@@ -1,0 +1,5 @@
+Symbol,TRP
+Industry,Natural Gas Utilities
+Sector,Utilities
+Employees,6059
+TransCanada Corporation (TransCanada) is an energy infrastructure company. The Company operates through three segment Natural Gas Pipelines  Liquids Pipelines and Energy. Natural Gas Pipelines and Liquids Pipelines consist of its respective natural gas and liquids pipelines in Canada  the United States and Mexico  as well as its regulated natural gas storage operations in the United States. Its natural gas pipeline network transports natural gas to local distribution companies  power generation facilities and other businesses across Canada  the United States and Mexico. Its existing liquids pipeline infrastructure connects Alberta and the United States crude oil supplies to the United States refining markets in Illinois  Oklahoma and Texas  as well as connecting the United States crude oil supplies from the Cushing  Oklahoma hub to refining markets in the United States Gulf Coast. Energy includes its power operations and the non-regulated natural gas storage business in Canada.,Read More

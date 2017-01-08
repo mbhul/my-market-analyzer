@@ -1,0 +1,5 @@
+Symbol,CAR_u
+Industry,Real Estate Operations
+Sector,Services
+Employees,840
+Canadian Apartment Properties Real Estate Investment Trust (CAPREIT) is a Canada-based is open-ended real estate investment trust. CAPREIT's investment objectives are to provide unitholders with long-term  monthly cash distributions; grow normalized funds from Operations  distributions and Unit value  acquisitions and financial management  and reinvest capital within the property portfolio. CAPREIT owns and operates a portfolio of multi-unit residential rental properties  including apartments  townhomes and manufactured home communities located in and near urban centers in Canada. CAPREIT owns interests in approximately 41 688 residential units  comprising 35 404 residential suites and 30 manufactured home communities (MHC)  comprising of 6 284 land lease sites. CAPREIT owns leasehold interests in 15 properties located in the Greater Toronto Area. The leases mature between 2033 and 2037.,Read More

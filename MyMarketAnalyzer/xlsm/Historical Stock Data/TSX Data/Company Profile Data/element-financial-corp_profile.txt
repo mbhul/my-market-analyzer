@@ -1,0 +1,5 @@
+Symbol,EFN
+Industry,Rental & Leasing
+Sector,Services
+Employees,-
+Element Financial Corporation is an independent financial services company. The Company originates  co-invests in and manages asset -based financings and related service programs with operations in both Canada and the United States. It operates in four vertical Fleet Management  which provides vehicle fleet leasing  management solutions  and related service programs  including service cards  remarketing  maintenance management and accident services; Rail Finance  with a focus on vendor relationships with rail manufacturers  provides leases and other secured financing for railcars for the North American rail industry; Aviation Finance  which provides leases and other secured financing for corporate airplanes and helicopters  and Commercial and Vendor Finance  in conjunction with manufacturers and distributors  delivers financing and leasing solutions to customers in the transportation  construction  commercial  industrial  healthcare  golf  technology and office products sectors.,Read More

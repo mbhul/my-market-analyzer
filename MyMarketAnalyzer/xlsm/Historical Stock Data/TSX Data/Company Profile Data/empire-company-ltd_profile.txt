@@ -1,0 +1,5 @@
+Symbol,EMPa
+Industry,Retail (Grocery)
+Sector,Services
+Employees,125000
+Empire Company Limited is engaged in the business of food retailing and related real estate. The Company operates through two segment Food Retailing and Investments and Other Operations. The Company's Food Retailing segment is carried out through its wholly owned subsidiary  Sobeys Inc.  which has conducted business through approximately 1 500 retail stores (corporate owned  franchised and affiliate)  as well as over 350 retail fuel locations  operating in province and in over 900 communities across Canada. The Company's Investments and Other Operations segment includes its equity investments in real estate  which are focused on the ownership of income-producing retail  office and mixed-use properties through an equity accounted ownership interest in Crombie REIT and residential land development in select communities in Ontario  Western Canada and the United States through its investments in Genstar. Crombie REIT owns a portfolio of approximately 255 retail and office properties.,Read More

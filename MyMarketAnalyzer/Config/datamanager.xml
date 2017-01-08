@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Datamanager>
+  <Live>
+    <Markets>
+      <!-- DO NOT REMOVE: Start -->
+      <Schema url="http://ca.investing.com/equities/">
+        <SearchStart>
+          <a href="/equities/">Stocks</a>
+        </SearchStart>
+        <KeyElement name="ul" attr="class">main</KeyElement>
+        <SubElement name="a" attr="href" ignore="2">
+        </SubElement>
+      </Schema>
+      <!-- DO NOT REMOVE: End -->
+      <Data>
+        <!-- DO NOT REMOVE: Start -->
+        <Schema>
+          <SearchStart>
+          </SearchStart>
+          <KeyElement name="select" attr="id">stocksFilter</KeyElement>
+          <SubElement name="option" attr="" ignore="0">
+          </SubElement>
+        </Schema>
+        <!-- DO NOT REMOVE: End -->
+        <Market href="/equities/canada" name="Canada" smlID="608">
+          <option id="all">Canada all stocks</option>
+          <option selected="selected" id="24441">S&amp;P/TSX Composite</option>
+          <option id="25282">S&amp;P/TSX 60</option>
+          <option id="25280">S&amp;P/TSX Canadian MidCap</option>
+          <option id="25278">S&amp;P/TSX Canadian Small Cap</option>
+          <option id="25281">S&amp;P/TSX Equity</option>
+          <option id="25300">S&amp;P/TSX Global Mining (USD)</option>
+          <option id="25298">S&amp;P/TSX Equal Weight Oil &amp; Gas</option>
+          <option id="25295">S&amp;P/TSX EqlWgt Global Base Metals</option>
+          <option id="25297">S&amp;P/TSX EqlWgt Diversified Banks</option>
+          <option id="25299">S&amp;P/TSX Divident Aristocrats</option>
+          <option id="25286">S&amp;P/TSX Preferred Share</option>
+          <option id="25291">S&amp;P/TSX Income Trust</option>
+          <option id="25284">S&amp;P/TSX Composite Capped</option>
+          <option id="25290">S&amp;P/TSX Canadian Gold</option>
+          <option id="25292">S&amp;P/TSX 60 Shariah</option>
+          <option id="25293">S&amp;P/TSX 60 Capped</option>
+          <option id="956494">Investing.com Canada 50</option>
+          <option id="25315">S&amp;P/TSX REIT</option>
+          <option id="25312">S&amp;P/TSX Clean Technology</option>
+          <option id="25309">S&amp;P/TSX Canadian Utilities</option>
+          <option id="25310">S&amp;P/TSX Canadian Telecommunications</option>
+          <option id="25306">S&amp;P/TSX Canadian Real Estate</option>
+          <option id="25313">S&amp;P/TSX Canadian Mining</option>
+          <option id="25308">S&amp;P/TSX Canadian Materials</option>
+          <option id="25311">S&amp;P/TSX Canadian Information Technology</option>
+          <option id="25305">S&amp;P/TSX Canadian Industrials</option>
+          <option id="25304">S&amp;P/TSX Canadian Health Care</option>
+          <option id="25307">S&amp;P/TSX Canadian Financials</option>
+          <option id="25314">S&amp;P/TSX Canadian Energy</option>
+          <option id="25303">S&amp;P/TSX Canadian Consumer Staples</option>
+          <option id="25302">S&amp;P/TSX Canadian Consumer Discretionary</option>
+          <option id="25279">S&amp;P/TSX Venture Composite</option>
+        </Market>
+        <Market href="/equities/us-pre-market" name="US Pre Market">
+        </Market>
+        <Market href="/equities/united-states" name="United States" smlID="800">
+          <option id="all">United States all stocks</option>
+          <option selected="selected" id="169">Dow Jones Industrial Average</option>
+          <option id="20">Nasdaq 100</option>
+          <option id="14958">NASDAQ Composite</option>
+          <option id="166">S&amp;P 500</option>
+          <option id="19943">Dow Jones Composite</option>
+          <option id="19941">Dow Jones Transportation</option>
+          <option id="19942">Dow Jones Utility</option>
+          <option id="27652">NYSE AMEX Composite</option>
+          <option id="27604">NYSE Composite</option>
+          <option id="941623">OTCM ADR</option>
+          <option id="941622">OTCM QX ADR 30</option>
+          <option id="40821">S&amp;P 100</option>
+          <option id="962667">S&amp;P Industrials Composite</option>
+          <option id="19954">Dow Jones Basic Materials</option>
+          <option id="19955">Dow Jones Consumer Goods</option>
+          <option id="19956">Dow Jones Consumer Services</option>
+          <option id="19957">Dow Jones Financials</option>
+          <option id="19958">Dow Jones Health Care</option>
+          <option id="19959">Dow Jones Industrials</option>
+          <option id="19972">Dow Jones Oil &amp; Gas</option>
+          <option id="19976">Dow Jones Technology</option>
+          <option id="19960">Dow Jones Telecommunications</option>
+          <option id="19961">Dow Jones Utilities</option>
+          <option id="14955">NASDAQ Bank</option>
+          <option id="14966">NASDAQ Biotechnology</option>
+          <option id="14961">NASDAQ Computer</option>
+          <option id="14956">NASDAQ Financial 100</option>
+          <option id="14959">NASDAQ Industrial</option>
+          <option id="14960">NASDAQ Insurance</option>
+          <option id="14957">NASDAQ Other Finance</option>
+          <option id="14963">NASDAQ Telecommunications</option>
+          <option id="14962">NASDAQ Transportation</option>
+          <option id="40034">Philadelphia Semiconductor Index</option>
+          <option id="962683">S&amp;P 400 Consumer Discretionary</option>
+          <option id="962688">S&amp;P 400 Consumer Staples</option>
+          <option id="962682">S&amp;P 400 Energy</option>
+          <option id="962672">S&amp;P 400 Financials</option>
+          <option id="962707">S&amp;P 400 Health Care</option>
+          <option id="962694">S&amp;P 400 Industrials</option>
+          <option id="962687">S&amp;P 400 Information Technology</option>
+          <option id="962680">S&amp;P 400 Materials</option>
+          <option id="962674">S&amp;P 400 Telecommunication Services</option>
+          <option id="962676">S&amp;P 400 Utilities</option>
+          <option id="962685">S&amp;P 500 Consumer Discretionary</option>
+          <option id="962693">S&amp;P 500 Consumer Staples</option>
+          <option id="962670">S&amp;P 500 Energy</option>
+          <option id="962669">S&amp;P 500 Financials</option>
+          <option id="962671">S&amp;P 500 Health Care</option>
+          <option id="962689">S&amp;P 500 Industrials</option>
+          <option id="962700">S&amp;P 500 Information Technology</option>
+          <option id="962702">S&amp;P 500 Materials</option>
+          <option id="962701">S&amp;P 500 Telecom Services</option>
+          <option id="962691">S&amp;P 500 Utilities</option>
+          <option id="962692">S&amp;P 600 Consumer Discretionary</option>
+          <option id="962696">S&amp;P 600 Consumer Staples</option>
+          <option id="962705">S&amp;P 600 Energy</option>
+          <option id="962675">S&amp;P 600 Financials</option>
+          <option id="962681">S&amp;P 600 Health Care</option>
+          <option id="962706">S&amp;P 600 Industrials</option>
+          <option id="962677">S&amp;P 600 Information Technology</option>
+          <option id="962703">S&amp;P 600 Materials</option>
+          <option id="962686">S&amp;P 600 Telecommunication Services</option>
+          <option id="962697">S&amp;P 600 Utilities</option>
+          <option id="962699">S&amp;P Composite 1500 Consumer Discretionary</option>
+          <option id="962684">S&amp;P Composite 1500 Consumer Staples</option>
+          <option id="962695">S&amp;P Composite 1500 Energy</option>
+          <option id="962708">S&amp;P Composite 1500 Financials</option>
+          <option id="962704">S&amp;P Composite 1500 Health Care</option>
+          <option id="962678">S&amp;P Composite 1500 Industrials</option>
+          <option id="962673">S&amp;P Composite 1500 Information Technology</option>
+          <option id="962679">S&amp;P Composite 1500 Materials</option>
+          <option id="962690">S&amp;P Composite 1500 Telecommunication Services</option>
+          <option id="962698">S&amp;P Composite 1500 Utilities</option>
+          <option id="27546">ARCA China</option>
+          <option id="27530">ARCA International Market</option>
+          <option id="27660">ARCA Major Markets</option>
+          <option id="20121">Dow Jones Growth</option>
+          <option id="19948">Dow Jones Large-Cap</option>
+          <option id="20115">Dow Jones Large-Cap Growth</option>
+          <option id="20116">Dow Jones Large-Cap Value</option>
+          <option id="19949">Dow Jones Mid-Cap</option>
+          <option id="20117">Dow Jones Mid-Cap Growth</option>
+          <option id="20118">Dow Jones Mid-Cap Value</option>
+          <option id="19950">Dow Jones Small-Cap</option>
+          <option id="20119">Dow Jones Small-Cap Growth</option>
+          <option id="20120">Dow Jones Small-Cap Value</option>
+          <option id="19947">Dow Jones US</option>
+          <option id="20122">Dow Jones Value</option>
+          <option id="956471">Investing.com United States 50</option>
+          <option id="27597">NYSE TOP International 100</option>
+          <option id="27600">NYSE TOP US 100</option>
+          <option id="40032">Philadelphia Gold/Silver</option>
+          <option id="941621">S&amp;P 600</option>
+          <option id="962709">S&amp;P 600 Small Cap</option>
+          <option id="27569">S&amp;P Midcap 400</option>
+          <option id="27568">S&amp;P Midcap 400 Growth</option>
+          <option id="27594">S&amp;P Midcap 400 Value</option>
+          <option id="27538">S&amp;P Smallcap 600 Growth</option>
+          <option id="27542">S&amp;P Smallcap 600 Value</option>
+          <option id="27651">ARCA Airline</option>
+          <option id="27536">ARCA Biotechnology</option>
+          <option id="27561">ARCA Computer Hardware</option>
+          <option id="27654">ARCA Computer Technology</option>
+          <option id="27548">ARCA Defense</option>
+          <option id="27547">ARCA Disk Drive</option>
+          <option id="27560">ARCA Gold BUGS</option>
+          <option id="27556">ARCA Gold Miners</option>
+          <option id="27658">ARCA Institutional</option>
+          <option id="27662">ARCA Natural Gas</option>
+          <option id="27603">ARCA Networking</option>
+          <option id="27664">ARCA North American Telecommunications</option>
+          <option id="27663">ARCA Oil</option>
+          <option id="27550">ARCA Pharmaceutical</option>
+          <option id="27653">ARCA Securities Broker</option>
+          <option id="27647">ARCA Tobacco</option>
+          <option id="20004">Dow Jones Aerospace</option>
+          <option id="19977">Dow Jones Aerospace &amp; Defense</option>
+          <option id="20005">Dow Jones Airlines</option>
+          <option id="20006">Dow Jones Aluminum</option>
+          <option id="20007">Dow Jones Apparel Retailers</option>
+          <option id="20008">Dow Jones Asset Managers</option>
+          <option id="20009">Dow Jones Auto Parts Makers</option>
+          <option id="20010">Dow Jones Automobiles</option>
+          <option id="19962">Dow Jones Automobiles &amp; Parts</option>
+          <option id="19963">Dow Jones Banks</option>
+          <option id="19964">Dow Jones Basic Resources</option>
+          <option id="19978">Dow Jones Beverages</option>
+          <option id="20011">Dow Jones Biotechnology</option>
+          <option id="20012">Dow Jones Brewers</option>
+          <option id="20013">Dow Jones Broadcasting &amp; Entertainment</option>
+          <option id="20014">Dow Jones Broadline Retailers</option>
+          <option id="20015">Dow Jones Building Materials &amp; Fixtures</option>
+          <option id="20016">Dow Jones Business Support Services</option>
+          <option id="20017">Dow Jones Business Training &amp; Employment Agencies</option>
+          <option id="19965">Dow Jones Chemicals</option>
+          <option id="20018">Dow Jones Clothing &amp; Accessories</option>
+          <option id="20019">Dow Jones Coal</option>
+          <option id="20020">Dow Jones Commercial Vehicles &amp; Trucks</option>
+          <option id="20021">Dow Jones Commodity Chemicals</option>
+          <option id="20022">Dow Jones Computer Hardware</option>
+          <option id="20023">Dow Jones Computer Services</option>
+          <option id="19966">Dow Jones Construction &amp; Materials</option>
+          <option id="20024">Dow Jones Consumer Electronics</option>
+          <option id="20025">Dow Jones Consumer Finance</option>
+          <option id="20026">Dow Jones Containers &amp; Packaging</option>
+          <option id="20027">Dow Jones Conventional Electricity</option>
+          <option id="20028">Dow Jones Defense</option>
+          <option id="20029">Dow Jones Delivery Services</option>
+          <option id="20030">Dow Jones Distillers &amp; Vintners</option>
+          <option id="20031">Dow Jones Diversified Industrials</option>
+          <option id="20032">Dow Jones Diversified REITs</option>
+          <option id="20033">Dow Jones Drug Retailers</option>
+          <option id="20034">Dow Jones Durable Household Products</option>
+          <option id="20035">Dow Jones Electrical Components &amp; Equipment</option>
+          <option id="20036">Dow Jones Electricity</option>
+          <option id="19979">Dow Jones Electronic &amp; Electrical Equipment</option>
+          <option id="20037">Dow Jones Electronic Equipment</option>
+          <option id="20039">Dow Jones Exploration &amp; Production</option>
+          <option id="20040">Dow Jones Financial Administration</option>
+          <option id="40825">Dow Jones Financial Services</option>
+          <option id="19967">Dow Jones Financial Services</option>
+          <option id="19968">Dow Jones Food &amp; Beverage Makers</option>
+          <option id="19980">Dow Jones Food &amp; Drug Retailers</option>
+          <option id="19981">Dow Jones Food Producers</option>
+          <option id="20042">Dow Jones Food Product Makers</option>
+          <option id="20043">Dow Jones Food Retail &amp; Wholesale</option>
+          <option id="20044">Dow Jones Footwear</option>
+          <option id="19982">Dow Jones Forestry &amp; Paper</option>
+          <option id="20045">Dow Jones Full Line Insurance</option>
+          <option id="20046">Dow Jones Furnishings</option>
+          <option id="20047">Dow Jones Gambling</option>
+          <option id="20048">Dow Jones Gas Distribution</option>
+          <option id="19983">Dow Jones Gas Water &amp; Multiutilities</option>
+          <option id="19984">Dow Jones General Industrials</option>
+          <option id="19985">Dow Jones General Retailers</option>
+          <option id="20049">Dow Jones Gold Mining</option>
+          <option id="19986">Dow Jones Health Care Equipment &amp; Services</option>
+          <option id="20050">Dow Jones Health Care Providers</option>
+          <option id="20051">Dow Jones Heavy Construction</option>
+          <option id="20052">Dow Jones Home Construction</option>
+          <option id="20053">Dow Jones Home Improvement Retailers</option>
+          <option id="20055">Dow Jones Hotel &amp; Lodging REITs</option>
+          <option id="20054">Dow Jones Hotels</option>
+          <option id="19987">Dow Jones Household Goods &amp; Home Construction</option>
+          <option id="20057">Dow Jones Industrial &amp; Office REITs</option>
+          <option id="19988">Dow Jones Industrial Engineering</option>
+          <option id="19969">Dow Jones Industrial Goods &amp; Services</option>
+          <option id="20056">Dow Jones Industrial Machinery</option>
+          <option id="19989">Dow Jones Industrial Metals &amp; Mining</option>
+          <option id="20058">Dow Jones Industrial Suppliers</option>
+          <option id="19990">Dow Jones Industrial Transportation</option>
+          <option id="19970">Dow Jones Insurance</option>
+          <option id="20059">Dow Jones Insurance Brokers</option>
+          <option id="20060">Dow Jones Integrated Oil &amp; Gas</option>
+          <option id="20061">Dow Jones Internet</option>
+          <option id="20125">Dow Jones Internet Commerce</option>
+          <option id="20124">Dow Jones Internet Composite</option>
+          <option id="20126">Dow Jones Internet Services</option>
+          <option id="20062">Dow Jones Investment Services</option>
+          <option id="20063">Dow Jones Iron &amp; Steel</option>
+          <option id="19991">Dow Jones Leisure Goods</option>
+          <option id="20064">Dow Jones Life Insurance</option>
+          <option id="20065">Dow Jones Marine Transportation</option>
+          <option id="19971">Dow Jones Media</option>
+          <option id="20066">Dow Jones Media Agencies</option>
+          <option id="20067">Dow Jones Medical Equipment</option>
+          <option id="20068">Dow Jones Medical Supplies</option>
+          <option id="19992">Dow Jones Mining</option>
+          <option id="20069">Dow Jones Mobile Telecommunications</option>
+          <option id="20070">Dow Jones Mortgage Finance</option>
+          <option id="20071">Dow Jones Mortgage REITs</option>
+          <option id="20072">Dow Jones Multiutilities</option>
+          <option id="20074">Dow Jones Nonferrous Metals</option>
+          <option id="19993">Dow Jones Nonlife Insurance</option>
+          <option id="19994">Dow Jones Oil &amp; Gas Producers</option>
+          <option id="20075">Dow Jones Oil Equipment &amp; Services</option>
+          <option id="19995">Dow Jones Oil Equipment Services &amp; Distribution</option>
+          <option id="20076">Dow Jones Paper</option>
+          <option id="19973">Dow Jones Personal &amp; Household Goods</option>
+          <option id="19996">Dow Jones Personal Goods</option>
+          <option id="20077">Dow Jones Personal Products</option>
+          <option id="20078">Dow Jones Pharmaceuticals</option>
+          <option id="19997">Dow Jones Pharmaceuticals &amp; Biotechnology</option>
+          <option id="20079">Dow Jones Pipelines</option>
+          <option id="20080">Dow Jones Platinum &amp; Precious Metals</option>
+          <option id="20081">Dow Jones Property &amp; Casualty Insurance</option>
+          <option id="20082">Dow Jones Publishing</option>
+          <option id="20083">Dow Jones Railroads</option>
+          <option id="19974">Dow Jones Real Estate</option>
+          <option id="20084">Dow Jones Real Estate Holding &amp; Development</option>
+          <option id="19998">Dow Jones Real Estate Investment &amp; Services</option>
+          <option id="20085">Dow Jones Real Estate Services</option>
+          <option id="20086">Dow Jones Recreational Products</option>
+          <option id="20087">Dow Jones Recreational Services</option>
+          <option id="20088">Dow Jones Reinsurance</option>
+          <option id="20089">Dow Jones Residential REITs</option>
+          <option id="20090">Dow Jones Restaurants &amp; Bars</option>
+          <option id="20091">Dow Jones Retail REITs</option>
+          <option id="19975">Dow Jones Retailers</option>
+          <option id="20092">Dow Jones Semiconductors</option>
+          <option id="20093">Dow Jones Soft Drinks</option>
+          <option id="20094">Dow Jones Software</option>
+          <option id="20000">Dow Jones Software &amp; Computer Services</option>
+          <option id="20095">Dow Jones Specialized Consumer Services</option>
+          <option id="20096">Dow Jones Specialty Chemicals</option>
+          <option id="20097">Dow Jones Specialty Finance</option>
+          <option id="20098">Dow Jones Specialty REITs</option>
+          <option id="20099">Dow Jones Specialty Retailers</option>
+          <option id="20001">Dow Jones Support Services</option>
+          <option id="20002">Dow Jones Technology Hardware &amp; Equipment</option>
+          <option id="20101">Dow Jones Tires</option>
+          <option id="20102">Dow Jones Tobacco</option>
+          <option id="20103">Dow Jones Toys</option>
+          <option id="20104">Dow Jones Transportation Services</option>
+          <option id="20003">Dow Jones Travel &amp; Leisure</option>
+          <option id="20105">Dow Jones Travel &amp; Tourism</option>
+          <option id="20106">Dow Jones Trucking</option>
+          <option id="20107">Dow Jones Waste &amp; Disposal Services</option>
+          <option id="20108">Dow Jones Water</option>
+          <option id="20038">DowJones Electronic Office Equipment</option>
+          <option id="20041">DowJones Fixed Line Telecommunications</option>
+          <option id="20073">DowJones Nondurable Household Products</option>
+          <option id="19999">DowJones Real Estate Investment Trusts</option>
+          <option id="20100">DowJones Telecommunications Equipment</option>
+          <option id="27593">MS HI-Tech 35</option>
+          <option id="101829">PHLX Housing</option>
+          <option id="101831">PHLX Oil Service</option>
+          <option id="101830">PHLX Utility</option>
+        </Market>
+        <Market href="/equities/middle-east" name="Middle East" smlID="598">
+          <option id="10529">TA 25</option>
+          <option selected="selected" id="11319">Tadawul All Share</option>
+          <option id="13185">QE General</option>
+          <option id="13009">Al-Quds</option>
+          <option id="13384">MSM 30</option>
+          <option id="12259">Amman SE General</option>
+          <option id="941336">ADX General</option>
+          <option id="12522">DFM General</option>
+          <option id="11102">Kuwait Main Market</option>
+          <option id="14523">BLOM STK IDX     </option>
+          <option id="12860">EGX 30</option>
+        </Market>
+        <Market href="/equities/asia-pacific" name="Asia/Pacific" smlID="597">
+          <option selected="selected" id="178">Nikkei 225</option>
+          <option id="39929">BSE Sensex 30</option>
+          <option id="17940">Nifty 50</option>
+          <option id="179">Hang Seng</option>
+          <option id="171">S&amp;P/ASX 200</option>
+          <option id="37426">KOSPI</option>
+          <option id="38015">SET Index</option>
+          <option id="29151">CSE All-Share</option>
+          <option id="38017">Taiwan Weighted</option>
+          <option id="49692">PSEi Composite</option>
+          <option id="49677">Karachi 100</option>
+          <option id="41064">VN 30</option>
+          <option id="29078">FTSE Malaysia KLCI</option>
+          <option id="989440">Dhaka Stock Exchange 30</option>
+        </Market>
+        <Market href="/equities/europe" name="Europe" smlID="596">
+          <option selected="selected" id="172">DAX</option>
+          <option id="175">Euro Stoxx 50</option>
+          <option id="27">FTSE 100</option>
+          <option id="167">CAC 40</option>
+          <option id="177">FTSE MIB</option>
+          <option id="174">IBEX 35</option>
+          <option id="176">SMI</option>
+          <option id="168">AEX</option>
+          <option id="40822">ATX</option>
+          <option id="25685">OMX Stockholm 30</option>
+          <option id="25760">OMX Copenhagen 20</option>
+          <option id="25823">OMX Helsinki 25</option>
+          <option id="25887">ICEX Main</option>
+          <option id="14603">OSE Benchmark</option>
+          <option id="44400">Oslo OBX</option>
+          <option id="14601">BEL 20</option>
+          <option id="14600">PSI 20</option>
+          <option id="14602">WIG20</option>
+          <option id="41044">WIG30</option>
+          <option id="38014">Budapest SE</option>
+          <option id="14774">CROBEX</option>
+          <option id="49753">Cyprus Main Market</option>
+          <option id="50647">PX</option>
+          <option id="44399">Athens General-Composite</option>
+          <option id="49629">BSE SOFIX</option>
+          <option id="14770">BET</option>
+          <option id="41155">SAX</option>
+          <option id="29149">Blue-Chip SBITOP</option>
+          <option id="945507">BIRS</option>
+          <option id="945505">Sarajevo 10</option>
+          <option id="13666">MICEX</option>
+          <option id="13665">RTSI</option>
+          <option id="29191">PFTS</option>
+          <option id="19155">BIST 100</option>
+        </Market>
+        <Market href="/equities/americas" name="Americas" smlID="595">
+          <option selected="selected" id="169">Dow Jones Industrial Average</option>
+          <option id="20">Nasdaq 100</option>
+          <option id="14958">NASDAQ Composite</option>
+          <option id="166">S&amp;P 500</option>
+          <option id="24441">S&amp;P/TSX Composite</option>
+          <option id="17920">Bovespa</option>
+          <option id="27254">IPC</option>
+          <option id="13376">Merval</option>
+          <option id="49642">COLCAP</option>
+          <option id="14767">IPSA Select</option>
+          <option id="49680">S&amp;P Lima General</option>
+          <option id="49748">Bursatil</option>
+        </Market>
+      </Data>
+    </Markets>
+  </Live>
+  <Historical>
+  </Historical>
+</Datamanager>

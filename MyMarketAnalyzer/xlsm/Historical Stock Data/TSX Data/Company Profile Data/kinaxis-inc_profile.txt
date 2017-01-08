@@ -1,0 +1,5 @@
+Symbol,KXS
+Industry,Software & Programming
+Sector,Technology
+Employees,257
+Kinaxis Inc. is a Canada-based company  which provides a cloud-based subscription software. The Company offers a configurable application  RapidResponse  which provides supply chain planning and analytics capabilities that create the foundation for managing multiple  interconnected supply chain management and sales and operations planning (S&OP) processes. Its RapidResponse application is used in inventory management  order fulfillment  capacity planning and master scheduling  sales and operations planning  aggregate supply planning  demand planning  engineering change management  inventory planning and optimization  integrated project management  master production scheduling (MPS)  order fulfillment  supplier collaboration and supply action management  among others. It provides training courses to the users to receive user adoption from their RapidResponse investment. It is focused on high technology and electronics manufacturing  consumer packaged goods and the automotive sectors.,Read More

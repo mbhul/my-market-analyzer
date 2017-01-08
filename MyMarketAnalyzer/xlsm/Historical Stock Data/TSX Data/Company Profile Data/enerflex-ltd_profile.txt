@@ -1,0 +1,5 @@
+Symbol,EFX
+Industry,Oil Well Services & Equipment
+Sector,Energy
+Employees,3500
+Enerflex Ltd. is a Canada-based company  which is a supplier of natural gas compression  oil and gas processing  refrigeration systems and electric power equipment. The Company also provides in-house engineering and mechanical services. The Company's in‐house resources provide the capability to engineer  design  manufacture  construct  commission and service hydrocarbon handling systems. The Company's segments include Canada  United States and Rest of World segments. Each segment has three product lines  which include Engineered Systems  Service and Rentals.,Read More

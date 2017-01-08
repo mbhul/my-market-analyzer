@@ -1,0 +1,5 @@
+Symbol,AVO
+Industry,Electronic Instr. & Controls
+Sector,Technology
+Employees,696
+Avigilon Corporation is a Canada-based business intelligence and security solutions company. The Company develops  manufactures  markets and sells high definition (HD) and megapixel (MP) network-based video surveillance systems  video analytics and access control equipment for the global security market. The Company's offerings include end-to-end product solutions  HD IP Cameras  Network Video Recorders (NVR)  Analog Video Encoders  Avigilon Control Center  Avigilon Access Control Manager (ACM) and RIALTO Analytics Appliance. Its end-to-end product solutions include HD IP cameras  video management software  access control and adaptive video analytics. The Company's products are assembled and tested at its manufacturing facility in Richmond  British Columbia  Canada. The Company's subsidiaries include Avigilon Fortress Corporation  9051112 Canada Inc.  AVO USA Holding 2 Corporation  Avigilon USA Corporation and AVO USA Holding 1 Corporation.,Read More

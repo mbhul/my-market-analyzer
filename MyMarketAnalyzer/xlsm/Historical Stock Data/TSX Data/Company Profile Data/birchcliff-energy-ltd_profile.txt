@@ -1,0 +1,5 @@
+Symbol,BIR
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,157
+Birchcliff Energy Ltd. is an intermediate oil and natural gas company. The Company is engaged in business of exploring for  developing and producing oil and natural gas resources in the Western Canadian Sedimentary Basin with operations concentrated within its one core area  the Peace River Arch of Alberta. As of 2014  Birchcliff drilled 57 wells  consisting of 37 natural gas wells and 20 oil wells. The natural gas wells are all Montney/Doig horizontal wells. The oil wells included four Montney/Doig horizontal oil wells  11 (Worsley Charlie Lake horizontal light oil wells  one Progress Charlie Lake horizontal light oil well  three Halfway horizontal light oil wells and one Upper Doig horizontal light oil well. As of December 31  2014  Birchcliff had a working interest in 11 gas plants  four of which were wholly owned and five of which are operated by the Company  and a working interest in two oil batteries  one of which is wholly owned and operated by the Company.,Read More

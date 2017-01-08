@@ -1,0 +1,5 @@
+Symbol,GRT_u
+Industry,Real Estate Operations
+Sector,Services
+Employees,33
+Granite Real Estate Investment Trust (Granite REIT) is a real estate investment trust (REIT). The Company is engaged in the ownership and management of industrial  warehouse and logistics properties in North America and Europe. Granite owns approximately 30.0 million square feet in over 100 rental income properties. The Company’s tenant base includes Magna International Inc. and its operating subsidiaries. Granite’s investment properties consist of income-producing properties  properties and land under development and land held for development. The Company’s income-producing properties consist of light industrial properties  heavy industrial manufacturing facilities  corporate offices  warehouse and logistics properties  product development and engineering centers and test facilities in eight countrie Canada  the United States  Austria  Germany  The Netherlands  the Czech Republic  the United Kingdom and Spain.,Read More

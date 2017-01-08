@@ -1,0 +1,5 @@
+Symbol,ESL
+Industry,Software & Programming
+Sector,Technology
+Employees,1381
+Enghouse Systems Limited is a Canada-based company that develops enterprise software solutions. The Company has two business segment the Interactive Management Group and the Asset Management Group. The Interactive Management Group specializes in customer interaction software and services. Its core technologies include contact center  attendant console  interactive voice response  dialers  agent performance optimization and analytics that support any telephony environment  deployed on premise or in the cloud. The Asset Management Group provides a portfolio of products to telecom service providers  utilities and the oil and gas industry  such as telecom billing  intelligent routing  number portability  network asset management  geographic information systems (GIS)  wholesale revenue management solutions and data conversion services. The Company also provides fleet routing  dispatch  scheduling  communications and emergency control center solutions.,Read More

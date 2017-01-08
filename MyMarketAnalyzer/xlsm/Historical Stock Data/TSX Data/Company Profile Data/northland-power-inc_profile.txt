@@ -1,0 +1,5 @@
+Symbol,NPI
+Industry,Electric Utilities
+Sector,Utilities
+Employees,230
+Northland Power Inc. (Northland) is an independent power producer. The Company is engaged in developing  building  owning and operating facilities in Canada  Europe and other selected jurisdictions that produce electricity from clean-burning natural gas and renewable resources   such as wind  solar and biomass. Northland operates through five segment thermal  renewable  managed  which includes management and operations services for Kirkland Lake  Cochrane and Canadian Environmental Energy Corporation (CEEC); offshore wind  including Gemini and Nordsee  and other  which includes investment income and wood-chipping operations  as well as the administration of Northland. Northland owns power-producing facilities with a total capacity of approximately 1 345 megawatts (MW). The Company has approximately 40 MW of ground-mounted solar projects and the 600 MW Gemini offshore wind project under construction.,Read More

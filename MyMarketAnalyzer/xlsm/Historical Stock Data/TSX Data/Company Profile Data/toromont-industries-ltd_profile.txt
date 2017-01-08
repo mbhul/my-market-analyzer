@@ -1,0 +1,5 @@
+Symbol,TIH
+Industry,Rental & Leasing
+Sector,Services
+Employees,3336
+Toromont Industries Ltd. is a Canada-based company that delivers specialized equipment and other products. The Company has two operational segment the Equipment Group and CIMCO. The Equipment Group is engaged in the supply of specialized mobile equipment and industrial engines. The Equipment Group provides sales and rental solutions  as well as product support through Toromont Cat  Battlefield-The Cat Rental Store  SITECH Mid-Canada Ltd. and Ag West Equipment Ltd. CIMCO is engaged in the design  engineering  fabrication and installation of industrial and recreational refrigeration systems with operations in Canada and the United States. CIMCO offers systems designed to optimize energy usage through products  such as ECO CHILL. CIMCO has manufacturing facilities in Canada and the United States and sells its solutions globally.,Read More

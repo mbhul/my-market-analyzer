@@ -1,0 +1,5 @@
+Symbol,T
+Industry,Communications Services
+Sector,Services
+Employees,43670
+TELUS Corporation (TELUS) is a telecommunications company. The Company operates through two business segment wireless segment and wireline segment. The wireless segment includes 8.1 million wireless subscribers. The wireline segment includes 3.2 million wireline network access lines (NALs). The Company provides a range of telecommunications services and products  including wireless and wireline voice and data; TELUS TV  a high-definition entertainment service with Optik TV and TELUS Satellite TV (TELUS Satellite TV is offered only in British Columbia and Alberta); Internet Protocol networks and applications; contact center and business process outsourcing solutions; hosting  managed IT and cloud-based services around Internet of Things; TELUS Health's technology  including pharmacy management  electronic medical and health record  remote patient monitoring and online settlement claims management solutions  and conferencing and collaboration equipment and application solutions.,Read More

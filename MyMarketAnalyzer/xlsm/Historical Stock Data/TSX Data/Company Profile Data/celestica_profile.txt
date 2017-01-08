@@ -1,0 +1,5 @@
+Symbol,CLS
+Industry,Electronic Instr. & Controls
+Sector,Technology
+Employees,25000
+Celestica Inc. (Celestica) is a provider of supply chain solutions globally to original equipment manufacturers (OEMs) and service providers in the communications  consumer  diversified  servers and storage end markets. The Company offers a range of services to its customers  including design and development  engineering services  supply chain management  new product introduction  component sourcing  electronics manufacturing  assembly and test  complex mechanical assembly  systems integration  precision machining  order fulfillment  logistics and after-market repair and return services. The Company's products and services serve a range of applications  including servers; networking  wireless and telecommunications equipment; storage systems; optical equipment; aerospace and defense electronics; healthcare products for diagnostic imaging; audiovisual equipment; set top boxes; printer supplies; semiconductor equipment  and a range of industrial and green technology products.,Read More

@@ -1,0 +1,5 @@
+Symbol,AX_u
+Industry,Real Estate Operations
+Sector,Services
+Employees,-
+Artis Real Estate Investment Trust (Artis) is an unincorporated closed-end real estate investment trust (REIT). The Company's objective is to provide stable  reliable and tax efficient monthly cash distributions  as well as long-term appreciation in the value of Artis' units. The Company invests in retail  office and industrial assets primarily in western Canada  as well as in the Greater Toronto Area (Ontario) and selected markets in the United States. Artis' REIT portfolio includes 246 commercial properties totaling approximately 25.8 million square feet (S.F.) of gross leasable area (GLA). Artis' real estate is diversified across five Canadian provinces and six United States states  and across the office  retail and industrial asset classes. Its REIT portfolio includes Hudson's Bay Centre  Union Crossings II  Cargill R&D  Stampede Station II  Park 8Ninety  601 Tower at Carlson  Corridor Park  Crowfoot Village  Shoppes of St. Vital and Union Crossings III  among others.,Read More

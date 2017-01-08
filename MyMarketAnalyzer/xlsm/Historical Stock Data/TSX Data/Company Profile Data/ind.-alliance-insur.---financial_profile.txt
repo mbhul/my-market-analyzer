@@ -1,0 +1,5 @@
+Symbol,IAG
+Industry,Insurance (Life)
+Sector,Financial
+Employees,5019
+Industrial Alliance Insurance and Financial Services Inc. (Industrial Alliance) is a Canada-based life insurance stock company. The Company operates through five segment Individual Insurance  Individual Wealth Management  Group Insurance  Group Savings and Retirement  and Other activities. The Individual Insurance segment offers life  health  disability  and mortgage insurance products. The Individual Wealth Management segment offers individual products and services for savings plans  retirement funds and segregated funds  in addition to securities brokerage  trust operations and mutual funds. The Group Insurance segment offers life  health  accidental death and dismemberment  dental care and short and long-term disability insurance products. The Group Savings and Retirement segment offers group products and services for savings plans  retirement funds and segregated funds. The Other activities segment offers general insurance products and products related to car insurance.,Read More

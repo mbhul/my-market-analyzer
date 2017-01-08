@@ -1,0 +1,5 @@
+Symbol,RRX
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,34
+Raging River Exploration Inc. is a Canada-based crude oil and natural gas exploration  development and production company. The Company's operations are focused in the Dodsland area of southwest Saskatchewan. The Company has an approximate total of 58 111 net acres of undeveloped land in its area of Dodsland in southwest Saskatchewan.

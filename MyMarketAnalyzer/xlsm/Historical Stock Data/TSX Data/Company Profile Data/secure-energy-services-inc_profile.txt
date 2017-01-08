@@ -1,0 +1,5 @@
+Symbol,SES
+Industry,Oil Well Services & Equipment
+Sector,Energy
+Employees,1550
+Secure Energy Services Inc. is an energy services company. The Company operates three division Processing  Recovery and Disposal (PRD) division  owns and operates midstream infrastructure that provides processing  storing  shipping and marketing of crude oil  oilfield waste disposal and recycling; Drilling Services (DS) division  provides equipment and chemicals for building  maintaining  processing and recycling of drilling and completion fluids  and On Site Services (OS) division  which include environmental services  which provide pre-drilling assessment planning  drilling waste management  remediation and reclamation assessment services  laboratory services  and CleanSite waste container services; integrated fluid solutions  which include water management  recycling  pumping and storage solutions; and projects  which include pipeline integrity; demolition and decommissioning and reclamation and remediation of former wellsites  facilities  commercial and industrial properties.,Read More

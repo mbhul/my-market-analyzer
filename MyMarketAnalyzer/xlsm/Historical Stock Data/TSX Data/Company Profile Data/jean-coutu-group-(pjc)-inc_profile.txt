@@ -1,0 +1,5 @@
+Symbol,PJC
+Industry,Retail (Drugs)
+Sector,Services
+Employees,1140
+Jean Coutu Group PJC (Jean Coutu Group) is a Canada-based pharmacy chain. The Company is engaged in the distribution and retailing of pharmaceutical  healthcare  hygiene  beauty and other products. Jean Coutu Group operates through two segment franchising and generic drugs. The Company's franchising segment involves its franchising activity under the PJC Jean Coutu  PJC Clinique  PJC Jean Coutu Sante and PJC Jean Coutu Sante Beaute brands  operates two distribution centers and coordinates various other services for its franchisees. In the generic drugs segment  the Company owns Pro Doc Ltd  a Canadian manufacturer of generic drugs with a portfolio of around 170 generic molecules and approximately 370 different products. Jean Coutu Group's services for its franchises include centralized purchasing  distribution  marketing  training  human resources  management  operational consulting  information systems and the private labels program of the Company.,Read More

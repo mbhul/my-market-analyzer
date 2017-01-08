@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{813D6113-3D40-4638-889B-77D701A573C1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyMarketAnalyzer</RootNamespace>
+    <AssemblyName>MyMarketAnalyzer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\14.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnalysisPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AnalysisPage.Designer.cs">
+      <DependentUpon>AnalysisPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomChart.Designer.cs">
+      <DependentUpon>CustomChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HeatMap.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="CSVParser.cs" />
+    <Compile Include="DataManager.cs" />
+    <Compile Include="Equity.cs" />
+    <Compile Include="ExchangeMarket.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlgorithmDesignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgorithmDesignForm.Designer.cs">
+      <DependentUpon>AlgorithmDesignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StatTable.Designer.cs">
+      <DependentUpon>StatTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Algorithms.cs" />
+    <Compile Include="VisualsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisualsTab.Designer.cs">
+      <DependentUpon>VisualsTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ticker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ticker.Designer.cs">
+      <DependentUpon>Ticker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VisualSummaryTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisualSummaryTabPage.Designer.cs">
+      <DependentUpon>VisualSummaryTabPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Watchlist.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Watchlist.Designer.cs">
+      <DependentUpon>Watchlist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WatchlistItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WatchlistItem.Designer.cs">
+      <DependentUpon>WatchlistItem.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AnalysisPage.resx">
+      <DependentUpon>AnalysisPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomChart.resx">
+      <DependentUpon>CustomChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HeatMap.resx">
+      <DependentUpon>HeatMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgorithmDesignForm.resx">
+      <DependentUpon>AlgorithmDesignForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="StatTable.resx">
+      <DependentUpon>StatTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualsTab.resx">
+      <DependentUpon>VisualsTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ticker.resx">
+      <DependentUpon>Ticker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualSummaryTabPage.resx">
+      <DependentUpon>VisualSummaryTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Watchlist.resx">
+      <DependentUpon>Watchlist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WatchlistItem.resx">
+      <DependentUpon>WatchlistItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="xlsm\StockDataDownloader.xlsm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\datamanager.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Config\watchlist.xml" />
+    <None Include="img\option.png" />
+    <None Include="img\folder.png" />
+    <None Include="img\clock2.png" />
+    <None Include="img\clock1.png" />
+    <None Include="img\arrow-icon-normal-rev.png" />
+    <None Include="img\arrow-icon-normal.png" />
+    <None Include="img\arrow-icon-hover-rev.png" />
+    <None Include="img\arrow-icon-hover.png" />
+    <None Include="img\fl-AP.png" />
+    <None Include="img\icom-icon.png" />
+    <None Include="img\fl-US.png" />
+    <None Include="img\fl-EU.png" />
+    <None Include="img\fl-CA.png" />
+    <None Include="img\ptn-icon.png" />
+    <None Include="img\collapse-icon.png" />
+    <None Include="img\expand-icon.png" />
+    <None Include="img\x-icon-hover.png" />
+    <None Include="img\Excel-icon.png" />
+    <None Include="img\excel_icon.gif" />
+    <None Include="img\x-icon-normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSHTML">
+      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

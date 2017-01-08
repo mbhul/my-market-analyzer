@@ -1,0 +1,5 @@
+Symbol,L
+Industry,Retail (Grocery)
+Sector,Services
+Employees,195000
+Loblaw Companies Limited (Loblaw) is a Canada-based holding company. The Company through its subsidiaries provides grocery  pharmacy  health and beauty  apparel  general merchandise  and financial products and services. The Company operates through three segment Retail  Financial Services and Choice Properties. The Retail segment consists of retail food and associate-owned drug stores  and also includes in-store pharmacies and other health and beauty products  gas bars and apparel and other general merchandise. The Financial Services segment provides credit card services  loyalty programs  insurance brokerage services  personal banking services  deposit taking services and telecommunication services. The Choice Properties segment owns and leases income-producing commercial properties. Its subsidiaries include Loblaws Inc.  Shoppers Drug Mart Corporation  President's Choice Bank  Choice Properties Real Estate Investment Trust and Choice Properties Limited Partnership.,Read More

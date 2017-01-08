@@ -1,0 +1,5 @@
+Symbol,KEY
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,720
+Keyera Corp is a Canada-based company  which operates natural gas midstream businesses in the oil and gas sector. The Company operates through two business units  including Gathering and Processing business unit and Liquids business unit. The Gathering and Processing business unit owns and operates raw gas gathering pipelines and processing plants  which collect and process raw natural gas  remove waste products and separate the economic components before the sales gas is injected into long-distance pipeline systems. The Liquids business unit includes NGL infrastructure and marketing. Its NGL Infrastructure owns and operates a network of facilities for the processing  storage and transportation of the by-products of natural gas processing. In addition  NGL Infrastructure includes Keyera's iso-octane facilities (Alberta Envirofuels) and facilities for handling crude oil. It also markets a range of products associated with its two infrastructure business lines.,Read More

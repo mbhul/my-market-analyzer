@@ -1,0 +1,5 @@
+Symbol,CRR_u
+Industry,Real Estate Operations
+Sector,Services
+Employees,-
+Crombie Real Estate Investment Trust (Crombie) is an unincorporated open-ended real estate investment trust (REIT). Crombie invests in income-producing retail  office and mixed use properties in Canada  with a growth strategy focused primarily on the acquisition of grocery-anchored and drug store-anchored retail properties. Crombie owns a portfolio of 255 commercial properties in 10 provinces  comprising approximately 17.4 million square feet of gross leasable area (GLA). Crombie instituted a distribution reinvestment plan (DRIP) whereby Canadian resident REIT unitholders may elect to automatically have their distributions reinvested in additional REIT units. Its REIT portfolio includes Aberdeen Business Centre  Barrington Place  Brunswick Place  Kenmount Business Centre  Barrington Tower  CIBC Building  Amherst Centre  Avalon Mall  County Fair Mall  1 Avenue NW Safeway  2 Avenue West Safeway  11200 8th Street Safeway  2nd Avenue West Safeway and 13th Avenue  among others.,Read More

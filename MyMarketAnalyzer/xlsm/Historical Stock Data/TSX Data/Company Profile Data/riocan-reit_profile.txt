@@ -1,0 +1,5 @@
+Symbol,REI_u
+Industry,Real Estate Operations
+Sector,Services
+Employees,747
+RioCan Real Estate Investment Trust (RioCan) is a Canada-based closed-end real estate investment trust. RioCan owns and manages a portfolio of shopping centers  with ownership interests in a portfolio of approximately 340 retail properties in Canada and the United States combined  including 15 under development  containing an aggregate of around 79.1 million square feet. RioCan's Canadian portfolio consists of around 292 shopping centers  including grocery anchored  new format retail  urban retail  mixed use and non-grocery anchored centers. Of these properties  approximately 199 are properties held through outright ownership (195 income properties and four properties under development)  while 93 centers  including 11 under development  are co-owned with 22 partners through joint arrangements. RioCan's United States portfolio consists of around 48 shopping centers  principally grocery anchored and new format retail centers. The Company also has interests in around 46 income properties.,Read More

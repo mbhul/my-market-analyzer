@@ -1,0 +1,5 @@
+Symbol,TRI
+Industry,Printing & Publishing
+Sector,Services
+Employees,53000
+Thomson Reuters Corporation is a provider of intelligent information for businesses and professionals. The Company is organized into four business unit Financial & Risk  Legal  Tax & Accounting and Intellectual Property & Science. Financial & Risk business unit provides news  information and analytics  enabling transactions and bringing together financial communities. It also provides regulatory and operational risk management solutions. Legal business unit provides online and print information  decision tools  software and services that support legal  investigation  business and government professionals. Tax & Accounting business unit provides integrated tax compliance and accounting information  software and services for professionals in accounting firms  corporations  law firms and government. Intellectual Property & Science business unit provides intellectual property and scientific information  decision support tools and services.,Read More

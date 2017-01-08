@@ -1,0 +1,5 @@
+Symbol,ARE
+Industry,Construction Services
+Sector,Capital Goods
+Employees,1862
+Aecon Group Inc. is a Canada-based construction and infrastructure development company. The Company operates in four segment Infrastructure  Energy  Mining and Concessions. The Infrastructure segment includes all aspects of the construction of both public and private infrastructure  primarily in Canada  and on a selected basis  internationally. The Energy segment includes a full suite of service offerings to the energy sector  including industrial  construction and manufacturing activities  such as in-plant construction  site construction and module assembly. The Mining segment offers services consolidating the Company's mining capabilities and services across Canada  including both mine site installations and contract mining. The Concessions segment includes the activities of development  financing  construction and operation of infrastructure projects by way of build-operate-transfer  build-own-operate-transfer and other public-private partnership contract structures.,Read More

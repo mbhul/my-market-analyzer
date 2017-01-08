@@ -1,0 +1,5 @@
+Symbol,RUS
+Industry,Misc. Fabricated Products
+Sector,Basic Materials
+Employees,2540
+Russel Metals Inc. is a metals distribution company. The Company operates through segments  which include metals service centers  energy products  and steel distributors. The Company's metals service centers provide a line of products in a range of sizes  shapes and specifications  including carbon hot rolled and cold finished steel  pipe and tubular products  stainless steel and aluminum. The Company energy products distributes oil country tubular goods (OCTG)  line pipe  tubes  valves and fittings to the energy industry in Western Canada and the United States. The Company's steel distributors provide as the master distributors selling steel in large volumes to other steel service centers and equipment manufacturers.,Read More

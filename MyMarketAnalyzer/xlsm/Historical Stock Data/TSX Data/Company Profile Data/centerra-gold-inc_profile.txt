@@ -1,0 +1,5 @@
+Symbol,CG
+Industry,Gold & Silver
+Sector,Basic Materials
+Employees,2939
+Centerra Gold Inc. is a Canada-based gold mining and exploration company. The Company is engaged in the production of gold and related activities including exploration  development  mining and processing in the Kyrgyz Republic  Mongolia  Turkey and Canada. The Company's operations are segmented on a regional basis. The Kyrgyz Republic segment includes the operations of the Kumtor Gold project and the Mongolian segment involves the operations of the Boroo Gold project  activities related to the Gatsuurt project and local exploration activities. The Corporate and other segment include the head office located in Toronto  the Oksut Turkish project and other international exploration projects. Its significant subsidiaries includeKumtor Gold Company in the Kyrgyz Republic  Boroo Gold LLC and Centerra Gold Mongolia LLC (owner of the Gatsuurt property and Altan Tsagaan Ovoo property) in Mongolia and Oksut Madencilik A.S. in Turkey.,Read More

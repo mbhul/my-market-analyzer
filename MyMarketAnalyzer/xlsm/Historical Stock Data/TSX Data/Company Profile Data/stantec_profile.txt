@@ -1,0 +1,5 @@
+Symbol,STN
+Industry,Construction Services
+Sector,Capital Goods
+Employees,14200
+Stantec Inc. (Stantec) is engaged in providing planning  engineering  architecture  interior design  landscape architecture  surveying  environmental sciences  project management  and project economics. The Company’s three business operating units include Buildings  Energy & Resources  and Infrastructure. The Company’s Buildings business operating unit consists of services in architecture  buildings engineering  project management  interior design  and functional planning for vertical infrastructure. The Energy & Resources business operating unit is composed of environmental services  industrial engineering services  project management  and construction management services  primarily for private sector clients. Its Infrastructure business operating unit is engaged in the design and engineering services  and also project and construction management. It operates in three geographic regional operating unit Canada  the United States and International.,Read More

@@ -1,0 +1,5 @@
+Symbol,GIBa
+Industry,Computer Services
+Sector,Technology
+Employees,26000
+CGI Group Inc (CGI) is a Canada-based company that provides information technology (IT) consulting  systems integration  IT outsourcing and business solutions. The Company's delivery model provides for work to be carried out onsite at client premises  or through its centers located globally. In addition  CGI has a range of business solutions  which helps its clients and shareholders. CGI has a range of business solutions  which helps its clients and shareholders. It includes Momentum  CGI Advantage and Credit Services Solutions. CGI offers its end-to-end services to a focused set of industry vertical markets  such as financial services  government  health  telecommunications and utilities and manufacturing  retail and distribution (MRD). The Company provides a full range of IT and management consulting services  including business transformation  IT strategic planning  business process engineering and systems architecture.,Read More

@@ -1,0 +1,5 @@
+Symbol,HBM
+Industry,Metal Mining
+Sector,Basic Materials
+Employees,1797
+HudBay Minerals Inc. (Hudbay) is a Canada-based mining company. The Company is engaged in the production of copper concentrate  consisting of copper  gold and silver  as well as zinc metal. The Company is focused on the discovery  production and marketing of base and precious metals in North and South America. Through its subsidiaries  the Company owns copper/zinc/gold mines  ore concentrators and a zinc production facility in northern Manitoba and Saskatchewan  and copper projects in Cusco (Peru) and Arizona (United States). The Company's properties include 777 Mine  Lalor Mine  Reed Mine. The Company also owns 100% interests of Constancia project in Peru and Rosemont project  is a copper project located in Pima County  Arizona.,Read More

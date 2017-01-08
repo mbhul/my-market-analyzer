@@ -1,0 +1,5 @@
+Symbol,LB
+Industry,Regional Banks
+Sector,Financial
+Employees,3600
+Laurentian Bank of Canada is a banking institution whose activities extend across Canada. The Company has four segments  which are the retail and sme-quebec segment  the real estate and commercial segment  the b2b bank segment and Laurentian bank securities and capital markets segment. The retail segment provides savings  investment and financing products  and transactional products and services. The real estate segment provides real estate financing throughout Canada  commercial financing in Ontario and Quebec  as well as foreign exchange and international services. The B2B bank segment supplies banking and financial products to independent financial advisors across Canada. Laurentian bank securities and capital markets segment consists of the Laurentian Bank Securities Inc. subsidiary and the Company’s capital market activities.,Read More

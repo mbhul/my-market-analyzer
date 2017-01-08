@@ -1,0 +1,5 @@
+Symbol,TA
+Industry,Electric Utilities
+Sector,Utilities
+Employees,2786
+TransAlta Corporation (TransAlta) is engaged in the production and sale of electric energy. The Company is organized into three business segment Generation  Energy Marketing and Corporate. The Generation segment is responsible for constructing  operating and maintaining the Company's electricity generation  as well as the operation and maintenance of its related mining operations in Canada. The Energy Marketing segment is responsible for marketing its production through short-term and long-term contracts. The Energy Marketing segment also encompasses the management of available generating capacity  as well as the fuel and transmission needs of the Generation business. The Corporate segment provides finance  tax  treasury  legal  regulatory  environmental  health and safety  sustainable development  corporate communications  government and investor relations  procurement  information technology  risk management  human resources  internal audit and other administrative services.,Read More

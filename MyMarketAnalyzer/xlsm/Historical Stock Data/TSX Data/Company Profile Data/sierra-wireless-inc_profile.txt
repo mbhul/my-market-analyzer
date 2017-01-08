@@ -1,0 +1,5 @@
+Symbol,SW
+Industry,Communications Equipment
+Sector,Technology
+Employees,920
+Sierra Wireless  Inc. is a provider of cellular wireless solutions to the machine-to-machine (M2M) and connected device markets. The Company develops and markets a range of wireless products that include embedded modules and embedded software for original equipment manufacturers (OEMs)  gateways and routers for industrial  commercial and public safety applications  and a cloud-based platform for delivering device management and enabling end-to-end applications. The company's products  services and solutions connect people  their mobile computers and machines to wireless voice and data networks around the world. The Company operates through two segment OEM Solutions  which includes AirPrime embedded wireless modules (including embedded wireless modules for PC OEM customers)  and Enterprise Solutions  which includes Airlink Intelligent Gateways  AirVantage M2M Cloud and InMotion Solutions.,Read More

@@ -1,0 +1,5 @@
+Symbol,VET
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,532
+Vermilion Energy Inc. (Vermilion) is engaged in the business of oil and natural gas exploitation  development  acquisition and production in Canada  France  Ireland  the Netherlands  Germany  Australia and the United States. It operates in seven business unit Canada  which includes revenues and expenditures related directly to its assets in Alberta and Saskatchewan; France  which relates to its operations in France in the Paris and Aquitaine basins; Netherlands  which relates to its operations in the Netherlands; Germany  which relates to its 25% contractual participation interest in a four-partner consortium in Germany; Ireland  which relates to its 18.5% non-operated interest in the offshore Corrib natural gas field and related infrastructure; Australia  which relates to operations on the Wandoo offshore crude oil field  and United States  which relates to its operations in Wyoming in the Powder River Basin.,Read More

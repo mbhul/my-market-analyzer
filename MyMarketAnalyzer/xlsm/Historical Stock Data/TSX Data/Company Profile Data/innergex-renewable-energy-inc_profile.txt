@@ -1,0 +1,5 @@
+Symbol,INE
+Industry,Electric Utilities
+Sector,Utilities
+Employees,136
+Innergex Renewable Energy Inc. is an independent renewable power producer. The Company is a developer  owner and operator of renewable power-generating facilities with a focus on hydroelectric  wind power and solar photovoltaic (PV) projects. It operates through four segment hydroelectric generation  wind power generation  solar power generation and site development. Through its hydroelectric  wind power and solar power generation segments  the Company sells electricity produced by its hydroelectric  wind farm and solar facilities to publicly owned utilities or other creditworthy counterparties. Through its site development segment  it analyzes potential sites and develops hydroelectric  wind and solar facilities up to the commissioning stage. Its portfolio of assets consists of interests in 33 operating facilities with an aggregate net installed capacity of 687 megawatts (MW)  including 26 hydroelectric operating facilities  six wind farms  and one solar photovoltaic farm.,Read More

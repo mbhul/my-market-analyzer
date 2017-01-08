@@ -1,0 +1,5 @@
+Symbol,RBA
+Industry,Misc. Capital Goods
+Sector,Capital Goods
+Employees,1468
+Ritchie Bros. Auctioneers Incorporated is an auctioneer of industrial equipment. The Company is engaged in providing unreserved auction services to equipment buyers and sellers. Ritchie Bros. focuses on the sale of heavy machinery. The Company operates through two segment Core Auction segment and EquipmentOne segment. Core Auction segment offers a network of auction locations that conduct live  unreserved auctions with both on-site and online bidding. EquipmentOne segment is a secure online marketplace that facilitates private equipment transactions. The Company sells equipment through unreserved auctions at around 44 auction sites around the world. Through the Company’s unreserved auctions and online marketplaces  it sells a range of used and unused industrial assets  including equipment  trucks and other assets used in the construction  transportation  agricultural  material handling  mining  forestry  energy and marine industries.,Read More

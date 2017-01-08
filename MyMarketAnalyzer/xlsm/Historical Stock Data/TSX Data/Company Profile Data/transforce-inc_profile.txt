@@ -1,0 +1,5 @@
+Symbol,TFI
+Industry,Trucking
+Sector,Transportation
+Employees,25438
+TransForce Inc. is engaged in the provision of transportation and logistics services across Canada and the United States. The Company offers services to five segment Package and Courier  which includes pickup  transport and delivery of items across North America; Less-Than-Truckload  which offers pickup  consolidation  transport and delivery of smaller loads; Truckload  which carries loads directly from the customer to the destination using a closed van or specialized equipment  which includes expedited transportation  flatbed  container and dedicated services; Waste Management  which offers services for integrated residual materials management  ranging from collection to disposal  through conversion and recycling  to meet specific needs of its clients in municipal  industrial  commercial and institutional sectors  and Logistics and Other Services  which offers logistics services and rig moving services.,Read More

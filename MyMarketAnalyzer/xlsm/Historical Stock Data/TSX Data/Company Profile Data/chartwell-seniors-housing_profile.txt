@@ -1,0 +1,5 @@
+Symbol,CSH_u
+Industry,Real Estate Operations
+Sector,Services
+Employees,15990
+Chartwell Retirement Residences (Chartwell) is an unincorporated  open-ended trust. Chartwell indirectly owns and manages a portfolio of seniors housing communities across the complete continuum of care  all of   which are located in Canada and the United States. It operates through three segment Canadian Retirement Operations  Canadian Long Term Care Operations and U.S. Operations. Its portfolio of seniors housing communities includes Independent living  which are age-qualified units that provide meals and general services; Independent supported living  which include age-qualified units with households general services and personal care services; Assisted living  which are age-qualified units with personal care services in a separate wing; Memory care  which contain age-qualified units with personal care services for persons with Alzheimer's disease in a separate wing  and Long term care  which includes 24-hour nursing care  assistance with daily living activities and personal care.,Read More

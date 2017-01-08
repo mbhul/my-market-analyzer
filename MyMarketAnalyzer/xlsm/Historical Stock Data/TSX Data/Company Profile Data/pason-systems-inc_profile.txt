@@ -1,0 +1,5 @@
+Symbol,PSI
+Industry,Oil Well Services & Equipment
+Sector,Energy
+Employees,758
+Pason Systems Inc. is a provider of instrumentation and data management systems for drilling rigs. The Company offers solutions  which include data acquisition  wellsite reporting  remote communications  and Web-based information management  enable collaboration between the rig and the office. The Company operates in three geographic segment Canada  the United States  and International. The Company's Electronic Drilling Recorder (EDR) provides a complete system of drilling data acquisition  data networking  and drilling management tools and reports at both the wellsite and customer offices. Its solution Pit Volume Totalizer (PVT) is used for the detection and early warning of kicks that are caused by hydrocarbons entering the wellbore under high pressure and expanding as they migrate to the surface. The Company's data management system Pason DataHub collects  stores  and displays drilling data  reports  and real-time information from drilling operations.,Read More

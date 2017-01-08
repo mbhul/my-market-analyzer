@@ -1,0 +1,5 @@
+Symbol,SCL
+Industry,Misc. Fabricated Products
+Sector,Basic Materials
+Employees,5846
+ShawCor Ltd. is an energy services company. The Company operates through two business segment Pipeline and Pipe Services  and Petrochemical and Industrial. The Pipeline and Pipe Services segment includes the Bredero Shaw  CanusaCPS  Shaw Pipeline Services  Flexpipe Systems  Guardian  Socotherm and Desert NDT divisions. The Petrochemical and Industrial segment includes the DSG-Canusa and ShawFlex divisions. The Company provides a range of products and services  which include pipe coating services  flexible composite pipe  onshore and offshore pipeline corrosion and thermal protection  ultrasonic and radiographic inspection services  tubular management services  heat-shrinkable polymer tubing  and control  and instrumentation wire and cable.,Read More

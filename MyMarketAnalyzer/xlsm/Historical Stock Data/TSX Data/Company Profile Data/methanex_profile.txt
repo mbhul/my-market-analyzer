@@ -1,0 +1,5 @@
+Symbol,MX
+Industry,Chemical Manufacturing
+Sector,Basic Materials
+Employees,1231
+Methanex Corporation is a Canada-based producer and supplier of methanol to international markets in Asia Pacific  North America  Europe and South America. The Company operates three production facilities in New Zealand  which supply methanol primarily to customers in Asia Pacific. Its two plants in Trinidad  Titan and Atlas  supply methanol markets in North America  Europe  Asia Pacific and South America. Its Geismar 1 facility in Louisiana supplies to customers in the United States. The Company through a joint venture facility in Egypt  located on the Mediterranean Sea  supplies methanol markets in Europe and Asia Pacific. Its plant in Medicine Hat  Alberta  supplies methanol to customers in North America. The Punta Arenas production complex in southern Chile supplies to customers in South America.,Read More

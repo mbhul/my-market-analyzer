@@ -1,0 +1,5 @@
+Symbol,EXE
+Industry,Healthcare Facilities
+Sector,Healthcare
+Employees,16800
+Extendicare Inc. is a provider of senior care and services throughout Canada. The Company  through its subsidiaries  operates long-term care (LTC) centers in Canada and provides home health care services in Ontario  Canada. The Company has two operating segments within its Canadian operation long-term care and home health care operations. In the long-term care segment  the Company owns and operates 57 LTC centers in Canada. In the home health care segment  the Company provides home health care services through its ParaMed division. The Company's other Canadian operations consisted of its management and group purchasing services. The Company's U.S. continuing operations consists of Virtual Care Provider  Inc. (VCPI)  which provides information technology hosting and professional services to long-term and post-acute health care providers  and Captive Insurance Company  which self-insures certain risks related to general and professional liability of its U.S. operations.,Read More

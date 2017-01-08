@@ -1,0 +1,5 @@
+Symbol,GTE
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,473
+Gran Tierra Energy Inc. is an energy Company. Through its subsidiaries  the Company is engaged in oil and gas acquisition  exploration  development and production. The Company owns the rights to oil and gas properties in Colombia  Peru and Brazil. In Colombia  the Company focuses on developing its producing light oil fields  including Costayaco and Moqueta  and on the generation of exploration prospects. In Peru  the Company is engaged in engineering  procurement and construction work in preparation for a long-term production test. It commenced drilling the Bretana Sur 95-3-4-1X well and drilled the Bretana Sur 95-2-1XD water disposal well. In Brazil  on Block REC-T-155  the Company completed the dual completions of the 3-GTE-03-BA and 4-GTE-04-BA development wells in the Tie field and completed single-stage fracture stimulation on the 1-GTE-8DP-BA exploration well.,Read More

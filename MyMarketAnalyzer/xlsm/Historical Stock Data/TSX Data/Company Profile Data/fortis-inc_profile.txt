@@ -1,0 +1,5 @@
+Symbol,FTS
+Industry,Electric Utilities
+Sector,Utilities
+Employees,6941
+Fortis Inc. (Fortis) is a Canada-based electric and gas utility company. The Company serves more than three million customers across Canada  the United States and the Caribbean. Fortis owns non-regulated hydroelectric generation assets in Canada  Belize and Upstate New York. Its non-utility investment is comprised of hotels and commercial real estate in Canada. It operates in two segment non-regulated generation and non-utility assets. Its Regulated Electric & Gas Utilities in the United States comprise of Tucson Electric Power Company  UNS Electric  Inc.  UNS Gas  Inc. and Central Hudson Gas & Electric Corporation. Its Regulated Gas Utilities in Canada include FortisBC Energy Inc.)  FortisBC Energy (Vancouver Island) Inc. and FortisBC Energy (Whistler) Inc. Its Regulated Electric Utilities in Canada include FortisAlberta  FortisBC Electric and Eastern Canadian. Its Regulated Electric Utilities in the Caribbean include Caribbean Utilities Company  Ltd. and Fortis Turks and Caicos.,Read More

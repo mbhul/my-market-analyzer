@@ -1,0 +1,5 @@
+Symbol,CCO
+Industry,Metal Mining
+Sector,Basic Materials
+Employees,3963
+Cameco Corporation (Cameco) is engaged in the exploration for and the development  mining  refining  conversion  fabrication and trading of uranium for sale as fuel for generating electricity in nuclear power reactors in Canada and other countries. The Company operates through three segment Uranium  fuel services and NUKEM. The uranium segment involves the exploration for  mining  milling  purchase and sale of uranium concentrate. The fuel services segment involves the refining  conversion and fabrication of uranium concentrate and the purchase and sale of conversion services. The NUKEM segment acts as a market intermediary between uranium producers and nuclear-electric utilities. Cameco conducts a portion of its exploration  development  mining and milling activities through joint operations located around the world. Cameco's Canadian uranium joint operation interests are McArthur River  Key Lake and Cigar Lake.,Read More

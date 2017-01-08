@@ -1,0 +1,5 @@
+Symbol,OTC
+Industry,Software & Programming
+Sector,Technology
+Employees,8500
+Open Text Corporation is a Canada-based company operating in enterprise information market (EIM). The Company provides software products and services to organizations in finding  utilizing and sharing business information. The Company's products and services include enterprise content management (ECM)  business process management (BPM)  customer experience management (CEM)  information exchange (iX)  discovery  and analytics and reporting. Its ECM solutions include content management  archiving and core  among others. Its BPM solutions include process suite platform  capture and recognition systems  and process suite solutions. Its CEM solutions include Web content management  digital asset management and portal. Its iX solutions include business-to-business (B2B) integration  fax solutions and secure messaging. Its discovery solutions include search and InfoFusion. Its analytics and reporting solutions include embedded analytics and reporting  and advanced analytics.,Read More

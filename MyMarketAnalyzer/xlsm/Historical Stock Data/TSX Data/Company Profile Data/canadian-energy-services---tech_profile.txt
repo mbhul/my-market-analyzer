@@ -1,0 +1,5 @@
+Symbol,CEU
+Industry,Oil Well Services & Equipment
+Sector,Energy
+Employees,1610
+Canadian Energy Services & Technology Corp. (CES) is a Canada-based provider of consumable chemical solutions throughout the life-cycle of the oilfield. This includes total solutions at the drill-bit  at the point of completion and stimulation  at the wellhead and pump-jack  and through to the pipeline and midstream market. CES' designed production and specialty chemicals provide down-hole solutions for production and gathering infrastructure to maximize production and reduce costs of equipment maintenance. The Company's solutions include corrosion inhibitors  demulsifiers  H2S scavengers  paraffin control products  surfactants  scale inhibitors  biocides and other specialty products. In addition  specialty chemicals are used throughout the pipeline and midstream industry to aid in hydrocarbon movement and manage transportation and processing challenges  including corrosion  wax build-up and H2S. CES operates in the Western Canadian Sedimentary Basin (WCSB).,Read More

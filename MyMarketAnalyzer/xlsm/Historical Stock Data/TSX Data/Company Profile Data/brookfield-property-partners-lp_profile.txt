@@ -1,0 +1,5 @@
+Symbol,BPY_u
+Industry,Real Estate Operations
+Sector,Services
+Employees,-
+Brookfield Property Partners L.P. is a commercial property Company. The Company owns  operates and invests in office  retail  multifamily and industrial assets. The Company's operating segments include Office  Retail  Industrial  Multifamily  Hotels  Triple Net Lease  and Corporate. Triple Net Lease includes Capital Automotive Real Estate Services Inc. (CARS)  which owns the real estate for more than 300 automotive dealerships across North America and leases it on a triple net lease basis. The office segment consists of interests in 244 office properties totaling 112 million square feet  which are located primarily in commercial markets  such as New York; London; Los Angeles; Washington  D.C.; Sydney; Toronto; Houston; Calgary  and Perth  among others. The retail segment consists of 164 regional malls containing 154 million square feet in the United States and Brazil.,Read More

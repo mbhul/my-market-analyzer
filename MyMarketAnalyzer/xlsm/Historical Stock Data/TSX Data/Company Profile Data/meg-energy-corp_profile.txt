@@ -1,0 +1,5 @@
+Symbol,MEG
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,685
+MEG Energy Corp. (MEG) is an oil sands company. The Company is focused on sustainable in situ oil sands development and production in the southern Athabasca oil sands region of Alberta  Canada. MEG is developing enhanced oil recovery projects that utilize steam‐assisted gravity drainage (SAGD) extraction methods. The Company has two commercial SAGD project the Christina Lake Project and the Surmont Project. The Christina Lake Project is situated on 80 square miles of oil sands leases in the southern Athabasca oil sands region of Alberta. MEG owns a 100% working interest in the oil sands leases associated with the Christina Lake Project. The Surmont Project comprises 32 square miles of lands in the southern Athabasca oil sands region of Alberta. The Surmont Project is located approximately 50 miles south of Fort McMurray. MEG owns a 100% working interest in the oil sands leases associated with the Surmont Project. MEG also holds a 50% interest in the Access Pipeline.,Read More

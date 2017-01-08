@@ -1,0 +1,5 @@
+Symbol,SLW
+Industry,Gold & Silver
+Sector,Basic Materials
+Employees,24
+Silver Wheaton Corp. (Silver Wheaton) is a Canada-based mining company. The Company is engaged in pure precious metals streaming and generates its revenues from the sale of silver and gold. As of December 31  2014  Silver Wheaton had entered into 18 long-term purchase agreements and one early deposit long-term purchase agreement associated with silver and gold (precious metal purchase agreements)  relating to 27 different mining assets  whereby Silver Wheaton acquired silver and gold production from the counterparties for a per ounce cash payment which was fixed by contract  generally at or below the prevailing market price. As of December 31  2014  gold and silver interests owned by Silver Wheaton included San Dimas and Penasquito in Mexico; Yauliyacu  Lagunas Norte and Pierina in Peru; 777  Canada; Salobo  Brazil; Sudbury and Minto in Canada; Veladero  Argentina; Zinkgruvan  Sweden  and Neves-Corvo and Aljustrel in Portugal.,Read More

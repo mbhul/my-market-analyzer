@@ -1,0 +1,5 @@
+Symbol,CCA
+Industry,Broadcasting & Cable TV
+Sector,Services
+Employees,4500
+Cogeco Communications Inc  formerly Cogeco Cable Inc  is a Canada-based telecommunications company. It operates into three segment Canadian cable services  American cable services and Enterprise data services. The Canadian and American cable services segments provide a wide range of Television  High Speed Internet (HSI) and Telephony services primarily to residential customers. The Canadian cable services activities are carried out by Cogeco Cable Canada in the Provinces of Quebec and Ontario and the American cable services activities are carried out by Atlantic Broadband in Western Pennsylvania  South Florida  Maryland/Delaware and South Carolina. The Enterprise data services segment provides through its data centers collocation  managed and dedicated hosting  managed IT and cloud services to small  medium and large enterprises and public sector customers as well as a full suite of connectivity services. It’s competitors are DirecTV Inc  Dish Network  AT&T and Comcast  among others.,Read More

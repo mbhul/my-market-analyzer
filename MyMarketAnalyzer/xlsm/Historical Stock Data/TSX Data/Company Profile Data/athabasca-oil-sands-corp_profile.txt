@@ -1,0 +1,5 @@
+Symbol,ATH
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,325
+Athabasca Oil Corporation is a Canada-based energy company focused on the exploration for  and development and production of  bitumen from oil sands in the Athabasca region of northeastern Alberta  Canada  and light oil and liquids-rich natural gas from regions in northwestern Alberta  Canada. The Company operates through two division Light Oil Division and Thermal Oil Division. Light Oil Division produces light oil and liquids-rich natural gas from unconventional reservoirs utilizing horizontal drilling and multi-stage hydraulic fracturing technology. Thermal Oil Division is engaged in the exploration  development and production of bitumen from oil sands. The Company's principal properties are the Kaybob and Saxon/Placid Areas in its Light Oil Division and the Hangingstone asset in its Thermal Oil Division. The Company's other project areas include Dover West (Sands and Carbonates)  Birch and Grosmont in its Thermal Oil Division and the Light Oil Exploration Areas.,Read More

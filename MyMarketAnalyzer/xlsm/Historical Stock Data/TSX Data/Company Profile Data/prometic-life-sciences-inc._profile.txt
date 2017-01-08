@@ -1,0 +1,5 @@
+Symbol,PLI
+Industry,Biotechnology & Drugs
+Sector,Healthcare
+Employees,197
+ProMetic Life Sciences Inc. (ProMetic) is a Canada-based biopharmaceutical company. The Company offers solutions in bioseparations  plasma-derived therapeutics and small-molecule drug development. ProMetic offers its technologies for large-scale purification of biologics  drug development  proteomics and the elimination of pathogens. The Company operates through two segment Therapeutics and Protein Technology. Therapeutics segment is a small molecule drug discovery business. It has lead compounds  namely PBI-4050 indicated for the treatment of fibrosis in patients with chronic kidney diseases and certain cancers  and the side effects associated with chemotherapy. Protein Technology segment contains the financial information of the activities  including BioTherapeutics  Bioseparation and Prion Capture/Pathogen Removal.,Read More

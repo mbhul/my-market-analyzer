@@ -1,0 +1,5 @@
+Symbol,FSV
+Industry,Real Estate Operations
+Sector,Services
+Employees,-
+FirstService Corporation is a provider of property services. The Company offers property services through two service platforms  including FirstService Residential and FirstService Brands. FirstService Residential manages approximately 7 000 properties in residential communities. In addition to property management services  FirstService Residential provides other services in various areas  such as on-site staffing  including building engineering and maintenance  full-service amenity management  security  concierge and front desk personnel  and landscaping; banking and insurance products  and energy conservation and management solutions. FirstService Brands provides property services through seven brands  including Paul Davis Restoration  CertaPro Painters  California Closets  Pillar to Post Home Inspectors  Floorcoverings International  College Pro Painters and Service America. The Company also provides services related to energy  insurance  financial products and loan placement.,Read More

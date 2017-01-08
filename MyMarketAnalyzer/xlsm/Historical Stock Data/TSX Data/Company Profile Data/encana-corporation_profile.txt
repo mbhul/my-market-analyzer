@@ -1,0 +1,5 @@
+Symbol,ECA
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,3129
+Encana Corporation is engaged in the business of the exploration  development  production and marketing of natural gas  oil and natural gas liquids (NGLs). The Company operates through three business segment Canadian Operations  which includes the exploration for  development of  and production of natural gas oil and NGLs and other related activities within Canada; USA Operations  which includes the exploration for  development of  and production of natural gas oil and NGLs and other related activities within the United States and Market Optimization  which includes third-party purchases and sales of products that provide operational flexibility for transportation commitments  product type  delivery points and customer diversification. Market Optimization sells all of the Company's upstream production to third-party customers. Its growth assets include Permian; Tuscaloosa Marine Shale; Eagle Ford; Montney; Duvernay; DJ Basin  and San Juan.,Read More

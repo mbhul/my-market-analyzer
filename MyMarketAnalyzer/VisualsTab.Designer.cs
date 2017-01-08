@@ -1,0 +1,377 @@
+﻿namespace MyMarketAnalyzer
+{
+    partial class VisualsTab
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualsTab));
+            this.tabVisualsData = new System.Windows.Forms.TabControl();
+            this.tabVisualData = new System.Windows.Forms.TabPage();
+            this.visualSummaryTabPage1 = new MyMarketAnalyzer.VisualSummaryTabPage();
+            this.splitContainerTabVS = new System.Windows.Forms.SplitContainer();
+            this.chartMain = new MyMarketAnalyzer.CustomChart();
+            this.tblVisualsTab1 = new MyMarketAnalyzer.StatTable();
+            this.vsTabToolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.tsComboTransformation = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsBtnClear = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsBtnUpdate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsParam1Lbl = new System.Windows.Forms.ToolStripLabel();
+            this.tsParam1Txt = new System.Windows.Forms.ToolStripTextBox();
+            this.tsParam1Separator = new System.Windows.Forms.ToolStripSeparator();
+            this.tsParam2Lbl = new System.Windows.Forms.ToolStripLabel();
+            this.tsParam2Txt = new System.Windows.Forms.ToolStripTextBox();
+            this.tsParam2Separator = new System.Windows.Forms.ToolStripSeparator();
+            this.tsParam3Lbl = new System.Windows.Forms.ToolStripLabel();
+            this.tsParam3Txt = new System.Windows.Forms.ToolStripTextBox();
+            this.tsParam3Separator = new System.Windows.Forms.ToolStripSeparator();
+            this.tsBtnTransformAll = new System.Windows.Forms.ToolStripButton();
+            this.dataTransformationThread = new System.ComponentModel.BackgroundWorker();
+            this.tabVisualsData.SuspendLayout();
+            this.tabVisualData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTabVS)).BeginInit();
+            this.splitContainerTabVS.Panel1.SuspendLayout();
+            this.splitContainerTabVS.Panel2.SuspendLayout();
+            this.splitContainerTabVS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartMain)).BeginInit();
+            this.vsTabToolStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // tabVisualsData
+            // 
+            this.tabVisualsData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabVisualsData.Controls.Add(this.tabVisualData);
+            this.tabVisualsData.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabVisualsData.Location = new System.Drawing.Point(0, 26);
+            this.tabVisualsData.Name = "tabVisualsData";
+            this.tabVisualsData.SelectedIndex = 0;
+            this.tabVisualsData.Size = new System.Drawing.Size(1035, 112);
+            this.tabVisualsData.TabIndex = 1;
+            this.tabVisualsData.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabVisualsData_DrawItem);
+            this.tabVisualsData.SelectedIndexChanged += new System.EventHandler(this.tabVisualsData_SelectedIndexChanged);
+            this.tabVisualsData.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tabVisualsData_Deselected);
+            this.tabVisualsData.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabVisualsData_MouseDown);
+            this.tabVisualsData.MouseLeave += new System.EventHandler(this.tabVisualsData_MouseLeave);
+            this.tabVisualsData.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabVisualsData_MouseMove);
+            this.tabVisualsData.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabVisualsData_MouseUp);
+            // 
+            // tabVisualData
+            // 
+            this.tabVisualData.Controls.Add(this.visualSummaryTabPage1);
+            this.tabVisualData.Location = new System.Drawing.Point(4, 22);
+            this.tabVisualData.Name = "tabVisualData";
+            this.tabVisualData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVisualData.Size = new System.Drawing.Size(1027, 86);
+            this.tabVisualData.TabIndex = 0;
+            this.tabVisualData.Text = "Raw Data";
+            this.tabVisualData.UseVisualStyleBackColor = true;
+            // 
+            // visualSummaryTabPage1
+            // 
+            this.visualSummaryTabPage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.visualSummaryTabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.visualSummaryTabPage1.Location = new System.Drawing.Point(0, 0);
+            this.visualSummaryTabPage1.Name = "visualSummaryTabPage1";
+            this.visualSummaryTabPage1.Size = new System.Drawing.Size(1024, 80);
+            this.visualSummaryTabPage1.TabIndex = 0;
+            // 
+            // splitContainerTabVS
+            // 
+            this.splitContainerTabVS.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainerTabVS.Location = new System.Drawing.Point(0, 142);
+            this.splitContainerTabVS.Name = "splitContainerTabVS";
+            // 
+            // splitContainerTabVS.Panel1
+            // 
+            this.splitContainerTabVS.Panel1.Controls.Add(this.chartMain);
+            this.splitContainerTabVS.Panel1MinSize = 300;
+            // 
+            // splitContainerTabVS.Panel2
+            // 
+            this.splitContainerTabVS.Panel2.Controls.Add(this.tblVisualsTab1);
+            this.splitContainerTabVS.Panel2MinSize = 100;
+            this.splitContainerTabVS.Size = new System.Drawing.Size(1035, 441);
+            this.splitContainerTabVS.SplitterDistance = 652;
+            this.splitContainerTabVS.TabIndex = 2;
+            // 
+            // chartMain
+            // 
+            this.chartMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chartMain.BackColor = System.Drawing.Color.Transparent;
+            this.chartMain.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.VerticalCenter;
+            this.chartMain.BackSecondaryColor = System.Drawing.Color.White;
+            this.chartMain.BorderlineColor = System.Drawing.Color.Gainsboro;
+            this.chartMain.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartArea1.Name = "ChartArea1";
+            this.chartMain.ChartAreas.Add(chartArea1);
+            this.chartMain.CurrentSeriesIndex = 0;
+            legend1.Alignment = System.Drawing.StringAlignment.Center;
+            legend1.DockedToChartArea = "ChartArea1";
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.IsDockedInsideChartArea = false;
+            legend1.Name = "chartMainLegend1";
+            this.chartMain.Legends.Add(legend1);
+            this.chartMain.Location = new System.Drawing.Point(15, 0);
+            this.chartMain.Name = "chartMain";
+            this.chartMain.Size = new System.Drawing.Size(621, 439);
+            this.chartMain.TabIndex = 0;
+            this.chartMain.Text = "chart1";
+            this.chartMain.SelectedPointChanged += new System.EventHandler(this.chartMain_SelectedPointChanged);
+            // 
+            // tblVisualsTab1
+            // 
+            this.tblVisualsTab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tblVisualsTab1.AutoScroll = true;
+            this.tblVisualsTab1.AutoSize = true;
+            this.tblVisualsTab1.Location = new System.Drawing.Point(4, 4);
+            this.tblVisualsTab1.Name = "tblVisualsTab1";
+            this.tblVisualsTab1.Size = new System.Drawing.Size(371, 434);
+            this.tblVisualsTab1.TabIndex = 0;
+            this.tblVisualsTab1.TableType = MyMarketAnalyzer.StatTableType.INDIVIDUAL_PPC;
+            this.tblVisualsTab1.Layout += new System.Windows.Forms.LayoutEventHandler(this.tblVisualsTab1_OnLayout);
+            // 
+            // vsTabToolStrip
+            // 
+            this.vsTabToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.tsComboTransformation,
+            this.toolStripSeparator1,
+            this.tsBtnClear,
+            this.toolStripSeparator4,
+            this.tsBtnUpdate,
+            this.toolStripSeparator3,
+            this.tsParam1Lbl,
+            this.tsParam1Txt,
+            this.tsParam1Separator,
+            this.tsParam2Lbl,
+            this.tsParam2Txt,
+            this.tsParam2Separator,
+            this.tsParam3Lbl,
+            this.tsParam3Txt,
+            this.tsParam3Separator,
+            this.tsBtnTransformAll});
+            this.vsTabToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.vsTabToolStrip.Name = "vsTabToolStrip";
+            this.vsTabToolStrip.Size = new System.Drawing.Size(1035, 25);
+            this.vsTabToolStrip.TabIndex = 3;
+            this.vsTabToolStrip.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(125, 22);
+            this.toolStripLabel1.Text = "Apply Transformation:";
+            // 
+            // tsComboTransformation
+            // 
+            this.tsComboTransformation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tsComboTransformation.Name = "tsComboTransformation";
+            this.tsComboTransformation.Size = new System.Drawing.Size(121, 25);
+            this.tsComboTransformation.SelectedIndexChanged += new System.EventHandler(this.tsComboTransform_SelectedIndexChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsBtnClear
+            // 
+            this.tsBtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnClear.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnClear.Image")));
+            this.tsBtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnClear.Name = "tsBtnClear";
+            this.tsBtnClear.Size = new System.Drawing.Size(38, 22);
+            this.tsBtnClear.Text = "Clear";
+            this.tsBtnClear.Click += new System.EventHandler(this.tsBtnClear_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsBtnUpdate
+            // 
+            this.tsBtnUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnUpdate.Enabled = false;
+            this.tsBtnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnUpdate.Image")));
+            this.tsBtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnUpdate.Name = "tsBtnUpdate";
+            this.tsBtnUpdate.Size = new System.Drawing.Size(65, 22);
+            this.tsBtnUpdate.Text = "Transform";
+            this.tsBtnUpdate.Click += new System.EventHandler(this.tsBtnUpdate_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsParam1Lbl
+            // 
+            this.tsParam1Lbl.Name = "tsParam1Lbl";
+            this.tsParam1Lbl.Size = new System.Drawing.Size(47, 22);
+            this.tsParam1Lbl.Text = "Param1";
+            this.tsParam1Lbl.Visible = false;
+            // 
+            // tsParam1Txt
+            // 
+            this.tsParam1Txt.Name = "tsParam1Txt";
+            this.tsParam1Txt.Size = new System.Drawing.Size(30, 25);
+            this.tsParam1Txt.Visible = false;
+            // 
+            // tsParam1Separator
+            // 
+            this.tsParam1Separator.Name = "tsParam1Separator";
+            this.tsParam1Separator.Size = new System.Drawing.Size(6, 25);
+            this.tsParam1Separator.Visible = false;
+            // 
+            // tsParam2Lbl
+            // 
+            this.tsParam2Lbl.Name = "tsParam2Lbl";
+            this.tsParam2Lbl.Size = new System.Drawing.Size(47, 22);
+            this.tsParam2Lbl.Text = "Param2";
+            this.tsParam2Lbl.Visible = false;
+            // 
+            // tsParam2Txt
+            // 
+            this.tsParam2Txt.Name = "tsParam2Txt";
+            this.tsParam2Txt.Size = new System.Drawing.Size(30, 25);
+            this.tsParam2Txt.Visible = false;
+            // 
+            // tsParam2Separator
+            // 
+            this.tsParam2Separator.Name = "tsParam2Separator";
+            this.tsParam2Separator.Size = new System.Drawing.Size(6, 25);
+            this.tsParam2Separator.Visible = false;
+            // 
+            // tsParam3Lbl
+            // 
+            this.tsParam3Lbl.Name = "tsParam3Lbl";
+            this.tsParam3Lbl.Size = new System.Drawing.Size(47, 22);
+            this.tsParam3Lbl.Text = "Param3";
+            this.tsParam3Lbl.Visible = false;
+            // 
+            // tsParam3Txt
+            // 
+            this.tsParam3Txt.Name = "tsParam3Txt";
+            this.tsParam3Txt.Size = new System.Drawing.Size(30, 25);
+            this.tsParam3Txt.Visible = false;
+            // 
+            // tsParam3Separator
+            // 
+            this.tsParam3Separator.Name = "tsParam3Separator";
+            this.tsParam3Separator.Size = new System.Drawing.Size(6, 25);
+            this.tsParam3Separator.Visible = false;
+            // 
+            // tsBtnTransformAll
+            // 
+            this.tsBtnTransformAll.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsBtnTransformAll.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tsBtnTransformAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnTransformAll.Enabled = false;
+            this.tsBtnTransformAll.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnTransformAll.Image")));
+            this.tsBtnTransformAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnTransformAll.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
+            this.tsBtnTransformAll.Name = "tsBtnTransformAll";
+            this.tsBtnTransformAll.Size = new System.Drawing.Size(82, 22);
+            this.tsBtnTransformAll.Text = "Transform All";
+            this.tsBtnTransformAll.ToolTipText = "Apply transformation to all equities bound to correlation table";
+            this.tsBtnTransformAll.Click += new System.EventHandler(this.tsBtnTransformAll_Click);
+            // 
+            // dataTransformationThread
+            // 
+            this.dataTransformationThread.DoWork += new System.ComponentModel.DoWorkEventHandler(this.dataTransformationThread_DoWork);
+            this.dataTransformationThread.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.dataTransformationThread_Completed);
+            // 
+            // VisualsTab
+            // 
+            this.Controls.Add(this.vsTabToolStrip);
+            this.Controls.Add(this.splitContainerTabVS);
+            this.Controls.Add(this.tabVisualsData);
+            this.Name = "VisualsTab";
+            this.Size = new System.Drawing.Size(1035, 590);
+            this.Load += new System.EventHandler(this.VisualsTab_Load);
+            this.Resize += new System.EventHandler(this.VisualsTab_Resize);
+            this.tabVisualsData.ResumeLayout(false);
+            this.tabVisualData.ResumeLayout(false);
+            this.splitContainerTabVS.Panel1.ResumeLayout(false);
+            this.splitContainerTabVS.Panel2.ResumeLayout(false);
+            this.splitContainerTabVS.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTabVS)).EndInit();
+            this.splitContainerTabVS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartMain)).EndInit();
+            this.vsTabToolStrip.ResumeLayout(false);
+            this.vsTabToolStrip.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private CustomChart chartMain;
+        private System.Windows.Forms.TabControl tabVisualsData;
+        private System.Windows.Forms.TabPage tabVisualData;
+        private System.Windows.Forms.SplitContainer splitContainerTabVS;
+        private StatTable tblVisualsTab1;
+        private VisualSummaryTabPage visualSummaryTabPage1;
+        private System.Windows.Forms.ToolStrip vsTabToolStrip;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox tsComboTransformation;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton tsBtnClear;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton tsBtnUpdate;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel tsParam1Lbl;
+        private System.Windows.Forms.ToolStripTextBox tsParam1Txt;
+        private System.Windows.Forms.ToolStripSeparator tsParam1Separator;
+        private System.Windows.Forms.ToolStripLabel tsParam2Lbl;
+        private System.Windows.Forms.ToolStripTextBox tsParam2Txt;
+        private System.Windows.Forms.ToolStripSeparator tsParam2Separator;
+        private System.Windows.Forms.ToolStripLabel tsParam3Lbl;
+        private System.Windows.Forms.ToolStripTextBox tsParam3Txt;
+        private System.Windows.Forms.ToolStripSeparator tsParam3Separator;
+        private System.Windows.Forms.ToolStripButton tsBtnTransformAll;
+        private System.ComponentModel.BackgroundWorker dataTransformationThread;
+
+
+    }
+}

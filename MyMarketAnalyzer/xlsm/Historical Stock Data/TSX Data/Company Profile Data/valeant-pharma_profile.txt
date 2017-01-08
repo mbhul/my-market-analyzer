@@ -1,0 +1,5 @@
+Symbol,VRX
+Industry,Biotechnology & Drugs
+Sector,Healthcare
+Employees,16800
+Valeant Pharmaceuticals International  Inc. is a specialty pharmaceutical and medical device company. The Company is engaged in developing  manufacturing  and marketing a range of branded  generic and branded generic pharmaceuticals  over-the-counter (OTC) products  and medical devices (contact lenses  intraocular lenses  ophthalmic surgical equipment  and aesthetics devices)  which are marketed directly or indirectly in over 100 countries. The Company operates through two segment developed markets and emerging markets. The Company's developed markets segment consists of sales in the United States of pharmaceutical products  OTC products  and medical device products. The Company's Emerging Markets segment consists of branded generic pharmaceutical products and branded pharmaceuticals  OTC products  and medical device products.,Read More

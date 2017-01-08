@@ -1,0 +1,5 @@
+Symbol,BAD
+Industry,Construction Services
+Sector,Capital Goods
+Employees,1655
+Badger Daylighting Ltd. (Badger) is a Canada-based company that provides non-destructive excavating services to the utility  transportation  industrial  engineering  construction and petroleum industries in Canada and the United States. The Company operates in segments  including Canada and the United States. Badger works for contractors and facility owners in the utility and petroleum industries. The Company's technology is the Badger Hydrovac  which is used primarily for safe digging in congested grounds and challenging conditions. The Badger Hydrovac uses a pressurized water stream to liquefy the soil cover  which is then removed with a vacuum system and deposited into a storage tank. Badger manufactures its truck-mounted hydrovac units.,Read More

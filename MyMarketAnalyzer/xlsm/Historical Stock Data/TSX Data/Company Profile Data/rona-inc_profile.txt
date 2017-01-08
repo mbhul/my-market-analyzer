@@ -1,0 +1,5 @@
+Symbol,RON
+Industry,Retail (Home Improvement)
+Sector,Services
+Employees,17500
+Rona inc. (RONA) is a Canada-based company. The Company is a retailer and distributor of hardware  building materials and home renovation products. It operates a network of corporate  franchise and affiliate stores under several different banners and in a number of complementary formats. The Company operates business through two operating segments  which include distribution and retail. The RONA's retail segment offers a network of stores under various formats and banners. The Company's distribution network consists of nine distribution centers. RONA serves its own network  as well as many independent dealers operating under different banners  including Ace for which RONA owns the licensing rights and is the distributor in Canada.,Read More

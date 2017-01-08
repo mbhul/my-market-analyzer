@@ -1,0 +1,5 @@
+Symbol,RY
+Industry,S&Ls/Savings Banks
+Sector,Financial
+Employees,78000
+Royal Bank of Canada (RBC) is a diversified financial services company. The Company provides personal and commercial banking  wealth management services  insurance  investor services and capital markets products and services on a global basis. It operates in five segment Personal & Commercial Banking  which operates comprises its personal and business banking operations  as well as its auto financing and retail investment businesses; Wealth Management  which comprises Canadian Wealth Management  United States and International Wealth Management and Global Asset Management (GAM); Insurance  which operates under two business line Canadian Insurance and International Insurance; Investor & Treasury Services  which is a provider of asset servicing  custody  payments and treasury services  and Capital Markets  which comprises two business line Corporate and Investment Banking and Global Markets. It operates in three geographic segment Canada  United States and Other International.,Read More

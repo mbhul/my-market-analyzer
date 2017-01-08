@@ -1,0 +1,5 @@
+Symbol,QSR
+Industry,Restaurants
+Sector,Services
+Employees,4600
+Restaurant Brands International Inc is the parent company for Tim Hortons Inc. and Burger King Worldwide  Inc. The Company operates more than 18 000 restaurants operating in 100 countries under its two distinct brands. Tim Hortons operates restaurant chains in North America and Canada. Operating in the quick service segment of the restaurant industry  Tim Hortons menu includes premium coffee  hot and cold specialty drinks (including lattes  cappuccinos and espresso shots)  specialty teas and fruit smoothies  fresh baked goods  grilled Panini and classic sandwiches  wraps  soups  prepared foods and other food products. As of September 28  2014  Tim Hortons had 4 590 system wide restaurants  including 3 665 in Canada  869 in the United States and 56 in the Gulf Cooperation Council. BURGER KING is a fast food hamburger chain. The BURGER KING system operates in approximately 14 000 locations serving more than 11 million guests daily in 100 countries and territories globally.,Read More

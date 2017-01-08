@@ -1,0 +1,5 @@
+Symbol,TRQ
+Industry,Metal Mining
+Sector,Basic Materials
+Employees,2897
+Turquoise Hill Resources Ltd. (Turquoise Hill) is an international mining company focused on mining operations in Mongolia. The Company's principal and only material mineral resource property is the Oyu Tolgoi copper-gold mine in southern Mongolia. The Oyu Tolgoi Mine is approximately 550 kilometers south of Ulaanbaatar  Mongolia's capital city  and 80 kilometers north of the Mongolia-China border. The minerals on the property consist of porphyry-style copper  gold  silver and molybdenum contained in a linear structural trend (the Oyu Tolgoi Trend) that extends over 26 kilometers. Mineral resources include  from south to north  the Heruga Deposit  the Southern Oyu deposits (Southwest Oyu  South Oyu  Wedge and Central Oyu) and the Hugo Dummett deposits (Hugo South  Hugo North and Hugo North Extension).,Read More

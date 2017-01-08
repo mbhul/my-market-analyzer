@@ -1,0 +1,5 @@
+Symbol,CWB
+Industry,Regional Banks
+Sector,Financial
+Employees,2062
+Canadian Western Bank (CWB) is a bank offering a range of financial services through more than 40 branch locations in Western Canada. The bank offers Personal banking  business banking and investing services. Personal banking include the provision of bank accounts  mortgages  loans  credit cards  banking services such as online banking  mobile banking and ATM banking  creditor insurance and travel insurance. Business banking includes provision of business lending  business accounts  cash management services  credit cards and services to small businesses. Its investing services include a range of Guaranteed Investment Certificates (GICs)  Registered Retirement Savings Plans (RRSPs)  Tax-Free Savings Accounts (TFSAs)  Registered Retirement Income Fund Products (RRIFs)  Registered Education Savings Plan (RESP) and mutual funds.,Read More

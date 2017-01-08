@@ -1,0 +1,5 @@
+Symbol,OSB
+Industry,Conglomerates
+Sector,Conglomerates
+Employees,1900
+Norbord Inc is a Canada-based forest products company. The Company manufactures and markets a range of building material and paper products in North America and Europe. The Company produces wood-based panels; oriented strand board (OSB) in the United States  Canada and Europe  and medium-density fiberboard (MDF)  particleboard and furniture in Europe. The Company offers roof sheathing under the Solarbord and Trubord brands; wall sheathing under the Tallwall  Windstorm and Trubord brands  and sub-floor and stairs under brands  such as Pinnacle  TruFlor  pointSIX  Durastrand  Stabledge  Rimboard and SteadiTred in North America. In Europe  it offers OSB  including SterlingOSB2  SterlingOSB3  Sterling Roofdek  Sterling Sitecoat and Sterling Fire Solutions; MDF  such as Caberwood MDF  Caberwood MDF Trade and Caberwood MDF Industrial; chipboard  such as Caberdek  Caberfloor P5  Cabershield and ContiBoard  and floor fixings  such as Caberfix Pro Kit  Caberfix D4 and Caberfic Tape.,Read More

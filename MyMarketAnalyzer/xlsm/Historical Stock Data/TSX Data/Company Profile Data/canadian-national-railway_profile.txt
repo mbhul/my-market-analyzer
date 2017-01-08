@@ -1,0 +1,5 @@
+Symbol,CNR
+Industry,Railroads
+Sector,Transportation
+Employees,23172
+Canadian National Railway Company (CN) is engaged in the rail and related transportation business. CN's network and connections to all Class I railroads provide its customers with access to all three North American Free Trade Agreement (NAFTA) nations. CN derives its freight revenue from seven commodity groups representing a portfolio of goods transported between a range of origins and destinations. The Company's network of approximately 20 000 route miles of track spans Canada and mid-America  from the Atlantic and Pacific oceans to the Gulf of Mexico  serving the ports of Vancouver  Prince Rupert (British Columbia)  Montreal  Halifax  New Orleans and Mobile (Alabama)  and the metropolitan areas of Toronto  Buffalo  Chicago  Detroit  Duluth (Minnesota)/Superior (Wisconsin)  Green Bay (Wisconsin)  Minneapolis/St. Paul  Memphis  and Jackson (Mississippi)  with connections to all points in North America.,Read More

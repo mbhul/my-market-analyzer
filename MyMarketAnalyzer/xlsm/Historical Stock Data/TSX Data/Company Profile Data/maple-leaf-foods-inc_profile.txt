@@ -1,0 +1,5 @@
+Symbol,MFI
+Industry,Food Processing
+Sector,Consumer/Non-Cyclical
+Employees,12000
+Maple Leaf Foods Inc. is a Canada-based consumer protein company. The Company's brands include Maple Leaf  Maple Leaf Prime  Maple Leaf Natural Selections  Schneiders  Schneiders Country Naturals and Mina. It operates through two segment Meat Products Group and Agribusiness Group. The Meat Products Group includes value-added prepared meats  lunch kits and snacks  and fresh pork and poultry products. The Agribusiness Group includes Canadian hog production operations that primarily supply the Meat Products Group with livestock  as well as toll feed sales. The Company's Meat Products Group and Agribusiness Group comprise the Protein Group. The Company's portfolio includes prepared meats  ready-to-cook and ready-to-serve meals and valued-added fresh pork and poultry.,Read More

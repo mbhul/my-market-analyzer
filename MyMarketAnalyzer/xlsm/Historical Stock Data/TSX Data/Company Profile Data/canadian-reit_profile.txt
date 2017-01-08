@@ -1,0 +1,5 @@
+Symbol,REF_u
+Industry,Real Estate Operations
+Sector,Services
+Employees,143
+Canadian Real Estate Investment Trust is a Canada-based real estate investment trust (REIT). The Company's objective is to accumulate and manage a portfolio of high-quality real estate assets and to deliver the benefits of real estate ownership to its investors. The Company's properties include retail properties  industrial properties and office properties. The Company's properties include Westridge Power Centre  Woodbridge  Ontario; Mega Centre Lebourgneuf  Quebec City  Quebec; Bay Mac Shopping Centre  Richmond Hill  Ontario; 100 Alexis Nihon Boulevard  Montreal  Quebec; Hopewell Distribution Park  Calgary  Alberta; South Edmonton Common  Edmonton  Alberta; Bay Mac Shopping Centre  Richmond Hill  Ontario; Horizon Business Park  Edmonton  Alberta  and Great Plains Business Park  Calgary  Alberta  among others.,Read More

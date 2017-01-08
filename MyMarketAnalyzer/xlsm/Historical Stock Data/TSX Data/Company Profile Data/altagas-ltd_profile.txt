@@ -1,0 +1,5 @@
+Symbol,ALA
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,1542
+AltaGas Ltd. is a Canada-based energy infrastructure company with a focus on natural gas  power and regulated utilities. The Company operates through three segment Gas  Power and Utilities. Gas segment serves producers in the Western Canadian Sedimentary Basin (WCSB) and transacts over 2 billion cubic feet per day (Bcf/d) of natural gas. Gas segment includes natural gas processing  transportation  storage and natural gas marketing. Power segment includes power generation assets  power purchase agreements for power supply  and sale of power to Commercial and Industrial (C&I) customers. Power segment also includes approximately 1 285 megawatts (MW) of power generation capacity from gas-fired  coal fired  wind  biomass and run-of-river assets  along with an additional 81 MW of assets under construction. Utilities segment includes regulated natural gas distribution utilities across North America and a regulated natural gas storage utility in the United States.,Read More

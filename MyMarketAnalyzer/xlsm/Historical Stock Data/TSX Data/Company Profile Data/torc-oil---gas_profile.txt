@@ -1,0 +1,5 @@
+Symbol,TOG
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,30
+TORC Oil & Gas Ltd. is a Canada-based company. The Company's principal business activity is the exploration for and production of petroleum and natural gas in the Western Canadian sedimentary basin.

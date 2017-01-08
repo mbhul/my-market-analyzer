@@ -1,0 +1,5 @@
+Symbol,CU
+Industry,Natural Gas Utilities
+Sector,Utilities
+Employees,6811
+Canadian Utilities Limited is a Canada-based ATCO company. The Company operates through four segment Utilities  which include three business operations within western and northern Canad ATCO Electric  ATCO Gas and ATCO Pipelines; Energy segment activities are conducted through ATCO Power  which is engaged in the non-regulated supply of electricity and cogeneration steam  as well as the regulated supply of electricity and ATCO Energy Solutions  which provides non-regulated natural gas gathering  processing  storage and transmission  natural gas liquids extraction  electricity transmission and industrial water services; ATCO Australia  which includes the distribution of natural gas by ATCO Gas Australia and the non-regulated supply of electricity and steam by ATCO Power Australia  and Corporate & Other  which includes the strategic growth investments in long-term contracted electricity transmission infrastructure in Alberta and geographical expansion into Mexico.,Read More

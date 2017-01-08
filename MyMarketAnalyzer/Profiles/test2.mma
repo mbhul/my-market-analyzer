@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MyMarketAnalyzer>
+  <Profile>
+    <Watchlist>
+      <WatchItem>
+        <Name>Cameco</Name>
+        <Last>14.04</Last>
+        <Change>0.08(0.57%)</Change>
+        <Date>2017-12-30 12:00:00 AM</Date>
+        <Source>http://ca.investing.com/equities/cameco-corp?cid=24485</Source>
+        <Hist />
+        <Listed>S&amp;P/TSX 60</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>Brookfield Asset Management</Name>
+        <Last>44.3</Last>
+        <Change>-0.26(-0.58%)</Change>
+        <Date>2017-12-30 12:00:00 AM</Date>
+        <Source>http://ca.investing.com/equities/brookfield-asset-management</Source>
+        <Hist />
+        <Listed>S&amp;P/TSX 60</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>Bombardier Inc</Name>
+        <Last>2.16</Last>
+        <Change>-0.01(-0.46%)</Change>
+        <Date>2017-12-30 12:00:00 AM</Date>
+        <Source>http://ca.investing.com/equities/bombardier-inc</Source>
+        <Hist />
+        <Listed>S&amp;P/TSX 60</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>BlackBerry</Name>
+        <Last>9.24</Last>
+        <Change>-0.15(-1.6%)</Change>
+        <Date>2017-12-30 12:00:00 AM</Date>
+        <Source>http://ca.investing.com/equities/research-in-motion-ltd?cid=24639</Source>
+        <Hist />
+        <Listed>S&amp;P/TSX 60</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>Bosch</Name>
+        <Last>21080</Last>
+        <Change>30.05(0.14%)</Change>
+        <Date>2017-01-02 4:59:00 AM</Date>
+        <Source>http://ca.investing.com/equities/bosch</Source>
+        <Hist />
+        <Listed>Nifty 50</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>Allianz</Name>
+        <Last>157.3</Last>
+        <Change>0.3(0.19%)</Change>
+        <Date>2017-01-02 11:29:59 AM</Date>
+        <Source>http://ca.investing.com/equities/allianz-ag</Source>
+        <Hist />
+        <Listed>DAX</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>Deutsche Bank AG</Name>
+        <Last>17.545</Last>
+        <Change>0.295(1.71%)</Change>
+        <Date>2017-01-02 11:29:59 AM</Date>
+        <Source>http://ca.investing.com/equities/deutsche-bank</Source>
+        <Hist />
+        <Listed>DAX</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>Deutsche Bank AG</Name>
+        <Last>17.25</Last>
+        <Change>0.14(0.82%)</Change>
+        <Date>2016-12-30 12:00:00 AM</Date>
+        <Source>http://ca.investing.com/equities/deutsche-bank</Source>
+        <Hist />
+        <Listed>DAX</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>Asahi Glass</Name>
+        <Last>796</Last>
+        <Change>-3(-0.38%)</Change>
+        <Date>2017-12-30 12:00:00 AM</Date>
+        <Source>http://ca.investing.com/equities/asahi-glass-co.,-ltd.</Source>
+        <Hist />
+        <Listed>Nikkei 225</Listed>
+      </WatchItem>
+      <WatchItem>
+        <Name>Fuji Electric</Name>
+        <Last>606</Last>
+        <Change>2(0.33%)</Change>
+        <Date>2017-12-30 12:00:00 AM</Date>
+        <Source>http://ca.investing.com/equities/fuji-electric-co.,-ltd.</Source>
+        <Hist />
+        <Listed>Nikkei 225</Listed>
+      </WatchItem>
+    </Watchlist>
+  </Profile>
+</MyMarketAnalyzer>

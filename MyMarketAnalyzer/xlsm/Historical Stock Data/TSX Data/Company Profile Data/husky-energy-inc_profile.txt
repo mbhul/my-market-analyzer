@@ -1,0 +1,5 @@
+Symbol,HSE
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,5774
+Husky Energy Inc. (Husky) is an international integrated energy company. The Company operates in two segment Upstream and Downstream. Upstream includes exploration for  and development and production of  crude oil  bitumen  natural gas and NGL (Exploration and Production) and marketing of the Company's and other producers' crude oil  natural gas  Natural Gas Liquids (NGL)  sulphur and petroleum coke  pipeline transportation  the blending of crude oil and natural gas  and storage of crude oil  diluent and natural gas (Infrastructure and Marketing). Downstream includes upgrading of heavy crude oil feedstock into synthetic crude oil (Upgrading)  refining in Canada of crude oil and marketing of refined petroleum products  including gasoline  diesel  ethanol blended fuels  asphalt and ancillary products  and production of ethanol (Canadian Refined Products) and refining in the United States of primarily crude oil to produce and market gasoline  jet fuel and diesel fuels.,Read More

@@ -1,0 +1,5 @@
+Symbol,AC
+Industry,Airline
+Sector,Transportation
+Employees,24400
+Air Canada is a domestic  the United States trans-border and international airline and provider of scheduled passenger services in the Canadian market  the Canada-United States trans-border market and in the international market to and from Canada. Together with its Air Canada Express regional partners  Air Canada serves close to 35 million passengers annually and provides direct passenger service to more than 175 destinations on five continents. Air Canada is a founding member of Star Alliance. Air Canada's new leisure airline  Air Canada rouge  (aircanada.com/rouge) serves popular holiday destinations in Europe  the Caribbean and Central America and is expanding to a total of 10 European destinations. Air Canada's five new Boeing 777-300ER aircraft entered service  after Air Canada's Premium Economy cabin was inaugurated on Montreal-Paris flights. Air Canada offers array of services from its mobile platform  enabling customers to seamlessly manage their travel from mobile device.,Read More

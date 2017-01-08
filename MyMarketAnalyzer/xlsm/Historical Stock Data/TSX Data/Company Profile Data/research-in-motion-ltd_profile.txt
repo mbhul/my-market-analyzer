@@ -1,0 +1,5 @@
+Symbol,BB
+Industry,Communications Equipment
+Sector,Technology
+Employees,6225
+BlackBerry Limited (BlackBerry) is a provider of mobile communications and services. The Company is engaged primarily in the provision of the BlackBerry wireless solution  consisting of smartphones  service and software. The Company's four areas of business are Devices business  Enterprise Services  BlackBerry Technology Solutions (BTS) business and Messaging. The Company's Devices business is focused on delivering smartphone products. BlackBerry's Enterprise Services business offers enterprise products and services. The Company's BTS business consists of five unit QNX Software Systems Limited (QNX)  Certicom  Paratek  the BlackBerry Internet of Things (IoT) Platform  and Intellectual Property and Patent Licensing (IPPL). The Company's Messaging business is engaged in providing BlackBerry Messenger (BBM)  the Company's instant mobile to mobile private messaging service. The Company offers a portfolio of smartphone products to both the enterprise and consumer markets.,Read More

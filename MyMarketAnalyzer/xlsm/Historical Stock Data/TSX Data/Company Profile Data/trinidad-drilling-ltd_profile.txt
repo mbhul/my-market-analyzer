@@ -1,0 +1,5 @@
+Symbol,TDG
+Industry,Oil Well Services & Equipment
+Sector,Energy
+Employees,2772
+Trinidad Drilling Ltd. (Trinidad) is a Canada-based drilling rig contractor. Trinidad operates in the drilling and barge-drilling sectors of the North American oil and natural gas industry. Trinidad operates through four segment Canadian Operations  consisting of the Company's Canadian land drilling operations; the United States and International Operations  which provides contract drilling services to the United States and Mexican oil and gas industry; Manufacturing Operations  consisting of the operations of Trinidad's subsidiary  Victory Rig Equipment Corporation (Victory)  doing business as Trinidad Design & Manufacturing (TDM)  a drilling rig and equipment construction and fabrication business which builds and maintains  and recertifies drilling and related equipment  and Joint Venture Operations  which provides contract drilling services to Halliburton Company for its international integrated projects.,Read More

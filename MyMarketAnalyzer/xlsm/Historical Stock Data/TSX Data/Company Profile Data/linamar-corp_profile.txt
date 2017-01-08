@@ -1,0 +1,5 @@
+Symbol,LNR
+Industry,Auto & Truck Parts
+Sector,Consumer Cyclical
+Employees,19500
+Linamar Corporation is a Canada-based diversified manufacturing company of engineered products powering vehicles  motion  work and lives. The Company operates through two segment the Powertrain/Driveline segment and the Industrial segment. The segments are further divided into three operating group Machining & Assembly  Forging  and Skyjack. The Company's Machining & Assembly and Forging operating groups focus on precision metallic components  modules and systems for engine  transmission and driveline systems designed for vehicle and industrial markets. The Company's Skyjack operating group is noted for its mobile industrial equipment  notably its aerial work platforms and tele handlers.,Read More

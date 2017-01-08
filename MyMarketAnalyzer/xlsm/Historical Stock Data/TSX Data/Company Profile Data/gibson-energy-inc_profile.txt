@@ -1,0 +1,5 @@
+Symbol,GEI
+Industry,Oil & Gas Operations
+Sector,Energy
+Employees,2520
+Gibson Energy Inc. (Gibson) is an integrated service provider to the oil and gas industry with operations across regions throughout North America. Gibson is engaged in the movement  storage  blending  processing  marketing and distribution of crude oil  condensate  natural gas liquids (NGLs)  water  oilfield waste and refined products. The Company operates through six segment Terminals and Pipelines  Environmental Services  Truck Transportation  Propane and NGL Marketing and Distribution  Processing and Wellsite Fluids  and Marketing. The Company transports energy products by utilizing its integrated network of terminals  pipelines  storage tanks  and trucks located throughout western Canada and through its truck transportation and injection station network in the United States. The Company also provides emulsion treating  water disposal and oilfield waste management services in Canada and the United States.,Read More
