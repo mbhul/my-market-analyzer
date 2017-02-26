@@ -23,10 +23,10 @@ namespace MyMarketAnalyzer
             Boolean returnValue = false;
 
             //Prevent nuissance failure caused by empty string
-            if(arg0 == "")
-            {
-                arg0 = "0";
-            }
+            //if(arg0 == "")
+            //{
+            //    arg0 = "0";
+            //}
 
             try
             {

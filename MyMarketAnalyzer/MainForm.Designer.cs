@@ -45,12 +45,15 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.watchlist1 = new MyMarketAnalyzer.Watchlist();
+            this.ticker1 = new MyMarketAnalyzer.Ticker();
             this.tabStats = new System.Windows.Forms.TabPage();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.dataMenuPanel = new System.Windows.Forms.Panel();
             this.cbLiveDataInterval = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.dataMenuArrow = new System.Windows.Forms.PictureBox();
+            this.tblStatTableMain = new MyMarketAnalyzer.StatTable();
             this.lblUpdate = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblPoweredBy = new System.Windows.Forms.Label();
@@ -92,7 +95,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.tabAnalysis = new System.Windows.Forms.TabPage();
             this.analysisSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnRunAnalysis = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sellRulesBox = new System.Windows.Forms.GroupBox();
             this.btnSellRuleExpandCollapse = new System.Windows.Forms.Button();
@@ -106,6 +109,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.analysisAmtHelpBtn = new System.Windows.Forms.PictureBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.analysisAmtTxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.analysisSelectBox = new System.Windows.Forms.ComboBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -113,6 +119,8 @@
             this.lblChartDate = new System.Windows.Forms.Label();
             this.btnChartNext = new System.Windows.Forms.Button();
             this.btnChartPrev = new System.Windows.Forms.Button();
+            this.chartAnalysis = new MyMarketAnalyzer.CustomChart();
+            this.statTable1 = new MyMarketAnalyzer.StatTable();
             this.toolStripAnalysis = new System.Windows.Forms.ToolStrip();
             this.tsHistSourceDir2 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -137,11 +145,6 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.watchlist1 = new MyMarketAnalyzer.Watchlist();
-            this.ticker1 = new MyMarketAnalyzer.Ticker();
-            this.tblStatTableMain = new MyMarketAnalyzer.StatTable();
-            this.chartAnalysis = new MyMarketAnalyzer.CustomChart();
-            this.statTable1 = new MyMarketAnalyzer.StatTable();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -168,16 +171,17 @@
             this.buyRulesBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.analysisAmtHelpBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.panelAnalysis1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartAnalysis)).BeginInit();
             this.toolStripAnalysis.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartAnalysis)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -307,6 +311,25 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "My Watch List";
             // 
+            // watchlist1
+            // 
+            this.watchlist1.AutoScroll = true;
+            this.watchlist1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.watchlist1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.watchlist1.Location = new System.Drawing.Point(6, 33);
+            this.watchlist1.Name = "watchlist1";
+            this.watchlist1.Size = new System.Drawing.Size(458, 364);
+            this.watchlist1.TabIndex = 2;
+            // 
+            // ticker1
+            // 
+            this.ticker1.BackColor = System.Drawing.Color.LightGray;
+            this.ticker1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ticker1.Location = new System.Drawing.Point(6, 406);
+            this.ticker1.Name = "ticker1";
+            this.ticker1.Size = new System.Drawing.Size(458, 14);
+            this.ticker1.TabIndex = 3;
+            // 
             // tabStats
             // 
             this.tabStats.Controls.Add(this.toolStripContainer1);
@@ -388,6 +411,17 @@
             this.dataMenuArrow.Click += new System.EventHandler(this.dataMenuArrow_Click);
             this.dataMenuArrow.MouseEnter += new System.EventHandler(this.dataMenuArrow_MouseEnter);
             this.dataMenuArrow.MouseLeave += new System.EventHandler(this.dataMenuArrow_MouseLeave);
+            // 
+            // tblStatTableMain
+            // 
+            this.tblStatTableMain.AutoScroll = true;
+            this.tblStatTableMain.AutoSize = true;
+            this.tblStatTableMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblStatTableMain.Location = new System.Drawing.Point(0, 0);
+            this.tblStatTableMain.Name = "tblStatTableMain";
+            this.tblStatTableMain.Size = new System.Drawing.Size(967, 373);
+            this.tblStatTableMain.TabIndex = 4;
+            this.tblStatTableMain.TableType = MyMarketAnalyzer.StatTableType.HIST_STATS;
             // 
             // lblUpdate
             // 
@@ -778,7 +812,7 @@
             // 
             // analysisSplitContainer.Panel1
             // 
-            this.analysisSplitContainer.Panel1.Controls.Add(this.button1);
+            this.analysisSplitContainer.Panel1.Controls.Add(this.btnRunAnalysis);
             this.analysisSplitContainer.Panel1.Controls.Add(this.tableLayoutPanel1);
             this.analysisSplitContainer.Panel1.Controls.Add(this.panel1);
             this.analysisSplitContainer.Panel1.Controls.Add(this.groupBox1);
@@ -792,16 +826,17 @@
             this.analysisSplitContainer.SplitterWidth = 6;
             this.analysisSplitContainer.TabIndex = 1;
             // 
-            // button1
+            // btnRunAnalysis
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnRunAnalysis.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(0, 371);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(510, 29);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Run Analysis";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRunAnalysis.Location = new System.Drawing.Point(0, 371);
+            this.btnRunAnalysis.Name = "btnRunAnalysis";
+            this.btnRunAnalysis.Size = new System.Drawing.Size(510, 29);
+            this.btnRunAnalysis.TabIndex = 4;
+            this.btnRunAnalysis.Text = "Run Analysis";
+            this.btnRunAnalysis.UseVisualStyleBackColor = true;
+            this.btnRunAnalysis.Click += new System.EventHandler(this.btnRunAnalysis_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -847,6 +882,7 @@
             this.btnSellRuleExpandCollapse.Size = new System.Drawing.Size(30, 22);
             this.btnSellRuleExpandCollapse.TabIndex = 2;
             this.btnSellRuleExpandCollapse.UseVisualStyleBackColor = true;
+            this.btnSellRuleExpandCollapse.Click += new System.EventHandler(this.btnSellRuleExpandCollapse_Click);
             // 
             // analysisSell_RTxtBox
             // 
@@ -884,6 +920,7 @@
             this.btnBuyRuleExpandCollapse.Size = new System.Drawing.Size(30, 22);
             this.btnBuyRuleExpandCollapse.TabIndex = 1;
             this.btnBuyRuleExpandCollapse.UseVisualStyleBackColor = true;
+            this.btnBuyRuleExpandCollapse.Click += new System.EventHandler(this.btnBuyRuleExpandCollapse_Click);
             // 
             // analysisBuy_RTxtBox
             // 
@@ -954,6 +991,9 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.analysisAmtHelpBtn);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.analysisAmtTxt);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.analysisSelectBox);
             this.groupBox1.Location = new System.Drawing.Point(4, 35);
@@ -964,15 +1004,46 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Selected Security";
             // 
+            // analysisAmtHelpBtn
+            // 
+            this.analysisAmtHelpBtn.BackColor = System.Drawing.Color.Transparent;
+            this.analysisAmtHelpBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.analysisAmtHelpBtn.Image = global::MyMarketAnalyzer.Properties.Resources.help_blue;
+            this.analysisAmtHelpBtn.Location = new System.Drawing.Point(183, 12);
+            this.analysisAmtHelpBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.analysisAmtHelpBtn.Name = "analysisAmtHelpBtn";
+            this.analysisAmtHelpBtn.Size = new System.Drawing.Size(24, 24);
+            this.analysisAmtHelpBtn.TabIndex = 4;
+            this.analysisAmtHelpBtn.TabStop = false;
+            this.analysisAmtHelpBtn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.analysisAmtHelp_MouseDown);
+            this.analysisAmtHelpBtn.MouseEnter += new System.EventHandler(this.analysisAmtHelp_MouseEnter);
+            this.analysisAmtHelpBtn.MouseLeave += new System.EventHandler(this.analysisAmtHelp_MouseLeave);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 17);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(89, 13);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Principal Amount:";
+            // 
+            // analysisAmtTxt
+            // 
+            this.analysisAmtTxt.Location = new System.Drawing.Point(98, 14);
+            this.analysisAmtTxt.Name = "analysisAmtTxt";
+            this.analysisAmtTxt.Size = new System.Drawing.Size(84, 20);
+            this.analysisAmtTxt.TabIndex = 2;
+            // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(213, 16);
+            this.label10.Location = new System.Drawing.Point(210, 17);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(80, 13);
+            this.label10.Size = new System.Drawing.Size(83, 13);
             this.label10.TabIndex = 1;
-            this.label10.Text = "Name / Symbol";
+            this.label10.Text = "Name / Symbol:";
             // 
             // analysisSelectBox
             // 
@@ -1006,6 +1077,7 @@
             this.splitContainer3.Size = new System.Drawing.Size(451, 400);
             this.splitContainer3.SplitterDistance = 231;
             this.splitContainer3.TabIndex = 5;
+            this.splitContainer3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer3_SplitterMoved);
             this.splitContainer3.Paint += new System.Windows.Forms.PaintEventHandler(this.analysis_nestedSplitPanelRightOnPaint);
             // 
             // panelAnalysis1
@@ -1054,6 +1126,33 @@
             this.btnChartPrev.Text = "<";
             this.btnChartPrev.UseVisualStyleBackColor = true;
             this.btnChartPrev.Click += new System.EventHandler(this.btnChartPrev_Click);
+            // 
+            // chartAnalysis
+            // 
+            this.chartAnalysis.BackColor = System.Drawing.Color.Silver;
+            this.chartAnalysis.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
+            chartArea1.BackColor = System.Drawing.Color.Silver;
+            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
+            chartArea1.Name = "ChartArea1";
+            this.chartAnalysis.ChartAreas.Add(chartArea1);
+            this.chartAnalysis.CurrentSeriesIndex = 0;
+            this.chartAnalysis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartAnalysis.Location = new System.Drawing.Point(0, 0);
+            this.chartAnalysis.Name = "chartAnalysis";
+            this.chartAnalysis.Size = new System.Drawing.Size(451, 231);
+            this.chartAnalysis.TabIndex = 0;
+            this.chartAnalysis.Text = "chart1";
+            // 
+            // statTable1
+            // 
+            this.statTable1.AutoScroll = true;
+            this.statTable1.AutoSize = true;
+            this.statTable1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statTable1.Location = new System.Drawing.Point(0, 0);
+            this.statTable1.Name = "statTable1";
+            this.statTable1.Size = new System.Drawing.Size(451, 165);
+            this.statTable1.TabIndex = 0;
+            this.statTable1.TableType = MyMarketAnalyzer.StatTableType.HIST_STATS;
             // 
             // toolStripAnalysis
             // 
@@ -1265,63 +1364,6 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(967, 373);
             // 
-            // watchlist1
-            // 
-            this.watchlist1.AutoScroll = true;
-            this.watchlist1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.watchlist1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.watchlist1.Location = new System.Drawing.Point(6, 33);
-            this.watchlist1.Name = "watchlist1";
-            this.watchlist1.Size = new System.Drawing.Size(458, 364);
-            this.watchlist1.TabIndex = 2;
-            // 
-            // ticker1
-            // 
-            this.ticker1.BackColor = System.Drawing.Color.LightGray;
-            this.ticker1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ticker1.Location = new System.Drawing.Point(6, 406);
-            this.ticker1.Name = "ticker1";
-            this.ticker1.Size = new System.Drawing.Size(458, 14);
-            this.ticker1.TabIndex = 3;
-            // 
-            // tblStatTableMain
-            // 
-            this.tblStatTableMain.AutoScroll = true;
-            this.tblStatTableMain.AutoSize = true;
-            this.tblStatTableMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblStatTableMain.Location = new System.Drawing.Point(0, 0);
-            this.tblStatTableMain.Name = "tblStatTableMain";
-            this.tblStatTableMain.Size = new System.Drawing.Size(967, 373);
-            this.tblStatTableMain.TabIndex = 4;
-            this.tblStatTableMain.TableType = MyMarketAnalyzer.StatTableType.HIST_STATS;
-            // 
-            // chartAnalysis
-            // 
-            this.chartAnalysis.BackColor = System.Drawing.Color.Silver;
-            this.chartAnalysis.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
-            chartArea1.BackColor = System.Drawing.Color.Silver;
-            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
-            chartArea1.Name = "ChartArea1";
-            this.chartAnalysis.ChartAreas.Add(chartArea1);
-            this.chartAnalysis.CurrentSeriesIndex = 0;
-            this.chartAnalysis.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartAnalysis.Location = new System.Drawing.Point(0, 0);
-            this.chartAnalysis.Name = "chartAnalysis";
-            this.chartAnalysis.Size = new System.Drawing.Size(451, 231);
-            this.chartAnalysis.TabIndex = 0;
-            this.chartAnalysis.Text = "chart1";
-            // 
-            // statTable1
-            // 
-            this.statTable1.AutoScroll = true;
-            this.statTable1.AutoSize = true;
-            this.statTable1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statTable1.Location = new System.Drawing.Point(0, 0);
-            this.statTable1.Name = "statTable1";
-            this.statTable1.Size = new System.Drawing.Size(451, 165);
-            this.statTable1.TabIndex = 0;
-            this.statTable1.TableType = MyMarketAnalyzer.StatTableType.HIST_STATS;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1369,6 +1411,7 @@
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.analysisAmtHelpBtn)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.Panel2.PerformLayout();
@@ -1376,6 +1419,7 @@
             this.splitContainer3.ResumeLayout(false);
             this.panelAnalysis1.ResumeLayout(false);
             this.panelAnalysis1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartAnalysis)).EndInit();
             this.toolStripAnalysis.ResumeLayout(false);
             this.toolStripAnalysis.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -1384,7 +1428,6 @@
             this.toolStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartAnalysis)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1419,7 +1462,7 @@
         private System.Windows.Forms.SplitContainer analysisSplitContainer;
         //private System.Windows.Forms.DataVisualization.Charting.Chart chartAnalysis;
         private CustomChart chartAnalysis;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRunAnalysis;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label8;
@@ -1500,6 +1543,9 @@
         private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
         private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
+        private System.Windows.Forms.TextBox analysisAmtTxt;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.PictureBox analysisAmtHelpBtn;
     }
 }
 

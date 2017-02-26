@@ -403,6 +403,7 @@ namespace MyMarketAnalyzer
             progressStats.Value = e.ProgressPercentage;
             if(e.ProgressPercentage == 100)
             {
+                tblStatTableMain.TableType = StatTableType.HIST_STATS;
                 progressStats.Visible = false;
                 DisplayStatData();
                 DisplayAnalysisData();
@@ -699,7 +700,7 @@ namespace MyMarketAnalyzer
         {
             String[,] filterKey;
             String filterString = "";
-            Boolean isValid = Helpers.ValidateNumeric(txtStatFrom.Text) && Helpers.ValidateNumeric(txtStatTo.Text);
+            Boolean isValid = Helpers.ValidateNumeric(txtStatFrom.Text) || Helpers.ValidateNumeric(txtStatTo.Text);
 
             if (!(this.tblStatTableMain.TableType == StatTableType.LIVE_STATS && this.MyDataManager.IsLiveSessionOpen))
             {
@@ -712,11 +713,11 @@ namespace MyMarketAnalyzer
 
             if (isValid)
             {
-                if (txtStatFrom.Text != "")
+                if (Helpers.ValidateNumeric(txtStatFrom.Text))
                 {
                     filterString += (filterKey[comboBoxStatFilter.SelectedIndex - 1, 0] + " >= " + txtStatFrom.Text);
                 }
-                if (txtStatTo.Text != "")
+                if (Helpers.ValidateNumeric(txtStatTo.Text))
                 {
                     if (filterString != "")
                     {
@@ -768,7 +769,16 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void analysisSelectBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int index;
+            List<Equity> data = MyDataManager.HistoricalData.Constituents;
 
+            index = this.analysisSelectBox.SelectedIndex;
+
+            if(MyDataManager.HistoricalData.Constituents != null &&
+                this.analysisSelectBox.Items.Count == MyDataManager.HistoricalData.Constituents.Count)
+            {
+                this.AnalysisChartBindData<DateTime>(data[index].HistoricalPriceDate, data[index].HistoricalPrice);
+            }
         }
 
         /*****************************************************************************
@@ -888,7 +898,7 @@ namespace MyMarketAnalyzer
          *  Description:    
          *  Parameters:     None
          *****************************************************************************/
-        private void AnalysisChartBindData(List<double> x_values, List<double> y_values)
+        private void AnalysisChartBindData<T>(List<T> x_values, List<double> y_values)
         {
             //Bind data to chart
             if (chartAnalysis.Series.Count <= 0)
@@ -904,8 +914,11 @@ namespace MyMarketAnalyzer
             chartAnalysis.Series["Analysis"].Points.DataBindXY(x_values, y_values);
 
             //Set chart axes labels
-            chartAnalysis.ChartAreas[0].AxisX.Title = Analysis.ChartFeatures[cbAnalysisIndicatorX.SelectedIndex];
-            chartAnalysis.ChartAreas[0].AxisY.Title = Analysis.ChartFeatures[cbAnalysisIndicatorY.SelectedIndex];
+            if (cbAnalysisIndicatorX.SelectedIndex >= 0 && cbAnalysisIndicatorY.SelectedIndex >= 0)
+            {
+                chartAnalysis.ChartAreas[0].AxisX.Title = Analysis.ChartFeatures[cbAnalysisIndicatorX.SelectedIndex];
+                chartAnalysis.ChartAreas[0].AxisY.Title = Analysis.ChartFeatures[cbAnalysisIndicatorY.SelectedIndex];
+            }
 
             chartAnalysis.Invalidate();
         }
@@ -1227,7 +1240,164 @@ namespace MyMarketAnalyzer
             }
         }
 
+        /*****************************************************************************
+         *  EVENT HANDLER:  btnBuyRuleExpandCollapse_Click
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void btnBuyRuleExpandCollapse_Click(object sender, EventArgs e)
+        {
+            int x, y;
+            if (this.analysisBuy_RTxtBox.Dock == DockStyle.Fill)
+            {
+                this.analysisBuy_RTxtBox.Dock = DockStyle.None;
+                this.analysisBuy_RTxtBox.Width = this.analysisBuy_RTxtBox.Parent.Width - 37;
+                this.analysisBuy_RTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+                x = this.btnBuyRuleExpandCollapse.Parent.Width - this.btnBuyRuleExpandCollapse.Width - 5;
+                y = 18;
+
+                this.btnBuyRuleExpandCollapse.Location = new Point(x, y);
+                this.btnBuyRuleExpandCollapse.BringToFront();
+
+                this.btnBuyRuleExpandCollapse.Image = MyMarketAnalyzer.Properties.Resources.expand_icon;
+            }
+            else
+            {
+                this.analysisBuy_RTxtBox.Dock = DockStyle.Fill;
+
+                x = this.btnBuyRuleExpandCollapse.Parent.Width - this.btnBuyRuleExpandCollapse.Width - 2;
+                y = 15;
+
+                this.btnBuyRuleExpandCollapse.Location = new Point(x, y);
+                this.btnBuyRuleExpandCollapse.BringToFront();
+
+                this.btnBuyRuleExpandCollapse.Image = MyMarketAnalyzer.Properties.Resources.collapse_icon;
+            }
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  btnSellRuleExpandCollapse_Click
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void btnSellRuleExpandCollapse_Click(object sender, EventArgs e)
+        {
+            int x, y;
+            if (this.analysisSell_RTxtBox.Dock == DockStyle.Fill)
+            {
+                this.analysisSell_RTxtBox.Dock = DockStyle.None;
+                this.analysisSell_RTxtBox.Width = this.analysisSell_RTxtBox.Parent.Width - 37;
+                this.analysisSell_RTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+                x = this.btnSellRuleExpandCollapse.Parent.Width - this.btnSellRuleExpandCollapse.Width - 5;
+                y = 18;
+
+                this.btnSellRuleExpandCollapse.Location = new Point(x, y);
+                this.btnSellRuleExpandCollapse.BringToFront();
+
+                this.btnSellRuleExpandCollapse.Image = MyMarketAnalyzer.Properties.Resources.expand_icon;
+            }
+            else
+            {
+                this.analysisSell_RTxtBox.Dock = DockStyle.Fill;
+
+                x = this.btnSellRuleExpandCollapse.Parent.Width - this.btnSellRuleExpandCollapse.Width - 2;
+                y = 15;
+
+                this.btnSellRuleExpandCollapse.Location = new Point(x, y);
+                this.btnSellRuleExpandCollapse.BringToFront();
+
+                this.btnSellRuleExpandCollapse.Image = MyMarketAnalyzer.Properties.Resources.collapse_icon;
+            }
+        }
+
+        private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  btnRunAnalysis_Click
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void btnRunAnalysis_Click(object sender, EventArgs e)
+        {
+            List<double> gain_loss_array;
+            List<int> buy_sell_units;
+            int index;
+            double overall_gain = 0.0, principal_amt = 0.0;
+            List<Equity> data = MyDataManager.HistoricalData.Constituents;
+
+            index = this.analysisSelectBox.SelectedIndex;
+
+            if(MyDataManager.HistoricalData.Constituents != null &&
+                this.analysisSelectBox.Items.Count == MyDataManager.HistoricalData.Constituents.Count)
+            {
+                if (Helpers.ValidateNumeric(this.analysisAmtTxt.Text))
+                {
+                    principal_amt = Double.Parse(this.analysisAmtTxt.Text);
+                    overall_gain = RuleParser.CalculateGainLoss(data[index], this.analysisBuy_RTxtBox.Text, this.analysisSell_RTxtBox.Text,
+                        principal_amt, out gain_loss_array, out buy_sell_units);
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid Principal Amount!", "Invalid Principal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  analysisAmtHelp_MouseEnter
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void analysisAmtHelp_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.analysisAmtHelpBtn, "Maximum amount (excluding returns) to invest.");
+
+            this.analysisAmtHelpBtn.BackColor = Color.LightCyan;
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  analysisAmtHelp_MouseDown
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void analysisAmtHelp_MouseDown(object sender, MouseEventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.analysisAmtHelpBtn, "Maximum amount (excluding returns) to invest.");
+
+            this.analysisAmtHelpBtn.BackColor = Color.LightCyan;
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  analysisAmtHelp_MouseLeave
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void analysisAmtHelp_MouseLeave(object sender, EventArgs e)
+        {
+            this.analysisAmtHelpBtn.BackColor = Color.Transparent;
+        }
+
         
-        
+
     }
 }

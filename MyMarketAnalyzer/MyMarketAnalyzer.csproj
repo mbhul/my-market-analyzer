@@ -88,6 +88,7 @@
     <Compile Include="Profile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleParser.cs" />
     <Compile Include="StatTable.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -187,6 +188,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Config\watchlist.xml" />
+    <None Include="img\help_blue.png" />
     <None Include="img\option.png" />
     <None Include="img\folder.png" />
     <None Include="img\clock2.png" />
