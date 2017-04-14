@@ -53,11 +53,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalysisPage.cs">
+    <Compile Include="AnalysisSummaryPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AnalysisPage.Designer.cs">
-      <DependentUpon>AnalysisPage.cs</DependentUpon>
+    <Compile Include="AnalysisSummaryPage.Designer.cs">
+      <DependentUpon>AnalysisSummaryPage.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomChart.cs">
       <SubType>Component</SubType>
@@ -126,8 +126,8 @@
     <Compile Include="WatchlistItem.Designer.cs">
       <DependentUpon>WatchlistItem.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AnalysisPage.resx">
-      <DependentUpon>AnalysisPage.cs</DependentUpon>
+    <EmbeddedResource Include="AnalysisSummaryPage.resx">
+      <DependentUpon>AnalysisSummaryPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomChart.resx">
       <DependentUpon>CustomChart.cs</DependentUpon>

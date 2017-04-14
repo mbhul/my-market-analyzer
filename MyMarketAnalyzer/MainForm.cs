@@ -63,17 +63,27 @@ namespace MyMarketAnalyzer
         private const UInt32 WM_ADDWATCHLIST = 0xA007;
         private const UInt32 WM_MULTI_ADDWATCHLIST = 0xA008;
         private const UInt32 WM_LIVESESSIONCLOSED = 0xA009;
+        private const UInt32 WM_ANALYSISCOMPLETE = 0xA00A;
 
         //***** PRIVATE GLOBALS *****//
         private TabPage tabVisuals;
         private VisualsTab tabVisualsControl;
 
         private DataManager MyDataManager;
+        private RuleParser TestRuleParser;
         private AlgorithmDesignForm AlgDesignForm = null;
 
         private int AnalysisDisplayIndex = 0;
         private Rectangle InitialSize = new Rectangle();
         private bool DataMenuPanelVisible = false;
+
+        [DllImport("user32.dll", CallingConvention = CallingConvention.StdCall)]
+        public static extern int SendMessage(
+                          IntPtr hWnd,      // handle to destination window
+                          UInt32 Msg,       // message
+                          IntPtr wParam,  // first message parameter
+                          IntPtr lParam   // second message parameter
+                          );
 
         /*****************************************************************************
          *  CONSTRUCTOR: MainForm
@@ -87,6 +97,7 @@ namespace MyMarketAnalyzer
             tabControl1.SelectedIndex = 1;
 
             MyDataManager = new DataManager(this.Handle);
+            TestRuleParser = new RuleParser();
 
             tabVisuals = null;
             tabVisualsControl = null;
@@ -627,6 +638,9 @@ namespace MyMarketAnalyzer
                     break;
                 case (int)WM_MULTI_ADDWATCHLIST:
                     AddToWatchlist(((StatTable)StatTable.FromHandle(m.LParam)).SelectedEntries);
+                    break;
+                case (int)WM_ANALYSISCOMPLETE:
+                    this.analysisSummaryPage1.DisplayResult();
                     break;
                 default:
                     break;
@@ -1316,11 +1330,6 @@ namespace MyMarketAnalyzer
             }
         }
 
-        private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
-
         /*****************************************************************************
          *  EVENT HANDLER:  btnRunAnalysis_Click
          *  Description:    
@@ -1330,10 +1339,8 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void btnRunAnalysis_Click(object sender, EventArgs e)
         {
-            List<double> gain_loss_array;
-            List<int> buy_sell_units;
             int index;
-            double overall_gain = 0.0, principal_amt = 0.0;
+            double principal_amt = 0.0;
             List<Equity> data = MyDataManager.HistoricalData.Constituents;
 
             index = this.analysisSelectBox.SelectedIndex;
@@ -1344,8 +1351,10 @@ namespace MyMarketAnalyzer
                 if (Helpers.ValidateNumeric(this.analysisAmtTxt.Text))
                 {
                     principal_amt = Double.Parse(this.analysisAmtTxt.Text);
-                    overall_gain = RuleParser.CalculateGainLoss(data[index], this.analysisBuy_RTxtBox.Text, this.analysisSell_RTxtBox.Text,
-                        principal_amt, out gain_loss_array, out buy_sell_units);
+                    this.TestRuleParser.SetInputParams(data[index], this.analysisBuy_RTxtBox.Text, this.analysisSell_RTxtBox.Text, principal_amt);
+
+                    backgroundWorkerAnalysis.RunWorkerAsync();
+                    backgroundWorkerAnalysisProgress.RunWorkerAsync();
                 }
                 else
                 {
@@ -1395,6 +1404,75 @@ namespace MyMarketAnalyzer
         private void analysisAmtHelp_MouseLeave(object sender, EventArgs e)
         {
             this.analysisAmtHelpBtn.BackColor = Color.Transparent;
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  backgroundWorkerAnalysisProgress_DoWork
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void backgroundWorkerAnalysisProgress_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            int[] pct_progress = { 0, 0 };
+            const long timeout = 20000;
+            long time_passed = 0;
+            int exit_persistence = 0;
+
+            while (this.TestRuleParser.PercentComplete < 1 && time_passed < timeout)
+            {
+                System.Threading.Thread.Sleep(100);
+                time_passed += 100;
+                pct_progress[1] = (int)(this.TestRuleParser.PercentComplete * 100);
+                if (pct_progress[1] == pct_progress[0])
+                {
+                    exit_persistence += 1;
+                }
+                else
+                {
+                    exit_persistence = 0;
+                }
+
+                //if the progress hasn't changed in 5 update periods, exit
+                if (exit_persistence >= 5)
+                {
+                    break;
+                }
+                pct_progress[0] = pct_progress[1];
+                worker.ReportProgress(pct_progress[1]);
+            }
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  backgroundWorkerAnalysisProgress_ProgressChanged
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void backgroundWorkerAnalysisProgress_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            analysisSummaryPage1.UpdateProgress(e.ProgressPercentage);
+            if(e.ProgressPercentage == 100)
+            {
+                this.analysisSummaryPage1.DisplayResult();
+            }
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  backgroundWorkerAnalysis_DoWork
+         *  Description:    
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void backgroundWorkerAnalysis_DoWork(object sender, DoWorkEventArgs e)
+        {
+            AnalysisResult _result;
+            _result = this.TestRuleParser.RunAnalysis();
+            this.analysisSummaryPage1.SetResult(_result);
         }
 
         

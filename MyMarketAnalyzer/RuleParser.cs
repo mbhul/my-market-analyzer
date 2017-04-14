@@ -22,94 +22,362 @@ using System.Data;
 
 namespace MyMarketAnalyzer
 {
-    static class RuleParser
+    public class RuleParser
     {
         private enum Variable
         {
+            //Available Parameters
             [StringValue("MACD_SIG")]
             MACD_SIG = 0xE00,
             [StringValue("MACD_DIFF")]
             MACD_DIFF = 0xE01,
+            [StringValue("P")]
+            PRICE = 0xE02
+        }
 
+        private enum Fn
+        {
             //Functions
             [StringValue("AVG")]
             AVG = 0xF01,
             [StringValue("MAX")]
             MAX = 0xF02,
             [StringValue("MIN")]
-            MIN = 0xF03
+            MIN = 0xF03,
+            [StringValue("TREND")]
+            TREND = 0xF04
         }
 
         private static String[] operators = { "AND", "OR" };
         private static String[] comparators = { "=", ">", "<", ">=", "<=" };
+        private static Fn[] fns = { Fn.AVG, Fn.MAX, Fn.MIN, Fn.TREND };
+
+        private List<Fn> current_buy_functions;
+        private List<Fn> current_sell_functions;
+
+        //Input parameters
+        private Equity inEquity;
+        private String inBuyRule;
+        private String inSellRule;
+        private Double inPrincipalAmt;
+
+        public Double PercentComplete { get; private set; }
+
+        public RuleParser()
+        {
+            PercentComplete = 0.0;
+            current_buy_functions = new List<Fn>();
+            current_sell_functions = new List<Fn>();
+        }
+
+        public void SetInputParams(Equity pEqIn, String pBuyRule, String pSellRule, Double pPrincipal)
+        {
+            inEquity = pEqIn;
+            inBuyRule = pBuyRule;
+            inSellRule = pSellRule;
+            inPrincipalAmt = pPrincipal;
+        }
+
 
         /*****************************************************************************
          *  FUNCTION:       CalculateGainLoss
          *  Description:    
          *  Parameters:     None
          *****************************************************************************/
-        public static double CalculateGainLoss(Equity pEqIn, String pBuyRule, String pSellRule, Double pPrincipal, out List<double> pGLArray, out List<int> pBSUnits)
+        public AnalysisResult RunAnalysis()
         {
             int i;
             bool buy, sell;
-            string parameter, str_expression, str_evaluated_rule, str_units;
-            double parameter_value = 0.0, gain_loss = 0.0;
-            String[] buy_conditions = pBuyRule.Split(operators, StringSplitOptions.RemoveEmptyEntries);
-            String[] sell_conditions = pSellRule.Split(operators, StringSplitOptions.RemoveEmptyEntries);
+            string str_expression, str_evaluated_rule;
+            double gain_loss = 0.0, cash = inPrincipalAmt, investments = 0.0, transaction_amt = 0.0;
+            int units = 0, units_held = 0, total_transactions = 0;
+            String[] buy_conditions = inBuyRule.Split(operators, StringSplitOptions.RemoveEmptyEntries);
+            String[] sell_conditions = inSellRule.Split(operators, StringSplitOptions.RemoveEmptyEntries);
+            AnalysisResult analysis_result = new AnalysisResult();
 
-            pGLArray = new List<double>();
-            pBSUnits = new List<int>();
-            
-            //ex. AVG(MACD_DIFF[-5..0]) > 0
+            PercentComplete = 0.0;
+
+            //Get the list of functions passed in the current Buy and Sell rules 
+            //(so that we don't have to itterate again for each data point)
+            current_buy_functions.Clear();
+            current_sell_functions.Clear();
+            foreach(Fn func in fns)
+            {
+                foreach (String buy_cond in buy_conditions)
+                {
+                    if (buy_cond.Contains(StringEnum.GetStringValue(func)))
+                    {
+                        current_buy_functions.Add(func);
+                    }
+                }
+                foreach (String sell_cond in sell_conditions)
+                {
+                    if (sell_cond.Contains(StringEnum.GetStringValue(func)))
+                    {
+                        current_sell_functions.Add(func);
+                    }
+                }
+            }
+
+            //ex. ((MACD_DIFF > 0) AND (P < AVG[P][-5..0]))
 
             //For every day in data
-            for(i = 0; i < pEqIn.HistoricalPriceDate.Count; i++)
+            for(i = 0; i < inEquity.HistoricalPriceDate.Count; i++)
             {
+                //Initialize analysis result values
+                analysis_result.cash_totals.Add(0.0);
+                analysis_result.investments_totals.Add(0.0);
+                analysis_result.net_change_daily.Add(0.0);
+                analysis_result.units_change_daily.Add(0);
+
                 //First determine whether the day is a buy or sell (or neither)
                 buy = false;
-                str_evaluated_rule = pBuyRule;
+                str_evaluated_rule = inBuyRule;
                 foreach(String buy_cond in buy_conditions)
                 {
-                    parameter = buy_cond.Split(comparators, StringSplitOptions.RemoveEmptyEntries)[0];
-
-                    if(parameter != null)
-                    {
-                        parameter = parameter.Trim();
-                        parameter_value = GetParameter(pEqIn, parameter, i);
-                        str_expression = buy_cond.Replace(parameter, parameter_value.ToString());
-                        str_evaluated_rule = str_evaluated_rule.Replace(buy_cond, Evaluate(str_expression).ToString());
-                    }
+                    str_expression = Parse(buy_cond, inEquity, i, current_buy_functions);
+                    str_evaluated_rule = str_evaluated_rule.Replace(buy_cond, str_expression);
                 }
                 buy = Evaluate(str_evaluated_rule);
 
                 sell = false;
-                str_evaluated_rule = pSellRule;
+                str_evaluated_rule = inSellRule;
                 foreach (String sell_cond in sell_conditions)
                 {
-                    parameter = sell_cond.Split(comparators, StringSplitOptions.RemoveEmptyEntries)[0];
-
-                    if (parameter != null)
-                    {
-                        parameter_value = GetParameter(pEqIn, parameter, i);
-                        str_expression = sell_cond.Replace(parameter.Trim(), parameter_value.ToString());
-                        str_evaluated_rule = str_evaluated_rule.Replace(sell_cond, Evaluate(str_expression).ToString());
-                    }
+                    str_expression = Parse(sell_cond, inEquity, i, current_sell_functions);
+                    str_evaluated_rule = str_evaluated_rule.Replace(sell_cond, str_expression);
                 }
                 sell = Evaluate(str_evaluated_rule);
 
                 if(buy)
                 {
-
-
+                    units += (int)Math.Floor(cash / inEquity.HistoricalPrice[i]);
+                    transaction_amt = inEquity.HistoricalPrice[i] * units;
+                    if (cash >= (transaction_amt))
+                    {
+                        units_held += units;
+                        cash -= transaction_amt;
+                        investments = (inEquity.HistoricalPrice[i] * units_held);
+                        total_transactions++;
+                    }
                 }
-                else if (sell)
+
+                if (sell)
                 {
-
+                    transaction_amt = inEquity.HistoricalPrice[i] * units;
+                    if (investments >= transaction_amt)
+                    {
+                        units_held -= units;
+                        cash += transaction_amt;
+                        investments = (inEquity.HistoricalPrice[i] * units_held);
+                        total_transactions++;
+                        units = 0;
+                    }
                 }
-                else { }
+
+                //update Analyis result structure
+                analysis_result.cash_totals[i] = cash;
+                analysis_result.investments_totals[i] = investments;
+                analysis_result.net_change_daily[i] = (cash + investments);
+                analysis_result.units_change_daily[i] = units_held;
+                analysis_result.dates_from_to = new Tuple<DateTime, DateTime>(inEquity.HistoricalPriceDate[0],
+                    inEquity.HistoricalPriceDate[inEquity.HistoricalPriceDate.Count - 1]);
+
+                if(i > 0)
+                {
+                    analysis_result.net_change_daily[i] -= (analysis_result.cash_totals[i - 1] + 
+                        analysis_result.investments_totals[i - 1]);
+
+                    analysis_result.units_change_daily[i] -= analysis_result.units_change_daily[i - 1];
+                }
+
+                
+                //Update progress
+                PercentComplete = ((double)(i + 1) / (double)inEquity.HistoricalPriceDate.Count);
             }
 
-            return gain_loss;
+            PercentComplete = 1.0;
+
+            gain_loss = (cash + investments) - inPrincipalAmt;
+            analysis_result.net_change = gain_loss;
+
+            return analysis_result;
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       Parse
+         *  Description:    Replaces a primitive expression with corresponding numeric values
+         *                  to enable evaluation. 
+         *                  
+         *                  Ex. (P < AVG[P][-5..0])
+         *  Parameters:     
+         *  
+         *****************************************************************************/
+        private String Parse(String pExpression, Equity pEqIn, int pIndex, List<Fn> pFNs)
+        {
+            string parameter, str_expression, fn_str;
+            double parameter_value = 0.0;
+            string[] split_str;
+            int index1, index2;
+            Variable in_param;
+
+            str_expression = pExpression;
+            foreach (Fn func in pFNs)
+            {
+                fn_str = "";
+                if(pExpression.Contains(StringEnum.GetStringValue(func)))
+                {
+                    index1 = pExpression.IndexOf(StringEnum.GetStringValue(func));
+                    index2 = pExpression.IndexOf("]", index1);
+
+                    if (pExpression.Length > index2 && pExpression.ToCharArray()[index2 + 1] == '[')
+                    {
+                        index2 = pExpression.IndexOf("]", index2 + 1);
+                    }
+
+                    fn_str = pExpression.Substring(index1, index2 - index1 + 1);
+                    str_expression = str_expression.Replace(fn_str.Trim(), GetFunction(func, pEqIn, fn_str, pIndex).ToString());
+                }
+            }
+
+            split_str = str_expression.Split(comparators, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach(string exp_part in split_str)
+            {
+                if(Helpers.ValidateNumeric(exp_part) == false)
+                {
+                    parameter = CleanExpression(exp_part.Trim());
+                    in_param = GetParameterType(parameter);
+
+                    //If the data to be analyzed is one of the MACD signals, ensure the passed index is valid
+                    if (in_param == Variable.MACD_DIFF || in_param == Variable.MACD_SIG)
+                    {
+                        if (pIndex > (pEqIn.HistoricalPrice.Count() - pEqIn.MACD_C.Count()))
+                        {
+                            parameter_value = GetParameter(pEqIn, parameter, pIndex);
+                            str_expression = str_expression.Replace(parameter, parameter_value.ToString());
+                        }
+                    }
+                    else
+                    {
+                        parameter_value = GetParameter(pEqIn, parameter, pIndex);
+                        str_expression = str_expression.Replace(parameter, parameter_value.ToString());
+                    }
+
+                }
+            }
+
+            return str_expression;
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       GetFunction
+         *  Description:    Evaluates the passed funuction on the given Equity at the 
+         *                  passed index (date/price)
+         *  Parameters:     None
+         *****************************************************************************/
+        private Double GetFunction(Fn pFn, Equity pEqIn, String pFnStr, int pIndex)
+        {
+            List<double> func_inputs;
+            Double eval_data = 0.0;
+            int index1, index2, filter_index1, filter_index2;
+            Variable input_param;
+            String input_param_str, filter_str;
+
+            func_inputs = new List<double>();
+            index1 = pFnStr.IndexOf('[');
+            index2 = pFnStr.IndexOf(']');
+            
+            if(index1 >= 0 && index2 > index1)
+            {
+                input_param_str = pFnStr.Substring(index1 + 1, index2 - index1 - 1);
+                input_param = GetParameterType(input_param_str);
+
+                //Set the input array
+                switch (input_param)
+                {
+                    case Variable.MACD_SIG:
+                        func_inputs = new List<double>(pEqIn.MACD_B);
+                        break;
+                    case Variable.MACD_DIFF:
+                        func_inputs = new List<double>(pEqIn.MACD_C);
+                        break;
+                    case Variable.PRICE:
+                        func_inputs = new List<double>(pEqIn.HistoricalPrice);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (pFnStr.Length > index2 && pFnStr.ToCharArray()[index2 + 1] == '[')
+                {
+                    index1 = index2 + 1;
+                    index2 = pFnStr.IndexOf(']', index1);
+
+                    filter_index1 = 1;
+                    filter_index2 = 1;
+
+                    if (index2 > index1)
+                    {
+                        filter_str = pFnStr.Substring(index1 + 1, index2 - index1 - 1);
+                        
+                        if(Regex.Matches(filter_str,"[-][0-9][.][.][-]?[0-9]").Count > 0)
+                        {
+                            index1 = filter_str.IndexOf('.');
+                            filter_index1 = int.Parse(filter_str.Substring(0, index1));
+                            filter_index2 = int.Parse(filter_str.Substring(index1 + 2, filter_str.Length - index1 - 2));
+                        }
+                    }
+
+                    if ((filter_index1 <= 0 && filter_index2 <= 0) &&
+                        (pIndex + filter_index1 >= 0) &&
+                        func_inputs.Count > pIndex)
+                    {
+                        func_inputs = func_inputs.GetRange(pIndex + filter_index1, filter_index2 - filter_index1 - 1);
+
+                        switch (pFn)
+                        {
+                            case Fn.AVG:
+                                eval_data = func_inputs.Average();
+                                break;
+                            case Fn.MAX:
+                                eval_data = func_inputs.Max();
+                                break;
+                            case Fn.MIN:
+                                eval_data = func_inputs.Min();
+                                break;
+                            case Fn.TREND:
+                                //Need some kind of curve/line fitting algorithm
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    //If the data to be analyzed is one of the MACD signals, ensure the passed index is valid
+                    if(input_param == Variable.MACD_DIFF || input_param == Variable.MACD_SIG) 
+                    {
+                        if(pIndex > (pEqIn.HistoricalPrice.Count() - pEqIn.MACD_C.Count()))
+                        {
+                            eval_data = func_inputs[pIndex];
+                        }
+                        else
+                        {
+                            eval_data = 0.0;
+                        }
+                    }
+                    else
+                    {
+                        eval_data = func_inputs[pIndex];
+                    }
+                    
+                }
+                
+            }
+
+            return eval_data;
         }
 
         /*****************************************************************************
@@ -117,14 +385,21 @@ namespace MyMarketAnalyzer
          *  Description:    
          *  Parameters:     None
          *****************************************************************************/
-        private static Boolean Evaluate(String pExpression)
+        private Boolean Evaluate(String pExpression)
         {
-            bool result = false;
+            bool result;
 
             DataTable dt = new DataTable();
-            var v = dt.Compute(pExpression, "");
+            try
+            {
+                result = (bool)(dt.Compute(CleanExpression(pExpression), ""));
+            }
+            catch(Exception e)
+            {
+                result = false;
+            }
 
-            return (bool)result;
+            return result;
         }
 
         /*****************************************************************************
@@ -132,10 +407,11 @@ namespace MyMarketAnalyzer
          *  Description:    
          *  Parameters:     None
          *****************************************************************************/
-        private static String CleanExpression(String pSubString)
+        private String CleanExpression(String pSubString)
         {
             String str_return = "";
             int nesting_level = 0;
+            Regex regex;
             str_return = RemoveUnitsSpecifier(pSubString);
 
             foreach(char c in str_return.ToCharArray())
@@ -150,9 +426,19 @@ namespace MyMarketAnalyzer
                 }
                 else { }
             }
-
-            var regex = new Regex(Regex.Escape("("));
-            str_return = regex.Replace(str_return, "", nesting_level);
+            
+            if(nesting_level > 0)
+            {
+                regex = new Regex(Regex.Escape("("));
+                str_return = regex.Replace(str_return, "", nesting_level);
+            }
+            else if (nesting_level < 0)
+            {
+                regex = new Regex(Regex.Escape(")"));
+                str_return = regex.Replace(str_return, "", -nesting_level);
+            }
+            else { }
+            
 
             return str_return;
         }
@@ -162,7 +448,7 @@ namespace MyMarketAnalyzer
          *  Description:    
          *  Parameters:     None
          *****************************************************************************/
-        private static String RemoveUnitsSpecifier(String pSubString)
+        private String RemoveUnitsSpecifier(String pSubString)
         {
             String str_return = "";
             int index1, index2;
@@ -192,23 +478,71 @@ namespace MyMarketAnalyzer
          *  Description:    
          *  Parameters:     None
          *****************************************************************************/
-        private static Double GetParameter(Equity pEqIn, String pKey, int pIndex)
+        private Double GetParameter(Equity pEqIn, String pKey, int pIndex)
         {
             double return_val = 0.0;
             pKey = pKey.Trim();
+            int macd_i_diff;
+            Variable get_param = 0;
 
-            if (pKey == StringEnum.GetStringValue(Variable.MACD_SIG))
+            get_param = GetParameterType(pKey);
+
+            switch(get_param)
             {
-                return_val = pEqIn.MACD_B[pIndex];
+                case Variable.MACD_SIG:
+                    macd_i_diff = pEqIn.HistoricalPrice.Count - pEqIn.MACD_B.Count;
+                    if(pIndex >= macd_i_diff)
+                    {
+                        return_val = pEqIn.MACD_B[pIndex - macd_i_diff];
+                    }
+                    break;
+                case Variable.MACD_DIFF:
+                    macd_i_diff = pEqIn.HistoricalPrice.Count - pEqIn.MACD_C.Count;
+                    if (pIndex >= macd_i_diff)
+                    {
+                        return_val = pEqIn.MACD_C[pIndex - macd_i_diff];
+                    }
+                    break;
+                case Variable.PRICE:
+                    return_val = pEqIn.HistoricalPrice[pIndex];
+                    break;
+                default:
+                    break;
             }
-            else if (pKey == StringEnum.GetStringValue(Variable.MACD_DIFF))
-            {
-                return_val = pEqIn.MACD_C[pIndex];
-            }
-            else { }
 
             return return_val;
         }
+
+        /*****************************************************************************
+         *  FUNCTION:       GetParameterType
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
+        private Variable GetParameterType(String pKey)
+        {
+            Variable return_type;
+
+            if (pKey == StringEnum.GetStringValue(Variable.MACD_SIG))
+            {
+                return_type = Variable.MACD_SIG;
+            }
+            else if (pKey == StringEnum.GetStringValue(Variable.MACD_DIFF))
+            {
+                return_type = Variable.MACD_DIFF;
+            }
+            else if (pKey == StringEnum.GetStringValue(Variable.PRICE))
+            {
+                return_type = Variable.PRICE;
+            }
+            else
+            {
+                return_type = 0;
+            }
+
+            return return_type;
+        }
+
+        
 
     }
 }

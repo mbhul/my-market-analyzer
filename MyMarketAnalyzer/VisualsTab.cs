@@ -304,24 +304,24 @@ namespace MyMarketAnalyzer
                         vspage.Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                         vspage.Width = tabVisualsData.TabPages[0].Controls[0].Width;
                     }
-
-                    //Plot the chart data
-                    chartMain.Series.Add(dataSet[i].Name);
-                    chartMain.Series[dataSet[i].Name].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-
-                    if (((VisualSummaryTabPage)tabVisualsData.TabPages[i].Controls[0]).DisplayedData == DisplayedDataSet.HISTORICAL)
-                    {
-                        chartMain.Series[dataSet[i].Name].Points.DataBindXY(dataSet[i].HistoricalPriceDate, dataSet[i].HistoricalPrice);
-                    }
-                    else if (((VisualSummaryTabPage)tabVisualsData.TabPages[i].Controls[0]).DisplayedData == DisplayedDataSet.LIVE)
-                    {
-                        chartMain.Series[dataSet[i].Name].Points.DataBindXY(dataSet[i].DailyTime, dataSet[i].DailyLast);
-                    }
-                    else { }
-
-                    AddChartLegend();
-                    CorrelationTableSortInstruction.Add(String.Empty);
                 }
+
+                //Plot the chart data
+                chartMain.Series.Add(dataSet[i].Name);
+                chartMain.Series[dataSet[i].Name].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+
+                if (((VisualSummaryTabPage)tabVisualsData.TabPages[i].Controls[0]).DisplayedData == DisplayedDataSet.HISTORICAL)
+                {
+                    chartMain.Series[dataSet[i].Name].Points.DataBindXY(dataSet[i].HistoricalPriceDate, dataSet[i].HistoricalPrice);
+                }
+                else if (((VisualSummaryTabPage)tabVisualsData.TabPages[i].Controls[0]).DisplayedData == DisplayedDataSet.LIVE)
+                {
+                    chartMain.Series[dataSet[i].Name].Points.DataBindXY(dataSet[i].DailyTime, dataSet[i].DailyLast);
+                }
+                else { }
+
+                AddChartLegend();
+                CorrelationTableSortInstruction.Add(String.Empty);
             }
 
             UpdateChartTitles();

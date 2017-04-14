@@ -668,4 +668,23 @@ namespace MyMarketAnalyzer
             return output;
         }
     }
+
+    public class AnalysisResult
+    {
+        public double net_change;
+        public List<double> net_change_daily;
+        public List<double> cash_totals;
+        public List<double> investments_totals;
+        public List<int> units_change_daily;
+        public Tuple<DateTime, DateTime> dates_from_to;
+        
+        public AnalysisResult()
+        {
+            net_change = 0.0;
+            net_change_daily = new List<double>();
+            cash_totals = new List<double>();
+            investments_totals = new List<double>();
+            units_change_daily = new List<int>();
+        }
+    }
 }

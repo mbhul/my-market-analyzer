@@ -33,7 +33,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -120,7 +120,7 @@
             this.btnChartNext = new System.Windows.Forms.Button();
             this.btnChartPrev = new System.Windows.Forms.Button();
             this.chartAnalysis = new MyMarketAnalyzer.CustomChart();
-            this.statTable1 = new MyMarketAnalyzer.StatTable();
+            this.analysisSummaryPage1 = new MyMarketAnalyzer.AnalysisSummaryPage();
             this.toolStripAnalysis = new System.Windows.Forms.ToolStrip();
             this.tsHistSourceDir2 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -145,6 +145,8 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.backgroundWorkerAnalysisProgress = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerAnalysis = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -821,7 +823,7 @@
             // 
             this.analysisSplitContainer.Panel2.Controls.Add(this.splitContainer3);
             this.analysisSplitContainer.Panel2MinSize = 400;
-            this.analysisSplitContainer.Size = new System.Drawing.Size(967, 400);
+            this.analysisSplitContainer.Size = new System.Drawing.Size(967, 430);
             this.analysisSplitContainer.SplitterDistance = 510;
             this.analysisSplitContainer.SplitterWidth = 6;
             this.analysisSplitContainer.TabIndex = 1;
@@ -830,7 +832,7 @@
             // 
             this.btnRunAnalysis.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRunAnalysis.Location = new System.Drawing.Point(0, 371);
+            this.btnRunAnalysis.Location = new System.Drawing.Point(0, 401);
             this.btnRunAnalysis.Name = "btnRunAnalysis";
             this.btnRunAnalysis.Size = new System.Drawing.Size(510, 29);
             this.btnRunAnalysis.TabIndex = 4;
@@ -853,7 +855,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(510, 290);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(510, 320);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // sellRulesBox
@@ -861,10 +863,10 @@
             this.sellRulesBox.Controls.Add(this.btnSellRuleExpandCollapse);
             this.sellRulesBox.Controls.Add(this.analysisSell_RTxtBox);
             this.sellRulesBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sellRulesBox.Location = new System.Drawing.Point(3, 148);
+            this.sellRulesBox.Location = new System.Drawing.Point(3, 163);
             this.sellRulesBox.Name = "sellRulesBox";
             this.sellRulesBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.sellRulesBox.Size = new System.Drawing.Size(504, 139);
+            this.sellRulesBox.Size = new System.Drawing.Size(504, 154);
             this.sellRulesBox.TabIndex = 11;
             this.sellRulesBox.TabStop = false;
             this.sellRulesBox.Text = "Sell Rule";
@@ -902,7 +904,7 @@
             this.buyRulesBox.Location = new System.Drawing.Point(3, 3);
             this.buyRulesBox.Name = "buyRulesBox";
             this.buyRulesBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buyRulesBox.Size = new System.Drawing.Size(504, 139);
+            this.buyRulesBox.Size = new System.Drawing.Size(504, 154);
             this.buyRulesBox.TabIndex = 10;
             this.buyRulesBox.TabStop = false;
             this.buyRulesBox.Text = "Buy Rule";
@@ -1072,12 +1074,11 @@
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.statTable1);
+            this.splitContainer3.Panel2.Controls.Add(this.analysisSummaryPage1);
             this.splitContainer3.Panel2MinSize = 100;
-            this.splitContainer3.Size = new System.Drawing.Size(451, 400);
-            this.splitContainer3.SplitterDistance = 231;
+            this.splitContainer3.Size = new System.Drawing.Size(451, 430);
+            this.splitContainer3.SplitterDistance = 248;
             this.splitContainer3.TabIndex = 5;
-            this.splitContainer3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer3_SplitterMoved);
             this.splitContainer3.Paint += new System.Windows.Forms.PaintEventHandler(this.analysis_nestedSplitPanelRightOnPaint);
             // 
             // panelAnalysis1
@@ -1131,28 +1132,25 @@
             // 
             this.chartAnalysis.BackColor = System.Drawing.Color.Silver;
             this.chartAnalysis.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
-            chartArea1.BackColor = System.Drawing.Color.Silver;
-            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
-            chartArea1.Name = "ChartArea1";
-            this.chartAnalysis.ChartAreas.Add(chartArea1);
+            chartArea2.BackColor = System.Drawing.Color.Silver;
+            chartArea2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
+            chartArea2.Name = "ChartArea1";
+            this.chartAnalysis.ChartAreas.Add(chartArea2);
             this.chartAnalysis.CurrentSeriesIndex = 0;
             this.chartAnalysis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartAnalysis.Location = new System.Drawing.Point(0, 0);
             this.chartAnalysis.Name = "chartAnalysis";
-            this.chartAnalysis.Size = new System.Drawing.Size(451, 231);
+            this.chartAnalysis.Size = new System.Drawing.Size(451, 248);
             this.chartAnalysis.TabIndex = 0;
             this.chartAnalysis.Text = "chart1";
             // 
-            // statTable1
+            // analysisSummaryPage1
             // 
-            this.statTable1.AutoScroll = true;
-            this.statTable1.AutoSize = true;
-            this.statTable1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statTable1.Location = new System.Drawing.Point(0, 0);
-            this.statTable1.Name = "statTable1";
-            this.statTable1.Size = new System.Drawing.Size(451, 165);
-            this.statTable1.TabIndex = 0;
-            this.statTable1.TableType = MyMarketAnalyzer.StatTableType.HIST_STATS;
+            this.analysisSummaryPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.analysisSummaryPage1.Location = new System.Drawing.Point(0, 0);
+            this.analysisSummaryPage1.Name = "analysisSummaryPage1";
+            this.analysisSummaryPage1.Size = new System.Drawing.Size(451, 178);
+            this.analysisSummaryPage1.TabIndex = 0;
             // 
             // toolStripAnalysis
             // 
@@ -1364,6 +1362,17 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(967, 373);
             // 
+            // backgroundWorkerAnalysisProgress
+            // 
+            this.backgroundWorkerAnalysisProgress.WorkerReportsProgress = true;
+            this.backgroundWorkerAnalysisProgress.WorkerSupportsCancellation = true;
+            this.backgroundWorkerAnalysisProgress.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerAnalysisProgress_DoWork);
+            this.backgroundWorkerAnalysisProgress.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerAnalysisProgress_ProgressChanged);
+            // 
+            // backgroundWorkerAnalysis
+            // 
+            this.backgroundWorkerAnalysis.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerAnalysis_DoWork);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1414,7 +1423,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.analysisAmtHelpBtn)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
-            this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.panelAnalysis1.ResumeLayout(false);
@@ -1499,7 +1507,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox sellRulesBox;
         private System.Windows.Forms.GroupBox buyRulesBox;
-        private StatTable statTable1;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton btnVisualsMenu;
         private System.Windows.Forms.ToolStripMenuItem showChartToolStripMenuItem;
@@ -1546,6 +1553,9 @@
         private System.Windows.Forms.TextBox analysisAmtTxt;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.PictureBox analysisAmtHelpBtn;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerAnalysisProgress;
+        private AnalysisSummaryPage analysisSummaryPage1;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerAnalysis;
     }
 }
 
