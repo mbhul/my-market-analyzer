@@ -36,9 +36,23 @@
             this.tabPageData = new System.Windows.Forms.TabPage();
             this.dataTableMain = new MyMarketAnalyzer.StatTable();
             this.tabPageChart = new System.Windows.Forms.TabPage();
+            this.btnChartSliderLeft = new System.Windows.Forms.Button();
+            this.btnChartSliderRight = new System.Windows.Forms.Button();
+            this.chartSlider = new System.Windows.Forms.TrackBar();
             this.chartMain = new MyMarketAnalyzer.CustomChart();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.autofillCheckBox = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.gbParameters1 = new System.Windows.Forms.GroupBox();
+            this.lblParam1 = new System.Windows.Forms.Label();
+            this.lblParam3 = new System.Windows.Forms.Label();
+            this.numParam1 = new System.Windows.Forms.NumericUpDown();
+            this.numParam3 = new System.Windows.Forms.NumericUpDown();
+            this.numParam2 = new System.Windows.Forms.NumericUpDown();
+            this.lblParam2 = new System.Windows.Forms.Label();
+            this.gbParameters2 = new System.Windows.Forms.GroupBox();
+            this.gbParameters3 = new System.Windows.Forms.GroupBox();
             this.gbPrototype = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -46,13 +60,6 @@
             this.cbProtoAttributeY = new System.Windows.Forms.ComboBox();
             this.cbProtoFunction = new System.Windows.Forms.ComboBox();
             this.cbProtoAttributeX = new System.Windows.Forms.ComboBox();
-            this.gbParameters = new System.Windows.Forms.GroupBox();
-            this.lblParam1 = new System.Windows.Forms.Label();
-            this.lblParam3 = new System.Windows.Forms.Label();
-            this.numParam1 = new System.Windows.Forms.NumericUpDown();
-            this.numParam3 = new System.Windows.Forms.NumericUpDown();
-            this.numParam2 = new System.Windows.Forms.NumericUpDown();
-            this.lblParam2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.numGroupMax = new System.Windows.Forms.NumericUpDown();
@@ -65,28 +72,31 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numTrainingPct = new System.Windows.Forms.NumericUpDown();
             this.tabConsoleContainer = new System.Windows.Forms.TabControl();
-            this.tabPageMain = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.tabPageFnOptions = new System.Windows.Forms.TabPage();
+            this.tabPageConsole = new System.Windows.Forms.TabPage();
+            this.consoleTxt = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageData.SuspendLayout();
             this.tabPageChart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartMain)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.gbPrototype.SuspendLayout();
-            this.gbParameters.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.gbParameters1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numParam1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numParam3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numParam2)).BeginInit();
+            this.gbPrototype.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numGroupMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numGroupMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTestPct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTrainingPct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTrainingPct)).BeginInit();
             this.tabConsoleContainer.SuspendLayout();
-            this.tabPageMain.SuspendLayout();
+            this.tabPageConsole.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -105,7 +115,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1002, 530);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1306, 530);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // toolStrip1
@@ -113,7 +123,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.toolStrip1, 2);
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1002, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1306, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -125,7 +135,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 148);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(495, 379);
+            this.tabControl1.Size = new System.Drawing.Size(647, 379);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPageData
@@ -134,7 +144,7 @@
             this.tabPageData.Location = new System.Drawing.Point(4, 22);
             this.tabPageData.Name = "tabPageData";
             this.tabPageData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageData.Size = new System.Drawing.Size(487, 353);
+            this.tabPageData.Size = new System.Drawing.Size(639, 353);
             this.tabPageData.TabIndex = 0;
             this.tabPageData.Text = "Data";
             this.tabPageData.UseVisualStyleBackColor = true;
@@ -146,33 +156,73 @@
             this.dataTableMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataTableMain.Location = new System.Drawing.Point(3, 3);
             this.dataTableMain.Name = "dataTableMain";
-            this.dataTableMain.Size = new System.Drawing.Size(481, 347);
+            this.dataTableMain.Size = new System.Drawing.Size(633, 347);
             this.dataTableMain.TabIndex = 0;
             this.dataTableMain.TableType = MyMarketAnalyzer.StatTableType.HIST_STATS;
             // 
             // tabPageChart
             // 
+            this.tabPageChart.Controls.Add(this.btnChartSliderLeft);
+            this.tabPageChart.Controls.Add(this.btnChartSliderRight);
+            this.tabPageChart.Controls.Add(this.chartSlider);
             this.tabPageChart.Controls.Add(this.chartMain);
             this.tabPageChart.Location = new System.Drawing.Point(4, 22);
             this.tabPageChart.Name = "tabPageChart";
             this.tabPageChart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageChart.Size = new System.Drawing.Size(487, 353);
+            this.tabPageChart.Size = new System.Drawing.Size(639, 353);
             this.tabPageChart.TabIndex = 1;
             this.tabPageChart.Text = "Chart";
             this.tabPageChart.UseVisualStyleBackColor = true;
             // 
+            // btnChartSliderLeft
+            // 
+            this.btnChartSliderLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnChartSliderLeft.Location = new System.Drawing.Point(3, 303);
+            this.btnChartSliderLeft.Name = "btnChartSliderLeft";
+            this.btnChartSliderLeft.Size = new System.Drawing.Size(21, 45);
+            this.btnChartSliderLeft.TabIndex = 5;
+            this.btnChartSliderLeft.Text = "<";
+            this.btnChartSliderLeft.UseVisualStyleBackColor = true;
+            this.btnChartSliderLeft.Click += new System.EventHandler(this.btnChartSliderLeft_Click);
+            // 
+            // btnChartSliderRight
+            // 
+            this.btnChartSliderRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnChartSliderRight.Location = new System.Drawing.Point(612, 303);
+            this.btnChartSliderRight.Name = "btnChartSliderRight";
+            this.btnChartSliderRight.Size = new System.Drawing.Size(21, 45);
+            this.btnChartSliderRight.TabIndex = 4;
+            this.btnChartSliderRight.Text = ">";
+            this.btnChartSliderRight.UseVisualStyleBackColor = true;
+            this.btnChartSliderRight.Click += new System.EventHandler(this.btnChartSliderRight_Click);
+            // 
+            // chartSlider
+            // 
+            this.chartSlider.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chartSlider.LargeChange = 10;
+            this.chartSlider.Location = new System.Drawing.Point(25, 303);
+            this.chartSlider.Maximum = 100;
+            this.chartSlider.Name = "chartSlider";
+            this.chartSlider.Size = new System.Drawing.Size(586, 45);
+            this.chartSlider.TabIndex = 3;
+            this.chartSlider.TickFrequency = 5;
+            this.chartSlider.Scroll += new System.EventHandler(this.chartSlider_Scroll);
+            // 
             // chartMain
             // 
+            this.chartMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.chartMain.ChartAreas.Add(chartArea1);
             this.chartMain.CurrentSeriesIndex = 0;
-            this.chartMain.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
             legend1.Name = "chartLegend";
             this.chartMain.Legends.Add(legend1);
             this.chartMain.Location = new System.Drawing.Point(3, 3);
             this.chartMain.Name = "chartMain";
-            this.chartMain.Size = new System.Drawing.Size(481, 347);
+            this.chartMain.Size = new System.Drawing.Size(630, 294);
             this.chartMain.TabIndex = 0;
             this.chartMain.Text = "customChart1";
             // 
@@ -191,114 +241,67 @@
             this.panel1.Controls.Add(this.numTrainingPct);
             this.panel1.Location = new System.Drawing.Point(3, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(996, 114);
+            this.panel1.Size = new System.Drawing.Size(1300, 114);
             this.panel1.TabIndex = 3;
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.autofillCheckBox);
+            this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Controls.Add(this.gbPrototype);
-            this.groupBox1.Controls.Add(this.gbParameters);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.numGroupMax);
             this.groupBox1.Controls.Add(this.numGroupMin);
             this.groupBox1.Location = new System.Drawing.Point(437, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(556, 114);
+            this.groupBox1.Size = new System.Drawing.Size(860, 114);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
-            // gbPrototype
+            // autofillCheckBox
             // 
-            this.gbPrototype.Controls.Add(this.label7);
-            this.gbPrototype.Controls.Add(this.label6);
-            this.gbPrototype.Controls.Add(this.label5);
-            this.gbPrototype.Controls.Add(this.cbProtoAttributeY);
-            this.gbPrototype.Controls.Add(this.cbProtoFunction);
-            this.gbPrototype.Controls.Add(this.cbProtoAttributeX);
-            this.gbPrototype.Location = new System.Drawing.Point(139, 3);
-            this.gbPrototype.Name = "gbPrototype";
-            this.gbPrototype.Size = new System.Drawing.Size(200, 108);
-            this.gbPrototype.TabIndex = 15;
-            this.gbPrototype.TabStop = false;
-            this.gbPrototype.Text = "Feature Selection";
+            this.autofillCheckBox.AutoSize = true;
+            this.autofillCheckBox.Location = new System.Drawing.Point(6, 94);
+            this.autofillCheckBox.Name = "autofillCheckBox";
+            this.autofillCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.autofillCheckBox.Size = new System.Drawing.Size(117, 17);
+            this.autofillCheckBox.TabIndex = 17;
+            this.autofillCheckBox.Text = "Auto-Fill Date Gaps";
+            this.autofillCheckBox.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // flowLayoutPanel1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(1, 73);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(28, 19);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Fn:";
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.gbParameters1);
+            this.flowLayoutPanel1.Controls.Add(this.gbParameters2);
+            this.flowLayoutPanel1.Controls.Add(this.gbParameters3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(342, 8);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(518, 103);
+            this.flowLayoutPanel1.TabIndex = 16;
             // 
-            // label6
+            // gbParameters1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 44);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(20, 19);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Y:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(21, 19);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "X:";
-            // 
-            // cbProtoAttributeY
-            // 
-            this.cbProtoAttributeY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProtoAttributeY.FormattingEnabled = true;
-            this.cbProtoAttributeY.Location = new System.Drawing.Point(32, 42);
-            this.cbProtoAttributeY.Name = "cbProtoAttributeY";
-            this.cbProtoAttributeY.Size = new System.Drawing.Size(160, 21);
-            this.cbProtoAttributeY.TabIndex = 2;
-            this.cbProtoAttributeY.SelectedIndexChanged += new System.EventHandler(this.cbProtoAttribute_YIndexChanged);
-            // 
-            // cbProtoFunction
-            // 
-            this.cbProtoFunction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProtoFunction.FormattingEnabled = true;
-            this.cbProtoFunction.Location = new System.Drawing.Point(32, 72);
-            this.cbProtoFunction.Name = "cbProtoFunction";
-            this.cbProtoFunction.Size = new System.Drawing.Size(160, 21);
-            this.cbProtoFunction.TabIndex = 1;
-            // 
-            // cbProtoAttributeX
-            // 
-            this.cbProtoAttributeX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProtoAttributeX.FormattingEnabled = true;
-            this.cbProtoAttributeX.Location = new System.Drawing.Point(32, 14);
-            this.cbProtoAttributeX.Name = "cbProtoAttributeX";
-            this.cbProtoAttributeX.Size = new System.Drawing.Size(160, 21);
-            this.cbProtoAttributeX.TabIndex = 0;
-            this.cbProtoAttributeX.SelectedIndexChanged += new System.EventHandler(this.cbProtoAttribute_XIndexChanged);
-            // 
-            // gbParameters
-            // 
-            this.gbParameters.Controls.Add(this.lblParam1);
-            this.gbParameters.Controls.Add(this.lblParam3);
-            this.gbParameters.Controls.Add(this.numParam1);
-            this.gbParameters.Controls.Add(this.numParam3);
-            this.gbParameters.Controls.Add(this.numParam2);
-            this.gbParameters.Controls.Add(this.lblParam2);
-            this.gbParameters.Location = new System.Drawing.Point(345, 3);
-            this.gbParameters.Name = "gbParameters";
-            this.gbParameters.Size = new System.Drawing.Size(166, 108);
-            this.gbParameters.TabIndex = 14;
-            this.gbParameters.TabStop = false;
-            this.gbParameters.Text = "Paramters";
-            this.gbParameters.Visible = false;
+            this.gbParameters1.Controls.Add(this.lblParam1);
+            this.gbParameters1.Controls.Add(this.lblParam3);
+            this.gbParameters1.Controls.Add(this.numParam1);
+            this.gbParameters1.Controls.Add(this.numParam3);
+            this.gbParameters1.Controls.Add(this.numParam2);
+            this.gbParameters1.Controls.Add(this.lblParam2);
+            this.gbParameters1.Location = new System.Drawing.Point(3, 0);
+            this.gbParameters1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.gbParameters1.Name = "gbParameters1";
+            this.gbParameters1.Size = new System.Drawing.Size(166, 97);
+            this.gbParameters1.TabIndex = 18;
+            this.gbParameters1.TabStop = false;
+            this.gbParameters1.Text = "Parameters";
+            this.gbParameters1.Visible = false;
             // 
             // lblParam1
             // 
@@ -384,6 +387,101 @@
             this.lblParam2.Size = new System.Drawing.Size(42, 13);
             this.lblParam2.TabIndex = 11;
             this.lblParam2.Text = "param2";
+            // 
+            // gbParameters2
+            // 
+            this.gbParameters2.Location = new System.Drawing.Point(175, 0);
+            this.gbParameters2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.gbParameters2.Name = "gbParameters2";
+            this.gbParameters2.Size = new System.Drawing.Size(166, 97);
+            this.gbParameters2.TabIndex = 19;
+            this.gbParameters2.TabStop = false;
+            this.gbParameters2.Visible = false;
+            // 
+            // gbParameters3
+            // 
+            this.gbParameters3.Location = new System.Drawing.Point(347, 0);
+            this.gbParameters3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.gbParameters3.Name = "gbParameters3";
+            this.gbParameters3.Size = new System.Drawing.Size(166, 97);
+            this.gbParameters3.TabIndex = 20;
+            this.gbParameters3.TabStop = false;
+            this.gbParameters3.Visible = false;
+            // 
+            // gbPrototype
+            // 
+            this.gbPrototype.Controls.Add(this.label7);
+            this.gbPrototype.Controls.Add(this.label6);
+            this.gbPrototype.Controls.Add(this.label5);
+            this.gbPrototype.Controls.Add(this.cbProtoAttributeY);
+            this.gbPrototype.Controls.Add(this.cbProtoFunction);
+            this.gbPrototype.Controls.Add(this.cbProtoAttributeX);
+            this.gbPrototype.Location = new System.Drawing.Point(139, 3);
+            this.gbPrototype.Name = "gbPrototype";
+            this.gbPrototype.Size = new System.Drawing.Size(200, 108);
+            this.gbPrototype.TabIndex = 15;
+            this.gbPrototype.TabStop = false;
+            this.gbPrototype.Text = "Feature Selection";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(1, 73);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(28, 19);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Fn:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(5, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(20, 19);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Y:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(5, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(21, 19);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "X:";
+            // 
+            // cbProtoAttributeY
+            // 
+            this.cbProtoAttributeY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProtoAttributeY.FormattingEnabled = true;
+            this.cbProtoAttributeY.Location = new System.Drawing.Point(32, 42);
+            this.cbProtoAttributeY.Name = "cbProtoAttributeY";
+            this.cbProtoAttributeY.Size = new System.Drawing.Size(160, 21);
+            this.cbProtoAttributeY.TabIndex = 2;
+            this.cbProtoAttributeY.SelectedIndexChanged += new System.EventHandler(this.cbProtoAttribute_YIndexChanged);
+            // 
+            // cbProtoFunction
+            // 
+            this.cbProtoFunction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProtoFunction.FormattingEnabled = true;
+            this.cbProtoFunction.Location = new System.Drawing.Point(32, 72);
+            this.cbProtoFunction.Name = "cbProtoFunction";
+            this.cbProtoFunction.Size = new System.Drawing.Size(160, 21);
+            this.cbProtoFunction.TabIndex = 1;
+            this.cbProtoFunction.SelectedIndexChanged += new System.EventHandler(this.cbProtoFunction_SelectedIndexChanged);
+            // 
+            // cbProtoAttributeX
+            // 
+            this.cbProtoAttributeX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProtoAttributeX.FormattingEnabled = true;
+            this.cbProtoAttributeX.Location = new System.Drawing.Point(32, 14);
+            this.cbProtoAttributeX.Name = "cbProtoAttributeX";
+            this.cbProtoAttributeX.Size = new System.Drawing.Size(160, 21);
+            this.cbProtoAttributeX.TabIndex = 0;
+            this.cbProtoAttributeX.SelectedIndexChanged += new System.EventHandler(this.cbProtoAttribute_XIndexChanged);
             // 
             // label4
             // 
@@ -507,40 +605,50 @@
             // 
             // tabConsoleContainer
             // 
-            this.tabConsoleContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabConsoleContainer.Controls.Add(this.tabPageMain);
-            this.tabConsoleContainer.Location = new System.Drawing.Point(504, 148);
+            this.tabConsoleContainer.Controls.Add(this.tabPageFnOptions);
+            this.tabConsoleContainer.Controls.Add(this.tabPageConsole);
+            this.tabConsoleContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabConsoleContainer.Location = new System.Drawing.Point(656, 148);
             this.tabConsoleContainer.Name = "tabConsoleContainer";
             this.tabConsoleContainer.SelectedIndex = 0;
-            this.tabConsoleContainer.Size = new System.Drawing.Size(495, 147);
+            this.tabConsoleContainer.Size = new System.Drawing.Size(647, 379);
             this.tabConsoleContainer.TabIndex = 4;
             // 
-            // tabPageMain
+            // tabPageFnOptions
             // 
-            this.tabPageMain.Controls.Add(this.richTextBox1);
-            this.tabPageMain.Location = new System.Drawing.Point(4, 22);
-            this.tabPageMain.Name = "tabPageMain";
-            this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMain.Size = new System.Drawing.Size(487, 121);
-            this.tabPageMain.TabIndex = 0;
-            this.tabPageMain.Text = "Console";
-            this.tabPageMain.UseVisualStyleBackColor = true;
+            this.tabPageFnOptions.Location = new System.Drawing.Point(4, 22);
+            this.tabPageFnOptions.Name = "tabPageFnOptions";
+            this.tabPageFnOptions.Size = new System.Drawing.Size(639, 353);
+            this.tabPageFnOptions.TabIndex = 1;
+            this.tabPageFnOptions.Text = "Function";
+            this.tabPageFnOptions.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // tabPageConsole
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(481, 115);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.tabPageConsole.Controls.Add(this.consoleTxt);
+            this.tabPageConsole.Location = new System.Drawing.Point(4, 22);
+            this.tabPageConsole.Name = "tabPageConsole";
+            this.tabPageConsole.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageConsole.Size = new System.Drawing.Size(639, 353);
+            this.tabPageConsole.TabIndex = 0;
+            this.tabPageConsole.Text = "Console";
+            this.tabPageConsole.UseVisualStyleBackColor = true;
+            // 
+            // consoleTxt
+            // 
+            this.consoleTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.consoleTxt.Location = new System.Drawing.Point(3, 3);
+            this.consoleTxt.Name = "consoleTxt";
+            this.consoleTxt.Size = new System.Drawing.Size(633, 347);
+            this.consoleTxt.TabIndex = 1;
+            this.consoleTxt.Text = "";
+            this.consoleTxt.TextChanged += new System.EventHandler(this.console_TextChanged);
             // 
             // AlgorithmDesignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1002, 530);
+            this.ClientSize = new System.Drawing.Size(1306, 530);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AlgorithmDesignForm";
             this.Text = "Pattern Discovery";
@@ -551,25 +659,28 @@
             this.tabPageData.ResumeLayout(false);
             this.tabPageData.PerformLayout();
             this.tabPageChart.ResumeLayout(false);
+            this.tabPageChart.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartMain)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.gbPrototype.ResumeLayout(false);
-            this.gbPrototype.PerformLayout();
-            this.gbParameters.ResumeLayout(false);
-            this.gbParameters.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.gbParameters1.ResumeLayout(false);
+            this.gbParameters1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numParam1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numParam3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numParam2)).EndInit();
+            this.gbPrototype.ResumeLayout(false);
+            this.gbPrototype.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numGroupMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numGroupMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTestPct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTrainingPct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTrainingPct)).EndInit();
             this.tabConsoleContainer.ResumeLayout(false);
-            this.tabPageMain.ResumeLayout(false);
+            this.tabPageConsole.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -596,13 +707,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numGroupMax;
         private System.Windows.Forms.NumericUpDown numGroupMin;
-        private System.Windows.Forms.Label lblParam3;
-        private System.Windows.Forms.NumericUpDown numParam3;
-        private System.Windows.Forms.Label lblParam2;
-        private System.Windows.Forms.NumericUpDown numParam2;
-        private System.Windows.Forms.Label lblParam1;
-        private System.Windows.Forms.NumericUpDown numParam1;
-        private System.Windows.Forms.GroupBox gbParameters;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox gbPrototype;
         private System.Windows.Forms.ComboBox cbProtoFunction;
@@ -612,8 +716,23 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabControl tabConsoleContainer;
-        private System.Windows.Forms.TabPage tabPageMain;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TabPage tabPageConsole;
+        private System.Windows.Forms.RichTextBox consoleTxt;
+        private System.Windows.Forms.TabPage tabPageFnOptions;
+        private System.Windows.Forms.TrackBar chartSlider;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.GroupBox gbParameters1;
+        private System.Windows.Forms.Label lblParam1;
+        private System.Windows.Forms.Label lblParam3;
+        private System.Windows.Forms.NumericUpDown numParam1;
+        private System.Windows.Forms.NumericUpDown numParam3;
+        private System.Windows.Forms.NumericUpDown numParam2;
+        private System.Windows.Forms.Label lblParam2;
+        private System.Windows.Forms.GroupBox gbParameters2;
+        private System.Windows.Forms.GroupBox gbParameters3;
+        private System.Windows.Forms.CheckBox autofillCheckBox;
+        private System.Windows.Forms.Button btnChartSliderRight;
+        private System.Windows.Forms.Button btnChartSliderLeft;
 
     }
 }

@@ -13,6 +13,7 @@
  *     given signal
 *****************************************************************************/
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,35 +23,53 @@ using System.Data;
 
 namespace MyMarketAnalyzer
 {
+    public enum Variable
+    {
+        //Available Parameters
+        [StringValue("MACD_SIG")]
+        MACD_SIG = 0xE00,
+        [StringValue("MACD_DIFF")]
+        MACD_DIFF = 0xE01,
+        [StringValue("P")]
+        PRICE = 0xE02,
+        [StringValue("V")]
+        VOLUME = 0xE03,
+        [StringValue("PCT")]
+        PCT = 0xE04
+    }
+
+    public enum Fn
+    {
+        //Functions
+        [StringValue("AVG")]
+        AVG = 0xF01,
+        [StringValue("MAX")]
+        MAX = 0xF02,
+        [StringValue("MIN")]
+        MIN = 0xF03,
+        [StringValue("TREND")]
+        TREND = 0xF04,
+        [StringValue("STDEV")]
+        STDEV = 0xF05
+    }
+
+    public static class RuleParserInputs
+    {
+        public static Variable[] VarList = { Variable.PRICE, Variable.VOLUME, Variable.PCT, Variable.MACD_SIG, Variable.MACD_DIFF };
+        public static String[] VarCaptions = { "PRICE", "VOLUME", "% CHANGE", "MACD SIG", "MACD DIFF" };
+        public static Fn[] Fns = { Fn.AVG, Fn.MAX, Fn.MIN, Fn.TREND, Fn.STDEV };
+        public static String[] Operators = { "AND", "OR" };
+        public static String[] Comparators = { ">=", "<=", ">", "<", "=" };
+    }
+
     public class RuleParser
     {
-        private enum Variable
-        {
-            //Available Parameters
-            [StringValue("MACD_SIG")]
-            MACD_SIG = 0xE00,
-            [StringValue("MACD_DIFF")]
-            MACD_DIFF = 0xE01,
-            [StringValue("P")]
-            PRICE = 0xE02
-        }
+        private Hashtable VariablesTable = new Hashtable(100);
 
-        private enum Fn
-        {
-            //Functions
-            [StringValue("AVG")]
-            AVG = 0xF01,
-            [StringValue("MAX")]
-            MAX = 0xF02,
-            [StringValue("MIN")]
-            MIN = 0xF03,
-            [StringValue("TREND")]
-            TREND = 0xF04
-        }
-
-        private static String[] operators = { "AND", "OR" };
-        private static String[] comparators = { "=", ">", "<", ">=", "<=" };
-        private static Fn[] fns = { Fn.AVG, Fn.MAX, Fn.MIN, Fn.TREND };
+        //private Variable[] VarList = { Variable.MACD_SIG, Variable.MACD_DIFF, Variable.PCT, Variable.PRICE, Variable.VOLUME };
+        //private static String[] operators = { "AND", "OR" };
+        //private static String[] comparators = { ">=", "<=", ">", "<", "=" };
+        //private static Fn[] fns = { Fn.AVG, Fn.MAX, Fn.MIN, Fn.TREND, Fn.STDEV };
 
         private List<Fn> current_buy_functions;
         private List<Fn> current_sell_functions;
@@ -68,6 +87,11 @@ namespace MyMarketAnalyzer
             PercentComplete = 0.0;
             current_buy_functions = new List<Fn>();
             current_sell_functions = new List<Fn>();
+
+            foreach (Variable var in RuleParserInputs.VarList)
+            {
+                VariablesTable.Add(StringEnum.GetStringValue(var),var);
+            }
         }
 
         public void SetInputParams(Equity pEqIn, String pBuyRule, String pSellRule, Double pPrincipal)
@@ -80,7 +104,7 @@ namespace MyMarketAnalyzer
 
 
         /*****************************************************************************
-         *  FUNCTION:       CalculateGainLoss
+         *  FUNCTION:       RunAnalysis
          *  Description:    
          *  Parameters:     None
          *****************************************************************************/
@@ -91,8 +115,8 @@ namespace MyMarketAnalyzer
             string str_expression, str_evaluated_rule;
             double gain_loss = 0.0, cash = inPrincipalAmt, investments = 0.0, transaction_amt = 0.0;
             int units = 0, units_held = 0, total_transactions = 0;
-            String[] buy_conditions = inBuyRule.Split(operators, StringSplitOptions.RemoveEmptyEntries);
-            String[] sell_conditions = inSellRule.Split(operators, StringSplitOptions.RemoveEmptyEntries);
+            String[] buy_conditions = inBuyRule.Split(RuleParserInputs.Operators, StringSplitOptions.RemoveEmptyEntries);
+            String[] sell_conditions = inSellRule.Split(RuleParserInputs.Operators, StringSplitOptions.RemoveEmptyEntries);
             AnalysisResult analysis_result = new AnalysisResult();
 
             PercentComplete = 0.0;
@@ -101,7 +125,7 @@ namespace MyMarketAnalyzer
             //(so that we don't have to itterate again for each data point)
             current_buy_functions.Clear();
             current_sell_functions.Clear();
-            foreach(Fn func in fns)
+            foreach (Fn func in RuleParserInputs.Fns)
             {
                 foreach (String buy_cond in buy_conditions)
                 {
@@ -130,9 +154,14 @@ namespace MyMarketAnalyzer
                 analysis_result.net_change_daily.Add(0.0);
                 analysis_result.units_change_daily.Add(0);
 
-                //First determine whether the day is a buy or sell (or neither)
+                //Evaluate the given historical data point against each of the buy rules
                 buy = false;
                 str_evaluated_rule = inBuyRule;
+
+                //Get the number of units to buy
+                units = GetNumberOfUnits(str_evaluated_rule, out str_evaluated_rule, inEquity.HistoricalPrice[i], cash);
+                
+                //Parse each of the individual conditional expressions and evaluate the overall rule
                 foreach(String buy_cond in buy_conditions)
                 {
                     str_expression = Parse(buy_cond, inEquity, i, current_buy_functions);
@@ -140,18 +169,9 @@ namespace MyMarketAnalyzer
                 }
                 buy = Evaluate(str_evaluated_rule);
 
-                sell = false;
-                str_evaluated_rule = inSellRule;
-                foreach (String sell_cond in sell_conditions)
+                //Update holdings if the buy rule evaluates to True
+                if (buy)
                 {
-                    str_expression = Parse(sell_cond, inEquity, i, current_sell_functions);
-                    str_evaluated_rule = str_evaluated_rule.Replace(sell_cond, str_expression);
-                }
-                sell = Evaluate(str_evaluated_rule);
-
-                if(buy)
-                {
-                    units += (int)Math.Floor(cash / inEquity.HistoricalPrice[i]);
                     transaction_amt = inEquity.HistoricalPrice[i] * units;
                     if (cash >= (transaction_amt))
                     {
@@ -161,6 +181,20 @@ namespace MyMarketAnalyzer
                         total_transactions++;
                     }
                 }
+
+                //Evaluate the given historical data point against each of the sell rules
+                sell = false;
+                str_evaluated_rule = inSellRule;
+
+                //Get the number of units to sell
+                units = GetNumberOfUnits(str_evaluated_rule, out str_evaluated_rule, 1.0, investments);
+
+                foreach (String sell_cond in sell_conditions)
+                {
+                    str_expression = Parse(sell_cond, inEquity, i, current_sell_functions);
+                    str_evaluated_rule = str_evaluated_rule.Replace(sell_cond, str_expression);
+                }
+                sell = Evaluate(str_evaluated_rule);
 
                 if (sell)
                 {
@@ -240,7 +274,7 @@ namespace MyMarketAnalyzer
                 }
             }
 
-            split_str = str_expression.Split(comparators, StringSplitOptions.RemoveEmptyEntries);
+            split_str = str_expression.Split(RuleParserInputs.Comparators, StringSplitOptions.RemoveEmptyEntries);
 
             foreach(string exp_part in split_str)
             {
@@ -305,6 +339,12 @@ namespace MyMarketAnalyzer
                     case Variable.PRICE:
                         func_inputs = new List<double>(pEqIn.HistoricalPrice);
                         break;
+                    case Variable.VOLUME:
+                        func_inputs = new List<double>(pEqIn.HistoricalVolumes);
+                        break;
+                    case Variable.PCT:
+                        func_inputs = new List<double>(pEqIn.HistoricalPctChange);
+                        break;
                     default:
                         break;
                 }
@@ -349,6 +389,9 @@ namespace MyMarketAnalyzer
                             case Fn.TREND:
                                 //Need some kind of curve/line fitting algorithm
                                 break;
+                            case Fn.STDEV:
+                                eval_data = Helpers.StdDev(func_inputs);
+                                break;
                             default:
                                 break;
                         }
@@ -357,6 +400,8 @@ namespace MyMarketAnalyzer
                 else
                 {
                     //If the data to be analyzed is one of the MACD signals, ensure the passed index is valid
+                    // The index needs to be greater than the first day for which the MACD can be calculated.
+                    // ie. for the standard 12,26,9 series, pIndex must be greater than (26 + 9) = 35
                     if(input_param == Variable.MACD_DIFF || input_param == Variable.MACD_SIG) 
                     {
                         if(pIndex > (pEqIn.HistoricalPrice.Count() - pEqIn.MACD_C.Count()))
@@ -412,7 +457,7 @@ namespace MyMarketAnalyzer
             String str_return = "";
             int nesting_level = 0;
             Regex regex;
-            str_return = RemoveUnitsSpecifier(pSubString);
+            str_return = pSubString;
 
             foreach(char c in str_return.ToCharArray())
             {
@@ -444,33 +489,75 @@ namespace MyMarketAnalyzer
         }
 
         /*****************************************************************************
-         *  FUNCTION:       RemoveUnitsSpecifier
-         *  Description:    
-         *  Parameters:     None
+         *  FUNCTION:       GetNumberOfUnits
+         *  Description:    Determines the number of units to be bought/sold for each
+         *                  transaction that meets the given rule. A decimal value between
+         *                  0 and 1 denotes a percentage of total holdings.
+         *                  
+         *                  Ex.  [U%50] [U100]            
+         *  Parameters:     
+         *  
          *****************************************************************************/
-        private String RemoveUnitsSpecifier(String pSubString)
+        private int GetNumberOfUnits(String pSubString, out String pReturnString, double unit_price, double cash)
         {
-            String str_return = "";
-            int index1, index2;
+            String str_return = "", u_str;
+            int index1, index2, units_int;
+            double units = 0.0;
+            const String units_specifier = "[U";
+            bool isPct = false;
 
-            str_return = pSubString.Replace(" ", "");
-            index1 = str_return.IndexOf("[U");
+            str_return = pSubString;
+            index1 = str_return.IndexOf(units_specifier);
 
-            while(index1 >= 0)
+            if(index1 >= 0)
             {
+                index1 += units_specifier.Length;
                 index2 = str_return.IndexOf("]", index1);
                 if(index2 > index1)
                 {
+                    u_str = str_return.Substring(index1, index2 - index1);
+
+                    if(u_str[0] == '%')
+                    {
+                        u_str.Remove(0, 1);
+                        units = double.Parse(u_str) / 100.0;
+                        isPct = true;
+                    }
+                    else
+                    {
+                        units = Math.Floor(double.Parse(u_str));
+                    }
+
                     str_return.Remove(index1, (index2 - index1 + 1));
-                    index1 = str_return.IndexOf("[U");
-                }
-                else
-                {
-                    index1 = -1;
                 }
             }
 
-            return str_return;
+            //Default in case no units specifier exists
+            if (units == 0.0)
+            {
+                units = cash / unit_price;
+            }
+
+            //If the number of units is relative (ie. percentage of total cash holdings)
+            if (isPct)
+            {
+                if (units > 0)
+                {
+                    units_int = (int)Math.Floor((cash / unit_price) * units);
+                }
+                else
+                {
+                    units_int = 0;
+                }
+            }
+            else
+            {
+                units_int = (int)units;
+            }
+
+            pReturnString = str_return;
+
+            return units_int;
         }
 
         /*****************************************************************************
@@ -506,6 +593,12 @@ namespace MyMarketAnalyzer
                 case Variable.PRICE:
                     return_val = pEqIn.HistoricalPrice[pIndex];
                     break;
+                case Variable.PCT:
+                    return_val = pEqIn.HistoricalPctChange[pIndex];
+                    break;
+                case Variable.VOLUME:
+                    return_val = pEqIn.HistoricalVolumes[pIndex];
+                    break;
                 default:
                     break;
             }
@@ -522,27 +615,17 @@ namespace MyMarketAnalyzer
         {
             Variable return_type;
 
-            if (pKey == StringEnum.GetStringValue(Variable.MACD_SIG))
+            try
             {
-                return_type = Variable.MACD_SIG;
+                return_type = (Variable)VariablesTable[pKey];
             }
-            else if (pKey == StringEnum.GetStringValue(Variable.MACD_DIFF))
-            {
-                return_type = Variable.MACD_DIFF;
-            }
-            else if (pKey == StringEnum.GetStringValue(Variable.PRICE))
-            {
-                return_type = Variable.PRICE;
-            }
-            else
+            catch(NullReferenceException ne)
             {
                 return_type = 0;
             }
 
             return return_type;
         }
-
-        
 
     }
 }

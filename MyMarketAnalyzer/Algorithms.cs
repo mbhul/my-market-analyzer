@@ -8,12 +8,26 @@ namespace MyMarketAnalyzer
 {
     static class Algorithms
     {
+        /*****************************************************************************
+         *  FUNCTION:       GaussianBlur
+         *  Description:    See below
+         *  Parameters:     See below
+         *****************************************************************************/
         public static void GaussianBlur(ref List<Double> pData, Double pSigma, int pWindowSize = 5)
         {
             List<Double> return_data = GaussianBlur(pData, pSigma, pWindowSize);
             pData = return_data;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       GaussianBlur
+         *  Description:    Applies a Gaussian filter to the input array and returns the
+         *                  filtered values in the same array
+         *  Parameters:     
+         *      pData       - Input data to apply the filter to
+         *      pSigma      - Standard deviation parameter of the Gaussian function 
+         *      pWindowSize - Convolution window size, in number of elements (default = 5)
+         *****************************************************************************/
         public static List<Double> GaussianBlur(List<Double> pData, Double pSigma, int pWindowSize = 5)
         {
             List<Double> return_data = new List<double>(pData);
@@ -59,6 +73,16 @@ namespace MyMarketAnalyzer
             return return_data;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       MeanFilter
+         *  Description:    Applies an averaging filter to the input data and returns as 
+         *                  a new array. ie. each element is adjusted based on an average
+         *                  of surrounding data points.
+         *  Parameters:     
+         *      pData       - the input data to apply the filter to
+         *      pWindowSize - the number of elements on either side of each data point
+         *                    to average for the purpose of smoothing
+         *****************************************************************************/
         public static List<Double> MeanFilter(List<Double> pData, int pWindowSize = 2)
         {
             List<Double> return_data = new List<double>(pData);
@@ -69,7 +93,6 @@ namespace MyMarketAnalyzer
             pad = pWindowSize;
 
             //Perform the convolution
-            
             for (i = 0; i < pData.Count; i++)
             {
                 //use a dynamic window size that automatically adjusts at the edges to use the available data
@@ -116,22 +139,12 @@ namespace MyMarketAnalyzer
             return return_data;
         }
 
-        public static Double StdDev(List<Double> pData)
-        {
-            int i;
-            double variance_sum, avgData, variance;
-            variance_sum = 0;
-            avgData = pData.Average();
-            for (i = 0; i < pData.Count(); i++)
-            {
-                variance_sum = variance_sum + Math.Pow((pData[i] - avgData), 2);
-            }
-            variance = variance_sum / pData.Count();
-
-            //Return Std. Dev
-            return Math.Round(Math.Sqrt(variance), 4);
-        }
-
+        /*****************************************************************************
+         *  FUNCTION:       Normalize
+         *  Description:    
+         *  Parameters:     
+         *      pInput       - the input data
+         *****************************************************************************/
         public static List<Double> Normalize(List<Double> pInput, double pCenter)
         {
             List<Double> return_values = new List<double>(pInput);
@@ -168,6 +181,22 @@ namespace MyMarketAnalyzer
             return return_values;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       k_means
+         *  Description:    Classifies the data points passed in pPopulation, into one
+         *                  of the classes defined by class prototypes contained in 
+         *                  pPrototypes, using the k-means algorithm. Outputs class labels 
+         *                  in pClassLabels as the index of pPrototypes corresponding to 
+         *                  the chosen class.
+         *  Parameters:     
+         *      pPopulation - the input data [x,y]
+         *      pPrototypes - the prototypes [x,y] of the classes to choose from
+         *      pK          - 
+         *      pMaxIterations - maximum number of iterations (for test, to help prevent infinite recurssion)
+         *      pClassLabels   - the final classification of each point in pPopulation.
+         *      
+         *  pClassLabels must contain the same number of elements as pPopulation. 
+         *****************************************************************************/
         public static int k_means(double[,] pPopulation, double[,] pPrototypes, int pK, int pMaxIterations, out int[] pClassLabels)
         {
             //Stop when all prototypes are within this distance of where they started from (not moving)
@@ -263,6 +292,26 @@ namespace MyMarketAnalyzer
             return num_classes;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       fuzzy_c_means
+         *  Description:    Classifies the data points passed in pPopulation, into one
+         *                  or more classes using the fuzzy c-means clustering algorithm.
+         *                  Starts with the class prototypes initially defined by pPrototypes and
+         *                  pNumClassesInit, then re-classifies and merges as necessary.
+         *                  
+         *                  Note: pNumClassesInit must equal the first dimension of pPopulation.
+         * 
+         *  Parameters:     
+         *      pPopulation - the input data [x,y]
+         *      pPrototypes - the prototypes [x,y] of the classes to choose from
+         *      pNumClassesInit - the initial number of classes. Must equal the first dimension of pPrototypes
+         *      pFuzzifier      - a 'fuzziness' factor. A higher value results in lower (less defined) membership
+         *                        values, and 'fuzzier' clusters.
+         *      pMaxIterations  - maximum number of iterations (for test, to help prevent infinite recurssion).
+         *                        Also allows finite limitation of processing time.
+         *      pClassLabels    - the final classification of each point in pPopulation. Each element is an 
+         *                        integer (beginning at 1) corresponding to the associated cluster.
+         *****************************************************************************/
         public static int fuzzy_c_means(double[,] pPopulation, double[,] pPrototypes, int pNumClassesInit, int pFuzzifier, int pMaxIterations, out int[] pClassLabels)
         {
             //Stop when all prototypes are within 0.5% of where they started from (not moving)
@@ -382,6 +431,26 @@ namespace MyMarketAnalyzer
             return num_classes;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       ShiftedPearsonProductCoefficient
+         *  
+         *  Description:    Calculates the Pearson Product Coefficient (PPC) for each 
+         *                  Equity in pInputList based on it's HistoricalPrice list, against
+         *                  every other Equity in pInputList, after shifting its HistoricalPrice
+         *                  left by pShiftValue.
+         *                  
+         *                  The intent is to find a predictive correlation. 
+         *                  ie. if one price-series tends to lag another by 1 trading day
+         *                  (in terms of its trend), then shifting that series left by 1 and
+         *                  calculating the PPC with the other series ought to yield a strong
+         *                  PPC correlation. See Helpers.PearsonProductCoefficient() for the
+         *                  normal PPC calculation.
+         *                  
+         *  Parameters:     
+         *      pInputList  - the input data, consisting of multiple Equity instances
+         *      pShiftValue - the number of HistoricalPriceDates to shift data by before
+         *                    computing the PPC.
+         *****************************************************************************/
         public static Double[,] ShiftedPearsonProductCoefficient(List<Equity> pInputList, int pShiftValue)
         {
             int N, cSize, i, j, k, count, key1, key2;

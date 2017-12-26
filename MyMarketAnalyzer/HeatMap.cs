@@ -1,170 +1,115 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
-using System.Data;
-using System.Drawing;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MyMarketAnalyzer
 {
-    class HeatMap : System.Windows.Forms.DataGridView
+    public partial class HeatMap : UserControl
     {
-        private DataTable mapValues = new DataTable();
-        private int lastIndex = 0;
+        Bitmap heatMapImage;
 
-        private bool IsValid = false;
+        public HeatMap()
+        {
+            InitializeComponent();
+            heatMapImage = new Bitmap(this.Width, this.Height);
+            this.heatMapPicBox.Image = heatMapImage;
+        }
 
-        private const int DEFAULT_COL_WIDTH = 50;
-
-        public HeatMap() : base()
+        private void heatMap_OnPaint(object sender, PaintEventArgs e)
         {
             
         }
 
-        private void InitializeComponent()
+        public void BindMarketData(ExchangeMarket pData)
         {
-            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // HeatMap
-            // 
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-            this.ResumeLayout(false);
-        }
+            const int PCT_MAX_COLOR = 10;
 
-        public void AddRow(List<DateTime> pDates, List<Double> pHeatValues)
-        {
-            bool validParams = false;
-            int i;
-            DataRow row;
-            DateTime prev_start, prev_end;
+            int xfactor = 0, yfactor = 0;
+            int remainder = 0;
+            double r, g, b;
+            int xcount = 0, ycount = 0;
+            Color eqColor = new Color();
 
-            if(pDates.Count == pHeatValues.Count)
+            if(pData.Constituents != null)
             {
-                validParams = true;
-            }
-
-            if (validParams == true)
-            {
-                if(mapValues.Rows.Count <= 0)
+                if(this.Height < pData.Constituents.Count)
                 {
-                    CreateMapTable(pDates);
+                    this.Height = pData.Constituents.Count;
+                }
+                if(this.Width < pData.Constituents[0].HistoricalPctChange.Count)
+                {
+                    this.Width = pData.Constituents[0].HistoricalPctChange.Count;
                 }
 
-                prev_start = DateTime.Parse(mapValues.Columns[0].Caption);
-                prev_end = DateTime.Parse(mapValues.Columns[mapValues.Columns.Count - 1].Caption);
-
-                //Create new row
-                row = mapValues.NewRow();
-
-                for (i = 0; i < pDates.Count; i++)
+                if (this.Height > pData.Constituents.Count)
                 {
-
-                    if (pDates[i] < prev_start)
-                    {
-
-                    }
-                    else if (pDates[i] > prev_end)
-                    {
-
-                    }
-                    else
-                    {
-                        row[i.ToString()] = Math.Round(pHeatValues[i], 2);
-                    }
+                    yfactor = (int)Math.Floor((double)this.Height / (double)pData.Constituents.Count);
+                    remainder = this.Height % pData.Constituents.Count;
+                    this.Height -= remainder;
                 }
 
-                //Add row to DataTable
-                mapValues.Rows.Add(row);
-
-                //Bind DataTable to the data grid view
-                BindTableSource();
-            }
-        }
-
-        private void CreateMapTable(List<DateTime> pDates)
-        {
-            int i;
-            DataColumn column;
-
-            mapValues.Clear();
-            mapValues.Constraints.Clear();
-            mapValues.Rows.Clear();
-            mapValues.Columns.Clear();
-            lastIndex = 0;
-
-            for(i = 0; i < pDates.Count; i++)
-            {
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.Double");
-                column.ColumnName = i.ToString();
-                column.Caption = pDates[i].ToString();
-                column.ReadOnly = true;
-                column.Unique = false;
-                // Add the Column to the DataColumnCollection.
-                mapValues.Columns.Add(column);
-                lastIndex++;
-            }
-        }
-
-        private void AddColumn(DateTime pDate, int position)
-        {
-            DataColumn column;
-
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Double");
-            column.ColumnName = (lastIndex++).ToString();
-            column.Caption = pDate.ToString();
-            column.ReadOnly = true;
-            column.Unique = false;
-            // Add the Column to the DataColumnCollection.
-            mapValues.Columns.Add(column);
-            column.SetOrdinal(position);
-        }
-
-        private void BindTableSource()
-        {
-            int i;
-
-            //bindingSource1.DataSource = tableSource;
-            this.DataSource = mapValues;
-
-            for (i = 0; i < this.Columns.Count; i++)
-            {
-                this.Columns[i].Width = DEFAULT_COL_WIDTH;
-                this.Columns[i].SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            }
-
-            
-        }
-
-        public void Redraw()
-        {
-            int i, j, colorValue;
-            double heatvalue;
-
-            if (this.Visible == true && this.IsValid == false)
-            {
-                for (i = 0; i < this.Rows.Count - 1; i++)
+                if (this.Width > pData.Constituents[0].HistoricalPctChange.Count)
                 {
-                    for (j = 0; j < this.Columns.Count; j++)
+                    xfactor = (int)Math.Floor((double)this.Width / (double)pData.Constituents[0].HistoricalPctChange.Count);
+                    remainder = this.Width % pData.Constituents[0].HistoricalPctChange.Count;
+                    this.Width -= remainder;
+                }
+
+                foreach(Equity eq in pData.Constituents)
+                {
+                    ycount++;
+                    xcount = 0;
+                    foreach(double pct in eq.HistoricalPctChange)
                     {
-                        heatvalue = (double)this.Rows[i].Cells[j].Value;
-                        colorValue = 255 - (int)(255 * Math.Abs(heatvalue));
-                        if (heatvalue > 0)
+                        xcount++;
+
+                        b = 0;
+                        if (eq.HistoricalPctChange[xcount - 1] <= 0)
                         {
-                            this.Rows[i].Cells[j].Style.BackColor = Color.FromArgb(colorValue, 255, colorValue);
+                            r = 255;
                         }
-                        else if (heatvalue < 0)
+                        else
                         {
-                            this.Rows[i].Cells[j].Style.BackColor = Color.FromArgb(255, colorValue, colorValue);
+                            r = (-255 * eq.HistoricalPctChange[xcount - 1] / PCT_MAX_COLOR) + 255;
+                            r = (r < 0) ? 0 : r;
+                        }
+
+                        if (eq.HistoricalPctChange[xcount - 1] >= 0)
+                        {
+                            g = 255;
+                        }
+                        else
+                        {
+                            g = (255 * eq.HistoricalPctChange[xcount - 1] / PCT_MAX_COLOR) + 255;
+                            g = (g < 0) ? 0 : g;
+                            b = g;
+                        }
+
+                        eqColor = Color.FromArgb((int)r, (int)g, (int)b);
+
+                        for (int x = 0; x < xfactor; x++)
+                        {
+                            for (int y = 0; y < yfactor; y++)
+                            {
+                                this.heatMapImage.SetPixel((xcount * xfactor) + x, (ycount * yfactor) + y, eqColor);
+                            }
                         }
                     }
                 }
 
-                //this.IsValid = true;
+                this.Invalidate();
             }
+        }
+
+        private void heatMap_OnResize(object sender, EventArgs e)
+        {
+
         }
 
     }

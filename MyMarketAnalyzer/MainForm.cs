@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 
 namespace MyMarketAnalyzer
@@ -64,6 +65,10 @@ namespace MyMarketAnalyzer
         private const UInt32 WM_MULTI_ADDWATCHLIST = 0xA008;
         private const UInt32 WM_LIVESESSIONCLOSED = 0xA009;
         private const UInt32 WM_ANALYSISCOMPLETE = 0xA00A;
+        private const UInt32 WM_ANALYSISFUNCSELECT = 0xA00B;
+        private const UInt32 WM_ANALYSISVARSELECT = 0xA00C;
+
+        private const String DEFAULT_UNITS_SPECIFIER = "[U%100]";
 
         //***** PRIVATE GLOBALS *****//
         private TabPage tabVisuals;
@@ -76,6 +81,12 @@ namespace MyMarketAnalyzer
         private int AnalysisDisplayIndex = 0;
         private Rectangle InitialSize = new Rectangle();
         private bool DataMenuPanelVisible = false;
+
+        private bool AnalysisBuyRuleActive = false;
+        private bool AnalysisSellRuleActive = false;
+
+        private HeatMap heatMapControl = new HeatMap();
+        private Form heatMapForm = new Form();
 
         [DllImport("user32.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern int SendMessage(
@@ -108,6 +119,9 @@ namespace MyMarketAnalyzer
             InitializeMainForm();
             InitializeAnalysisForm();
             CollapseMenuPanel();
+
+            //debug
+            //Helpers.TestPOSTRequest();
         }
 
         /*****************************************************************************
@@ -163,8 +177,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       CollapseMenuPanel
-         *  Description:    
-         *  Parameters:     
+         *  Description:    Collapses the side toolbar menu
+         *  Parameters:     None
          *****************************************************************************/
         private void CollapseMenuPanel()
         {
@@ -176,8 +190,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       ExpandMenuPanel
-         *  Description:    
-         *  Parameters:     
+         *  Description:    Expands the side toolbar menu
+         *  Parameters:     None
          *****************************************************************************/
         private void ExpandMenuPanel()
         {
@@ -252,7 +266,7 @@ namespace MyMarketAnalyzer
          *  FUNCTION:       SetLiveDataIntervalOptions
          *  Description:    Populates the drop-down menu for selecting the interval at
          *                  which to request new live data
-         *  Parameters:     
+         *  Parameters:     None
          *****************************************************************************/
         private void SetLiveDataIntervalOptions()
         {
@@ -262,6 +276,7 @@ namespace MyMarketAnalyzer
             this.cbLiveDataInterval.Items.Clear();
             for(i = 0; i < this.LiveSessionIntervalsSec.Count(); i++)
             {
+                //Display options greater than 60 in terms of minutes instead of seconds
                 if(LiveSessionIntervalsSec[i] >= 60)
                 {
                     option_temp = (LiveSessionIntervalsSec[i] / 60).ToString() + " min";
@@ -271,6 +286,7 @@ namespace MyMarketAnalyzer
                     option_temp = LiveSessionIntervalsSec[i].ToString() + " sec";
                 }
 
+                //Pad option text for cleaner-looking alignment in the drop-down menu
                 if ((LiveSessionIntervalsSec[i] >= 10 && LiveSessionIntervalsSec[i] < 60) ||
                     (LiveSessionIntervalsSec[i] >= 600 && LiveSessionIntervalsSec[i] < 6000))
                 {
@@ -289,7 +305,7 @@ namespace MyMarketAnalyzer
         /*****************************************************************************
          *  FUNCTION:       ClearFilter
          *  Description:    Clears the drop-down filter input
-         *  Parameters:     
+         *  Parameters:     None
          *****************************************************************************/
         private void ClearFilter()
         {
@@ -301,6 +317,11 @@ namespace MyMarketAnalyzer
             }
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       SetHistoricalDataFilter
+         *  Description:    Populates the filter combo box for historical data
+         *  Parameters:     None
+         *****************************************************************************/
         private void SetHistoricalDataFilter()
         {
             //Update Filter Drop Down list
@@ -313,6 +334,11 @@ namespace MyMarketAnalyzer
             }
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       SetLiveDataFilter
+         *  Description:    Populates the filter combo box for live data
+         *  Parameters:     None
+         *****************************************************************************/
         private void SetLiveDataFilter()
         {
             comboBoxStatFilter.Items.Clear();
@@ -326,10 +352,11 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  EVENT HANDLER:  tsBtnLoadHistorical_Click
-         *  Description:    
+         *  Description:    Enables selection of a file containing historical data to be
+         *                  parsed and loaded.
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - the parent object from which the event was triggered
+         *          e      - the event arguments
          *****************************************************************************/
         private void tsBtnLoadHistorical_Click(object sender, EventArgs e)
         {
@@ -344,6 +371,7 @@ namespace MyMarketAnalyzer
             if(result == DialogResult.OK)
             {
                 folderName = dlgStatFolder.SelectedPath;
+                MyDataManager.UnloadHistoricalData();
                 MyDataManager.SetHistoricalDataPath(folderName);
                 this.backgroundWorkerStat.RunWorkerAsync();
                 this.backgroundWorkerProgress.RunWorkerAsync();
@@ -351,8 +379,24 @@ namespace MyMarketAnalyzer
         }
 
         /*****************************************************************************
+         *  EVENT HANDLER:  unloadToolStripMenuItem1_Click
+         *  Description:    Unloads historical data from the Data Manager and stat
+         *                  table binding
+         *  Parameters:     
+         *          sender - 
+         *          e      -
+         *****************************************************************************/
+        private void unloadToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MyDataManager.UnloadHistoricalData();
+            DisplayStatData();
+            SetDisplayHistoricalDataStatus(false);
+        }
+
+        /*****************************************************************************
          *  EVENT HANDLER:  backgroundWorkerStat_DoWork
-         *  Description:    
+         *  Description:    Worker thread function to load historical data. 
+         *                  The main thread is used to update the UI.
          *  Parameters:     
          *          sender - 
          *          e      -
@@ -364,7 +408,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  EVENT HANDLER:  backgroundWorkerProgress_DoWork
-         *  Description:    
+         *  Description:    Worker thread which polls the data manager for historical
+         *                  data load progress and reports it back to the UI thread.
          *  Parameters:     
          *          sender - 
          *          e      -
@@ -403,7 +448,9 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  EVENT HANDLER:  backgroundWorkerProgress_ProgressChanged
-         *  Description:    
+         *  Description:    Handles the "ProgressChanged" event invoked when the progress
+         *                  reported by the backgroundWorkerProgress_DoWork function has changed.
+         *                  This function runs on the main UI thread.
          *  Parameters:     
          *          sender - 
          *          e      -
@@ -462,7 +509,7 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  EVENT HANDLER:  btnExport_Click
-         *  Description:    
+         *  Description:    Exports the loaded historical data into an XML file
          *  Parameters:     
          *          sender - 
          *          e      -
@@ -485,7 +532,9 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       ShowVisualizationTab (overloaded)
-         *  Description:    
+         *  Description:    Initiates a request to display the "Visualization" tab which
+         *                  contains the chart(s) and other performance indicators for
+         *                  the selected table item.
          *  Parameters:     
          *          data_index   - 
          *          createNewTab - 
@@ -499,10 +548,15 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       ShowVisualizationTab (overloaded)
-         *  Description:    
+         *  Description:    Initiates a request to display the "Visualization" tab which
+         *                  contains the chart(s) and other performance indicators for
+         *                  the selected table items.
          *  Parameters:     
-         *          data_index   - 
-         *          createNewTab - 
+         *          data_index   - the list of indexes of the historical data constituents, 
+         *                         within the historical data 'constituents' array, to display
+         *                         visual data for.
+         *          createNewTab - 'True' to create a new tab, 'False' to add selected data
+         *                          to the existing visualization tab
          *****************************************************************************/
         private void ShowVisualizationTab(List<int> data_index, Boolean createNewTab)
         {
@@ -562,7 +616,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  EVENT HANDLER:  btnExcelDowloader_Click
-         *  Description:    
+         *  Description:    Opens an instance of Microsoft Excel with the historical
+         *                  data downloader file
          *  Parameters:     
          *          sender - 
          *          e      -
@@ -591,7 +646,8 @@ namespace MyMarketAnalyzer
          *  FUNCTION:       WndProc (Windows Method)
          *  Description:    Intercepts all Windows messages directed at the MainForm window
          *  Parameters:     
-         *          m   - 
+         *          m   -   The Windows Forms Message that was sent with the MainForm handle
+         *                  as the destination
          *****************************************************************************/
         protected override void WndProc(ref Message m)
         {
@@ -602,6 +658,7 @@ namespace MyMarketAnalyzer
             }
             switch (m.Msg)
             {
+                //*** Message routers for the main stat table ***//
                 case (int)WM_CELLCLICK:
                     ShowVisualizationTab((int)m.WParam, createNewTab);
                     break;
@@ -614,12 +671,16 @@ namespace MyMarketAnalyzer
                     else
                         tabVisualsControl.ToggleCorrelationTable(true);
                     break;
+
+                //*** Message routers for the Visualization/Chart tab ***//
                 case (int)WM_PROCESS_TI:
                     tabVisualsControl.manageTechnicalIndicators();
                     break;
                 case (int)WM_SHOWNEWWINDCLICK:
                     tabVisualsControl.displayNewWindow();
                     break;
+
+                //*** Message routers for live data events ***//
                 case (int)WM_LIVEUPDATE:
                     lblUpdate.Visible = false;
                     SetDisplayLiveDataStatus(true);
@@ -633,15 +694,27 @@ namespace MyMarketAnalyzer
                 case (int)WM_UPDATING_DATA:
                     lblUpdate.Visible = true;
                     break;
+
+                //*** Message routers for watchlist events ***//
                 case (int)WM_ADDWATCHLIST:
                     AddToWatchlist((int)m.WParam);
                     break;
                 case (int)WM_MULTI_ADDWATCHLIST:
                     AddToWatchlist(((StatTable)StatTable.FromHandle(m.LParam)).SelectedEntries);
                     break;
+
+                //*** Message routers for the Analysis tab ***//
                 case (int)WM_ANALYSISCOMPLETE:
                     this.analysisSummaryPage1.DisplayResult();
                     break;
+                case (int)WM_ANALYSISFUNCSELECT:
+                    this.updateActiveAnalysisRule(typeof(Fn), m.WParam);
+                    break;
+                case (int)WM_ANALYSISVARSELECT:
+                    this.updateActiveAnalysisRule(typeof(Variable), m.WParam);
+                    break;
+                
+                //*** DEFAULT CASE ***//
                 default:
                     break;
             }
@@ -650,8 +723,11 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       AddToWatchlist
-         *  Description:    
+         *  Description:    Adds an item from the loaded data manager to the watchlist
+         *                  based on index value.
          *  Parameters:     
+         *      pIndex -    the index of the loaded data manager item (Equity) to add
+         *                  to the watchlist.
          *****************************************************************************/
         private void AddToWatchlist(int pIndex)
         {
@@ -662,8 +738,11 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       AddToWatchlist
-         *  Description:    
+         *  Description:    Adds a range of items from the loaded data manager to the 
+         *                  watchlist, based on index value.
          *  Parameters:     
+         *      pIndex -    The list of indexes identifying the data manger items (Equities)
+         *                  to add to the watchlist
          *****************************************************************************/
         private void AddToWatchlist(List<int> pIndex)
         {
@@ -705,10 +784,12 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  EVENT HANDLER:  btnRefreshStatTable_Click
-         *  Description:    
+         *  Description:    Event handler for the 'From' and 'To' filter text box inputs.
+         *                  Refreshes the displayed table data based on the updated filter
+         *                  criteria.
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void btnRefreshStatTable_Click(object sender, EventArgs e)
         {
@@ -747,9 +828,9 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       UpdateStatResultCount
-         *  Description:    
+         *  Description:    Updates the stat table 'result count' label text
          *  Parameters:     
-         *          resultCount   - 
+         *          resultCount   - # of results
          *****************************************************************************/
         private void UpdateStatResultCount(int resultCount)
         {
@@ -758,7 +839,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       UpdateAnalysisComboBox
-         *  Description:    
+         *  Description:    Updates the drop-down in the Analysis tab page containing
+         *                  the list of loaded Equities available for analysis
          *  Parameters:     None
          *****************************************************************************/
         private void UpdateAnalysisComboBox()
@@ -776,10 +858,11 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  EVENT HANDLER:  analysisSelectBox_SelectedIndexChanged
-         *  Description:    
+         *  Description:    Handles updates to the Analysis tab page when the selected
+         *                  equity to be analyzed is changed. 
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void analysisSelectBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -797,10 +880,10 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  EVENT HANDLER:  btnAnalysisShowChart_Click
-         *  Description:    
+         *  Description:    Handles the button click event for the 'Run Analysis' button
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void btnAnalysisShowChart_Click(object sender, EventArgs e)
         {
@@ -941,8 +1024,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  btnChartNext_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void btnChartNext_Click(object sender, EventArgs e)
         {
@@ -958,8 +1041,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  btnChartPrev_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void btnChartPrev_Click(object sender, EventArgs e)
         {
@@ -980,8 +1063,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  analysis_nestedSplitPanelRightOnPaint
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void analysis_nestedSplitPanelRightOnPaint(object sender, PaintEventArgs e)
         {
@@ -1023,8 +1106,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  btnLoadPatternForm_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void btnLoadPatternForm_Click(object sender, EventArgs e)
         {
@@ -1039,8 +1122,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  random10ToolStripMenuItem_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void random10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1070,8 +1153,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  cbRegionSelect_SelectedIndexChanged
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void cbRegionSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1093,8 +1176,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  openToolStripMenuItem_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1120,8 +1203,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  openToolStripMenuItem_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1133,8 +1216,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  cbMarket_IndexChanged
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void cbMarket_IndexChanged(object sender, EventArgs e)
         {
@@ -1152,8 +1235,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  dataMenuArrow_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void dataMenuArrow_Click(object sender, EventArgs e)
         {
@@ -1171,8 +1254,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  dataMenuArrow_MouseEnter
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void dataMenuArrow_MouseEnter(object sender, EventArgs e)
         {
@@ -1190,8 +1273,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  dataMenuArrow_MouseLeave
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void dataMenuArrow_MouseLeave(object sender, EventArgs e)
         {
@@ -1209,8 +1292,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  loadProfileToolStripMenuItem_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void loadProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1237,8 +1320,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  saveProfileToolStripMenuItem_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void saveProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1258,32 +1341,66 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  btnBuyRuleExpandCollapse_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void btnBuyRuleExpandCollapse_Click(object sender, EventArgs e)
         {
             int x, y;
+            TableLayoutRowStyleCollection styles = this.tableLayoutPanel1.RowStyles;
+            TableLayoutRowStyleCollection styles2 = this.tblPanelBuyRule.RowStyles;
+
+            //Collapse 'Buy Rule' text box
             if (this.analysisBuy_RTxtBox.Dock == DockStyle.Fill)
             {
+                styles[0].SizeType = SizeType.Absolute;
+                styles[1].SizeType = SizeType.Absolute;
+                styles[2].SizeType = SizeType.AutoSize;
+
                 this.analysisBuy_RTxtBox.Dock = DockStyle.None;
-                this.analysisBuy_RTxtBox.Width = this.analysisBuy_RTxtBox.Parent.Width - 37;
+                this.analysisBuy_RTxtBox.Width = this.analysisBuy_RTxtBox.Parent.Width - 25;
                 this.analysisBuy_RTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
-                x = this.btnBuyRuleExpandCollapse.Parent.Width - this.btnBuyRuleExpandCollapse.Width - 5;
-                y = 18;
+                //Reset the table layout panel containing the 'buy' and 'sell' rule containers
+                styles[0].Height = 64;
+                styles[1].Height = 64;
+
+                //Reset the table layout panel containing only the buy rule container
+                styles2[0].SizeType = SizeType.Absolute;
+                styles2[0].Height = 32;
+                styles2[1].SizeType = SizeType.AutoSize;
+
+                //Move the expand/collapse button back to its initial position
+                x = this.btnBuyRuleExpandCollapse.Parent.Width - this.btnBuyRuleExpandCollapse.Width;
+                y = 4;
 
                 this.btnBuyRuleExpandCollapse.Location = new Point(x, y);
                 this.btnBuyRuleExpandCollapse.BringToFront();
 
                 this.btnBuyRuleExpandCollapse.Image = MyMarketAnalyzer.Properties.Resources.expand_icon;
             }
+            //Expand Buy Rule text box
             else
             {
+                styles[0].SizeType = SizeType.Percent;
+                styles[1].SizeType = SizeType.Percent;
+                styles[2].SizeType = SizeType.Percent;
+
+                //Expand the row containing the buy rule table layout panel to fill the entire buy/sell rule area
+                styles[0].Height = 100;
+                styles[1].Height = 0;
+                styles[2].Height = 0;
+
+                //Resize the buy rule table layout panel to fill as much of the area as necessary
+                styles2[0].SizeType = SizeType.Percent;
+                styles2[0].Height = 100;
+                styles2[1].SizeType = SizeType.Percent;
+                styles2[1].Height = 0;
+
                 this.analysisBuy_RTxtBox.Dock = DockStyle.Fill;
 
                 x = this.btnBuyRuleExpandCollapse.Parent.Width - this.btnBuyRuleExpandCollapse.Width - 2;
-                y = 15;
+                y = 0;
 
                 this.btnBuyRuleExpandCollapse.Location = new Point(x, y);
                 this.btnBuyRuleExpandCollapse.BringToFront();
@@ -1296,20 +1413,34 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  btnSellRuleExpandCollapse_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void btnSellRuleExpandCollapse_Click(object sender, EventArgs e)
         {
             int x, y;
+            TableLayoutRowStyleCollection styles = this.tableLayoutPanel1.RowStyles;
+            TableLayoutRowStyleCollection styles2 = this.tblPanelSellRule.RowStyles;
+
             if (this.analysisSell_RTxtBox.Dock == DockStyle.Fill)
             {
+                styles[0].SizeType = SizeType.Absolute;
+                styles[1].SizeType = SizeType.Absolute;
+                styles[2].SizeType = SizeType.AutoSize;
+
                 this.analysisSell_RTxtBox.Dock = DockStyle.None;
-                this.analysisSell_RTxtBox.Width = this.analysisSell_RTxtBox.Parent.Width - 37;
+                this.analysisSell_RTxtBox.Width = this.analysisSell_RTxtBox.Parent.Width - 25;
                 this.analysisSell_RTxtBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
-                x = this.btnSellRuleExpandCollapse.Parent.Width - this.btnSellRuleExpandCollapse.Width - 5;
-                y = 18;
+                styles[0].Height = 64;
+                styles[1].Height = 64;
+
+                styles2[0].SizeType = SizeType.Absolute;
+                styles2[0].Height = 32;
+                styles2[1].SizeType = SizeType.AutoSize;
+
+                x = this.btnSellRuleExpandCollapse.Parent.Width - this.btnSellRuleExpandCollapse.Width;
+                y = 4;
 
                 this.btnSellRuleExpandCollapse.Location = new Point(x, y);
                 this.btnSellRuleExpandCollapse.BringToFront();
@@ -1318,10 +1449,23 @@ namespace MyMarketAnalyzer
             }
             else
             {
+                styles[0].SizeType = SizeType.Percent;
+                styles[1].SizeType = SizeType.Percent;
+                styles[2].SizeType = SizeType.Percent;
+
+                styles[0].Height = 0;
+                styles[1].Height = 100;
+                styles[2].Height = 0;
+
+                styles2[0].SizeType = SizeType.Percent;
+                styles2[0].Height = 100;
+                styles2[1].SizeType = SizeType.Percent;
+                styles2[1].Height = 0;
+
                 this.analysisSell_RTxtBox.Dock = DockStyle.Fill;
 
                 x = this.btnSellRuleExpandCollapse.Parent.Width - this.btnSellRuleExpandCollapse.Width - 2;
-                y = 15;
+                y = 0;
 
                 this.btnSellRuleExpandCollapse.Location = new Point(x, y);
                 this.btnSellRuleExpandCollapse.BringToFront();
@@ -1334,8 +1478,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  btnRunAnalysis_Click
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void btnRunAnalysis_Click(object sender, EventArgs e)
         {
@@ -1368,8 +1512,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  analysisAmtHelp_MouseEnter
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void analysisAmtHelp_MouseEnter(object sender, EventArgs e)
         {
@@ -1383,8 +1527,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  analysisAmtHelp_MouseDown
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void analysisAmtHelp_MouseDown(object sender, MouseEventArgs e)
         {
@@ -1398,8 +1542,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  analysisAmtHelp_MouseLeave
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void analysisAmtHelp_MouseLeave(object sender, EventArgs e)
         {
@@ -1410,8 +1554,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  backgroundWorkerAnalysisProgress_DoWork
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void backgroundWorkerAnalysisProgress_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -1449,8 +1593,8 @@ namespace MyMarketAnalyzer
          *  EVENT HANDLER:  backgroundWorkerAnalysisProgress_ProgressChanged
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void backgroundWorkerAnalysisProgress_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -1462,11 +1606,42 @@ namespace MyMarketAnalyzer
         }
 
         /*****************************************************************************
+         *  FUNCTION:       updateActiveAnalysisRule
+         *  Description:    
+         *  Parameters:     
+         *****************************************************************************/
+        private void updateActiveAnalysisRule(Type pType, object pInParam)
+        {
+            String newText = "";
+
+            if(pType == typeof(Fn))
+            {
+                newText = StringEnum.GetStringValue((Fn)Enum.Parse(typeof(Fn),pInParam.ToString()));
+                newText += "(";
+            }
+            else if(pType == typeof(Variable))
+            {
+                newText = StringEnum.GetStringValue((Variable)Enum.Parse(typeof(Variable), pInParam.ToString()));
+            }
+            else { }
+
+            if(this.AnalysisBuyRuleActive)
+            {
+                this.analysisBuy_RTxtBox.Text += newText;
+            }
+            else if (this.AnalysisSellRuleActive)
+            {
+                this.analysisSell_RTxtBox.Text += newText;
+            }
+            else { }
+        }
+
+        /*****************************************************************************
          *  EVENT HANDLER:  backgroundWorkerAnalysis_DoWork
          *  Description:    
          *  Parameters:     
-         *          sender - 
-         *          e      -
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
          *****************************************************************************/
         private void backgroundWorkerAnalysis_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -1475,7 +1650,153 @@ namespace MyMarketAnalyzer
             this.analysisSummaryPage1.SetResult(_result);
         }
 
-        
+        /*****************************************************************************
+         *  EVENT HANDLER:  analysisBuy_RTxtBox_TextChanged
+         *  Description:    Event fired when the contents of the 'buy rule' text box
+         *                  is changed. Enables intelisense / autocomplete.
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void analysisBuy_RTxtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  analysisSell_RTxtBox_TextChanged
+         *  Description:    Event fired when the contents of the 'sell rule' text box
+         *                  is changed. Enables intelisense / autocomplete.
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void analysisSell_RTxtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  buyRTBox_OnFocus
+         *  Description:    
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void buyRTBox_OnFocus(object sender, EventArgs e)
+        {
+            Regex reg;
+            int buyRuleLines = this.analysisBuy_RTxtBox.Lines.Count();
+            int sellRuleLines = this.analysisSell_RTxtBox.Lines.Count();
+
+            this.AnalysisBuyRuleActive = true;
+            this.AnalysisSellRuleActive = false;
+
+            this.tblPanelBuyRule.BackColor = Color.LightSteelBlue;
+            this.tblPanelSellRule.BackColor = Color.Transparent;
+
+            if(buyRuleLines == 0)
+            {
+                if (this.analysisBuy_RTxtBox.Text.Trim() == String.Empty)
+                {
+                    this.analysisBuy_RTxtBox.Text += DEFAULT_UNITS_SPECIFIER;
+                }
+            }
+            else
+            {
+                if (this.analysisBuy_RTxtBox.Lines[buyRuleLines - 1].Trim() == String.Empty)
+                {
+                    this.analysisBuy_RTxtBox.Lines[buyRuleLines - 1] += DEFAULT_UNITS_SPECIFIER;
+                }
+            }
+            
+            reg = new Regex("\\[U.*\\]");
+            if (sellRuleLines == 0)
+            {
+                if (reg.Replace(this.analysisSell_RTxtBox.Text, "", 1).Trim() == String.Empty)
+                {
+                    this.analysisSell_RTxtBox.Text = "";
+                }
+            }
+            else
+            {
+                if (reg.Replace(this.analysisSell_RTxtBox.Lines[sellRuleLines - 1], "", 1).Trim().Length == 0)
+                {
+                    this.analysisSell_RTxtBox.Lines[sellRuleLines - 1] = "";
+                }
+            }
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  sellRTBox_OnFocus
+         *  Description:    
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void sellRTBox_OnFocus(object sender, EventArgs e)
+        {
+            Regex reg;
+            int buyRuleLines = this.analysisBuy_RTxtBox.Lines.Count();
+            int sellRuleLines = this.analysisSell_RTxtBox.Lines.Count();
+
+            this.AnalysisBuyRuleActive = false;
+            this.AnalysisSellRuleActive = true;
+
+            this.tblPanelBuyRule.BackColor = Color.Transparent;
+            this.tblPanelSellRule.BackColor = Color.LightSteelBlue;
+
+            if(sellRuleLines == 0)
+            {
+                if (this.analysisSell_RTxtBox.Text.Trim() == String.Empty)
+                {
+                    this.analysisSell_RTxtBox.Text += DEFAULT_UNITS_SPECIFIER;
+                }
+            }
+            else
+            {
+                if (this.analysisSell_RTxtBox.Lines[sellRuleLines - 1].Trim() == String.Empty)
+                {
+                    this.analysisSell_RTxtBox.Lines[sellRuleLines - 1] += DEFAULT_UNITS_SPECIFIER;
+                }
+            }
+
+            reg = new Regex("\\[U.*\\]");
+            if (buyRuleLines == 0)
+            {
+                if (reg.Replace(this.analysisBuy_RTxtBox.Text, "", 1).Trim() == String.Empty)
+                {
+                    this.analysisBuy_RTxtBox.Text = "";
+                }
+            }
+            else
+            {
+                if (reg.Replace(this.analysisBuy_RTxtBox.Lines[buyRuleLines - 1], "", 1).Trim().Length == 0)
+                {
+                    //this doesn't work?
+                    this.analysisBuy_RTxtBox.Lines[buyRuleLines - 1] = "";
+                }
+            }
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  heatMapToolStripMenuItem_Click
+         *  Description:    
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void heatMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            heatMapControl.BindMarketData(this.MyDataManager.HistoricalData);
+
+            heatMapForm.Size = new Size(heatMapControl.Width, heatMapControl.Height);
+            heatMapForm.Controls.Add(heatMapControl);
+            heatMapControl.Dock = DockStyle.Fill;
+            heatMapForm.Text = "Heat Map";
+
+            heatMapForm.Show();
+        }
 
     }
 }

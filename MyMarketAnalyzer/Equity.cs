@@ -22,17 +22,17 @@ namespace MyMarketAnalyzer
         private List<String> hist_data_in;
 
         //Historical Data
-        private List<DateTime> hist_dates;
-        private List<double> hist_price;
-        private List<double> hist_price_opens;
-        private List<double> hist_price_highs;
-        private List<double> hist_price_lows;
-        private List<double> hist_volumes;
-        private List<double> hist_daily_change;
+        private List<DateTime> hist_dates = new List<DateTime>();
+        private List<double> hist_price = new List<double>();
+        private List<double> hist_price_opens = new List<double>();
+        private List<double> hist_price_highs = new List<double>();
+        private List<double> hist_price_lows = new List<double>();
+        private List<double> hist_volumes = new List<double>();
+        private List<double> hist_daily_change = new List<double>();
 
         //Live Data
-        private List<DateTime> live_timestamps;
-        private List<double> live_price;
+        private List<DateTime> live_timestamps = new List<DateTime>();
+        private List<double> live_price = new List<double>();
         private double live_open;
         private double live_low;
         private double live_high;
@@ -815,12 +815,24 @@ namespace MyMarketAnalyzer
                     }
                     catch(Exception e){ }
                     break;
-                    break;
                 default:
                     break;
             }
         }
         #endregion
 
+        public void Clear()
+        {
+            this.hist_daily_change.Clear();
+            this.hist_data_in.Clear();
+            this.hist_dates.Clear();
+            this.hist_price.Clear();
+            this.hist_price_highs.Clear();
+            this.hist_price_lows.Clear();
+            this.hist_price_opens.Clear();
+            this.hist_volumes.Clear();
+            this.live_price.Clear();
+            this.live_timestamps.Clear();
+        }
     }
 }

@@ -33,7 +33,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -98,11 +98,16 @@
             this.btnRunAnalysis = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sellRulesBox = new System.Windows.Forms.GroupBox();
+            this.tblPanelSellRule = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.btnSellRuleExpandCollapse = new System.Windows.Forms.Button();
             this.analysisSell_RTxtBox = new System.Windows.Forms.RichTextBox();
             this.buyRulesBox = new System.Windows.Forms.GroupBox();
+            this.tblPanelBuyRule = new System.Windows.Forms.TableLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.btnBuyRuleExpandCollapse = new System.Windows.Forms.Button();
             this.analysisBuy_RTxtBox = new System.Windows.Forms.RichTextBox();
+            this.analysisToolbox1 = new MyMarketAnalyzer.AnalysisToolbox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblLiveDataStatus2 = new System.Windows.Forms.Label();
             this.lblHistDataStatus2 = new System.Windows.Forms.Label();
@@ -170,7 +175,11 @@
             this.analysisSplitContainer.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.sellRulesBox.SuspendLayout();
+            this.tblPanelSellRule.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.buyRulesBox.SuspendLayout();
+            this.tblPanelBuyRule.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.analysisAmtHelpBtn)).BeginInit();
@@ -512,15 +521,16 @@
             // loadToolStripMenuItem1
             // 
             this.loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
-            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem1.Text = "Load";
             this.loadToolStripMenuItem1.Click += new System.EventHandler(this.tsBtnLoadHistorical_Click);
             // 
             // unloadToolStripMenuItem1
             // 
             this.unloadToolStripMenuItem1.Name = "unloadToolStripMenuItem1";
-            this.unloadToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.unloadToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.unloadToolStripMenuItem1.Text = "Unload";
+            this.unloadToolStripMenuItem1.Click += new System.EventHandler(this.unloadToolStripMenuItem1_Click);
             // 
             // unloadToolStripMenuItem
             // 
@@ -586,6 +596,7 @@
             this.heatMapToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.heatMapToolStripMenuItem.Text = "Heat Map";
             this.heatMapToolStripMenuItem.ToolTipText = "Display the Heat Map of the currently loaded data";
+            this.heatMapToolStripMenuItem.Click += new System.EventHandler(this.heatMapToolStripMenuItem_Click);
             // 
             // random10ToolStripMenuItem
             // 
@@ -847,29 +858,54 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.sellRulesBox, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.buyRulesBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.analysisToolbox1, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 77);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(510, 320);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // sellRulesBox
             // 
-            this.sellRulesBox.Controls.Add(this.btnSellRuleExpandCollapse);
-            this.sellRulesBox.Controls.Add(this.analysisSell_RTxtBox);
+            this.sellRulesBox.Controls.Add(this.tblPanelSellRule);
             this.sellRulesBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sellRulesBox.Location = new System.Drawing.Point(3, 163);
+            this.sellRulesBox.Location = new System.Drawing.Point(3, 67);
             this.sellRulesBox.Name = "sellRulesBox";
             this.sellRulesBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.sellRulesBox.Size = new System.Drawing.Size(504, 154);
+            this.sellRulesBox.Size = new System.Drawing.Size(504, 58);
             this.sellRulesBox.TabIndex = 11;
             this.sellRulesBox.TabStop = false;
             this.sellRulesBox.Text = "Sell Rule";
+            // 
+            // tblPanelSellRule
+            // 
+            this.tblPanelSellRule.ColumnCount = 1;
+            this.tblPanelSellRule.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblPanelSellRule.Controls.Add(this.panel4, 0, 0);
+            this.tblPanelSellRule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblPanelSellRule.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.tblPanelSellRule.Location = new System.Drawing.Point(3, 16);
+            this.tblPanelSellRule.Name = "tblPanelSellRule";
+            this.tblPanelSellRule.RowCount = 2;
+            this.tblPanelSellRule.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tblPanelSellRule.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblPanelSellRule.Size = new System.Drawing.Size(498, 39);
+            this.tblPanelSellRule.TabIndex = 10;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btnSellRuleExpandCollapse);
+            this.panel4.Controls.Add(this.analysisSell_RTxtBox);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(492, 26);
+            this.panel4.TabIndex = 0;
             // 
             // btnSellRuleExpandCollapse
             // 
@@ -878,11 +914,11 @@
             this.btnSellRuleExpandCollapse.FlatAppearance.BorderSize = 0;
             this.btnSellRuleExpandCollapse.ForeColor = System.Drawing.Color.Black;
             this.btnSellRuleExpandCollapse.Image = global::MyMarketAnalyzer.Properties.Resources.expand_icon;
-            this.btnSellRuleExpandCollapse.Location = new System.Drawing.Point(469, 19);
+            this.btnSellRuleExpandCollapse.Location = new System.Drawing.Point(462, 4);
             this.btnSellRuleExpandCollapse.Margin = new System.Windows.Forms.Padding(0);
             this.btnSellRuleExpandCollapse.Name = "btnSellRuleExpandCollapse";
             this.btnSellRuleExpandCollapse.Size = new System.Drawing.Size(30, 22);
-            this.btnSellRuleExpandCollapse.TabIndex = 2;
+            this.btnSellRuleExpandCollapse.TabIndex = 4;
             this.btnSellRuleExpandCollapse.UseVisualStyleBackColor = true;
             this.btnSellRuleExpandCollapse.Click += new System.EventHandler(this.btnSellRuleExpandCollapse_Click);
             // 
@@ -890,24 +926,50 @@
             // 
             this.analysisSell_RTxtBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.analysisSell_RTxtBox.Location = new System.Drawing.Point(6, 19);
+            this.analysisSell_RTxtBox.Location = new System.Drawing.Point(0, 4);
             this.analysisSell_RTxtBox.Name = "analysisSell_RTxtBox";
-            this.analysisSell_RTxtBox.Size = new System.Drawing.Size(467, 22);
-            this.analysisSell_RTxtBox.TabIndex = 1;
+            this.analysisSell_RTxtBox.Size = new System.Drawing.Size(465, 22);
+            this.analysisSell_RTxtBox.TabIndex = 3;
             this.analysisSell_RTxtBox.Text = "";
+            this.analysisSell_RTxtBox.Enter += new System.EventHandler(this.sellRTBox_OnFocus);
             // 
             // buyRulesBox
             // 
-            this.buyRulesBox.Controls.Add(this.btnBuyRuleExpandCollapse);
-            this.buyRulesBox.Controls.Add(this.analysisBuy_RTxtBox);
+            this.buyRulesBox.Controls.Add(this.tblPanelBuyRule);
             this.buyRulesBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buyRulesBox.Location = new System.Drawing.Point(3, 3);
             this.buyRulesBox.Name = "buyRulesBox";
             this.buyRulesBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buyRulesBox.Size = new System.Drawing.Size(504, 154);
+            this.buyRulesBox.Size = new System.Drawing.Size(504, 58);
             this.buyRulesBox.TabIndex = 10;
             this.buyRulesBox.TabStop = false;
             this.buyRulesBox.Text = "Buy Rule";
+            // 
+            // tblPanelBuyRule
+            // 
+            this.tblPanelBuyRule.BackColor = System.Drawing.Color.Transparent;
+            this.tblPanelBuyRule.ColumnCount = 1;
+            this.tblPanelBuyRule.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblPanelBuyRule.Controls.Add(this.panel3, 0, 0);
+            this.tblPanelBuyRule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblPanelBuyRule.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.tblPanelBuyRule.Location = new System.Drawing.Point(3, 16);
+            this.tblPanelBuyRule.Name = "tblPanelBuyRule";
+            this.tblPanelBuyRule.RowCount = 2;
+            this.tblPanelBuyRule.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tblPanelBuyRule.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblPanelBuyRule.Size = new System.Drawing.Size(498, 39);
+            this.tblPanelBuyRule.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnBuyRuleExpandCollapse);
+            this.panel3.Controls.Add(this.analysisBuy_RTxtBox);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(492, 26);
+            this.panel3.TabIndex = 0;
             // 
             // btnBuyRuleExpandCollapse
             // 
@@ -916,11 +978,11 @@
             this.btnBuyRuleExpandCollapse.FlatAppearance.BorderSize = 0;
             this.btnBuyRuleExpandCollapse.ForeColor = System.Drawing.Color.Black;
             this.btnBuyRuleExpandCollapse.Image = global::MyMarketAnalyzer.Properties.Resources.expand_icon;
-            this.btnBuyRuleExpandCollapse.Location = new System.Drawing.Point(469, 18);
+            this.btnBuyRuleExpandCollapse.Location = new System.Drawing.Point(462, 4);
             this.btnBuyRuleExpandCollapse.Margin = new System.Windows.Forms.Padding(0);
             this.btnBuyRuleExpandCollapse.Name = "btnBuyRuleExpandCollapse";
             this.btnBuyRuleExpandCollapse.Size = new System.Drawing.Size(30, 22);
-            this.btnBuyRuleExpandCollapse.TabIndex = 1;
+            this.btnBuyRuleExpandCollapse.TabIndex = 12;
             this.btnBuyRuleExpandCollapse.UseVisualStyleBackColor = true;
             this.btnBuyRuleExpandCollapse.Click += new System.EventHandler(this.btnBuyRuleExpandCollapse_Click);
             // 
@@ -928,11 +990,21 @@
             // 
             this.analysisBuy_RTxtBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.analysisBuy_RTxtBox.Location = new System.Drawing.Point(6, 19);
+            this.analysisBuy_RTxtBox.Location = new System.Drawing.Point(0, 5);
             this.analysisBuy_RTxtBox.Name = "analysisBuy_RTxtBox";
-            this.analysisBuy_RTxtBox.Size = new System.Drawing.Size(467, 22);
-            this.analysisBuy_RTxtBox.TabIndex = 0;
+            this.analysisBuy_RTxtBox.Size = new System.Drawing.Size(465, 22);
+            this.analysisBuy_RTxtBox.TabIndex = 11;
             this.analysisBuy_RTxtBox.Text = "";
+            this.analysisBuy_RTxtBox.Enter += new System.EventHandler(this.buyRTBox_OnFocus);
+            // 
+            // analysisToolbox1
+            // 
+            this.analysisToolbox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.analysisToolbox1.Location = new System.Drawing.Point(3, 131);
+            this.analysisToolbox1.Name = "analysisToolbox1";
+            this.analysisToolbox1.Size = new System.Drawing.Size(504, 186);
+            this.analysisToolbox1.TabIndex = 12;
             // 
             // panel1
             // 
@@ -1132,10 +1204,10 @@
             // 
             this.chartAnalysis.BackColor = System.Drawing.Color.Silver;
             this.chartAnalysis.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
-            chartArea2.BackColor = System.Drawing.Color.Silver;
-            chartArea2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
-            chartArea2.Name = "ChartArea1";
-            this.chartAnalysis.ChartAreas.Add(chartArea2);
+            chartArea1.BackColor = System.Drawing.Color.Silver;
+            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
+            chartArea1.Name = "ChartArea1";
+            this.chartAnalysis.ChartAreas.Add(chartArea1);
             this.chartAnalysis.CurrentSeriesIndex = 0;
             this.chartAnalysis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartAnalysis.Location = new System.Drawing.Point(0, 0);
@@ -1415,7 +1487,11 @@
             this.analysisSplitContainer.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.sellRulesBox.ResumeLayout(false);
+            this.tblPanelSellRule.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.buyRulesBox.ResumeLayout(false);
+            this.tblPanelBuyRule.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1511,10 +1587,6 @@
         private System.Windows.Forms.ToolStripDropDownButton btnVisualsMenu;
         private System.Windows.Forms.ToolStripMenuItem showChartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem heatMapToolStripMenuItem;
-        private System.Windows.Forms.RichTextBox analysisSell_RTxtBox;
-        private System.Windows.Forms.RichTextBox analysisBuy_RTxtBox;
-        private System.Windows.Forms.Button btnBuyRuleExpandCollapse;
-        private System.Windows.Forms.Button btnSellRuleExpandCollapse;
         private System.Windows.Forms.ToolStripButton btnLoadPatternForm;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ToolStripMenuItem random10ToolStripMenuItem;
@@ -1556,6 +1628,15 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerAnalysisProgress;
         private AnalysisSummaryPage analysisSummaryPage1;
         private System.ComponentModel.BackgroundWorker backgroundWorkerAnalysis;
+        private System.Windows.Forms.TableLayoutPanel tblPanelBuyRule;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnBuyRuleExpandCollapse;
+        private System.Windows.Forms.RichTextBox analysisBuy_RTxtBox;
+        private System.Windows.Forms.TableLayoutPanel tblPanelSellRule;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnSellRuleExpandCollapse;
+        private System.Windows.Forms.RichTextBox analysisSell_RTxtBox;
+        private AnalysisToolbox analysisToolbox1;
     }
 }
 

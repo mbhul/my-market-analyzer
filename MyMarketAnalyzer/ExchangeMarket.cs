@@ -18,6 +18,11 @@ namespace MyMarketAnalyzer
 
         public String Name { get; private set; }
 
+        public DateTime DateStart { get; private set; }
+        public DateTime DateEnd { get; private set; }
+        public int MaxDataPoints { get; private set; }
+        public Boolean IsDataAligned { get; private set; }
+
         public Double[] CorrelationCoefficients { get; private set; }
 
         /*****************************************************************************
@@ -32,6 +37,7 @@ namespace MyMarketAnalyzer
             constituents = null;
             pct_download = 0;
             this.Name = "";
+            this.IsDataAligned = true;
         }
 
         /*****************************************************************************
@@ -43,6 +49,7 @@ namespace MyMarketAnalyzer
         {
             pct_download = 0;
             this.Name = "";
+            this.IsDataAligned = true;
         }
 
         #region Class Properties
@@ -100,6 +107,7 @@ namespace MyMarketAnalyzer
             {
                 files = rootDir.GetFiles("*.csv");
                 itemCount = files.Count();
+                this.IsDataAligned = true;
 
                 if (files != null)
                 {
@@ -118,6 +126,7 @@ namespace MyMarketAnalyzer
                         {
                             searchResult[0].DataFileName = fi.FullName;
                             searchResult[0].ReadDataFile();
+                            cEQ = searchResult[0];
                         }
                         else
                         {
@@ -130,6 +139,11 @@ namespace MyMarketAnalyzer
                                 constituents.Add(cEQ);
                             }
                         }
+
+                        if(this.IsDataAligned && this.Constituents.Count > 0)
+                        {
+                            this.IsDataAligned = cEQ.HistoricalPriceDate.SequenceEqual(this.Constituents[0].HistoricalPriceDate);
+                        }
                         
                         index++;
                         pct_download = (Double)index / (Double)files.Count();
@@ -137,6 +151,7 @@ namespace MyMarketAnalyzer
                     }
 
                     CalculateCorrelationCoefficients();
+                    UpdateTimeline();
                 }
             }
             catch (Exception e)
@@ -275,6 +290,18 @@ namespace MyMarketAnalyzer
         }
 
         /*****************************************************************************
+         *  FUNCTION:  UpdateTimeline
+         *  Description:    
+         *  Parameters: 
+         *****************************************************************************/
+        private void UpdateTimeline()
+        {
+            this.DateStart = this.Constituents.Select(x => x.HistoricalPriceDate.Min()).Min();
+            this.DateEnd = this.Constituents.Select(x => x.HistoricalPriceDate.Max()).Max();
+            this.MaxDataPoints = this.Constituents.Select(x => x.HistoricalPrice.Count()).Max();
+        }
+
+        /*****************************************************************************
          *  FUNCTION:  ExportToXML
          *  Description:    
          *  Parameters: 
@@ -363,6 +390,22 @@ namespace MyMarketAnalyzer
         public void UpdateCorrelationCoefficients()
         {
             this.CalculateCorrelationCoefficients();
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       Clear
+         *  Description:    Clears all Constituent data to provide a clean starting point
+         *  Parameters:     None
+         *****************************************************************************/
+        public void Clear()
+        {
+            foreach(Equity eq in this.Constituents)
+            {
+                eq.Clear();
+            }
+            this.Constituents.Clear();
+            this.pct_download = 0;
+            GC.Collect();
         }
     }
 }

@@ -150,14 +150,10 @@ namespace MyMarketAnalyzer
             {
                 //Open the file, using the 'path' variable
                 oBook = oBooks.Open(xlsmpath);
-
-                //oExcel.WorkbookBeforeClose += new AppEvents_WorkbookBeforeCloseEventHandler(AppEvent_BeforeBookClose);
             }
             
             // Run the macro, "GetHistoricalData"
-            //RunMacro(oExcel, new Object[] { "Worksheet01.xlsm!First_Macro" });
             oExcel.GetType().InvokeMember("Run", System.Reflection.BindingFlags.Default | System.Reflection.BindingFlags.InvokeMethod, null, oExcel, new Object[] { "GetHistoricalData" });
-
         }
 
         /*****************************************************************************
@@ -257,6 +253,14 @@ namespace MyMarketAnalyzer
             }
             
             return success;
+        }
+
+        public void UnloadHistoricalData()
+        {
+            if(HistoricalData != null)
+            {
+                HistoricalData.Clear();
+            }
         }
 
         /*****************************************************************************

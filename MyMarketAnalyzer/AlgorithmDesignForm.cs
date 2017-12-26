@@ -47,7 +47,9 @@ namespace MyMarketAnalyzer
             [StringValue("Variance")]
             VARIANCE = 0x41,
             [StringValue("Std. Deviation")]
-            STD_DEV = 0x42
+            STD_DEV = 0x42,
+            [StringValue("Daily")]
+            DAILY = 0x43
         }
 
         private const int ONE_HUNDRED_PCT = 100;
@@ -63,13 +65,19 @@ namespace MyMarketAnalyzer
                                                    };
         //List of functions available to generate a single prototype from a list of data for each Equity
         private PrototypeFunction[] ClassFnList = {
-                                                      PrototypeFunction.AVERAGE, PrototypeFunction.STD_DEV, PrototypeFunction.VARIANCE
+                                                      PrototypeFunction.AVERAGE, PrototypeFunction.STD_DEV, PrototypeFunction.VARIANCE,
+                                                      PrototypeFunction.DAILY
                                                   };
 
         private double[,] PopulationToClassify;
         private int[] PopulationClassLabels;
 
         DataManager DataSrc;
+
+        private List<List<double>> daily_chart_x_values;
+        private List<List<double>> daily_chart_y_values;
+
+        private int ConsoleLineCount = 1;
         
         public AlgorithmDesignForm(ref DataManager data_src)
         {
@@ -77,8 +85,15 @@ namespace MyMarketAnalyzer
             DataSrc = data_src;
             InitializeDefaultValues();
             LoadData();
+
+            this.Width = 990;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       InitializeDefaultValues
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
         private void InitializeDefaultValues()
         {
             int i;
@@ -107,13 +122,56 @@ namespace MyMarketAnalyzer
             }
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       LoadData
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
         private void LoadData()
         {
+            string warning_txt = "";
+            System.Drawing.Font promptFont;
+
             if (DataSrc.HistoricalData != null &&
                 DataSrc.HistoricalData.Constituents.Count > 0)
             {
                 this.dataTableMain.BindMarketData(DataSrc.HistoricalData);
+                this.chartSlider.Maximum = this.DataSrc.HistoricalData.MaxDataPoints;
+                this.consoleTxt.Clear();
+
+                //Check if data contained in the bound DataSrc is aligned properly
+                if(!DataSrc.HistoricalData.IsDataAligned)
+                {
+                    this.tabConsoleContainer.SelectedTab = this.tabPageConsole;
+                    this.autofillCheckBox.Enabled = true;
+                    
+                    promptFont = new Font(this.consoleTxt.Font, FontStyle.Bold);
+                    warning_txt = ">Warning: The loaded Equity data does not contain uniform date points, meaning that data is not correctly aligned. ";
+                    this.consolePrompt(warning_txt, promptFont, Color.Red);
+
+                    warning_txt = "Equities which do not contain data for all date values will be ignored from any daily analysis. " +
+                        "To include those equities in the analysis anyway, select the 'Auto-Fill Date Gaps' checkbox. " +
+                        "If this option is selected, data missing at the ends of a series will be filled in with the average over the existing data. " +
+                        "Data missing in the middle of a series will be filled in with the average of the immediately preceding and succeeding points.";
+                    promptFont = new Font(this.consoleTxt.Font, FontStyle.Regular);
+                    this.consolePrompt(warning_txt, promptFont, Color.Black);
+                }
+                else
+                {
+                    this.autofillCheckBox.Checked = false;
+                    this.autofillCheckBox.Enabled = false;
+                }
             }
+        }
+
+        private void LockFormInputs()
+        {
+            this.panel1.Enabled = false;
+        }
+
+        private void UnlockFormInputs()
+        {
+            this.panel1.Enabled = true;
         }
 
         private void algDesignForm_FirstShown(object sender, EventArgs e)
@@ -154,9 +212,18 @@ namespace MyMarketAnalyzer
             ConfigureParameters(algorithmSelectListBox.SelectedIndex);
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       ConfigureParameters
+         *  Description:    
+         *  Parameters:     
+         *      pAlgListIndex   - 
+         *****************************************************************************/
         private void ConfigureParameters(int pAlgListIndex)
         {
-            this.gbParameters.Visible = true;
+            this.gbParameters1.Visible = true;
+            this.gbParameters2.Visible = false;
+            this.gbParameters3.Visible = false;
+
             numGroupMin.Enabled = true;
             numGroupMax.Enabled = true;
 
@@ -181,7 +248,9 @@ namespace MyMarketAnalyzer
                     
                     break;
                 default:
-                    this.gbParameters.Visible = false;
+                    this.gbParameters1.Visible = false;
+                    this.gbParameters2.Visible = false;
+                    this.gbParameters3.Visible = false;
                     break;
             } 
         }
@@ -271,53 +340,8 @@ namespace MyMarketAnalyzer
             {
                 for (i = 0; i < nSize; i++)
                 {
-                    switch (keyX)
-                    {
-                        case ClassificationKey.CLOSE:
-                            eqMemberX = DataSrc.HistoricalData.Constituents[i].HistoricalPrice;
-                            break;
-                        case ClassificationKey.HIGH:
-                            eqMemberX = DataSrc.HistoricalData.Constituents[i].HistoricalHighs;
-                            break;
-                        case ClassificationKey.LOW:
-                            eqMemberX = DataSrc.HistoricalData.Constituents[i].HistoricalLows;
-                            break;
-                        case ClassificationKey.OPEN:
-                            eqMemberX = DataSrc.HistoricalData.Constituents[i].HistoricalOpens;
-                            break;
-                        case ClassificationKey.PCT_CHANGE:
-                            eqMemberX = DataSrc.HistoricalData.Constituents[i].HistoricalPctChange;
-                            break;
-                        case ClassificationKey.VOLUME:
-                            eqMemberX = Algorithms.IncrementalPercentChange(DataSrc.HistoricalData.Constituents[i].HistoricalVolumes, 0);
-                            break;
-                        default:
-                            break;
-                    }
-
-                    switch (keyY)
-                    {
-                        case ClassificationKey.CLOSE:
-                            eqMemberY = DataSrc.HistoricalData.Constituents[i].HistoricalPrice;
-                            break;
-                        case ClassificationKey.HIGH:
-                            eqMemberY = DataSrc.HistoricalData.Constituents[i].HistoricalHighs;
-                            break;
-                        case ClassificationKey.LOW:
-                            eqMemberY = DataSrc.HistoricalData.Constituents[i].HistoricalLows;
-                            break;
-                        case ClassificationKey.OPEN:
-                            eqMemberY = DataSrc.HistoricalData.Constituents[i].HistoricalOpens;
-                            break;
-                        case ClassificationKey.PCT_CHANGE:
-                            eqMemberY = DataSrc.HistoricalData.Constituents[i].HistoricalPctChange;
-                            break;
-                        case ClassificationKey.VOLUME:
-                            eqMemberY = Algorithms.IncrementalPercentChange(DataSrc.HistoricalData.Constituents[i].HistoricalVolumes, 0);
-                            break;
-                        default:
-                            break;
-                    }
+                    eqMemberX = SelectDataComponent(keyX, DataSrc.HistoricalData.Constituents[i]);
+                    eqMemberY = SelectDataComponent(keyY, DataSrc.HistoricalData.Constituents[i]);
 
                     if (eqMemberX != null && eqMemberY != null)
                     {
@@ -345,6 +369,38 @@ namespace MyMarketAnalyzer
             }
 
             return success;
+        }
+
+        private List<double> SelectDataComponent(ClassificationKey pKey, Equity pSrc)
+        {
+            List<double> return_list;
+
+            switch (pKey)
+            {
+                case ClassificationKey.CLOSE:
+                    return_list = pSrc.HistoricalPrice;
+                    break;
+                case ClassificationKey.HIGH:
+                    return_list = pSrc.HistoricalHighs;
+                    break;
+                case ClassificationKey.LOW:
+                    return_list = pSrc.HistoricalLows;
+                    break;
+                case ClassificationKey.OPEN:
+                    return_list = pSrc.HistoricalOpens;
+                    break;
+                case ClassificationKey.PCT_CHANGE:
+                    return_list = pSrc.HistoricalPctChange;
+                    break;
+                case ClassificationKey.VOLUME:
+                    return_list = Algorithms.IncrementalPercentChange(pSrc.HistoricalVolumes, 0);
+                    break;
+                default:
+                    return_list = new List<double>();
+                    break;
+            }
+
+            return return_list;
         }
 
         private void InsertClassColumn(int[]classLabels)
@@ -434,6 +490,7 @@ namespace MyMarketAnalyzer
                     chartMain.Series.Add(clbl_txt);
 
                     chartMain.Series[clbl_txt].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+                    chartMain.Series[clbl_txt]["IsXAxisQuantitative"] = "true";
                     chartMain.Series[clbl_txt].Points.Clear();
                     chartMain.Series[clbl_txt].Points.DataBindXY(XDataByClass[i], YDataByClass[i]);
                     chartMain.Series[clbl_txt].MarkerStyle = MarkerStyle.Circle + (i % 10);
@@ -481,7 +538,161 @@ namespace MyMarketAnalyzer
 
         }
 
+        private void chartSlider_Scroll(object sender, EventArgs e)
+        {
+            ProcessChartSliderChange();
+        }
 
+        private void btnChartSliderLeft_Click(object sender, EventArgs e)
+        {
+            if (this.chartSlider.Value > 0)
+            {
+                this.chartSlider.Value--;
+            }
+            ProcessChartSliderChange();
+        }
+
+        private void btnChartSliderRight_Click(object sender, EventArgs e)
+        {
+            if (this.chartSlider.Value < this.chartSlider.Maximum)
+            {
+                this.chartSlider.Value++;
+            }
+            ProcessChartSliderChange();
+        }
+
+        private void ProcessChartSliderChange()
+        {
+            int index = this.chartSlider.Value;
+            int n = this.DataSrc.HistoricalData.Constituents.Count;
+
+            if (index >= 0 && index < this.daily_chart_x_values.Count)
+            {
+                BindChartData(this.daily_chart_x_values[index], this.daily_chart_y_values[index], new List<int>(new int[n]));
+            }
+        }
+
+        private void cbProtoFunction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(this.DataSrc != null && 
+                this.DataSrc.HistoricalData.Constituents.Count > 0 &&
+                this.cbProtoFunction.SelectedItem.ToString() == StringEnum.GetStringValue(PrototypeFunction.DAILY))
+            {
+                BuildMovingChart();
+            }
+        }
+
+        private void BuildMovingChart()
+        {
+            int i, n;
+            List<double> x_seed;
+            List<double> y_seed;
+
+            ClassificationKey keyX = (cbProtoAttributeX.SelectedIndex < 0) ? ClassificationKey.NULL : ClassKeyList[cbProtoAttributeX.SelectedIndex];
+            ClassificationKey keyY = (cbProtoAttributeY.SelectedIndex < 0) ? ClassificationKey.NULL : ClassKeyList[cbProtoAttributeY.SelectedIndex];
+
+            this.daily_chart_x_values = new List<List<double>>();
+            this.daily_chart_y_values = new List<List<double>>();
+
+            n = this.DataSrc.HistoricalData.Constituents.Count;
+            x_seed = new List<double>(new double[n]);
+            this.daily_chart_x_values.Add(x_seed);
+
+            //If no feature is selected for the y-axis, treat the data as 1 dimensional
+            // To do this, each X-point for a particular equity will be placed at a unique but constant y-value
+            if (this.cbProtoAttributeY.SelectedIndex < 0)
+            {
+                y_seed = Enumerable.Range(1, n).Select(x => (double)x).ToList();
+            }
+            else
+            {
+                //Otherwise, start all data points at (0, 0)
+                y_seed = new List<double>(new double[n]);
+            }
+            this.daily_chart_y_values.Add(y_seed);
+
+            //Problem: not guaranteed that the date associated with a data-point-index is the same accross the entire array of Constituents. Need to align first.
+
+            //Create each subsequent series by adding the selected x attribute at the given index to it's previous value for each equity in the list
+            for (i = 0; i < this.DataSrc.HistoricalData.Constituents[0].HistoricalPriceDate.Count; i++)
+            {
+                switch(keyX)
+                {
+                    case ClassificationKey.PCT_CHANGE:
+                        x_seed = this.DataSrc.HistoricalData.Constituents.Select(x => x.HistoricalPctChange[i]).ToList();
+                        break;
+                    case ClassificationKey.VOLUME:
+                        x_seed = this.DataSrc.HistoricalData.Constituents.Select(x => x.HistoricalVolumes[i]).ToList();
+                        break;
+                    default:
+                        x_seed = this.DataSrc.HistoricalData.Constituents.Select(x => x.HistoricalPctChange[i]).ToList();
+                        break;
+                }
+
+                //If no feature is selected for the y-axis, treat the data as 1 dimensional
+                // To do this, each X-point for a particular equity will be placed at a unique but constant y-value
+                if (this.cbProtoAttributeY.SelectedIndex < 0)
+                {
+                    y_seed = Enumerable.Range(1, n).Select(x => (double)x).ToList();
+                    this.daily_chart_y_values.Add(y_seed);
+                }
+                else
+                {
+                    //Otherwise increment the data from the center point
+                    switch (keyY)
+                    {
+                        case ClassificationKey.PCT_CHANGE:
+                            y_seed = this.DataSrc.HistoricalData.Constituents.Select(x => x.HistoricalPctChange[i]).ToList();
+                            break;
+                        case ClassificationKey.VOLUME:
+                            y_seed = this.DataSrc.HistoricalData.Constituents.Select(x => x.HistoricalVolumes[i]).ToList();
+                            break;
+                        default:
+                            y_seed = this.DataSrc.HistoricalData.Constituents.Select(x => x.HistoricalPctChange[i]).ToList();
+                            break;
+                    }
+                    this.daily_chart_y_values.Add(this.daily_chart_y_values[i].Zip(y_seed, (x, y) => x + y).ToList());
+                }
+
+                this.daily_chart_x_values.Add(this.daily_chart_x_values[i].Zip(x_seed, (x, y) => x + y).ToList());
+            }
+
+            this.chartSlider.Maximum = this.DataSrc.HistoricalData.Constituents.Select(x => x.HistoricalPriceDate.Count).Max();
+            BindChartData(this.daily_chart_x_values[0], this.daily_chart_y_values[0], new List<int>(new int[n]));
+        }
+
+        /*****************************************************************************
+         *  Function:       consolePrompt
+         *  Description:    Displays prompt-text in the console rich text box with 
+         *                  specified font and colour
+         *  Parameters:     
+         *****************************************************************************/
+        private void consolePrompt(String pPromptText, Font pFont, Color pForeColour)
+        {
+            int start_index = this.consoleTxt.TextLength;
+            this.consoleTxt.AppendText(pPromptText);
+
+            this.consoleTxt.Select(start_index, pPromptText.Length);
+            this.consoleTxt.SelectionColor = pForeColour;
+            this.consoleTxt.SelectionFont = pFont;
+            this.consoleTxt.Select();
+
+            this.consoleTxt.AppendText(Environment.NewLine);
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  console_TextChanged
+         *  Description:    Inserts a '>' character at the beginning of each new line
+         *  Parameters:     
+         *****************************************************************************/
+        private void console_TextChanged(object sender, EventArgs e)
+        {
+            if(this.consoleTxt.Lines.Count() > this.ConsoleLineCount)
+            {
+                this.consoleTxt.AppendText(">");
+                this.ConsoleLineCount = this.consoleTxt.Lines.Count();
+            }
+        }
 
     }
 }

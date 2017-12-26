@@ -17,6 +17,12 @@ namespace MyMarketAnalyzer
     {
         private const string DEFAULT_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0";
 
+        /*****************************************************************************
+         *  FUNCTION:       ValidateNumeric
+         *  Description:    Returns true if the passed string value is numeric. False otherwise.
+         *  Parameters:     
+         *      arg0        - the input to validate 
+         *****************************************************************************/
         public static Boolean ValidateNumeric(String arg0)
         {
             Double testValue;
@@ -40,6 +46,14 @@ namespace MyMarketAnalyzer
             return returnValue;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       RemoveNonAlphanumeric
+         *  Description:    Returns the input value, stripped of all non-alphanumeric
+         *                  characters, as a string. ie. removes all characters that
+         *                  do not match the regular expression [^a-zA-Z0-9_]
+         *  Parameters:     
+         *      pInput      - the input value to start with
+         *****************************************************************************/
         public static String RemoveNonAlphanumeric(String pInput)
         {
             String return_value;
@@ -50,6 +64,15 @@ namespace MyMarketAnalyzer
             return return_value;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       ConvertVolumeString
+         *  Description:    Converts a string containing an abbreviated numeric value with
+         *                  either 'K' (for thousand) or 'M' (for million) as a the corresponding
+         *                  double value. ie "1.3M" will be returned as (double)1,300,000
+         *  Parameters:     
+         *      pVol        - A string indicating trading volume. Typically specified
+         *                    as "200K" or "1.3M" etc. 
+         *****************************************************************************/
         public static double ConvertVolumeString(String pVol)
         {
             int volLen;
@@ -76,6 +99,15 @@ namespace MyMarketAnalyzer
             return volume;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       ValidatePath
+         *  Description:    Converts a string containing an abbreviated numeric value with
+         *                  either 'K' (for thousand) or 'M' (for million) as a the corresponding
+         *                  double value. ie "1.3M" will be returned as (double)1,300,000
+         *  Parameters:     
+         *      pVol        - A string indicating trading volume. Typically specified
+         *                    as "200K" or "1.3M" etc. 
+         *****************************************************************************/
         public static Boolean ValidatePath(String pPath)
         {
             Boolean success = true;
@@ -85,6 +117,12 @@ namespace MyMarketAnalyzer
             return success;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       StdDev
+         *  Description:    Computes the standard deviation of the input data
+         *  Parameters:     
+         *      pData       - the input data 
+         *****************************************************************************/
         public static double StdDev(List<double> pInput)
         {
             int i;
@@ -103,6 +141,19 @@ namespace MyMarketAnalyzer
             return std_dev;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       AccumulationDistributionIndex
+         *  Description:    Computes the Accumulation/Distribution Index for a given set
+         *                  of corresponding equity data.
+         *  Parameters:     
+         *      pClose      - List of close prices
+         *      pHigh       - List of daily high-prices
+         *      pLow        - List of daily low-prices
+         *      pVolume     - List of daily trading volumes
+         *  
+         *  Note: all input lists must have the same number of elements. It is assumed that
+         *        all points at index 'n' correspond to the same point in time.
+         *****************************************************************************/
         public static List<Double> AccumulationDistributionIndex(List<Double> pClose, List<Double> pHigh, List<Double> pLow, List<Double> pVolume)
         {
             Double CLV = 0;
@@ -123,6 +174,27 @@ namespace MyMarketAnalyzer
             return AccumDistrIndex;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       ComputeMACD
+         *  Description:    Computes the 3 standard MACD series' for a given set of 
+         *                  historical prices.
+         *                  
+         *                  MACD computes 2 exponential moving averages using the first
+         *                  two time base values (typically 12 and 26). The difference
+         *                  between these 2 series' is referred to as the 'MACD'. The third 
+         *                  time base is used to compute an exponential moving average of the
+         *                  MACD. The zero-crossing of the difference between this 3rd signal
+         *                  and the MACD is often used to indicate price momentum.
+         *                  
+         *  Parameters:     
+         *      MACD_TIME_BASES - The time windows for computing the moving averages 
+         *                        required for MACD calculation. (12, 26, 9) is standard.
+         *      hist_price      - Array of historical prices to use in the computation
+         *      MACD_A          - MACD A series (first moving average)
+         *      MACD_B          - MACD B series (seond moving average)
+         *      MACD_C          - MACD C series (moving average of the difference between the first 
+         *                        two moving averages)
+         *****************************************************************************/
         public static void ComputeMACD(int[] MACD_TIME_BASES, List<Double> hist_price, out List<Double> MACD_A, out List<Double> MACD_B, out List<Double> MACD_C)
         {
             Double alpha, EMA1, EMA2, SIG;
@@ -262,6 +334,26 @@ namespace MyMarketAnalyzer
             return return_value;
         }
 
+        /*****************************************************************************
+         *  FUNCTION:       PearsonProductCoefficient
+         *  
+         *  Description:    Calculates the Pearson Product Coefficient (PPC) for each 
+         *                  Equity in pInputList based on it's HistoricalPrice list, against
+         *                  every other Equity in pInputList.
+         *                  
+         *                  The intent is to find correlation between Equities whose
+         *                  HistoricalPrice values tend to move together. 
+         *                  Each coefficient is a value between -1 and 1. A value of 
+         *                  1 corresponds to a high positive correlation. That is, the
+         *                  Equities tend to move in the same direction at the same time
+         *                  over the series of data provided. A value of -1 corresponds to
+         *                  a high negative correlation. That is, the Equities tend to move
+         *                  in opposite directions at the same time. A value of 0 means there
+         *                  is no identifiable correlation between the direction of movement.
+         *                  
+         *  Parameters:     
+         *      pInputList  - the input data, consisting of multiple Equity instances
+         *****************************************************************************/
         public static Double[] PearsonProductCoefficient(List<Equity> pInputList)
         {
             int N, cSize, i, j, k, count, key;
@@ -380,6 +472,68 @@ namespace MyMarketAnalyzer
             //}
             
             return return_value;
+        }
+
+        public static void TestPOSTRequest()
+        {
+            WebRequest request;
+            WebResponse response;
+            StreamReader reader;
+            GZipStream gzipStream;
+            string responseText;
+            MSHTML.HTMLDocument htmlresponse = new MSHTML.HTMLDocument();
+            MSHTML.IHTMLDocument2 webresponse = (MSHTML.IHTMLDocument2)htmlresponse;
+            string body = "curr_id=24442&smlID=1169009&st_date=11%2F18%2F2016&end_date=11%2F18%2F2017&interval_sec=Daily&sort_col=date&sort_ord=DESC&action=historical_data";
+
+            try
+            {
+                
+                request = WebRequest.Create("https://ca.investing.com/instruments/HistoricalDataAjax");
+                request.Credentials = CredentialCache.DefaultCredentials;
+                ((HttpWebRequest)request).Accept = "*/*";
+                ((HttpWebRequest)request).Method = "POST";
+                ((HttpWebRequest)request).UserAgent = DEFAULT_USER_AGENT;
+                ((HttpWebRequest)request).Referer = "http://ca.investing.com/equities/canada";
+                ((HttpWebRequest)request).Headers.Add("Accept-Encoding", "gzip,deflate");
+                ((HttpWebRequest)request).Headers.Add("X-Requested-With", "XMLHttpRequest");
+                ((HttpWebRequest)request).Timeout = 20000;
+
+                request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                request.ContentLength = body.Length;
+                
+                Stream rStream = request.GetRequestStream();
+                rStream.Write(body.Select(c => (byte)c).ToArray(), 0, body.Length);
+
+                response = request.GetResponse();
+
+                if (response.Headers.Get("Content-Encoding").ToLower().Contains("gzip"))
+                {
+                    gzipStream = new GZipStream(response.GetResponseStream(), CompressionMode.Decompress);
+                    reader = new StreamReader(gzipStream);
+                }
+                else
+                {
+                    reader = new StreamReader(response.GetResponseStream());
+                }
+                responseText = reader.ReadToEnd();
+                webresponse.write(responseText);
+
+                while (webresponse.body == null)
+                {
+                    System.Windows.Forms.Application.DoEvents();
+                }
+
+                webresponse.close();
+
+                reader.Close();
+                response.Close();
+                
+            }
+            catch (Exception e)
+            {
+                /* Do nothing */
+                int stophere = 1;
+            }
         }
 
         public static MSHTML.IHTMLDocument2 HTMLRequestResponse(String pUrl)
@@ -502,6 +656,7 @@ namespace MyMarketAnalyzer
             return (++ID);
         }
     }
+    //End of Helpers Class
 
     static class TechnicalIndicatorConst
     {

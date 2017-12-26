@@ -59,6 +59,12 @@
     <Compile Include="AnalysisSummaryPage.Designer.cs">
       <DependentUpon>AnalysisSummaryPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="AnalysisToolbox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AnalysisToolbox.Designer.cs">
+      <DependentUpon>AnalysisToolbox.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomChart.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -66,7 +72,10 @@
       <DependentUpon>CustomChart.cs</DependentUpon>
     </Compile>
     <Compile Include="HeatMap.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HeatMap.Designer.cs">
+      <DependentUpon>HeatMap.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
     <Compile Include="CSVParser.cs" />
@@ -128,6 +137,9 @@
     </Compile>
     <EmbeddedResource Include="AnalysisSummaryPage.resx">
       <DependentUpon>AnalysisSummaryPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnalysisToolbox.resx">
+      <DependentUpon>AnalysisToolbox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomChart.resx">
       <DependentUpon>CustomChart.cs</DependentUpon>
