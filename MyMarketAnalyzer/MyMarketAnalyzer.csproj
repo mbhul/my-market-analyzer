@@ -77,8 +77,8 @@
     <Compile Include="HeatMap.Designer.cs">
       <DependentUpon>HeatMap.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers.cs" />
-    <Compile Include="CSVParser.cs" />
+    <Compile Include="Utilities\Helpers.cs" />
+    <Compile Include="Utilities\CSVParser.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Equity.cs" />
     <Compile Include="ExchangeMarket.cs" />
@@ -105,6 +105,7 @@
       <DependentUpon>StatTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Algorithms.cs" />
+    <Compile Include="Utilities\FolderBrowserDialog2.cs" />
     <Compile Include="VisualsTab.cs">
       <SubType>UserControl</SubType>
     </Compile>

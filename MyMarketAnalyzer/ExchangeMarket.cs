@@ -103,17 +103,17 @@ namespace MyMarketAnalyzer
                 this.Name = rootDir.Name;
             }
                 
-            try
-            {
-                files = rootDir.GetFiles("*.csv");
-                itemCount = files.Count();
-                this.IsDataAligned = true;
+            files = rootDir.GetFiles("*.csv");
+            itemCount = files.Count();
+            this.IsDataAligned = true;
 
-                if (files != null)
+            if (files != null)
+            {
+                index = 0;
+                pct_download = 0;
+                foreach (FileInfo fi in files)
                 {
-                    index = 0;
-                    pct_download = 0;
-                    foreach (FileInfo fi in files)
+                    try
                     {
                         if (this.constituents == null)
                         {
@@ -144,22 +144,20 @@ namespace MyMarketAnalyzer
                         {
                             this.IsDataAligned = cEQ.HistoricalPriceDate.SequenceEqual(this.Constituents[0].HistoricalPriceDate);
                         }
-                        
-                        index++;
-                        pct_download = (Double)index / (Double)files.Count();
-
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
                     }
 
-                    CalculateCorrelationCoefficients();
-                    UpdateTimeline();
+                    index++;
+                    pct_download = (Double)index / (Double)files.Count();
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
 
-             
+                CalculateCorrelationCoefficients();
+                UpdateTimeline();
+            }
+            
             return success;
         }
 

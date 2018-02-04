@@ -142,7 +142,7 @@
             this.btnAnalysisShowChart = new System.Windows.Forms.Button();
             this.cbAnalysisIndicatorX = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.dlgStatFolder = new System.Windows.Forms.FolderBrowserDialog();
+            //this.dlgStatFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.backgroundWorkerStat = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerProgress = new System.ComponentModel.BackgroundWorker();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -521,14 +521,16 @@
             // loadToolStripMenuItem1
             // 
             this.loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
-            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.loadToolStripMenuItem1.Text = "Load";
             this.loadToolStripMenuItem1.Click += new System.EventHandler(this.tsBtnLoadHistorical_Click);
             // 
             // unloadToolStripMenuItem1
             // 
             this.unloadToolStripMenuItem1.Name = "unloadToolStripMenuItem1";
-            this.unloadToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.unloadToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.unloadToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.unloadToolStripMenuItem1.Text = "Unload";
             this.unloadToolStripMenuItem1.Click += new System.EventHandler(this.unloadToolStripMenuItem1_Click);
             // 
@@ -545,7 +547,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -553,7 +555,7 @@
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F2)));
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -1523,7 +1525,7 @@
         private System.Windows.Forms.TabPage tabStats;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.FolderBrowserDialog dlgStatFolder;
+        //private System.Windows.Forms.FolderBrowserDialog dlgStatFolder;
         private System.Windows.Forms.ToolStrip toolStripStat;
         private System.Windows.Forms.ToolStripDropDownButton btnDataSrc;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;

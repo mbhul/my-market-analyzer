@@ -3,7 +3,7 @@
  *  Description: Used to interpret custom syntax for buy and sell signals 
  *  
  *  Example Buy:
- *  [U%50] AVG(MACD_DIFF[-5..0]) > 0
+ *  [U%50] AVG[MACD_DIFF][-5..0] > 0
  *  
  *  [U%50]:
  *   - Invest 50% of the remaining principal amount if the given condition is 
@@ -349,7 +349,7 @@ namespace MyMarketAnalyzer
                         break;
                 }
 
-                if (pFnStr.Length > index2 && pFnStr.ToCharArray()[index2 + 1] == '[')
+                if ((pFnStr.Length > (index2+1)) && pFnStr.ToCharArray()[index2 + 1] == '[')
                 {
                     index1 = index2 + 1;
                     index2 = pFnStr.IndexOf(']', index1);
@@ -519,7 +519,7 @@ namespace MyMarketAnalyzer
 
                     if(u_str[0] == '%')
                     {
-                        u_str.Remove(0, 1);
+                        u_str = u_str.Remove(0, 1);
                         units = double.Parse(u_str) / 100.0;
                         isPct = true;
                     }

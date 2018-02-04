@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using MyMarketAnalyzer.Utilities;
 
 namespace MyMarketAnalyzer
 {
@@ -361,16 +362,17 @@ namespace MyMarketAnalyzer
         private void tsBtnLoadHistorical_Click(object sender, EventArgs e)
         {
             String folderName;
+            FolderBrowserDialog2 dlgStatFolder;
+            
+            dlgStatFolder = new FolderBrowserDialog2();
+            //dlgStatFolder.Description = "Select folder containing historical data";
+            dlgStatFolder.DirectoryPath = Path.GetDirectoryName(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, MyMarketAnalyzer.Properties.Resources.ExcelDataDownloaderPath)));
 
-            dlgStatFolder = new FolderBrowserDialog();
-            dlgStatFolder.Description = "Select folder containing historical data";
-            dlgStatFolder.SelectedPath = Environment.CurrentDirectory;
-
-            DialogResult result = dlgStatFolder.ShowDialog();
+            DialogResult result = dlgStatFolder.ShowDialog(null);
 
             if(result == DialogResult.OK)
             {
-                folderName = dlgStatFolder.SelectedPath;
+                folderName = dlgStatFolder.DirectoryPath;
                 MyDataManager.UnloadHistoricalData();
                 MyDataManager.SetHistoricalDataPath(folderName);
                 this.backgroundWorkerStat.RunWorkerAsync();
@@ -468,6 +470,7 @@ namespace MyMarketAnalyzer
                 SetDisplayHistoricalDataStatus(true);
                 ClearFilter();
                 UpdateAnalysisComboBox();
+                ShowVisualizationTab(0, false, false);
             }
         }
 
@@ -532,23 +535,23 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:       ShowVisualizationTab (overloaded)
-         *  Description:    Initiates a request to display the "Visualization" tab which
+         *  Description:    Initiates a request to display the Chart tab which
          *                  contains the chart(s) and other performance indicators for
          *                  the selected table item.
          *  Parameters:     
          *          data_index   - 
          *          createNewTab - 
          *****************************************************************************/
-        private void ShowVisualizationTab(int data_index, Boolean createNewTab)
+        private void ShowVisualizationTab(int data_index, Boolean createNewChart, Boolean selectTab = true)
         {
             List<int> pDataIndex = new List<int>();
             pDataIndex.Add(data_index);
-            ShowVisualizationTab(pDataIndex, createNewTab);
+            ShowVisualizationTab(pDataIndex, createNewChart, selectTab);
         }
 
         /*****************************************************************************
          *  FUNCTION:       ShowVisualizationTab (overloaded)
-         *  Description:    Initiates a request to display the "Visualization" tab which
+         *  Description:    Initiates a request to display the Chart tab which
          *                  contains the chart(s) and other performance indicators for
          *                  the selected table items.
          *  Parameters:     
@@ -558,7 +561,7 @@ namespace MyMarketAnalyzer
          *          createNewTab - 'True' to create a new tab, 'False' to add selected data
          *                          to the existing visualization tab
          *****************************************************************************/
-        private void ShowVisualizationTab(List<int> data_index, Boolean createNewTab)
+        private void ShowVisualizationTab(List<int> data_index, Boolean createNewChart, Boolean selectTab = true)
         {
             List<Equity> pEquities = new List<Equity>();
             int i;
@@ -573,7 +576,7 @@ namespace MyMarketAnalyzer
             if (tabVisuals == null)
             {
                 tabVisuals = new TabPage();
-                tabVisuals.Text = "Visualization";
+                tabVisuals.Text = "Chart";
                 tabVisuals.Leave += new EventHandler(this.tabVisuals_OnLoseFocus);
 
                 if (tabVisualsControl == null)
@@ -584,15 +587,31 @@ namespace MyMarketAnalyzer
                 }
 
                 tabControl1.TabPages.Add(tabVisuals);
-                tabControl1.SelectedIndex = tabControl1.TabPages.Count - 1;
+
+                if (selectTab)
+                {
+                    tabControl1.SelectedIndex = tabControl1.TabPages.Count - 1;
+                }
             }
             else if (!tabControl1.TabPages.Contains(tabVisuals))
             {
                 tabVisualsControl.ReloadChart(pEquities);
                 tabControl1.TabPages.Add(tabVisuals);
-                tabControl1.SelectedIndex = tabControl1.TabPages.IndexOf(tabVisuals);
+
+                if (selectTab)
+                {
+                    tabControl1.SelectedIndex = tabControl1.TabPages.IndexOf(tabVisuals);
+                }
             }
-            else if (createNewTab == false)
+            else if (createNewChart)
+            {
+                tabVisualsControl.ReloadChart(pEquities);
+                if (selectTab)
+                {
+                    tabControl1.SelectedIndex = tabControl1.TabPages.IndexOf(tabVisuals);
+                }
+            }
+            else
             {
                 tabVisualsControl.AddToChart(pEquities);
             }
@@ -608,10 +627,10 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void tabVisuals_OnLoseFocus(object sender, EventArgs e)
         {
-            if(tabVisuals != null)
-            {
-                tabControl1.TabPages.Remove(tabVisuals);
-            }
+            //if(tabVisuals != null)
+            //{
+            //    tabControl1.TabPages.Remove(tabVisuals);
+            //}
         }
 
         /*****************************************************************************
@@ -651,19 +670,19 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         protected override void WndProc(ref Message m)
         {
-            Boolean createNewTab = false;
+            Boolean createNewChart = false;
             if(m.LParam == tblStatTableMain.Handle)
             {
-                createNewTab = true;
+                createNewChart = true;
             }
             switch (m.Msg)
             {
                 //*** Message routers for the main stat table ***//
                 case (int)WM_CELLCLICK:
-                    ShowVisualizationTab((int)m.WParam, createNewTab);
+                    ShowVisualizationTab((int)m.WParam, createNewChart);
                     break;
                 case (int)WM_MULTIROWCLICK:
-                    ShowVisualizationTab(((StatTable)StatTable.FromHandle(m.LParam)).SelectedEntries, createNewTab);
+                    ShowVisualizationTab(((StatTable)StatTable.FromHandle(m.LParam)).SelectedEntries, createNewChart);
                     break;
                 case (int)WM_SHOWBTNCLICK:
                     if ((int)m.WParam == 0)
@@ -1145,7 +1164,7 @@ namespace MyMarketAnalyzer
                     indexList[i] = index;
                 }
 
-                ShowVisualizationTab(indexList.ToList(), false);
+                ShowVisualizationTab(indexList.ToList(), true);
             }
         }
 

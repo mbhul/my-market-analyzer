@@ -282,21 +282,29 @@ namespace MyMarketAnalyzer
                 hist_data_in = rawData.Select(arr => arr[5]).ToList();
                 for (int i = 1; i < hist_data_in.Count(); i++)
                 {
-                    volLen = hist_data_in[i].Length;
-                    volLen = volLen - Regex.Replace(hist_data_in[i], "[.].*", "").Length - 2;
-                    hist_data_in[i] = hist_data_in[i].Replace(".", "");
-                    if (volLen > 0 && hist_data_in[i].Contains("K"))
+                    try
                     {
-                        hist_data_in[i] += String.Join("", Enumerable.Repeat("0", 3 - volLen));
+                        volLen = hist_data_in[i].Length;
+                        volLen = volLen - Regex.Replace(hist_data_in[i], "[.].*", "").Length - 2;
+                        hist_data_in[i] = hist_data_in[i].Replace(".", "");
+                        if (volLen > 0 && hist_data_in[i].Contains("K"))
+                        {
+                            hist_data_in[i] += String.Join("", Enumerable.Repeat("0", 3 - volLen));
+                        }
+                        else if (volLen > 0 && hist_data_in[i].Contains("M"))
+                        {
+                            hist_data_in[i] += String.Join("", Enumerable.Repeat("0", 6 - volLen));
+                        }
+                        hist_data_in[i] = Regex.Replace(hist_data_in[i], "[A-Z]", "");
                     }
-                    else if (volLen > 0 && hist_data_in[i].Contains("M"))
+                    catch (Exception e)
                     {
-                        hist_data_in[i] += String.Join("", Enumerable.Repeat("0", 6 - volLen));
+                        hist_data_in[i] = "0";
                     }
-                    hist_data_in[i] = Regex.Replace(hist_data_in[i], "[A-Z]", "");
                 }
                 hist_volumes = hist_data_in.Skip(1).Select(dbl => double.Parse(dbl)).ToList();
                 hist_volumes.Reverse();
+                
 
                 //historical data - percent change
                 hist_data_in = rawData.Select(arr => arr[6]).ToList();

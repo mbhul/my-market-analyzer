@@ -45,8 +45,9 @@
             this.tiVariable1 = new System.Windows.Forms.Label();
             this.btnNewWind = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chkLiveData = new System.Windows.Forms.CheckBox();
             this.chkHistData = new System.Windows.Forms.CheckBox();
+            this.chkLiveData = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -252,6 +253,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.checkBox1);
             this.groupBox3.Controls.Add(this.chkHistData);
             this.groupBox3.Controls.Add(this.chkLiveData);
             this.groupBox3.Location = new System.Drawing.Point(156, 0);
@@ -260,6 +262,18 @@
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Options";
+            // 
+            // chkHistData
+            // 
+            this.chkHistData.AutoSize = true;
+            this.chkHistData.Enabled = false;
+            this.chkHistData.Location = new System.Drawing.Point(6, 38);
+            this.chkHistData.Name = "chkHistData";
+            this.chkHistData.Size = new System.Drawing.Size(132, 17);
+            this.chkHistData.TabIndex = 3;
+            this.chkHistData.Text = "Display Historical Data";
+            this.chkHistData.UseVisualStyleBackColor = true;
+            this.chkHistData.CheckedChanged += new System.EventHandler(this.chkHistData_CheckedChanged);
             // 
             // chkLiveData
             // 
@@ -273,17 +287,16 @@
             this.chkLiveData.UseVisualStyleBackColor = true;
             this.chkLiveData.CheckedChanged += new System.EventHandler(this.chkLiveData_CheckedChanged);
             // 
-            // chkHistData
+            // checkBox1
             // 
-            this.chkHistData.AutoSize = true;
-            this.chkHistData.Enabled = false;
-            this.chkHistData.Location = new System.Drawing.Point(6, 38);
-            this.chkHistData.Name = "chkHistData";
-            this.chkHistData.Size = new System.Drawing.Size(132, 17);
-            this.chkHistData.TabIndex = 3;
-            this.chkHistData.Text = "Display Historical Data";
-            this.chkHistData.UseVisualStyleBackColor = true;
-            this.chkHistData.CheckedChanged += new System.EventHandler(this.chkHistData_CheckedChanged);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Enabled = false;
+            this.checkBox1.Location = new System.Drawing.Point(6, 58);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(130, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Show Trading Volume";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // VisualSummaryTabPage
             // 
@@ -330,5 +343,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox chkLiveData;
         private System.Windows.Forms.CheckBox chkHistData;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
