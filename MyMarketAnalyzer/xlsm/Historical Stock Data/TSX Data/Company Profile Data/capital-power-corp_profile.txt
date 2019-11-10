@@ -1,5 +1,0 @@
-Symbol,CPX
-Industry,Electric Utilities
-Sector,Utilities
-Employees,714
-Capital Power Corporation (Capital Power) is a Canada-based power producing company. The Company develops  acquires  operates and optimizes power generation from a range of energy sources. Capital Power owns over 2 700 megawatts (MW) of power generation capacity at 15 facilities across North America and owns 371 MW of capacity through its interest in Sundance PPA. The Company's power generation operations and assets are owned by Capital Power L.P. (CPLP)  a subsidiary of the Company. The Company's commercial / merchant power generation facilities include Clover Bar Energy Centre  Clover Bar Landfill Gas  Halkirk Wind  Genesee 3  Joffre Co-generation  Keephills 3  Genesee 1 & 2  Island Generation  Quality Wind  Kingsbridge I  Port Dover & Nanticoke  Genesee 4 & 5  Shepard Energy Centre  Genesee Mine  K2 Wind Project and Port Dover & Nanticoke Wind.,Read More

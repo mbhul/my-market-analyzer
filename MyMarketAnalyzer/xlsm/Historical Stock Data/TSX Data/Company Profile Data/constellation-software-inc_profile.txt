@@ -1,5 +1,0 @@
-Symbol,CSU
-Industry,Software & Programming
-Sector,Technology
-Employees,3738
-Constellation Software Inc. (Constellation) is a Canada-based company  engaged in acquiring  managing and building vertical market software (VMS) businesses. The Company operates through two segment public sector and private sector. The public sector segment  which includes business units focused primarily on Government and Government-related customers. Its public sector segment includes Volaris  Harris and TSS Operating Groups. The private sector segment  which includes business units focused primarily on commercial customers. Its private sector segment includes Jonas  Perseus and Vela Operating Groups. The Company is engaged in the development  installation and customization of software relating to the markets  which include asset management  municipal systems  public transit operators  lease management  window manufacturers  winery management  food services and metal service centers  among others. It is also engaged in the provision of professional services and support.,Read More

@@ -1,5 +1,0 @@
-Symbol,DH
-Industry,Consumer Financial Services
-Sector,Financial
-Employees,4000
-DH Corporation (D+H) is a financial technology provider. The Company operates through two segment Canadian and the U.S. It offers lending  payments and enterprise solutions to banks  specialized lenders  community banks  credit unions and Governments. D+H's Canadian segment provides technology solutions to Canadian banks  smaller banks  credit unions  specialized lenders  the Federal Government and various provincial Governments. It provides Lending solutions and Payment solutions. Its lending solutions include collateral management solutions  Canadian mortgage technology and student loan administration services. Its payment solutions include the cheque program and various subscription fee-based enhancement services. The U.S. segment provides lending solutions and enterprise solutions. Its lending solutions include mortgage  commercial and commercial lending. Its enterprise solutions include core banking platform offerings  complementary channel solutions and optimization solutions.,Read More

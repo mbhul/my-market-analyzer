@@ -1,5 +1,0 @@
-Symbol,DOO
-Industry,Conglomerates
-Sector,Conglomerates
-Employees,7600
-BRP Inc. is a Canada-based company engaged in design  development  manufacturing  distribution and marketing of power sports vehicles and propulsion systems. The Company has four product categorie the year-round products; the seasonal products; the propulsion systems  and parts  accessories and clothing (PAC) products. Its year-round products consist of Can-Am ATVs  recreational SSVs and Spyder roadsters. Its seasonal products consist of Ski-Doo and Lynx snowmobiles and Sea-Doo PWCs. Its propulsion systems consist of Evinrude outboard engines and Rotax engines. Its PAC products support the Company's range of product lines with replacement parts  additional product accessories and complementary clothing. The Company has global distribution network of selling products  directly or indirectly  in around 107 countries.,Read More

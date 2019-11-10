@@ -1,5 +1,0 @@
-Symbol,CMG
-Industry,Software & Programming
-Sector,Technology
-Employees,208
-Computer Modelling Group Ltd. (CMG) is Canada-based computer software technology company engaged in serving the oil and gas industry. The Company is a supplier of advanced processes reservoir modeling software with a client base of international oil companies and technology centers in over 50 countries. It has 550 oil and gas companies and consulting firms in more than 55 countries. The Company’s software products include STARS  GEM  IMEX  CMOST and BUILDER. The Company also provides professional services consisting of highly specialized support  consulting  training  and contract research activities. CMG has sales and technical support services based in Calgary  Houston  London  Caracas  Dubai  Bogota and Kuala Lumpur. The Company operates in only one segment being the development and licensing of reservoir simulation software. Computer Modelling Group Inc.  CMG Venezuela  CMG Middle East FZ LLC and CMG (Europe) Limited are the company’s subsidiaries.,Read More

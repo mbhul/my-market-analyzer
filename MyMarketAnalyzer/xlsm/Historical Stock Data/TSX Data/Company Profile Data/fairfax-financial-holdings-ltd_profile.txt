@@ -1,5 +1,0 @@
-Symbol,FFH
-Industry,Insurance (Prop. & Casualty)
-Sector,Financial
-Employees,11450
-Fairfax Financial Holdings Limited is a holding company. The Company  through its subsidiaries  is engaged in property and casualty insurance  and reinsurance and investment management. The Company's insurance and reinsurance companies operate on a decentralized basis. The Company's subsidiaries provide a range of property and casualty products  maintaining a diversified portfolio of risks across all classes of business  geographic regions  and types of insureds. The Company's investments are managed by Hamblin Watsa Investment Counsel Ltd. (Hamblin Watsa Investment Counsel). The Company's principal subsidiaries include Northbridge Financial Corporation  Federated Insurance Company of Canada Limited  Crum & Forster Holdings Corp  Seneca Insurance Company  Inc.  Zenith National Insurance Corp.  Odyssey Re Holdings Corp.  First Capital Insurance Limited  Falcon Insurance Company (Hong Kong) Ltd. and The Pacific Insurance Berhad  among others.,Read More

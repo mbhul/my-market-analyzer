@@ -1,5 +1,0 @@
-Symbol,G
-Industry,Gold & Silver
-Sector,Basic Materials
-Employees,10652
-Goldcorp Inc. (Goldcorp) is a gold producer engaged in the acquisition  exploration  development and operation of gold properties in Canada  the United States  Mexico and Central and South America. The Company's principal products are gold and the byproduct silver  copper  lead and zinc. Goldcorp's operating assets include four mines in Canada  two mines in Mexico  and four in Central and South America.

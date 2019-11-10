@@ -1,5 +1,0 @@
-Symbol,TCN
-Industry,Real Estate Operations
-Sector,Services
-Employees,23
-Tricon Capital Group  Inc. is an asset manager and principal investor focused on the residential real estate industry in North America. The Company operates two businesse Private Funds and Advisory business and Principal Investment business. The Company's Private Funds and Advisory business and Principal Investment business are focused on three related business verticals within the North American residential real estate industry: Tricon Housing Partners  Tricon American Homes and Tricon Lifestyle Communities. The Private Funds and Advisory business is focused on the land and homebuilding sector. At Tricon Housing Partners  the Company co-invests in private investment vehicles. At Tricon American Homes  the Company invests in single-family rental homes through an integrated business platform. At Tricon Lifestyle Communities  the Company has entered into a joint venture with Cobblestone to purchase three to five star manufactured housing communities.,Read More

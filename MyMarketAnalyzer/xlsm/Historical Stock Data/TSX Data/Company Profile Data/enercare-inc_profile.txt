@@ -1,5 +1,0 @@
-Symbol,ECI
-Industry,Rental & Leasing
-Sector,Services
-Employees,87
-EnerCare Inc. is a Canada-based company  which provides home services and is engaged in the sub-metering business. The Company has two segment Home Services and Sub-metering. Its Home Services segment is engaged in the provision of water heaters  furnaces  air conditioners  and other heating  ventilation and air conditioning (HVAC) rental products  protection plans and related services. Through its subsidiary  EnerCare Solutions  it operates the Home Services business. Home Services' protection plans are maintenance protection plans and full service protection plans. Its other category includes services  such as duct cleaning  plumbing work and non-contracted chargeable services. Its Sub-metering segment is engaged in the provision of sub-metering equipment and billing services. The Company  through EnerCare Connections Inc.  a subsidiary  provides sub-metering services for electricity  thermal and water.,Read More

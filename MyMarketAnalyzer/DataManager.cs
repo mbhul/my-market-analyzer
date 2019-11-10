@@ -61,7 +61,7 @@ namespace MyMarketAnalyzer
 
         //Data for building Web Requests
         private t_ActiveMarket ActiveMarket = new t_ActiveMarket(DEFAULT_SMLID, DEFAULT_SID, "25282", "S&P/TSX 60");
-        private String TemplateRequestStr = "http://ca.investing.com/equities/StocksFilter";
+        private String TemplateRequestStr = "https://ca.investing.com/equities/StocksFilter";
 
         //Lists for selecting the source of live data based on market
         private List<MarketRegion> SelectableMarketRegions = new List<MarketRegion>();
@@ -85,6 +85,9 @@ namespace MyMarketAnalyzer
             ParentFormPtr = pParent;
 
             UserProfile = new Profile();
+
+            //Set the SSL/TLS security protocol to support TLS version 1.0, 1.1, and 1.2 (needed for HTTPS requests we use)
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
         }
 
         ~DataManager()

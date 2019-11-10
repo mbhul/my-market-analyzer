@@ -1,5 +1,0 @@
-Symbol,DIIb
-Industry,Furniture & Fixtures
-Sector,Consumer Cyclical
-Employees,11500
-Dorel Industries Inc. (Dorel) is a Canada-based global consumer products company. The Company designs  manufactures or sources  markets and distributes a portfolio of product brands. The Company markets its products in the United States  Canada  Europe and Latin America. The Company operates through three segment Dorel Juvenile  Dorel Sports and Dorel Home Furnishings segments. Dorel Juvenile segment is engaged in the designing  sourcing  manufacturing  distribution and retailing children's furniture and accessories. Dorel Sports segment is engaged in the designing  sourcing  manufacturing and distribution of recreational and leisure products and accessories. Dorel Home Furnishings segment is engaged in the design  sourcing  manufacturing and distribution of ready-to-assemble furniture and home furnishings.,Read More

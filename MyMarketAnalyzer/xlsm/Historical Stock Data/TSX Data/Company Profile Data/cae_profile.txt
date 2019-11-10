@@ -1,5 +1,0 @@
-Symbol,CAE
-Industry,Electronic Instr. & Controls
-Sector,Technology
-Employees,8000
-CAE Inc. provides training for the civil aviation  defense and security  and healthcare markets. The Company designs and integrates training solutions. The Company operates through three segment Civil Aviation Training Solutions  Defense and Security  and Healthcare. It provides integrated training solutions to three markets  such as the civil aviation market  which includes aircraft manufacturers  commercial airlines  regional airlines  business aircraft operators  civil helicopter operators  third-party training centers  flight training organizations  maintenance repair and overhaul organizations and aircraft finance leasing companies; the defense and security market  which includes defense forces  original equipment manufacturers (OEMs)  government agencies and public safety organizations  and the healthcare market  which includes hospital and university simulation centers  medical and nursing schools  paramedic organizations  defense forces  medical societies and OEMs.,Read More

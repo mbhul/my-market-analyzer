@@ -1,5 +1,0 @@
-Symbol,RCIb
-Industry,Communications Services
-Sector,Services
-Employees,27000
-Rogers Communications Inc. is a Canada-based communications and media company. The Company operates through four segment Wireless  Cable  Business Solutions and Media. The Wireless segment offers wireless telecommunications operations for Canadian consumers and businesses. The Cable segment offers Cable telecommunications operations  including Internet  television and telephony (phone) for Canadian consumers and businesses. The Business Solutions segment offers Network connectivity through its fiber network and data center assets to support a range of voice  data  networking  hosting and cloud-based services for small  medium and large Canadian businesses  governments  and on a wholesale basis to other telecommunications providers. The Media segment offers portfolio of media properties  including television and radio broadcasting  specialty channels  digital media  multi-platform shopping  publishing  and sports media and entertainment.,Read More

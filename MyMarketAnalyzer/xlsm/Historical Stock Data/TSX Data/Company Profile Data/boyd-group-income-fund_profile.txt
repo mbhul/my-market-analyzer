@@ -1,5 +1,0 @@
-Symbol,BYD_u
-Industry,Misc. Financial Services
-Sector,Financial
-Employees,5419
-Boyd Group Income Fund (BGIF) is a Canada-based unincorporated  open-ended mutual fund trust. The Company’s business consists of the ownership and operation of autobody/autoglass repair facilities and related services. The Company operates locations in five Canadian provinces under the trade name Boyd Autobody & Glass  as well as in 17 states in the United States under the trade names Gerber Collision & Glass  Collision Revision and Champ’s Collision Centers. The Company is a retail auto glass operator with locations across 29 states in the United States under the trade names Gerber Collision & Glass  Glass America  Auto Glass Services and Auto Glass Authority. The Company also operates Gerber National Claims Services (GNCS)  an auto glass repair and replacement referral business with approximately 5 500 glass provider locations and 4 600 Emergency Roadside Services provider locations throughout the United States.,Read More

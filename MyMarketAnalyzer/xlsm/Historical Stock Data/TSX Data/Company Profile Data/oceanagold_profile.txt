@@ -1,5 +1,0 @@
-Symbol,OGC
-Industry,Gold & Silver
-Sector,Basic Materials
-Employees,365
-OceanaGold Corporation is a gold producer with assets located in New Zealand  the Philippines and the United States. The Company operates in two segment New Zealand and the Philippines. The Company operates approximately two open cut mines and an underground mine in New Zealand. The Company also operates an open cut gold-copper mine at Didipio in the Philippines. The Company's projects include the Reefton Project  the Macraes Project and the Didipio Project. Its Reefton mine is located approximately seven kilometers southeast of the township of Reefton  a mining district in the West Coast region of New Zealand's South Island. The Company's Macraes Goldfield is a gold producing operation consisting of the Macraes open pit and frasers underground mines. The Company's Didipio mine is located approximately 270 kilometers north of the Philippine capital of Manila on the island of Luzon. The Company also operates the Waihi Gold Mine  which is located on the north island of New Zealand.,Read More

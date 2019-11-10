@@ -1,5 +1,0 @@
-Symbol,MDA
-Industry,Computer Services
-Sector,Technology
-Employees,4800
-MacDonald  Dettwiler and Associates Ltd. (MDA) is a global communications and information company. The Company provides operational solutions to commercial and Government organizations across the world. MDA operates through two segment Communications segment  which offers space-based solutions for a range of services  including television and radio distribution  broadband Internet and mobile communications. MDA is a supplier of communication satellites  satellite antenna subsystems  and associated ground infrastructure and support services  and Surveillance and Intelligence segment  which offers end-to-end solutions to support the operational needs of Government agencies  both military and civilian  and commercial customers. MDA is a supplier of space-based and airborne surveillance solutions  imaging satellite ground systems  geospatial information services  and associated support services. It also supplies robotic systems for the space and terrestrial markets.,Read More

@@ -1,5 +1,0 @@
-Symbol,LUN
-Industry,Metal Mining
-Sector,Basic Materials
-Employees,10
-Lundin Mining Corporation is a Canada-based mining company. The Company is engaged in mining  exploration and development of mineral properties  such as base metals  primarily in Chile  Portugal  Spain  Sweden  the United States and the Democratic Republic of the Congo (DRC). The Company’s wholly owned operating assets include the Neves-Corvo copper/zinc mine located in Portugal  the Zinkgruvan zinc/lead mine located in Sweden  the Aguablanca nickel/copper mine located in Spain and the Eagle nickel/copper mine located in the United States. The Company also holds 80% interest in the Candelaria and Ojos del Salado copper/gold mining complex located in Chile  and 24% equity accounted interests in the Tenke Fungurume copper/cobalt mine located in the Democratic Republic of Congo (DRC) and the Freeport Cobalt Oy business  which includes a cobalt refinery located in Kokkola  Finland.,Read More

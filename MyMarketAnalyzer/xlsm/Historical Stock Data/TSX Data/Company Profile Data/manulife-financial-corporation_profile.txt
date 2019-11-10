@@ -1,5 +1,0 @@
-Symbol,MFC
-Industry,Insurance (Life)
-Sector,Financial
-Employees,-
-Manulife Financial Corp is a Canada-based financial services and life insurance company. The Company offers financial protection and wealth management products and services. It caters to personal and business clients. It also provides asset management services to institutional customers. Its operating segments are Asia  Canadian and U.S. Divisions  and the Corporate and Other segment. Its Asia  Canadian and U.S. Divisions segment offers protection and wealth management services  such as life insurance and individual group long-term care insurance  annuities  pension contracts and mutual fund products and services  retirement products  and deposit and credit products to Canadian customers  among others. The Company's Corporate and Other segment consists of investment performance on assets backing capital  net of amounts allocated to operating division and financing costs  external asset management business  and property and casualty (P&C) reinsurance business  among others.,Read More

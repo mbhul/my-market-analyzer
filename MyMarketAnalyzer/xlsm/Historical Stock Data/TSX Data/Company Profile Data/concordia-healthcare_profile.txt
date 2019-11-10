@@ -1,5 +1,0 @@
-Symbol,CXR
-Industry,Biotechnology & Drugs
-Sector,Healthcare
-Employees,214
-Concordia Healthcare Corp. is a Canada-based diverse healthcare company. The Company is focused on legacy pharmaceutical products and orphan drugs. The Company operates through three segments  which includes Legacy Pharmaceutical Division  Concordia Pharmaceuticals Inc.  which consists of 23 products  including Nilandron  for the treatment of metastatic prostate cancer; Dibenzyline  for the treatment of pheochromocytoma; Lanoxin  for the treatment of mild-to-moderate heart failure and atrial fibrillation; Plaquenil  for the treatment of lupus and rheumatoid arthritis; Donnatal  for the treatment of irritable bowel syndrome  and Zonegran (zonisamide)  for treatment of partial seizures in adults with epilepsy. Its Specialty Healthcare Distribution (SHD) Division  Complete Medical Homecare  is engaged in the distribution of medical supplies focused on diabetes and related conditions. Its Orphan Drugs Division  Concordia Laboratories Inc.  is engaged in the manufacture of PHOTOFRIN.,Read More

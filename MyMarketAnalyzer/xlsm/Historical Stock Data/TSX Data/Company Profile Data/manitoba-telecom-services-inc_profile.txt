@@ -1,5 +1,0 @@
-Symbol,MBT
-Industry,Communications Services
-Sector,Services
-Employees,2928
-Manitoba Telecom Services Inc. is a Canada-based national communications provider. The Company operates in two segment MTS and Allstream. The Company's MTS segment is a telecommunications provider for residential and business customers in Manitoba. Its MTS segment operates wireless networks delivering coverage in Manitoba with its 4G  (Long-Term Evolution (LTE) and Evolved High Speed Packet Access (HSPA+))  code-division multiple access (CDMA) and Wireless Fidelity (Wi-Fi) networks. Its MTS segment offers a range of wireless  high-speed Internet  Internet Protocol television (IPTV)  wireline voice and home security services. MTS also provides business solutions  including information solutions and business telecommunications services. Its Allstream segment offers a range of telecommunications solutions to small  medium and large businesses and government organizations.,Read More

@@ -1,5 +1,0 @@
-Symbol,YRI
-Industry,Gold & Silver
-Sector,Basic Materials
-Employees,4513
-Yamana Gold Inc. is a Canada-based gold producer. The Company is engaged in gold mining and related activities  including exploration  extraction  processing and reclamation. The Company's production mines include Chapada  Brazil; El Penon  Chile; Canadian Malartic  Canada; Mercedes  Mexico; Gualcamayo  Argentina; Jacobina  Brazil; Minera Florida  Chile  and Other Producing Mines. Its development properties include Cerro Moro  Agua Rica and Suyai in Argentina. The Company has a total gold proven and probable mineral resource of around 18.750 million tons at Alumbrera  126.95 million tons at Canadian Malartic  509.15 million tons at Chapada  1.96 million tons at Cerro Morro  10.41 million tons at El Penon  29.16 million tons at Gualcamayo  22.85 million tons at Jacobina  8.68 million tons at Jeronimo  4.01 million tons at Mercedes  7.89 million tons at Minera Florida  24.03 million tons at C1-Santa Luz  2.05 million tons at Fazenda Brasileiro and 10.58 million tons at Pilar.,Read More

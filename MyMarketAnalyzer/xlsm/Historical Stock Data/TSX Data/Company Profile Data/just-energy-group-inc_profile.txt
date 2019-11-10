@@ -1,5 +1,0 @@
-Symbol,JE
-Industry,Electric Utilities
-Sector,Utilities
-Employees,900
-Just Energy Group Inc. (Just Energy) is a Canada-based energy management solutions provider engaged in electricity  natural gas  solar and green energy. The Company's segments include Consumer Energy and Commercial Energy. The Company operates in the United States  Canada and the United Kingdom  offering a range of energy products and home energy management services  including long-term fixed-price  variable-priced  and flat-bill programs  smart thermostats and residential solar panel installations. Just Energy also offers green products through its JustGreen program and conservation solutions through smart thermostats. The JustGreen electricity product offers customers the option of having all or a portion of their electricity sourced from renewable green sources  such as wind  run of the river hydro or biomass. Smart thermostats are offered as a bundled product with commodity contracts  as well as a stand-alone unit.,Read More

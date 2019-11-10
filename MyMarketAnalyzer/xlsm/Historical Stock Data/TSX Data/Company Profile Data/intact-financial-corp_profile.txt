@@ -1,5 +1,0 @@
-Symbol,IFC
-Industry,Insurance (Prop. & Casualty)
-Sector,Financial
-Employees,10365
-Intact Financial Corporation is a Canada-based holding company that provides property and casualty (P&C) insurance. The Company insures around five million individuals and businesses through its insurance subsidiaries in British Columbia  Alberta  Ontario  Quebec and Nova Scotia. The Company distributes insurance under the Intact Insurance brand through a network of brokers and its wholly owned subsidiary  BrokerLink. The Company's non-standard auto insurance in Ontario is distributed under the Jevco brand. The Company also distributes insurance directly to consumers through belairdirect and Grey Power. The Company's subsidiaries include Intact Insurance Company  Belair Insurance Company Inc.  The Nordic Insurance Company of Canada  Novex Insurance Company  Trafalgar Insurance Company of Canada  Equisure Financial Network Inc.  Canada Brokerlink Inc.  Grey Power Insurance Brokers Inc.  Intact Farm Insurance Inc.  Jevco Insurance Company and IB Reinsurance Inc.,Read More

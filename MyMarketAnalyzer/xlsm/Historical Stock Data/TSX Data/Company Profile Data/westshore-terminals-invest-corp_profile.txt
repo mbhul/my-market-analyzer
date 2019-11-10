@@ -1,5 +1,0 @@
-Symbol,WTE
-Industry,Coal
-Sector,Energy
-Employees,240
-Westshore Terminals Investment Corporation is a Canada-based company  which owns all of the limited partnership units of Westshore Terminals Limited Partnership (Westshore)  which is a limited partnership. Westshore operates a coal storage and loading terminal at Roberts Bank  British Columbia (the Terminal). Westshore handles coal from mines in British Columbia and Alberta  as well as from mines in the north-western United States. Its coal is delivered to the Terminal in unit trains operated by the Canadian Pacific  Canadian National (CN) and Burlington Northern Santa Fe (BNSF) railways and is then unloaded and either directly transferred onto a ship or stockpiled for future ship loading. The coal is loaded onto ships that are destined for approximately 20 countries across the world  with most of the volumes shipped to Asia. Westar Management Ltd. (the Manager) provides management services to Westshore and administrative services to the Company.,Read More

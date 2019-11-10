@@ -1,5 +1,0 @@
-Symbol,BEP_u
-Industry,Electric Utilities
-Sector,Utilities
-Employees,-
-Brookfield Renewable Energy Partners L.P. (Brookfield Renewable) operates as a pure-play renewable power platform. The Company's segments include hydroelectric  wind and other. Brookfield Renewable operates renewable power generating assets  which include conventional hydroelectric facilities located in the United States  Canada and Brazil  and wind facilities located in the United States  Canada and Europe. Brookfield Renewable also operates two co-generation facilities. The Company owns and operates approximately 204 hydroelectric generating stations on 72 river systems and 28 wind facilities  diversified across 13 power markets in the United States  Canada  Brazil and Europe. Brookfield Renewable's portfolio  primarily hydroelectric  totals over 6 700 megawatts (MW) and produces enough electricity from renewable resources to power 3.5 million homes each year. Its subsidiaries include Alta Wind VIII LLC  Brookfield BRP Canada Corp. and Black Bear Hydro Partners  LLC  among others.,Read More

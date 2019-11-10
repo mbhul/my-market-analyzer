@@ -1,5 +1,0 @@
-Symbol,ACQ
-Industry,Retail (Specialty)
-Sector,Services
-Employees,3400
-AutoCanada Inc. (AutoCanada) is a Canada-based multi-location automobile dealership company. The Company operates around 48 dealerships  which consists of 56 franchises that include 12 in British Columbia  25 in Alberta  four in Saskatchewan  four in Manitoba  five in Ontario and six in other provinces  including Quebec  New Brunswick and Nova Scotia. AutoCanada sells Chrysler  Dodge  Jeep  Ram  Fiat  Chevrolet  GMC  Buick  Cadillac  Infiniti  Nissan  Hyundai  Subaru  Mitsubishi  Audi  Volkswagen  Kia  BMW and MINI branded vehicles. The Company is engaged in new vehicle sales; used vehicle sales; parts  service and collision repair  and finance and insurance. The Company's dealerships sold approximately 57 000 vehicles and processed approximately 786 000 service and collision repair orders in its 822 service bays.,Read More

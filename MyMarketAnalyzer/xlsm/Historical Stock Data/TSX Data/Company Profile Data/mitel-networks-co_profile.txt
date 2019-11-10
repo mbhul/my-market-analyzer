@@ -1,5 +1,0 @@
-Symbol,MNW
-Industry,Communications Equipment
-Sector,Technology
-Employees,1913
-

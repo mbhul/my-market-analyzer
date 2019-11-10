@@ -1,5 +1,0 @@
-Symbol,EMA
-Industry,Electric Utilities
-Sector,Utilities
-Employees,3530
-Emera Incorporated is an energy and services company that owns and invests in electricity generation  transmission and distribution  gas transmission  utility services  energy marketing and trading services  and other energy-related management services. The Company provides regional energy solutions by connecting its assets  markets and partners  primarily in eastern Canada  the northeastern United States  and the Caribbean. Its segments include Nova Scotia Power Inc.; Emera Maine; Emera Caribbean (Emera (Caribbean) Incorporated and its subsidiaries  including Barbados Light & Power Company Ltd. and Dominica Electricity Services Ltd.  Grand Bahama Power Company Ltd. and Emera Utility Services (Bahamas) Limited; Pipelines  including Emera Brunswick Pipeline Company Limited and Maritimes & Northeast Pipeline  and Emera Energy Inc.  including Emera Energy Services  New England Gas Generating Facilities  Bayside Power Limited Partnership and Brooklyn Power Corporation  among others.,Read More

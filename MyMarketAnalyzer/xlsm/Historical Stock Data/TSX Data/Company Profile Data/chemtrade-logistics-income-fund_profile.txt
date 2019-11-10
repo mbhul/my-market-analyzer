@@ -1,5 +1,0 @@
-Symbol,CHE_u
-Industry,Chemical Manufacturing
-Sector,Basic Materials
-Employees,1200
-Chemtrade Logistics Income Fund provides industrial chemicals and services. Chemtrade operates in four business segment Sulphur Products & Performance Chemicals (SPPC)  Water Solutions & Specialty Chemicals (WSSC)  International (Intl) and Corporate (Corp). SPPC markets  removes and produces merchant  regenerated sulphuric acid  liquid sulphur dioxide  sodium hydrosulphite  elemental sulphur  hydrogen sulphide  and sodium bisulphite and other processing services. WSSC manufactures and markets a variety of inorganic coagulants used in water treatment  aluminum sulphate  aluminum chlorohydrate  polyaluminum chloride  and ferric sulphate; and a number of specialty chemicals. WSSC also includes the markets sodium chlorate and crude tall oil. Intl provides removal and marketing services for elemental sulphur and sulphuric acid. Corp is a non-operating segment that provides centralized services  such as treasury  finance  information technology  human resources  legal and risk management.,Read More

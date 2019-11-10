@@ -1,5 +1,0 @@
-Symbol,PD
-Industry,Oil Well Services & Equipment
-Sector,Energy
-Employees,7834
-Precision Drilling Corporation (Precision) is an oilfield services company. The Company provides contract drilling  well servicing and strategic support services to customers. It provides customers with access to a fleet of contract drilling rigs  directional drilling services  well service and snubbing rigs  coiled tubing services  camps  rental equipment  and water treatment units backed by a mix of technical support services. The Company provides the equipment  personnel and support services  which enables drill  complete and workover onshore wells for conventional and unconventional crude oil and natural gas exploration and production. The Company's service lines include Drilling Rigs (Canada)  Drilling Rigs (United States)  Drilling Rigs (International)  Directional Drilling (Canada and United States)  Rig Builds and Repair Turnkey Drilling Services  Oilfield Supplies (Canada and United States) and Oilfield Equipment Rentals  among others.,Read More

@@ -1,5 +1,0 @@
-Symbol,POW
-Industry,Insurance (Life)
-Sector,Financial
-Employees,28000
-Power Corporation of Canada is a diversified management and holding company. The Company has interest in the financial services  communications and other business sectors. Its principal asset is the controlling interest in Power Financial  which controls Lifeco and IGM. Power Financial Europe B.V.  a subsidiary of Power Financial  and Frere Group of Belgium together have a controlling interest in Parges. Lifeco offers life insurance  health insurance  retirement and investment services  and is engaged in the asset management and reinsurance business. IGM Financial is a financial services company. It operates through its subsidiaries  including Square Victoria Communications Group  a 100% owned company engaged in the communications and media industry  and Power Energy  holding investments in renewable energy companie Potentia Solar and Eagle Creek. It also operates equity investment funds in three geographie Sagard Europe  Sagard Capital in the United States and Sagard China.,Read More

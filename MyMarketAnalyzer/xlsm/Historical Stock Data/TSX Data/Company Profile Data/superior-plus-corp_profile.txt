@@ -1,5 +1,0 @@
-Symbol,SPB
-Industry,Oil & Gas Operations
-Sector,Energy
-Employees,4500
-Superior Plus Corp. (Superior) is a Canada-based diversified business company. The Company operates through three segment Energy Services  Specialty Chemicals and Construction Products Distribution. Superior's Energy Services segment provides distribution  wholesale procurement and related services in relation to propane  heating oil and other refined fuels under the following: Canadian propane division and U.S. refined fuels division. Energy Services also provides fixed-price natural gas and electricity supply services under Superior Energy Management. Specialty Chemicals segment is a supplier of sodium chlorate and technology to the pulp and paper industries and a regional supplier of potassium and chloralkali products in the United States Midwest. Construction Products Distribution segment is a distributor of commercial and industrial insulation in North America and is also a distributor of specialty construction products to the walls and ceilings industry in Canada.,Read More

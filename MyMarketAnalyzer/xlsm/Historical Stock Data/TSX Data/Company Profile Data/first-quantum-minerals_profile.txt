@@ -1,5 +1,0 @@
-Symbol,FM
-Industry,Metal Mining
-Sector,Basic Materials
-Employees,6500
-First Quantum Minerals Ltd. is a Canada-based mining and metals company. The Company is engaged in the production of copper  nickel  gold  zinc  platinum group elements (PGE) and acid  and related activities  including exploration and development. Its operating mines are located in Zambia  Australia  Finland  Turkey  Spain and Mauritania. The Company's operations include the Kansanshi copper-gold mine  the Guelb Moghrein copper-gold mine  the Las Cruces copper mine  the Kevitsa nickel-copper-PGE mine  the Pyhasalmi copper-zinc mine  the Ravensthorpe nickel-cobalt mine and the Cayeli copper-zinc mine. The Company is developing the Trident project in Zambia  the Cobre Panama copper project in Panama  exploring the Haquira copper deposit in Peru and the Taca Taca copper-gold-molybdenum porphyry deposit in Argentina. Its subsidiareies include Kansanshi Mining Plc  First Quantum Mining and Operations Limited  Mauritanian Copper Mines SARL and FQM Kevitsa Mining OY  among others.,Read More

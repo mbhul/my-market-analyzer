@@ -1,5 +1,0 @@
-Symbol,IGM
-Industry,Investment Services
-Sector,Financial
-Employees,1600
-IGM Financial Inc. is a Canada-based financial services company. The Company's principal businesses are Investors Group Inc. and Mackenzie Financial Corporation  which operate within the advice segment of the financial services market. The Company operates in three segment Investors Group  which provides a range of financial and investment planning services through its network of Consultants across the country and its products and services include Personal Financial Planner and Mutual Funds  among others; Mackenzie  which is an investment management firm and is engaged in the provision of investment management and related services offered through diversified investment solutions and distributed through multiple distribution channels  and Corporate and Other segment includes net investment income  share of earnings of its affiliate  Great-West Lifeco Inc. (Lifeco)  operating results for Investment Planning Counsel Inc.  other income  as well as consolidation elimination entries.,Read More

@@ -1,5 +1,0 @@
-Symbol,AEM
-Industry,Gold & Silver
-Sector,Basic Materials
-Employees,4999
-Agnico Eagle Mines Ltd is a Canada-based gold producer. The Company has mining operations in northwestern Quebec  northern Mexico  northern Finland and Nunavut  and exploration activities in Canada  Europe  Latin America and the United States. It operates through three business unit Northern Business  Southern Business and Exploration. Its Northern Business consists of the operations in Canada and Finland  which include the LaRonde mine  the Lapa mine  the Goldex mine  the Meadowbank mine and the Meliadine project. Its Southern Business consists of the Company's operations in Mexico. The Company's mining at Pinos Altos is conducted through its subsidiary  Agnico Eagle Mexico S.A. de C.V.  which owns the Pinos Altos mine  including the Creston Mascota deposit. Its Exploration group focuses on the identification of new mineral reserves and resources  and new developments in stable and proven gold producing regions.,Read More

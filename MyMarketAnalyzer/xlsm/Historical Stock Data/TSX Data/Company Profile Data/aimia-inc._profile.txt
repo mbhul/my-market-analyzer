@@ -1,5 +1,0 @@
-Symbol,AIM
-Industry,Advertising
-Sector,Services
-Employees,4711
-Aimia Inc. (Aimia) is a marketing and loyalty analytics company. Aimia is engaged in loyalty management. The Company  through its subsidiaries  operates in three regional business segment Canada  the United States and Asia-Pacific (US & APAC) and Europe  Middle-East and Africa (EMEA). Aimia offers loyalty services  which include Coalition Loyalty  Proprietary Loyalty and Analytics Insights. The Coalition Loyalty service designs  builds  owns and manages multi-partner and shared loyalty programs across the world. Aimia's Proprietary Loyalty service designs  builds and manages strategic business and customer loyalty programs for individual clients across the world. Its Analytics and Insights service collects  analyzes and derives actionable insight from customer data to deliver measurable marketing return-on-investment (ROI) for clients and partners across the world. Aimia provides proprietary loyalty services  including loyalty program strategy  design  launch and operation.,Read More

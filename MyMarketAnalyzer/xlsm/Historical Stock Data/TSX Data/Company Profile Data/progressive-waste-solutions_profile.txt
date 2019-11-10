@@ -1,5 +1,0 @@
-Symbol,BIN
-Industry,Waste Management Services
-Sector,Services
-Employees,6575
-Progressive Waste Solutions Ltd. is a waste management company. The Company provides non-hazardous solid waste collection  recycling and disposal services to commercial  industrial  municipal and residential customers in approximately 13 United States and the District of Columbia and six Canadian provinces. The Company conducts its business through three geographic region the East  West and North regions. The Company’s East region includes Florida  New York  New Jersey  Pennsylvania  Maryland  Virginia and the District of Columbia. The West region includes Texas  Louisiana  Oklahoma  Arkansas  Mississippi  Missouri and Illinois. The North region includes the Canadian provinces of British Columbia  Alberta  Manitoba  Saskatchewan  Ontario and Quebec.,Read More

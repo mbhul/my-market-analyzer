@@ -1,5 +1,0 @@
-Symbol,BTE
-Industry,Oil & Gas Operations
-Sector,Energy
-Employees,229
-Baytex Energy Corp. (Baytex)  through its subsidiaries  is engaged in the business of acquiring  developing  exploiting and holding interests in petroleum and natural gas properties and related assets in Canada (primarily in the provinces of Alberta and Saskatchewan) and in the United States (primarily in the state of Texas). The Company's crude oil and natural gas operations are organized into three business unit Central; Lloydminster; and United States. Each business unit has a portfolio of mineral leases  operated and non-operated properties and development prospects. The Company's wholly owned subsidiaries include include Baytex Energy Ltd.  which is engaged in the business of oil and natural gas exploration  exploitation  development  acquisition and production in Canada  and Baytex Energy USA  Inc.  which is engaged in the business of oil and natural gas exploration  exploitation  development  acquisition and production in the United States.,Read More

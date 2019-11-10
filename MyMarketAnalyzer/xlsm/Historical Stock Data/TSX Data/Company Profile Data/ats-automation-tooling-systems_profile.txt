@@ -1,5 +1,0 @@
-Symbol,ATA
-Industry,Misc. Capital Goods
-Sector,Capital Goods
-Employees,3500
-ATS Automation Tooling Systems Inc. is a Canada-based company  which is engaged in providing automation solutions. The Company provides custom automation  repeat automation  automation products and value-added services  including pre automation and after-sales services. The Company serves the automation systems' needs of various customers in industries  such as life sciences  computer and electronics  energy  transportation and consumer products. The Company has approximately 27 manufacturing facilities in Canada  the United States  Europe  Southeast Asia and China. The Company's automation products include ATS Supertrak Modular Conveyor system  ATS850 Clean Room Conveyor  Sortimat Birkman Feeder Technology  ATS Omnitrak  LogiTrack  Sortimat Clearliner  Sortimat Workliner  ATS Cortex System  ATS SmartVision software and ATS Flexsys Laser,Read More

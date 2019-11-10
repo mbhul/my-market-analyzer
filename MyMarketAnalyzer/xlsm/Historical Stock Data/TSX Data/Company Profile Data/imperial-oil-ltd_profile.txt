@@ -1,5 +1,0 @@
-Symbol,IMO
-Industry,Oil & Gas - Integrated
-Sector,Energy
-Employees,5500
-Imperial Oil Limited is an integrated oil company. The Company is engaged in the exploration for  and production and sale of  crude oil and natural gas. The Company’s operations are conducted in three main segment Upstream  Downstream and Chemical. Upstream operations include the exploration for  and production of  crude oil  natural gas  synthetic oil and bitumen. Downstream operations consist of the transportation and refining of crude oil  blending of refined products and the distribution and marketing of those products. Chemical operations consist of the manufacturing and marketing of various petrochemicals. The Company’s Chemical operations manufacture and market ethylene  benzene  aromatic and aliphatic solvents  plasticizer intermediates and polyethylene resin.,Read More

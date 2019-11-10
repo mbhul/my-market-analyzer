@@ -1,5 +1,0 @@
-Symbol,PKI
-Industry,Retail (Grocery)
-Sector,Services
-Employees,1700
-Parkland Fuel Corporation (Parkland) is a marketer of fuel and petroleum products. The Company delivers gasoline  diesel  propane  lubricants  heating oil and other high quality petroleum products to motorists  businesses  consumers and wholesale customers in Canada and the United States. Its segments include Retail Fuels  which operates and services a network of retail service stations that serve motorists in Canada; Commercial Fuels  which delivers bulk fuel  propane  heating oil  lubricants  agricultural inputs  oilfield fluids and other related products and services to commercial  industrial and residential customers across Canada; SPF Energy  operates and services a network of retail service stations in the United States; Wholesale  Supply and Distribution  which manages Parkland's fuel supply contracts  purchasing fuel from refiners  distribution through third-party rail and highway carriers  as well as serving wholesale and reseller customers  and Corporate.,Read More

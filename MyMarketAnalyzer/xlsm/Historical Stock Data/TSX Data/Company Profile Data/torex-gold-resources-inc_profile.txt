@@ -1,5 +1,0 @@
-Symbol,TXG
-Industry,Gold & Silver
-Sector,Basic Materials
-Employees,342
-Torex Gold Resources Inc. is a resource company. The Company is engaged in the exploration and development of the Morelos Gold Property. The Morelos Gold Property consists of seven mineral concessions covering a total area of approximately 29 000 hectares and contains two projects  the El Limon Guajes Project and the Media Luna Project. The Morelos Gold Property is located in the Guerrero Gold Belt in southern Mexico  180 kilometers to the southwest of Mexico City and approximately 50 kilometers southwest of Iguala. Its drilling areas located north of the Balsas River include the El Limon Guajes Project  El Limon Sur  Guajes South and Pacifico. Its prospective areas in the north include Todos Santos (north portion)  Corona  Tecate  Azcala  Modelo  Querenque and El Limon Deep. Its drilling areas located south of the Balsas River include the Media Luna Project  El Cristo  Naranjo and La Fe.,Read More

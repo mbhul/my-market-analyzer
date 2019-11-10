@@ -487,7 +487,6 @@ namespace MyMarketAnalyzer
 
             try
             {
-                
                 request = WebRequest.Create("https://ca.investing.com/instruments/HistoricalDataAjax");
                 request.Credentials = CredentialCache.DefaultCredentials;
                 ((HttpWebRequest)request).Accept = "*/*";
@@ -500,7 +499,7 @@ namespace MyMarketAnalyzer
 
                 request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
                 request.ContentLength = body.Length;
-                
+
                 Stream rStream = request.GetRequestStream();
                 rStream.Write(body.Select(c => (byte)c).ToArray(), 0, body.Length);
 
@@ -555,8 +554,9 @@ namespace MyMarketAnalyzer
                     ((HttpWebRequest)request).Accept = "*/*";
                     ((HttpWebRequest)request).UserAgent = DEFAULT_USER_AGENT;
                     ((HttpWebRequest)request).Referer = "http://ca.investing.com/equities/canada";
-                    ((HttpWebRequest)request).Headers.Add("Accept-Encoding", "gzip,deflate");
+                    ((HttpWebRequest)request).Headers.Add("Accept-Encoding", "gzip,deflate,br");
                     ((HttpWebRequest)request).Headers.Add("X-Requested-With", "XMLHttpRequest");
+                    ((HttpWebRequest)request).KeepAlive = true;
                     ((HttpWebRequest)request).Timeout = 20000;
 
                     response = request.GetResponse();
@@ -587,6 +587,7 @@ namespace MyMarketAnalyzer
             catch(Exception e)
             {
                 /* Do nothing */
+                int stophere = 1;
             }
 
             return webresponse;

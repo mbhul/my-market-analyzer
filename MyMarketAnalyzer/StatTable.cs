@@ -164,6 +164,8 @@ namespace MyMarketAnalyzer
 
                 // Create new columns
                 AddColumnToSource(System.Type.GetType("System.String"), TableHeadings.Name, "Name", true, false);
+                AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_Last, TableHeadings.Live_Last, true, false);
+                AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_High, TableHeadings.Live_High, true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.PctChange[0], TableHeadings.PctChange[1], true, false, false, ColumnStyle.PLUS_MINUS);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Hist_Avg[0], TableHeadings.Hist_Avg[1], true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Hist_Vlty, "Volatility", true, false);
@@ -176,6 +178,8 @@ namespace MyMarketAnalyzer
                     row = tableSource.NewRow();
                     row[IndexColumnName] = i + 1;
                     row[TableHeadings.Name] = mktData.Constituents[i].Name;
+                    row[TableHeadings.Live_Last] = mktData.Constituents[i].HistoricalPrice[mktData.Constituents[i].HistoricalPrice.Count - 1];
+                    row[TableHeadings.Live_High] = mktData.Constituents[i].HistoricalPrice.Max();
                     row[TableHeadings.PctChange[0]] = mktData.Constituents[i].pctChange;
                     row[TableHeadings.Hist_Avg[0]] = mktData.Constituents[i].avgPrice;
                     row[TableHeadings.Hist_Vlty] = mktData.Constituents[i].Volatility;

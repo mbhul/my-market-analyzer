@@ -1,5 +1,0 @@
-Symbol,MTL
-Industry,Oil Well Services & Equipment
-Sector,Energy
-Employees,4164
-Mullen Group Ltd. provides transportation and related services to the oil and natural gas industry in western Canada  and supplies trucking and logistics services in Canada. The Company has two segment Oilfield Services and Trucking/Logistics. Its Oilfield Services segment provides transportation  drilling  well-servicing and dewatering services  including transporting of oversize and overweight shipments; conductor pipe setting; core drilling; casing setting; the transportation  handling  storage and computerized inventory management of oilfield fluids  tubular and drilling mud  pipe stockpiling and stringing  and services related to the processing and production of heavy oil  transportation and disposal of fluids  as well as water management  dewatering  pond reclamation services  hydrovac excavation and drilling rig relocation services. Its Trucking/Logistics segment transports goods  including general freight  commodities  over-dimensional loads and dry bulk commodities.,Read More

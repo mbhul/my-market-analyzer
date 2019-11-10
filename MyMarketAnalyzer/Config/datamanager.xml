@@ -17,7 +17,7 @@
         <Schema>
           <SearchStart>
           </SearchStart>
-          <KeyElement name="select" attr="id">stocksFilter</KeyElement>
+          <KeyElement name="select" attr="id">StocksFilter</KeyElement>
           <SubElement name="option" attr="" ignore="0">
           </SubElement>
         </Schema>

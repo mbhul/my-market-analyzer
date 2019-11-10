@@ -1,5 +1,0 @@
-Symbol,CP
-Industry,Railroads
-Sector,Transportation
-Employees,13700
-Canadian Pacific Railway Limited (CP) operates a transcontinental railway in Canada and the United States (U.S.) and provides logistics and supply chain expertise. CP provides rail and intermodal transportation services over a network of approximately 13 700 miles  serving the principal business centers of Canada from Montreal  Quebec  to Vancouver  British Columbia (B.C.)  and the United States Northeast and Midwest regions. The Company transports bulk commodities  merchandise freight and intermodal traffic. Bulk commodities include Canadian grain  U.S. grain  coal  potash  and fertilizers and sulphur. Merchandise freight consists of finished vehicles and automotive parts  chemicals and plastics  crude oil  forest products  and metals  minerals  and consumer products. Intermodal traffic consists of retail goods in overseas containers that can be transported by train  ship and truck and in domestic containers and trailers that can be moved by train and truck.,Read More

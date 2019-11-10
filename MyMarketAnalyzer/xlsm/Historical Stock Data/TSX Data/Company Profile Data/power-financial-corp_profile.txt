@@ -1,5 +1,0 @@
-Symbol,PWF
-Industry,Insurance (Life)
-Sector,Financial
-Employees,-
-Power Financial Corporation is a diversified management and holding company that has interests  directly or indirectly  in companies in the financial services sector in Canada  the United States  Europe and Asia. The Company operates in three segment Lifeco  IGM and Parjointco. The Lifeco segment offers life insurance  health insurance  retirement and investment management services  and is engaged in the asset management and reinsurance business primarily in Canada  the United States and Europe. IGM Financial segment offers advices for the financial services market in Canada. Parjointco holds its interest in Pargesa Holding SA  a holding company which holds interests in European companies of various sector  including specialty minerals; cement  aggregates and concrete; oil  gas and alternative energies; testing  inspection and certification  wines and spirits; electricity  natural gas  and energy and environmental services  and water and waste management services.,Read More

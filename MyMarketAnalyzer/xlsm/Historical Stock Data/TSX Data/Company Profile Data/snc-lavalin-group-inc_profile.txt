@@ -1,5 +1,0 @@
-Symbol,SNC
-Industry,Construction Services
-Sector,Capital Goods
-Employees,42000
-SNC-Lavalin Group Inc. is an engineering and construction company. The Company operates through four segment Resources  Environment and Water (REW); Power; Infrastructure  and Infrastructure Concessions Investments (ICI). The Company's REW segment includes projects from the Mining & Metallurgy  Oil & Gas and Environment & Water sub-segments. The Company's Power segment includes projects and services in hydro  nuclear and thermal power generation; renewable power generation; energy from waste  and electrical transmission and distribution systems. The Company's Infrastructure segment includes projects from infrastructure and construction to operations and maintenance (O&M). The Company's ICI segment includes investments in infrastructure concessions in certain infrastructure for public services.,Read More

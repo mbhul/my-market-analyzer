@@ -1,5 +1,0 @@
-Symbol,BNP
-Industry,Oil & Gas Operations
-Sector,Energy
-Employees,338
-Bonavista Energy Corporation (Bonavista) is an oil and natural gas company. The Company acquires  develops and holds interests in oil and natural gas properties and assets in Western Canada. Its West Central Core Area is characterized by liquids-rich natural gas and light oil resources. It includes infrastructure of over 2 800 kilometers of pipelines and 38 facilities  which are operated by Bonavista. West Central core area has approximately 1.3 million acres  containing approximately 800 of drilling locations. The average annual production in West Central Core Area is 46 796 boe per day. Its Deep Basin Core Area contains multiple vertically stacked oil and natural gas reservoirs. The Company has assembled approximately 300 000 net acres and identified 300 horizontal drilling locations in the Deep Basin Core Area. The average annual production in Deep Basin Core Area is 17 276 boe per day. Bonavista drilled approximately 130 wells within the Deep Basin and West Central Core Areas.,Read More

@@ -1,5 +1,0 @@
-Symbol,PPL
-Industry,Oil Well Services & Equipment
-Sector,Energy
-Employees,1111
-Pembina Pipeline Corporation (Pembina) is an energy transportation and service provider. The Company operates through four segment Conventional Pipelines  Oil Sands & Heavy Oil  Gas Services and Midstream. Conventional Pipelines consists of the tariff-based operations of pipelines and related facilities to deliver crude oil  condensate and natural gas liquids (NGL) in Alberta  British Columbia  Saskatchewan  and North Dakota  United States. Oil Sands & Heavy Oil consists of the Syncrude  Horizon  Nipisi and Mitsue Pipelines  and the Cheecham Lateral. Gas Services consists of natural gas gathering and processing facilities  including approximately 7 gas plants  approximately 12 compressor stations and over 375 kilometres of gathering systems. Midstream consists of the Company's interests in extraction and fractionation facilities  terminalling and storage hub services.,Read More

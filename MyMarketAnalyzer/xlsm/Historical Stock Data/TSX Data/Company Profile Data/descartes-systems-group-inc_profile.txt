@@ -1,5 +1,0 @@
-Symbol,DSG
-Industry,Software & Programming
-Sector,Technology
-Employees,938
-The Descartes Systems Group Inc. (Descartes) is a global provider of on-demand  cloud-based software-as-a-service (SaaS) solutions. The Company is focused on logistics and supply chain management business processes. Customers use its modular  SaaS solutions to route  schedule  track and measure delivery resources; plan  allocate and execute shipments; rate  audit and pay transportation invoices; file customs and security documents for imports and exports; research and perform trade tariff and duty calculations and complete other logistics processes. The Company's primary focus is on serving transportation providers  including air  ocean and truck modes; logistics service providers  including third-party logistics providers  freight forwarders and customs brokers  and distribution-intensive companies. Its applications are categorized as Routing  Mobile & Telematics; Transportation Management; Customs & Regulatory Compliance; GLN Services  and Broker & Forwarder Enterprise Systems.,Read More

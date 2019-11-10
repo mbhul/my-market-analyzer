@@ -1,5 +1,0 @@
-Symbol,ELD
-Industry,Gold & Silver
-Sector,Basic Materials
-Employees,2636
-Eldorado Gold Corporation owns and operates mines around the world. The Company’s activities involve various facets of the mining industry  including exploration  development  production and reclamation. Its operating gold mines include Kisladag in Turkey (100%)  Efemcukuru in Turkey (100%)  Tanjianshan in China (90%)  White Mountain in China (95%) and Jinfeng in China (82%). Its gold projects include Perama Hill in Greece (100%)  Olympias in Greece (95%)  Skouries in Greece (95%)  Certej in Romania (81%)  Eastern Dragon in China (75%) and Tocantinzinho in Brazil (100%). Its other operating mines include Stratoni Lead and Zinc Concentrates in Greece (95%) and Vila Nova Iron Ore in Brazil (100%). The Company has completed an exploration program in Romania at the Bocsa  Magura  Muncel  Brad and Deva projects  which are situated in the Apuseni district near the Certej deposit.,Read More

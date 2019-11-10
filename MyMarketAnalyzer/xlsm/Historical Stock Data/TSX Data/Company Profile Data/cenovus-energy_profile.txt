@@ -1,5 +1,0 @@
-Symbol,CVE
-Industry,Oil & Gas - Integrated
-Sector,Energy
-Employees,3545
-Cenovus Energy Inc. is a Canada-based integrated oil company. The Company is engaged in the development  production and marketing of crude oil  natural gas liquids (NGLs) and natural gas in Canada with refining operations in the United States. The Company operates in four segment Oil Sands segment  engaged in the development and production of Cenovus’s bitumen assets at Foster Creek  Christina Lake and Narrows Lake  as well as projects in the early-stages of development  such as Grand Rapids and Telephone Lake  and Athabasca natural gas assets; Conventional segment  engaged in the development and production of conventional crude oil  natural gas liquids (NGLs) and natural gas in Alberta and Saskatchewan  including the heavy oil assets at Pelican Lake; Refining and Marketing segment  engaged in the transporting  selling and refining crude oil into petroleum and chemical products.,Read More

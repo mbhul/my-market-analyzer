@@ -1,5 +1,0 @@
-Symbol,CF
-Industry,Investment Services
-Sector,Financial
-Employees,1887
-Canaccord Genuity Group Inc. is a Canada-based independent financial services company. The Company operates in two principal segments of the securities industry: wealth management and capital markets. The Company offers investment banking services  investment products and brokerage services to the Company's institutional  corporate and private clients. Canaccord Genuity Group Inc.'s operations are divided into two business segment Canaccord Genuity (investment banking and capital markets operations) and Canaccord Genuity Wealth Management. Canaccord Genuity offers corporations and institutional investors around the world a platform for equity research  sales and trading  and investment banking services. Canaccord Genuity Wealth Management operations provide wealth management solutions and brokerage services to individual investors  private clients  charities and intermediaries through a suite of services. The Company has offices in 10 countries across the world.,Read More

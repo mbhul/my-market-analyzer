@@ -1,5 +1,0 @@
-Symbol,BNS
-Industry,Money Center Banks
-Sector,Financial
-Employees,89214
-The Bank of Nova Scotia (the Bank) is a Canada-based diversified financial institution. The Bank offered a range of products and services  including retail  commercial  corporate and investment banking to more than 21 million customers in more than 55 countries around the world. The Bank has four business line Canadian Banking  International Banking  Scotia Capital and Global Wealth Management. The Canadian Banking segment provided a range of banking and investing services to more than 7.7 million customers across Canada  through a network of 1 190 branches  3 869 automated banking machine (ABMs)  as well as telephone  Internet banking and third-party channels. International Banking includes Scotiabank’s retail and commercial banking operations in more than 55 countries outside Canada. Global Wealth Management (GWM) consists of wealth management insurance and Global Transaction Banking businesses.,Read More

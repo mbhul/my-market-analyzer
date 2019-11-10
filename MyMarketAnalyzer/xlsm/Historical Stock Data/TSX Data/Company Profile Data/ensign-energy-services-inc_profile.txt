@@ -1,5 +1,0 @@
-Symbol,ESI
-Industry,Oil Well Services & Equipment
-Sector,Energy
-Employees,8400
-Ensign Energy Services Inc. is a Canada-based company engaged in the business of providing oilfield services to the oil and gas industry in Canada  the United States and internationally. The Company's oilfield services include drilling and well servicing  oil sands coring  directional drilling  underbalanced and managed pressure drilling  equipment rentals  transportation  wireline services and production testing services. The Company's Canadian operations span the four western provinces of British Columbia  Alberta  Saskatchewan and Manitoba and include the Northwest Territories and the Yukon. In the United States  the Company operates predominantly in the Rocky Mountain and southern regions  as well as the states of California  Nevada  New Mexico  North Dakota  South Dakota  Nebraska  Pennsylvania and Michigan. Internationally  the Company operates in Australia  Argentina  Kurdistan  Libya  Oman and Venezuela.,Read More

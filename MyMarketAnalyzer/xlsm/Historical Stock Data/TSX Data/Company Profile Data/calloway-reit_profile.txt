@@ -1,5 +1,0 @@
-Symbol,SRU_u
-Industry,Real Estate Operations
-Sector,Services
-Employees,111
-Calloway Real Estate Investment Trust (the Trust) is a Canada-based open-ended mutual fund trust. The Trust owns and manages shopping centers in Canada  both directly and through its subsidiaries  Calloway Limited Partnership (LP)  Calloway Limited Partnership II (LP II) and Calloway Limited Partnership III (LP III). The Trust's assets consisted of 120 retail properties  one office property and seven development properties  with a gross leasable area of 27.3 million square feet and an estimated future developable area of 2.7 million square feet. The Trust's portfolio of properties includes Courtenay SmartCentre  Cowichan Commons East  Kamloops SmartCentre  Langley SmartCentre  New Westminster SmartCentre  Penticton Power Centre  Salmon Arm SmartCentre  Surrey West SmartCentre and Vernon SmartCentre  among others.,Read More

@@ -1,5 +1,0 @@
-Symbol,FTT
-Industry,Rental & Leasing
-Sector,Services
-Employees,14500
-Finning International Inc. is a Canada-based Caterpillar dealer. The Company sells  rents and provides parts and service for equipment and engines to customers in various industries  including mining  construction  petroleum  forestry  and a range of power systems applications. It operates in three segment Canadian operations  which include Finning  OEM Remanufacturing Company Inc. and Pipeline Machinery International  and its markets include mining (including the oil sands)  construction  conventional oil and gas  forestry  and power systems; South American operations  which sell  service and rent Caterpillar equipment and engines in Chile  Argentina  Uruguay and Bolivia  and its markets include mining  construction  and power systems  and UK & Ireland Operations  which sell  service and rent Caterpillar equipment and engines in England  Scotland  Wales  Northern Ireland  and the Republic of Ireland and its markets include mining  quarrying  construction and power systems.,Read More

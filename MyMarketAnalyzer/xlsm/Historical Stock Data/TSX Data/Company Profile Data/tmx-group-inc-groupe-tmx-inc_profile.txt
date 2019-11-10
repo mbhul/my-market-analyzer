@@ -1,5 +1,0 @@
-Symbol,X
-Industry,Investment Services
-Sector,Financial
-Employees,1323
-TMX Group Limited is a Canada-based company  which operates in equities  fixed income  derivatives and energy markets. The Company provides services encompassing listings for its issuers  trading  clearing  settlement and depository facilities  information services  as well as technology services for the international financial community. Its products and services include issuer services; trading  clearing  depository and related services  which include cash trading  clearing and depository (consisting of equities trading  fixed income trading and equities and fixed income)  derivatives trading and clearing and energy trading and clearing; information services  and technology services. The Company operates through Toronto Stock Exchange  TSX Venture Exchange  TMX Select Inc.  Alpha  The Canadian Depository for Securities Limited  Shorcan Brokers Limited  CanDeal.ca Inc.  Canadian Derivatives Clearing Corporation  TMX Technology Solutions and Montreal Exchange Inc.  among others.,Read More

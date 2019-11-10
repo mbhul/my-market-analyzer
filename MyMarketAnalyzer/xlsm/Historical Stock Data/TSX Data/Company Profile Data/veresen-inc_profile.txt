@@ -1,5 +1,0 @@
-Symbol,VSN
-Industry,Natural Gas Utilities
-Sector,Utilities
-Employees,224
-Veresen Inc. is a Canada-based company  which focuses on managing its pipeline transportation  midstream services  power generation and liquefied natural gas businesses. The Company's pipeline business comprises Alliance Pipeline (50% ownership)  Ruby Pipeline (50% convertible preferred ownership) and Alberta Ethane Gathering System (AEGS)  which is wholly owned. Alliance owns and manages an integrated  high-pressure natural gas and natural gas liquids pipeline that extends approximately 3 000 kilometers across North America. Ruby is a large-scale natural gas transmission system delivering the United States Rockies natural gas production to markets in the western United States. AEGS is an integrated pipeline system that transports purity ethane from various Alberta ethane extraction plants to petrochemical complexes located near Joffre and Fort Saskatchewan  Alberta. The system also transports ethane to and from third party underground storage in Fort Saskatchewan.,Read More

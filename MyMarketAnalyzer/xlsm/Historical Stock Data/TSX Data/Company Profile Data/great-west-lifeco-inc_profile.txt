@@ -1,5 +1,0 @@
-Symbol,GWO
-Industry,Insurance (Life)
-Sector,Financial
-Employees,17350
-Great-West Lifeco Inc. (Lifeco) is a Canada-based financial services holding company. The Company has interests in the life insurance  health insurance  asset management  investment and retirement savings  and reinsurance businesses. Lifeco has operations in Canada  the United States  Europe and Asia through The Great-West Life Assurance Company (Great-West)  London Life Insurance Company (London Life)  The Canada Life Assurance Company (Canada Life)  Great-West Life & Annuity Insurance Company (Great-West Financial)  Putnam Investments  LLC (Putnam)  Canada Life Limited and Irish Life Group Limited (Irish Life). Lifeco  through its operating subsidiaries  provides products and services under various brands  including the Great-West Life and Canada Life brands  the Freedom 55 Financial brand  the Irish Life brand  the Great-West Financial brand  the Empower Retirement brand  and the Putnam Investments and PanAgora brands.,Read More

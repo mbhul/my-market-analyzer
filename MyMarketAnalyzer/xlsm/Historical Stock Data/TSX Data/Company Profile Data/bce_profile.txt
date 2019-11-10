@@ -1,5 +1,0 @@
-Symbol,BCE
-Industry,Communications Services
-Sector,Services
-Employees,57234
-BCE Inc. is a communications company. The Company provides residential  business and wholesale customers with a range of solutions to all their communications needs  including wireless  high-speed Internet  Internet protocol television (IPTV) and satellite TV  business Internet protocol (IP) broadband  and information and communications technology (ICT) services. The Company’s segments include Bell Wireless  Bell Wireline and Bell Media. The Company's Bell Wireless segment provides wireless services that are available to virtually all of the Canadian population. The Bell Wireline segment includes voice and data network; high-speed fiber deployment  and bell direct to home (DTH) satellite television service. The Company's Bell Media segment offers specialty and pay television  radio  digital media and out-of-home advertising. The Company  through Bell media  operates approximately 110 radio stations in over 50 markets across Canada.,Read More

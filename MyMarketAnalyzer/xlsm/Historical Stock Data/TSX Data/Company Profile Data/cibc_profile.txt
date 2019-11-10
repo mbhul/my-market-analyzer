@@ -1,5 +1,0 @@
-Symbol,CM
-Industry,Money Center Banks
-Sector,Financial
-Employees,44000
-Canadian Imperial Bank of Commerce (CIBC) is a Canada-based financial institution. CIBC serves its clients through three strategic business unit Retail and Business Banking  Wealth Management and Wholesale Banking. Its three main operating groups are supported by six functional group Technology and Operations; Corporate Development; Finance; Treasury; Administration; and Risk Management  which form part of Corporate and Other. Retail and Business Banking provides financial advice  banking  investment  and authorized insurance products and services from over 1 100 branches  mobile sales force  telephone banking  and online and mobile banking. Wealth Management provides relationship-based advisory services and a suite of investment solutions to meet the needs of institutional  retail and high net worth clients. Wholesale Banking provides a range of credit  capital market  investment banking  merchant banking and research products and services to the clients.,Read More

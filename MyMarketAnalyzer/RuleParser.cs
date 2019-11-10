@@ -115,9 +115,10 @@ namespace MyMarketAnalyzer
             string str_expression, str_evaluated_rule;
             double gain_loss = 0.0, cash = inPrincipalAmt, investments = 0.0, transaction_amt = 0.0;
             int units = 0, units_held = 0, total_transactions = 0;
+            AnalysisResult analysis_result = new AnalysisResult();
+
             String[] buy_conditions = inBuyRule.Split(RuleParserInputs.Operators, StringSplitOptions.RemoveEmptyEntries);
             String[] sell_conditions = inSellRule.Split(RuleParserInputs.Operators, StringSplitOptions.RemoveEmptyEntries);
-            AnalysisResult analysis_result = new AnalysisResult();
 
             PercentComplete = 0.0;
 
@@ -483,7 +484,9 @@ namespace MyMarketAnalyzer
                 str_return = regex.Replace(str_return, "", -nesting_level);
             }
             else { }
-            
+
+            regex = new Regex(Regex.Escape("[") + "U.*" + Regex.Escape("]"));
+            str_return = regex.Replace(str_return, "").Trim();
 
             return str_return;
         }
@@ -505,6 +508,7 @@ namespace MyMarketAnalyzer
             double units = 0.0;
             const String units_specifier = "[U";
             bool isPct = false;
+            Regex regex;
 
             str_return = pSubString;
             index1 = str_return.IndexOf(units_specifier);
@@ -554,6 +558,9 @@ namespace MyMarketAnalyzer
             {
                 units_int = (int)units;
             }
+
+            regex = new Regex(Regex.Escape("[") + "U.*" + Regex.Escape("]"));
+            str_return = regex.Replace(str_return, "").Trim();
 
             pReturnString = str_return;
 

@@ -1,5 +1,0 @@
-Symbol,WJA
-Industry,Airline
-Sector,Transportation
-Employees,9211
-WestJet Airlines Ltd. is a Canada-based company engaged in the provision of airline service and travel packages. The Company offers scheduled service to approximately 93 destinations in North America  Central America  the Caribbean and Europe. The Company has a fleet of approximately 122 aircraft. It has approximately 44 Boeing 737 aircraft under operating leases. The Company's subsidiaries include WestJet Investment Corp. (WIC)  WestJet Operations Corp. (WOC)  WestJet Vacations Inc. (WVI)  WestJet Encore Ltd. (Encore).,Read More

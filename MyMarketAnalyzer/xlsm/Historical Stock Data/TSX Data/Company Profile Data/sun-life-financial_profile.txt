@@ -1,5 +1,0 @@
-Symbol,SLF
-Industry,Insurance (Life)
-Sector,Financial
-Employees,16275
-Sun Life Financial Inc. (Sun Life Financial) is a financial services organization  which provides a range of protection and wealth products and services to individuals and corporate customers. The Company operates in five segment Sun Life Financial Canada (SLF Canada)  Sun Life Financial United States (SLF U.S.)  MFS Investment Management (MFS)  Sun Life Financial Asia (SLF Asia) and Corporate. The Company distributes its products through a variety of distribution channels  including direct sales agents  managing general agents  independent general agents  financial intermediaries  broker-dealers  banks  pension and benefits consultants and other third-party marketing organizations. The Company operates in Canada  the United States  the United Kingdom  Ireland  Hong Kong  the Philippines  Japan  Indonesia  India  China  Australia  Singapore  Vietnam  Malaysia and Bermuda.,Read More

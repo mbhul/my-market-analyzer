@@ -1,5 +1,0 @@
-Symbol,BNE
-Industry,Oil & Gas Operations
-Sector,Energy
-Employees,30
-Bonterra Energy Corp. (Bonterra) is an oil and gas company  engaged in the exploration  acquisition  development and production of oil and natural gas reserves in the provinces of Alberta  British Columbia and Saskatchewan. The Company's development efforts are focused in the Cardium zone of the Pembina and Willesden Green fields located in west central Alberta. Bonterra operates 85% of its production with an average land working interest of 77%. Bonterra has a drilling inventory of approximately 750 net locations. The Company averaged approximately 13 195 barrels of oil equivalent (boe) per day. Its properties include the Pembina and Willesden Green Cardium fields; the Prespatou Area  and its Shaunavon Area.,Read More

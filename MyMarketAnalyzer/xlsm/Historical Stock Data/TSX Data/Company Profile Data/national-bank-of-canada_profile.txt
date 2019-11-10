@@ -1,5 +1,0 @@
-Symbol,NA
-Industry,Regional Banks
-Sector,Financial
-Employees,19764
-National Bank of Canada (the Bank) is an integrated provider of financial services to retail  commercial  corporate and institutional clients. The Bank offers a range of services that include banking and investment solutions  securities brokerage  insurance and wealth management. The Bank operates in three business segment Personal and Commercial  Wealth Management and Financial Markets. The Bank's Personal and Commercial segment includes the banking  financing and investing services offered to individuals and businesses  as well as insurance operations. Its Wealth Management segment includes investment solutions  trust services  banking services  lending services and other wealth management solutions offered through internal and third-party distribution networks. The Bank's Financial Markets segment includes banking services  investment banking services and financial solutions for institutional clients and is also engaged in the trading and investment activities of the Bank.,Read More

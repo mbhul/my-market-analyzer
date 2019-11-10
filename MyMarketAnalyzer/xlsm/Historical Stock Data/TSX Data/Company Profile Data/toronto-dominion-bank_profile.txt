@@ -1,5 +1,0 @@
-Symbol,TD
-Industry,Money Center Banks
-Sector,Financial
-Employees,81483
-The Toronto-Dominion Bank (the Bank) operates as a bank in North America. The Bank conducts its business through segments  such as Canadian Retail  U.S. Retail  Wholesale Banking and Corporate. Canadian Retail provides a range of financial products and services to customers in the Canadian personal and commercial banking businesses  including credit cards  auto finance  wealth and insurance businesses. U.S. Retail consists of the Bank's retail and commercial banking operations operating under the brand TD Bank  America's Most Convenient Bank  and wealth management services in the United States. Wholesale Banking provides a range of capital markets  investment banking  and corporate banking products and services  including underwriting and distribution of new debt and equity issues  providing advice on strategic acquisitions and divestitures  and meeting the daily trading  funding and investment needs of its clients. The Bank is also an online financial services firm.,Read More

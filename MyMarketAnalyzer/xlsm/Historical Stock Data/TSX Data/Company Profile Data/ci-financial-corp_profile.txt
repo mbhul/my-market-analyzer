@@ -1,5 +1,0 @@
-Symbol,CIX
-Industry,Misc. Financial Services
-Sector,Financial
-Employees,1280
-CI Financial Corp. (CI) is a Canada-based wealth management and investment fund company. The Company is engaged in management  marketing  distribution and administration of mutual funds  segregated funds  structured products and other fee-earning investment products for Canadian investors. CI operates through two segment Asset Management and Asset Administration. The Company's Asset Management segment provides the majority of CI's income and derives its revenue principally from the fees earned on the management of several families of mutual  segregated  pooled and closed-end funds  structured products and discretionary accounts. CI's Asset Administration segment derives its revenue principally from commissions and fees earned on the sale of mutual funds and other financial products and ongoing service to clients. The Company's products are distributed primarily through brokers  independent financial planners and insurance advisors  among others.,Read More

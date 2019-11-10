@@ -1,5 +1,0 @@
-Symbol,MIC
-Industry,Insurance (Prop. & Casualty)
-Sector,Financial
-Employees,265
-Genworth MI Canada Inc.  is a Canada-based company  which through its subsidiary  Genworth Financial Mortgage Insurance Company Canada (Genworth Canada)  is a private residential mortgage insurer in Canada. The Company provides mortgage default insurance to Canadian residential mortgage lenders  making homeownership more accessible to first-time homebuyers. Genworth Canada underwrites mortgage insurance for residential properties in all provinces and territories of Canada. It offers both high loan-to-value and low loan-to-value mortgage insurance. Its high loan-to-value mortgage insurance covers default risk on mortgage loans secured by residential properties to protect lenders from losses on claims resulting from default on any type of residential mortgage loan instrument that it has approved. It also provides low loan-to-value mortgage insurance to lenders for loans with loan-to-value ratios of 80% or less.,Read More

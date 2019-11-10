@@ -1,5 +1,0 @@
-Symbol,LIF
-Industry,Metal Mining
-Sector,Basic Materials
-Employees,-
-Labrador Iron Ore Royalty Corporation (LIORC) is a Canada-based mining company. The Company owns interests in Iron Ore Company of Canada (IOC) that operates an iron mine near Labrador City  Newfoundland and Labrador on lands leased from LIORC. The Company through its wholly owned subsidiary  Hollinger-Hanna Limited  owns a 15.10% equity interest in IOC and receives a 7% gross overriding royalty on all iron ore products produced from the leased lands  sold and shipped by IOC and commissions on sales of iron ore by IOC. IOC is a Canada-based iron ore producer  operating a mine  concentrator and pellet plant at Labrador City  Newfoundland.,Read More

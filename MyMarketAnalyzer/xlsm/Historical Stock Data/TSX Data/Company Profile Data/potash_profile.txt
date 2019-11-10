@@ -1,5 +1,0 @@
-Symbol,POT
-Industry,Metal Mining
-Sector,Basic Materials
-Employees,5136
-Potash Corporation of Saskatchewan Inc is a fertilizer company. The Company operates in three business segment potash  nitrogen and phosphate. The Company owns and operates five potash operations in Saskatchewan and one in New Brunswick. Its nitrogen operations involve the production of nitrogen fertilizers and nitrogen feed and industrial products  including ammonia  urea  nitrogen solutions  ammonium nitrate and nitric acid. It has nitrogen facilities in Georgia  Louisiana  Ohio and Trinidad. The Company’s phosphate operations include the manufacture and sale of solid and liquid phosphate fertilizers  phosphate feed and industrial acid  which is used in food products and industrial processes. It has phosphate mines and mineral processing plant complexes in Florida and North Carolina. The Company also has four phosphate feed plants in the United States and produce phosphoric acid at its Geismar  Louisiana facility.,Read More

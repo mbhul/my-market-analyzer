@@ -1,5 +1,0 @@
-Symbol,K
-Industry,Gold & Silver
-Sector,Basic Materials
-Employees,9300
-Kinross Gold Corporation is a senior gold mining company. The Company is engaged in gold mining and related activities  including exploration and acquisition of gold-bearing properties  the extraction and processing of gold-containing ore  and reclamation of gold mining properties. The Company's segments include Fort Knox  Round Mountain  Kettle River-Buckhorn  Kupol  Paracatu  Maricunga  Tasiast and Chirano. Its gold production and exploration activities are carried out principally in Canada  the United States  the Russian Federation  Brazil  Chile  Ghana and Mauritania. Its gold is produced in the form of dore  which is shipped to refineries for final processing. It also produces and sells silver.,Read More

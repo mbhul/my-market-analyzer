@@ -1,5 +1,0 @@
-Symbol,NGD
-Industry,Gold & Silver
-Sector,Basic Materials
-Employees,1146
-New Gold Inc. is a Canada-based intermediate gold mining company engaged in the development and operation of mineral properties. The Company's assets include New Afton Mine in Canada  which is an underground gold‐copper deposit; the Mesquite Mine in the United States  which is an open pit mine; the Peak Mines in Australia  which is an underground gold‐copper deposit  and the Cerro San Pedro Mine in Mexico  which is a gold‐silver  open pit mine. The Company projects include the Rainy River and Blackwater projects  both in Canada  and a 30% interest in the El Morro copper‐gold project in Chile. Approximately 28% of the Company's gold revenue is generated from Canada  28% from the United States  26% from Australia and 18% from Mexico  and over 70% of its gold reserves are located in Canada.,Read More

@@ -1,5 +1,0 @@
-Symbol,IPL
-Industry,Oil & Gas Operations
-Sector,Energy
-Employees,659
-Inter Pipeline Ltd. (Inter Pipeline) owns and operates energy infrastructure assets located in western Canada and Europe. Inter Pipeline operates in four segment oil sands transportation business  conventional oil pipelines business  natural gas liquids (NGL) extraction business and the bulk liquid storage business. The oil sands transportation business consists of the Corridor  Cold Lake and Polaris pipeline systems  which transport petroleum products and diluent and provide related blending and handling services. The conventional oil pipelines business involves the transportation  storage and processing of hydrocarbons  as well as midstream marketing blending and handling services. The NGL extraction business consists of processing natural gas to extract NGLs  including ethane and a mixture of propane  butane and pentanes plus. The bulk liquid storage business was rebranded Inter Terminal  which involves the primary storage and handling of bulk liquid products.,Read More

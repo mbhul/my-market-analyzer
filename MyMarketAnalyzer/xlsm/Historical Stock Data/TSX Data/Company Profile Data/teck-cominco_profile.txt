@@ -1,5 +1,0 @@
-Symbol,TCKb
-Industry,Coal
-Sector,Energy
-Employees,10200
-Teck Resources Ltd. is engaged in the business of exploring  acquiring  developing and producing natural resources. The Company is focused on steelmaking coal  copper  zinc and energy. The Company exports seaborne steelmaking coal and produces mined zinc. The Company also produces lead  molybdenum  silver  and various specialty and other metals  chemicals and fertilizers. It explores for copper from its interests in Antamina in Peru  Quebrada Blanca and Carmen de Andacollo in Chile and Duck Pond in Newfoundland. The Company has around 97.5% interest in Highland Valley Copper. The Company produces mined zinc  primarily from its Red Dog mine in Alaska  the Antamina mine in northern Peru  and its Pend Oreille mine in Washington State. Its energy assets in the Athabasca oil sands region of northeastern Alberta include its interests in the Fort Hills oil sands project  Frontier oil sands project in various other oil sands leases in the exploration phase  including the Lease 421 Area.,Read More

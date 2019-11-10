@@ -1,5 +1,0 @@
-Symbol,DRG_u
-Industry,Real Estate Operations
-Sector,Services
-Employees,20000
-Dream Global REIT is an  open-ended real estate investment trust. The Company provides investors with the opportunity to invest in real estate exclusively outside of Canada. Its objectives are to manage its investments to provide cash flows through investments in commercial real estate located outside of Canada  building a diversified  growth-oriented portfolio of commercial properties  capitalizing on internal growth and seeking accretive acquisition opportunities in its target markets  growing the value of its assets and maximizing the long-term value of its units through the management of its assets and providing predictable and growing cash distributions per unit  on a tax-efficient basis. Its portfolio consisted of approximately 266 properties located in Germany  including seven properties held within a joint venture of which the Company retained a 50% ownership interest. The Company's assets are managed by Dream Asset Management Corporation (Dream).,Read More
