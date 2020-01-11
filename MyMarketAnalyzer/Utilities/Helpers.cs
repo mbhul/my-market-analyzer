@@ -134,7 +134,7 @@ namespace MyMarketAnalyzer
             {
                 variance_sum = variance_sum + Math.Pow((pInput[i] - avgInput), 2);
             }
-            variance = variance_sum / pInput.Count();
+            variance = variance_sum / (pInput.Count() - 1);
 
             std_dev = Math.Round(Math.Sqrt(variance), 4);
 
@@ -358,12 +358,21 @@ namespace MyMarketAnalyzer
         {
             int N, cSize, i, j, k, count, key;
             Double coeff, numerator, denominator;
-            Double sumSqRange1, sumSqRange2, meanRange1, meanRange2;
+            Double meanRange1, meanRange2;
             Double[] CorrelationCoefficients;
 
+            /*Create the empty correlation table. Note that we only need to calculate the correlation between any 2 equities once.
+             *Ex. Given 5 inputs {a,b,c,d,e}:
+             *    a  b  c  d  e
+             *    ---------------   cSize = (5 * (4)) / 2 = 10
+             *  a|-  C0 C1 C2 C3
+             *  b|   -  C4 C5 C6
+             *  c|      -  C7 C8
+             *  d|         -  C9
+             *  e|            -
+             */
             N = pInputList.Count();
             cSize = N * (N - 1) / 2;
-
             CorrelationCoefficients = new Double[cSize];
 
             if (N > 0)
@@ -380,21 +389,22 @@ namespace MyMarketAnalyzer
                     {
                         if (pInputList[i].HistoricalPrice.Count() == pInputList[j].HistoricalPrice.Count())
                         {
-                            sumSqRange1 = 0;
-                            sumSqRange2 = 0;
                             numerator = 0;
-                            meanRange1 = pInputList[i].avgPrice;
-                            meanRange2 = pInputList[j].avgPrice;
+
+                            //Recalculate the average instead of using the 'avgPrice' member 
+                            // because the rounded value introduces significant inaccuracy in some transformations
+                            meanRange1 = pInputList[i].HistoricalPrice.Average(); 
+                            meanRange2 = pInputList[j].HistoricalPrice.Average();
 
                             for (k = 0; k < pInputList[j].HistoricalPrice.Count(); k++)
                             {
-                                sumSqRange1 += Math.Pow(pInputList[i].HistoricalPrice[k], 2);
-                                sumSqRange2 += Math.Pow(pInputList[j].HistoricalPrice[k], 2);
                                 numerator += (pInputList[i].HistoricalPrice[k] * pInputList[j].HistoricalPrice[k]);
                             }
                             numerator -= (pInputList[j].HistoricalPrice.Count() * meanRange1 * meanRange2);
-                            denominator = Math.Pow((sumSqRange1 - (pInputList[i].HistoricalPrice.Count() * Math.Pow(meanRange1, 2))), 0.5) *
-                                Math.Pow((sumSqRange2 - (pInputList[j].HistoricalPrice.Count() * Math.Pow(meanRange2, 2))), 0.5);
+
+                            denominator = Helpers.StdDev(pInputList[i].HistoricalPrice) * Helpers.StdDev(pInputList[j].HistoricalPrice);
+                            denominator *= (pInputList[j].HistoricalPrice.Count() - 1);
+
                             coeff = numerator / denominator;
                         }
 

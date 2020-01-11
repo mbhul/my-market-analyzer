@@ -24,7 +24,11 @@ namespace MyMarketAnalyzer
             [StringValue("Show Chart")]
             CHART,
             [StringValue("Add to Watchlist")]
-            WATCHLIST
+            WATCHLIST,
+            [StringValue("Open In New Tab")]
+            NEWTAB,
+            [StringValue("Add To Chart")]
+            ADDCHART
         }
 
         private int NUM_ENTRIES = 1;
@@ -64,6 +68,7 @@ namespace MyMarketAnalyzer
             NumberOfEntries = 0;
         }
 
+        //TBD: Initialize a table with a fixed number of entries
         public StatTable(int num_rows)
         {
             if (num_rows > 1)
@@ -81,8 +86,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:  DisplayedCount
-         *  Description:    
-         *  Parameters: 
+         *  Description:    Returns the number of rows currently shown in the table
+         *  Parameters:     None
          *****************************************************************************/
         public int DisplayedCount()
         {
@@ -101,8 +106,14 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:  SetFilterExpression
-         *  Description:    
-         *  Parameters: 
+         *  Description:    Set the filter expression to be applied to the DataTable. 
+         *                  The filter is applied only once ApplyFilter() is called.
+         *                  
+         *                  This is to allow a filter to be applied from the parent window
+         *                  
+         *  Parameters:    
+         *              pHandle - 
+         *              strFilter - 
          *****************************************************************************/
         public void SetFilterExpression(IntPtr pHandle, String strFilter)
         {
@@ -113,9 +124,9 @@ namespace MyMarketAnalyzer
         }
 
         /*****************************************************************************
-         *  FUNCTION:  Clear
-         *  Description:    
-         *  Parameters: 
+         *  FUNCTION:   Clear
+         *  Description:    Self explanatory. Clears the table.   
+         *  Parameters: None
          *****************************************************************************/
         public void Clear()
         {
@@ -131,7 +142,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:  ClearCellStyles
-         *  Description:    
+         *  Description:    Clears formatting from the table, and specifically the cells
+         *                  containing +/- data which is coloured green/red
          *  Parameters: 
          *****************************************************************************/
         private void ClearCellStyles()
@@ -142,7 +154,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:  BindMarketData
-         *  Description:    
+         *  Description:    This is the main data binding function. It creates or updates
+         *                  the table from the data contained in the passed ExchangeMarket class.
          *  Parameters: 
          *****************************************************************************/
         public void BindMarketData(ExchangeMarket mktData, bool updateExisting = false)
@@ -158,21 +171,26 @@ namespace MyMarketAnalyzer
 
             DataRow row;
 
+            //Create a Historical data table
             if (TableType == StatTableType.HIST_STATS)
             {
                 CreateNewTable();
 
-                // Create new columns
+                // Create the columns and column headings
                 AddColumnToSource(System.Type.GetType("System.String"), TableHeadings.Name, "Name", true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_Last, TableHeadings.Live_Last, true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_High, TableHeadings.Live_High, true, false);
+                AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_Low, TableHeadings.Live_Low, true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.PctChange[0], TableHeadings.PctChange[1], true, false, false, ColumnStyle.PLUS_MINUS);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Hist_Avg[0], TableHeadings.Hist_Avg[1], true, false);
-                AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Hist_Vlty, "Volatility", true, false);
+                AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Hist_Vlty, "StdDev (Volatility)", true, false);
                 AddColumnToSource(System.Type.GetType("System.DateTime"), TableHeadings.Hist_DtStart[0], TableHeadings.Hist_DtStart[1], true, false);
                 AddColumnToSource(System.Type.GetType("System.DateTime"), TableHeadings.Hist_DtEnd[0], TableHeadings.Hist_DtEnd[1], true, false);
 
+                //Fixed width for the stock name column is 25% of the full visible table width
                 NameColWidth = 0.25;
+
+                //Create the table rows from the ExchangeMarket data
                 for (i = 0; i < mktData.Constituents.Count(); i++)
                 {
                     row = tableSource.NewRow();
@@ -180,6 +198,7 @@ namespace MyMarketAnalyzer
                     row[TableHeadings.Name] = mktData.Constituents[i].Name;
                     row[TableHeadings.Live_Last] = mktData.Constituents[i].HistoricalPrice[mktData.Constituents[i].HistoricalPrice.Count - 1];
                     row[TableHeadings.Live_High] = mktData.Constituents[i].HistoricalPrice.Max();
+                    row[TableHeadings.Live_Low] = mktData.Constituents[i].HistoricalPrice.Min();
                     row[TableHeadings.PctChange[0]] = mktData.Constituents[i].pctChange;
                     row[TableHeadings.Hist_Avg[0]] = mktData.Constituents[i].avgPrice;
                     row[TableHeadings.Hist_Vlty] = mktData.Constituents[i].Volatility;
@@ -188,6 +207,7 @@ namespace MyMarketAnalyzer
                     tableSource.Rows.Add(row);
                 }
             }
+            //Create a PPC correlation table
             else if (TableType == StatTableType.ANALYSIS_PPC)
             {
                 CreateNewTable();
@@ -211,6 +231,7 @@ namespace MyMarketAnalyzer
                     tableSource.Rows.Add(row);
                 }
             }
+            // Create a Live data table
             else if (TableType == StatTableType.LIVE_STATS)
             {
                 CreateNewTable();
@@ -251,7 +272,7 @@ namespace MyMarketAnalyzer
             //Get the column indices of columns where the set style is PLUS_MINUS
             PlusMinusColumns = ColumnStyles.Select((cs, ci) => cs == ColumnStyle.PLUS_MINUS ? ci : -1).Where(ci2 => ci2 >= 0).ToList();
 
-            //Bind Data
+            //Bind Data from the DataTable to the DataGridView control
             BindTableSource(NameColWidth);
 
             //Apply existing filter
@@ -408,7 +429,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:  BindTableSource
-         *  Description:    
+         *  Description:    Binds the data from the source DataTable to the DataGridView
+         *                  control which is ultimately displayed on the UI. 
          *  Parameters: 
          *****************************************************************************/
         private void BindTableSource(Double NameColWidth = 0.25)
@@ -439,7 +461,8 @@ namespace MyMarketAnalyzer
 
         /*****************************************************************************
          *  FUNCTION:  AddColumnToSource
-         *  Description:    
+         *  Description:    Adds a new column to the global source Table (tableSource)
+         *                  based on the passed parameters.
          *  Parameters: 
          *****************************************************************************/
         private void AddColumnToSource(Type pDataType, String pName, String pCaption, Boolean pReadOnly, Boolean pUnique, 

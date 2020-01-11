@@ -89,6 +89,7 @@ namespace MyMarketAnalyzer
             Equity cEQ = null;
             List<Equity> searchResult;
 
+            //Get the root folder
             if(pContainingFolder == "")
             {
                 rootDir = new DirectoryInfo(downloadedDataPath);
@@ -102,7 +103,8 @@ namespace MyMarketAnalyzer
             {
                 this.Name = rootDir.Name;
             }
-                
+            
+            //Get the number of CSV files in the selected folder
             files = rootDir.GetFiles("*.csv");
             itemCount = files.Count();
             this.IsDataAligned = true;
@@ -111,6 +113,7 @@ namespace MyMarketAnalyzer
             {
                 index = 0;
                 pct_download = 0;
+                //Loop through all CSV files one by one
                 foreach (FileInfo fi in files)
                 {
                     try
@@ -120,6 +123,7 @@ namespace MyMarketAnalyzer
                             this.constituents = new List<Equity>();
                         }
 
+                        //If the constituents list already contains an item with the same name as the file, then update the existing Equity class
                         searchResult = constituents.Where(p => Helpers.RemoveNonAlphanumeric(p.Name) == Helpers.RemoveNonAlphanumeric(fi.Name.Replace(".csv",""))).ToList();
 
                         if (searchResult != null && searchResult.Count > 0)
@@ -128,6 +132,7 @@ namespace MyMarketAnalyzer
                             searchResult[0].ReadDataFile();
                             cEQ = searchResult[0];
                         }
+                        //Otherwise create the new Equity instance by parsing the file
                         else
                         {
                             cEQ = new Equity();
@@ -140,7 +145,8 @@ namespace MyMarketAnalyzer
                             }
                         }
 
-                        if(this.IsDataAligned && this.Constituents.Count > 0)
+                        //Set IsDataAligned to True if all Equities in this market instance have data points for all of the dates in the data set
+                        if (this.IsDataAligned && this.Constituents.Count > 0)
                         {
                             this.IsDataAligned = cEQ.HistoricalPriceDate.SequenceEqual(this.Constituents[0].HistoricalPriceDate);
                         }
@@ -288,9 +294,14 @@ namespace MyMarketAnalyzer
         }
 
         /*****************************************************************************
-         *  FUNCTION:  UpdateTimeline
-         *  Description:    
-         *  Parameters: 
+         *  FUNCTION:    UpdateTimeline
+         *  
+         *  Description:    Based on all of the Equities loaded in the Constituents list,
+         *                  get the first and last dates for which data exists for at least 
+         *                  1 Equity, as well as the maximum number of data points in any
+         *                  single Equity
+         *                  
+         *  Parameters:     None
          *****************************************************************************/
         private void UpdateTimeline()
         {

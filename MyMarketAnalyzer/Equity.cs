@@ -794,6 +794,7 @@ namespace MyMarketAnalyzer
         {
             double pSigma;
             int window_size;
+            bool transformApplied = false;
 
             switch(pType)
             {
@@ -802,6 +803,7 @@ namespace MyMarketAnalyzer
                     {
                         pSigma = Double.Parse(pParams["pSigma"]);
                         hist_price = Algorithms.GaussianBlur(hist_price, pSigma);
+                        transformApplied = true;
                     }
                     catch(Exception e){ }
                     break;
@@ -810,6 +812,7 @@ namespace MyMarketAnalyzer
                     {
                         window_size = int.Parse(pParams["Window"]);
                         hist_price = Algorithms.MeanFilter(hist_price, window_size);
+                        transformApplied = true;
                     }
                     catch (Exception e)
                     {
@@ -820,11 +823,17 @@ namespace MyMarketAnalyzer
                     try
                     {
                         hist_price = Algorithms.Normalize(hist_price, 0);
+                        transformApplied = true;
                     }
                     catch(Exception e){ }
                     break;
                 default:
                     break;
+            }
+
+            if (transformApplied)
+            {
+                CalculateAvgPrice();
             }
         }
         #endregion

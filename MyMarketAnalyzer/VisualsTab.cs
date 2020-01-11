@@ -84,32 +84,6 @@ namespace MyMarketAnalyzer
             }  
         }
 
-        private void SET_DATA_INVALID()
-        {
-            if (DataIsValid < MAX_INVALIDATION_LEVEL)
-            {
-                DataIsValid++;
-            }
-            else if (DataIsValid > MAX_INVALIDATION_LEVEL)
-            {
-                //Something wrong, reset the validation level
-                DataIsValid = 0;
-            }
-        }
-
-        private void SET_DATA_VALID()
-        {
-            if (DataIsValid > MAX_INVALIDATION_LEVEL)
-            {
-                //Something wrong, reset the validation level
-                DataIsValid = 0;
-            }
-            else if (DataIsValid > 0)
-            {
-                DataIsValid--;
-            }
-        }
-
         private void InitializePrivateGlobals()
         {
             dataSet = null;
@@ -123,6 +97,46 @@ namespace MyMarketAnalyzer
             for (int i = 0; i < TransformTList.Length; i++)
             {
                 this.tsComboTransformation.Items.Add(StringEnum.GetStringValue(TransformTList[i]));
+            }
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:  SET_DATA_INVALID
+         *  Description:    Notify that data bound to this control is in the process of being updated.
+         *                  Increments a validation count to keep track of the number of 
+         *                  tabs/charts being updated. For every call to this function,
+         *                  there must be a corresponding call to SET_DATA_VALID() to reset the count.
+         *  Parameters: 
+         *****************************************************************************/
+        private void SET_DATA_INVALID()
+        {
+            if (DataIsValid < MAX_INVALIDATION_LEVEL)
+            {
+                DataIsValid++;
+            }
+            else if (DataIsValid > MAX_INVALIDATION_LEVEL)
+            {
+                //Something wrong, reset the validation level
+                DataIsValid = 0;
+            }
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:  SET_DATA_VALID
+         *  Description:    Notify that data bound to this control is finished updating.
+         *                  Decrements the validation count.
+         *  Parameters: 
+         *****************************************************************************/
+        private void SET_DATA_VALID()
+        {
+            if (DataIsValid > MAX_INVALIDATION_LEVEL)
+            {
+                //Something wrong, reset the validation level
+                DataIsValid = 0;
+            }
+            else if (DataIsValid > 0)
+            {
+                DataIsValid--;
             }
         }
 
@@ -164,10 +178,6 @@ namespace MyMarketAnalyzer
                         chartMain.Series[i].IsVisibleInLegend = true;
                     }
                 }
-            }
-            else
-            {
-                //Do Nothing
             }
             
         }
