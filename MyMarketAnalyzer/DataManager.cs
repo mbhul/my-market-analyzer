@@ -100,7 +100,7 @@ namespace MyMarketAnalyzer
                     //System.Runtime.InteropServices.Marshal.ReleaseComObject(oBook);
                     oExcel.Quit();
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(oExcel);
                 oBook = null;
                 oExcel = null;
@@ -634,7 +634,7 @@ namespace MyMarketAnalyzer
 
                 configFile.Save(config_path);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 success = false;
             }
@@ -698,10 +698,7 @@ namespace MyMarketAnalyzer
                     keyNodeList[i].RemoveAll();
                 }
             }
-            catch(Exception e)
-            {
-
-            }
+            catch(Exception) { }
 
             return keyNodeList;
         }

@@ -39,7 +39,7 @@ namespace MyMarketAnalyzer
                 testValue = Double.Parse(arg0);
                 returnValue = true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //do nothing
             }
@@ -467,19 +467,9 @@ namespace MyMarketAnalyzer
         {
             String return_value = "";
 
-            //Method 1
             System.Text.RegularExpressions.Regex rgx = new System.Text.RegularExpressions.Regex("[^a-zA-Z0-9_]");
             return_value = rgx.Replace(pInput, " ");
             return_value = return_value.Substring(0, return_value.Trim().IndexOf(' ') + 1).Trim();
-
-            //Method 2 - much slower
-            //char[] arr = pInput.ToCharArray();
-            //arr = Array.FindAll<char>(arr, (c => (!char.IsLetterOrDigit(c) && c != '_')));
-            //return_value = pInput;
-            //for (int i = 0; i < arr.Length; i++)
-            //{
-            //    return_value.Replace(arr[i], ' ');
-            //}
             
             return return_value;
         }
@@ -538,10 +528,10 @@ namespace MyMarketAnalyzer
                 response.Close();
                 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 /* Do nothing */
-                int stophere = 1;
+                //int stophere = 1;
             }
         }
 
@@ -594,10 +584,10 @@ namespace MyMarketAnalyzer
                     response.Close();
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 /* Do nothing */
-                int stophere = 1;
+                //int stophere = 1;
             }
 
             return webresponse;

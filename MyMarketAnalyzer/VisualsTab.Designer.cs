@@ -106,6 +106,7 @@
             this.visualSummaryTabPage1.Name = "visualSummaryTabPage1";
             this.visualSummaryTabPage1.Size = new System.Drawing.Size(1024, 80);
             this.visualSummaryTabPage1.TabIndex = 0;
+            this.visualSummaryTabPage1.Invalidated += new System.Windows.Forms.InvalidateEventHandler(this.vspage_Invalidated);
             // 
             // splitContainerTabVS
             // 
@@ -130,6 +131,7 @@
             // 
             // chartMain
             // 
+            this.chartMain.AllowZoom = false;
             this.chartMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -138,6 +140,16 @@
             this.chartMain.BackSecondaryColor = System.Drawing.Color.White;
             this.chartMain.BorderlineColor = System.Drawing.Color.Gainsboro;
             this.chartMain.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.MinorGrid.Enabled = true;
+            chartArea1.AxisX.MinorGrid.Interval = double.NaN;
+            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gray;
+            chartArea1.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
+            chartArea1.AxisY.MajorGrid.Enabled = false;
+            chartArea1.AxisY.MinorGrid.Enabled = true;
+            chartArea1.AxisY.MinorGrid.Interval = double.NaN;
+            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gray;
+            chartArea1.AxisY.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
             chartArea1.Name = "ChartArea1";
             this.chartMain.ChartAreas.Add(chartArea1);
             this.chartMain.CurrentSeriesIndex = 0;

@@ -297,7 +297,7 @@ namespace MyMarketAnalyzer
                         }
                         hist_data_in[i] = Regex.Replace(hist_data_in[i], "[A-Z]", "");
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         hist_data_in[i] = "0";
                     }
@@ -474,7 +474,7 @@ namespace MyMarketAnalyzer
                     ParseLiveData(webresponse);
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 success = false;
             }
@@ -519,7 +519,7 @@ namespace MyMarketAnalyzer
                 }
 
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 //TBD
             }
@@ -552,7 +552,7 @@ namespace MyMarketAnalyzer
                     substr = pChange.Substring(index + 1, pChange.IndexOf('%') - index - 1);
                     this.live_chg_pct = Double.Parse(substr);
                 }
-                catch(Exception e)
+                catch(Exception)
                 {  
                     //Do Nothing
                 }
@@ -592,11 +592,11 @@ namespace MyMarketAnalyzer
             Boolean validated = true;
 
             validated &= (live_timestamps.Count == live_price.Count);
-            validated &= (this.live_chg != null);
-            validated &= (this.live_chg_pct != null);
-            validated &= (this.live_high != null);
-            validated &= (this.live_low != null);
-            validated &= (this.live_volume != null);
+            //validated &= (this.live_chg != null);
+            //validated &= (this.live_chg_pct != null);
+            //validated &= (this.live_high != null);
+            //validated &= (this.live_low != null);
+            //validated &= (this.live_volume != null);
 
             return validated;
         }
@@ -793,10 +793,11 @@ namespace MyMarketAnalyzer
         public void TransformData(Transformation pType, Dictionary<String, String> pParams)
         {
             double pSigma;
-            int window_size;
+            int window_size, rDecimals;
             bool transformApplied = false;
 
-            switch(pType)
+            rDecimals = 2;
+            switch (pType)
             {
                 case Transformation.GAUSS:
                     try
@@ -805,7 +806,7 @@ namespace MyMarketAnalyzer
                         hist_price = Algorithms.GaussianBlur(hist_price, pSigma);
                         transformApplied = true;
                     }
-                    catch(Exception e){ }
+                    catch(Exception){ }
                     break;
                 case Transformation.MEAN:
                     try
@@ -814,7 +815,7 @@ namespace MyMarketAnalyzer
                         hist_price = Algorithms.MeanFilter(hist_price, window_size);
                         transformApplied = true;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         window_size = 1;
                     }
@@ -823,12 +824,18 @@ namespace MyMarketAnalyzer
                     try
                     {
                         hist_price = Algorithms.Normalize(hist_price, 0);
+                        rDecimals = 3;
                         transformApplied = true;
                     }
-                    catch(Exception e){ }
+                    catch(Exception){ }
                     break;
                 default:
                     break;
+            }
+
+            for (int i = 0; i < hist_price.Count; i++)
+            {
+                hist_price[i] = Math.Round(hist_price[i], rDecimals);
             }
 
             if (transformApplied)

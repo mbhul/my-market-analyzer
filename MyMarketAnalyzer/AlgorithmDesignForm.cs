@@ -259,7 +259,7 @@ namespace MyMarketAnalyzer
         {
             double param1Value, param2Value, param3Value;
             double[,] classprototypes;
-            int i, k;
+            int k;
 
             SET_WAIT_CURSOR();
 

@@ -40,6 +40,8 @@ namespace MyMarketAnalyzer
         private UInt16 TIAnchorIndex;
         private DisplayedDataSet displayed_data = DisplayedDataSet.NONE;
 
+        public bool CandlestickChecked { get; private set; }
+
         /*****************************************************************************
          *  CONSTRUCTOR:  VisualSummaryTabPage
          *  Description:    
@@ -201,14 +203,29 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void UpdateTechnicalIndicatorLabels()
         {
-            double volatility;
+            double volume;
+            string volUnit = "";
 
-            volatility = dataSet.Volatility;
-            tiVariable1.Text = "Volatility: " + volatility.ToString();
+            volume = dataSet.avgDailyVolume;
+            if (volume > 1000000.0)
+            {
+                volume /= 1000000.0;
+                volume = Math.Round(volume, 3);
+                volUnit = "M";
+            }
 
-            tiVariable1.Visible = true;
-            tiVariable2.Visible = false;
-            tiVariable3.Visible = false;
+            lblVariable1.Text = "Price Range: " + dataSet.HistoricalLows.Min().ToString() +
+                " - " + dataSet.HistoricalHighs.Max().ToString();
+
+            lblVariable2.Text = "Avg Volume: " + volume.ToString() + volUnit;
+            lblVariable3.Text = "Volatility (σ): " + dataSet.Volatility.ToString();
+
+            lblVariable1.Visible = true;
+            lblVariable2.Visible = true;
+            lblVariable3.Visible = true;
+            lblVariable4.Visible = false;
+            lblVariable5.Visible = false;
+            lblVariable6.Visible = false;
         }
 
         private void btnTiAdd1_Click(object sender, EventArgs e)
@@ -410,6 +427,11 @@ namespace MyMarketAnalyzer
                 this.displayed_data = DisplayedDataSet.NONE;
             }
         }
- 
+
+        private void ChkCandlestick_CheckedChanged(object sender, EventArgs e)
+        {
+            this.CandlestickChecked = this.chkCandlestick.Checked;
+            this.Invalidate();
+        }
     }
 }

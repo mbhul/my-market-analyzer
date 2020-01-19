@@ -288,6 +288,12 @@ namespace MyMarketAnalyzer
             SET_DATA_VALID();
         }
 
+        private void vspage_Invalidated(Object sender, InvalidateEventArgs e)
+        {
+            chartMain.CandleStickEnabled = ((VisualSummaryTabPage)sender).CandlestickChecked;
+            chartMain.CurrentSeriesIndex = lastSelectedTab;
+        }
+
         private void LoadChartData()
         {
             int i;
@@ -313,16 +319,18 @@ namespace MyMarketAnalyzer
                         tabVisualsData.TabPages.Add(newTab);
                         vspage.Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                         vspage.Width = tabVisualsData.TabPages[0].Controls[0].Width;
+                        vspage.Invalidated += new InvalidateEventHandler(this.vspage_Invalidated);
                     }
                 }
 
                 //Plot the chart data
                 chartMain.Series.Add(dataSet[i].Name);
-                chartMain.Series[dataSet[i].Name].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                chartMain.Series[dataSet[i].Name].ChartType = SeriesChartType.Line;
 
                 if (((VisualSummaryTabPage)tabVisualsData.TabPages[i].Controls[0]).DisplayedData == DisplayedDataSet.HISTORICAL)
                 {
                     chartMain.Series[dataSet[i].Name].Points.DataBindXY(dataSet[i].HistoricalPriceDate, dataSet[i].HistoricalPrice);
+                    chartMain.CreateCandleStick(dataSet[i], dataSet[i].Name);
                 }
                 else if (((VisualSummaryTabPage)tabVisualsData.TabPages[i].Controls[0]).DisplayedData == DisplayedDataSet.LIVE)
                 {
@@ -334,6 +342,7 @@ namespace MyMarketAnalyzer
                 CorrelationTableSortInstruction.Add(String.Empty);
             }
 
+            chartMain.CurrentSeriesIndex = 0;
             UpdateChartTitles();
         }
 
@@ -355,15 +364,17 @@ namespace MyMarketAnalyzer
                     tabVisualsData.TabPages.Add(newTab);
                     vspage.Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                     vspage.Width = tabVisualsData.TabPages[0].Controls[0].Width;
+                    vspage.Invalidated += new InvalidateEventHandler(this.vspage_Invalidated);
 
                     //Plot chart data
                     chartMain.Series.Add(appData[i].Name);
-                    chartMain.Series[appData[i].Name].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                    chartMain.Series[appData[i].Name].ChartType = SeriesChartType.Line;
 
                     total_index = i + dataSet.Count - 1;
                     if (((VisualSummaryTabPage)tabVisualsData.TabPages[total_index].Controls[0]).DisplayedData == DisplayedDataSet.HISTORICAL)
                     {
                         chartMain.Series[appData[i].Name].Points.DataBindXY(appData[i].HistoricalPriceDate, appData[i].HistoricalPrice);
+                        chartMain.CreateCandleStick(appData[i], appData[i].Name);
                     }
                     else if (((VisualSummaryTabPage)tabVisualsData.TabPages[total_index].Controls[0]).DisplayedData == DisplayedDataSet.LIVE)
                     {

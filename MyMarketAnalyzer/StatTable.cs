@@ -160,7 +160,7 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         public void BindMarketData(ExchangeMarket mktData, bool updateExisting = false)
         {
-            int i, j;
+            int i;
             Double NameColWidth = 0.25;
             Dictionary<int, Double> CoefficientList;
             List<int> remSelectedRows = new List<int>(this.SelectedEntries);
@@ -315,7 +315,7 @@ namespace MyMarketAnalyzer
                     this.dataGridView1.FirstDisplayedScrollingRowIndex = this.ScrollIndex;
                 }     
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 this.SelectedEntries.Clear();
                 this.SelectedCells.Clear();
@@ -336,7 +336,7 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         public void BindCorrelationData(ref ExchangeMarket mktData, int pIndex)
         {
-            int i, j;
+            int i;
             Dictionary<int, Double> CoefficientList;
 
             DataRow row;
@@ -409,7 +409,7 @@ namespace MyMarketAnalyzer
                 tableSource.DefaultView.Sort = InstrString;
                 success = true;
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 //handle exception
             }
@@ -611,7 +611,7 @@ namespace MyMarketAnalyzer
                 }
 
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 //throw new ArithmeticException();
             }

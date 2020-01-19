@@ -35,9 +35,12 @@
             // 
             this.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.customchart_PostPaint);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.customchart_OnPaint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.custom_OnMouseDown);
             this.MouseEnter += new System.EventHandler(this.custom_OnMouseEnter);
             this.MouseLeave += new System.EventHandler(this.custom_OnMouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.custom_OnMouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.custom_OnMouseUp);
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.custom_OnMouseWheel);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 

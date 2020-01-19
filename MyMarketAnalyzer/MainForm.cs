@@ -481,7 +481,10 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void DisplayStatData()
         {
-            tblStatTableMain.BindMarketData(MyDataManager.HistoricalData, true);
+            if(MyDataManager.HistoricalData != null)
+            {
+                tblStatTableMain.BindMarketData(MyDataManager.HistoricalData, true);
+            }
             UpdateStatResultCount(tblStatTableMain.DisplayedCount());
 
             if (this.tblStatTableMain.TableType == StatTableType.HIST_STATS)

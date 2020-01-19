@@ -440,7 +440,7 @@ namespace MyMarketAnalyzer
             {
                 result = (bool)(dt.Compute(CleanExpression(pExpression), ""));
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 result = false;
             }
@@ -626,7 +626,7 @@ namespace MyMarketAnalyzer
             {
                 return_type = (Variable)VariablesTable[pKey];
             }
-            catch(NullReferenceException ne)
+            catch(NullReferenceException)
             {
                 return_type = 0;
             }
