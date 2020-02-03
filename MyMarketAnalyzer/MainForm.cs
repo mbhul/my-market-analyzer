@@ -860,271 +860,6 @@ namespace MyMarketAnalyzer
         }
 
         /*****************************************************************************
-         *  FUNCTION:       UpdateAnalysisComboBox
-         *  Description:    Updates the drop-down in the Analysis tab page containing
-         *                  the list of loaded Equities available for analysis
-         *  Parameters:     None
-         *****************************************************************************/
-        private void UpdateAnalysisComboBox()
-        {
-            if(MyDataManager.HistoricalData.Constituents != null &&
-                MyDataManager.HistoricalData.Constituents.Count > 0)
-            {
-                this.analysisSelectBox.Items.Clear();
-                foreach(Equity eq in MyDataManager.HistoricalData.Constituents)
-                {
-                    this.analysisSelectBox.Items.Add(eq.Name);
-                }
-            }
-        }
-
-        /*****************************************************************************
-         *  EVENT HANDLER:  analysisSelectBox_SelectedIndexChanged
-         *  Description:    Handles updates to the Analysis tab page when the selected
-         *                  equity to be analyzed is changed. 
-         *  Parameters:     
-         *          sender - handle to the item which fired the event
-         *          e      - default event args
-         *****************************************************************************/
-        private void analysisSelectBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index;
-            List<Equity> data = MyDataManager.HistoricalData.Constituents;
-
-            index = this.analysisSelectBox.SelectedIndex;
-
-            if(MyDataManager.HistoricalData.Constituents != null &&
-                this.analysisSelectBox.Items.Count == MyDataManager.HistoricalData.Constituents.Count)
-            {
-                this.AnalysisChartBindData<DateTime>(data[index].HistoricalPriceDate, data[index].HistoricalPrice);
-            }
-        }
-
-        /*****************************************************************************
-         *  EVENT HANDLER:  btnAnalysisShowChart_Click
-         *  Description:    Handles the button click event for the 'Run Analysis' button
-         *  Parameters:     
-         *          sender - handle to the item which fired the event
-         *          e      - default event args
-         *****************************************************************************/
-        private void btnAnalysisShowChart_Click(object sender, EventArgs e)
-        {
-            RunAnalysisAndDisplayChart();
-        }
-
-        /*****************************************************************************
-         *  FUNCTION:       RunAnalysisAndDisplayChart
-         *  Description:    
-         *  Parameters:     None
-         *****************************************************************************/
-        private void RunAnalysisAndDisplayChart()
-        {
-            List<double> x_values = new List<double>();
-            List<double> y_values = new List<double>();
-            List<Equity> hist_data = new List<Equity>();
-            //int i, x_index, y_index;
-            //double data_value_x, data_value_y;
-
-            if (MyDataManager.HistoricalData != null && 
-                cbAnalysisIndicatorX.SelectedIndex >= 0 && 
-                cbAnalysisIndicatorY.SelectedIndex >= 0 &&
-                cbAnalysisType.SelectedIndex >= 0)
-            {
-                if (MyDataManager.HistoricalData.Constituents.Count > 0)
-                {
-                    hist_data = new List<Equity>(MyDataManager.HistoricalData.Constituents);
-                    AnalysisChartTypeSpec(hist_data, (AnalysisChartType)cbAnalysisType.SelectedIndex, out x_values, out y_values);
-                    AnalysisChartBindData(x_values, y_values);
-                }
-            }
-        }
-
-        /*****************************************************************************
-         *  FUNCTION:       AnalysisChartTypeSpec
-         *  Description:    
-         *  Parameters:     None
-         *****************************************************************************/
-        private void AnalysisChartTypeSpec(List<Equity> hist_data, AnalysisChartType chart_type, out List<double> x_values, out List<double> y_values)
-        {
-            int i, x_index, y_index;
-            double data_value_x, data_value_y;
-
-            x_values = new List<double>();
-            y_values = new List<double>();
-
-            x_index = cbAnalysisIndicatorX.SelectedIndex;
-            y_index = cbAnalysisIndicatorY.SelectedIndex;
-            for (i = 0; i < hist_data.Count; i++)
-            {
-                data_value_x = 0;
-                data_value_y = 0;
-                switch (chart_type)
-                {
-                    case AnalysisChartType.AVERAGE:
-                        data_value_x = AnalysisChartFeatureValue(hist_data[i], x_index, chart_type).Average();
-                        data_value_y = AnalysisChartFeatureValue(hist_data[i], y_index, chart_type).Average();
-                        this.panelAnalysis1.Visible = false;
-                        break;
-                    case AnalysisChartType.ANIMATED:
-                        if (AnalysisDisplayIndex >= 0 && AnalysisDisplayIndex < hist_data.Count)
-                        {
-                            data_value_x = AnalysisChartFeatureValue(hist_data[i], x_index, chart_type)[AnalysisDisplayIndex];
-                            data_value_y = AnalysisChartFeatureValue(hist_data[i], y_index, chart_type)[AnalysisDisplayIndex];
-                            this.lblChartDate.Text = hist_data[0].HistoricalPriceDate[AnalysisDisplayIndex].ToShortDateString();
-                            this.panelAnalysis1.Visible = true;
-                        }
-                        
-                        break;
-                    default:
-                        break;
-                }
-                x_values.Add(data_value_x);
-                y_values.Add(data_value_y);
-            }
- 
-        }
-
-        /*****************************************************************************
-         *  FUNCTION:       AnalysisChartFeatureValue
-         *  Description:    
-         *  Parameters:     None
-         *****************************************************************************/
-        private List<double> AnalysisChartFeatureValue(Equity pInputData, int pFeatureIndex, AnalysisChartType pChartType)
-        {
-            List<double> temp_value = new List<double>();
-
-            switch (pFeatureIndex)
-            {
-                //Daily Spread
-                case 0:
-                    temp_value = Helpers.ListDoubleOperation(ListOperator.DIFF, pInputData.HistoricalHighs, pInputData.HistoricalLows);
-                    temp_value = Helpers.ListDoubleOperation(ListOperator.DIVIDE, temp_value, pInputData.HistoricalOpens);
-                    temp_value = (new ListDouble(temp_value) * 100.0).ToList();
-                    break;
-                //Daily % Change
-                case 1:
-                    temp_value = (new ListDouble(pInputData.HistoricalPctChange)).ToList();
-                    break;
-                default:
-                    break;
-            }
-
-            return temp_value;
-        }
-
-        /*****************************************************************************
-         *  FUNCTION:       AnalysisChartBindData
-         *  Description:    
-         *  Parameters:     None
-         *****************************************************************************/
-        private void AnalysisChartBindData<T>(List<T> x_values, List<double> y_values)
-        {
-            //Bind data to chart
-            if (chartAnalysis.Series.Count <= 0)
-            {
-                chartAnalysis.Series.Add("Analysis");  
-            }
-            else if(chartAnalysis.Series.IndexOf("Analysis") < 0)
-            {
-                chartAnalysis.Series.Add("Analysis");  
-            }
-            chartAnalysis.Series["Analysis"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            chartAnalysis.Series["Analysis"].Points.Clear();
-            chartAnalysis.Series["Analysis"].Points.DataBindXY(x_values, y_values);
-
-            //Set chart axes labels
-            if (cbAnalysisIndicatorX.SelectedIndex >= 0 && cbAnalysisIndicatorY.SelectedIndex >= 0)
-            {
-                chartAnalysis.ChartAreas[0].AxisX.Title = Analysis.ChartFeatures[cbAnalysisIndicatorX.SelectedIndex];
-                chartAnalysis.ChartAreas[0].AxisY.Title = Analysis.ChartFeatures[cbAnalysisIndicatorY.SelectedIndex];
-            }
-
-            chartAnalysis.Invalidate();
-        }
-
-        /*****************************************************************************
-         *  EVENT HANDLER:  btnChartNext_Click
-         *  Description:    
-         *  Parameters:     
-         *          sender - handle to the item which fired the event
-         *          e      - default event args
-         *****************************************************************************/
-        private void btnChartNext_Click(object sender, EventArgs e)
-        {
-            if (this.chartAnalysis.Series.Count > 0 &&
-                this.AnalysisDisplayIndex < this.chartAnalysis.Series[0].Points.Count - 1)
-            {
-                 this.AnalysisDisplayIndex++;
-                 RunAnalysisAndDisplayChart();
-            }
-        }
-
-        /*****************************************************************************
-         *  EVENT HANDLER:  btnChartPrev_Click
-         *  Description:    
-         *  Parameters:     
-         *          sender - handle to the item which fired the event
-         *          e      - default event args
-         *****************************************************************************/
-        private void btnChartPrev_Click(object sender, EventArgs e)
-        {
-            if (this.chartAnalysis.Series.Count > 0 &&
-                this.AnalysisDisplayIndex > 0)
-            {
-                this.AnalysisDisplayIndex--;
-                RunAnalysisAndDisplayChart();
-            }
-        }
-
-        private void tabAnalysis_Layout(object sender, LayoutEventArgs e)
-        {
-            //this.heatMap1.Redraw();
-        }
-
-        /*****************************************************************************
-         *  EVENT HANDLER:  analysis_nestedSplitPanelRightOnPaint
-         *  Description:    
-         *  Parameters:     
-         *          sender - handle to the item which fired the event
-         *          e      - default event args
-         *****************************************************************************/
-        private void analysis_nestedSplitPanelRightOnPaint(object sender, PaintEventArgs e)
-        {
-            var control = sender as SplitContainer;
-            //paint the three dots'
-            Point[] points = new Point[3];
-            var w = control.Width;
-            var h = control.Height;
-            var d = control.SplitterDistance;
-            var sW = control.SplitterWidth;
-
-            //calculate the position of the points'
-            if (control.Orientation == Orientation.Horizontal)
-            {
-                points[0] = new Point((w / 2), d + (sW / 2));
-                points[1] = new Point(points[0].X - 10, points[0].Y);
-                points[2] = new Point(points[0].X + 10, points[0].Y);
-            }
-            else
-            {
-                points[0] = new Point(d + (sW / 2), (h / 2));
-                points[1] = new Point(points[0].X, points[0].Y - 10);
-                points[2] = new Point(points[0].X, points[0].Y + 10);
-            }
-
-            foreach (Point p in points)
-            {
-                p.Offset(-2, -2);
-                e.Graphics.FillRectangle(SystemBrushes.ControlDark,
-                    new Rectangle(p, new Size(4, 2)));
-
-                p.Offset(1, 1);
-                e.Graphics.FillRectangle(SystemBrushes.ControlLight,
-                    new Rectangle(p, new Size(4, 2)));
-            }
-        }
-
-        /*****************************************************************************
          *  EVENT HANDLER:  btnLoadPatternForm_Click
          *  Description:    
          *  Parameters:     
@@ -1359,6 +1094,276 @@ namespace MyMarketAnalyzer
             }
         }
 
+        #region ANALAYSIS TAB FUNCTIONS
+        /*****************************************************************************
+         *  FUNCTION:       UpdateAnalysisComboBox
+         *  Description:    Updates the drop-down in the Analysis tab page containing
+         *                  the list of loaded Equities available for analysis
+         *  Parameters:     None
+         *****************************************************************************/
+        private void UpdateAnalysisComboBox()
+        {
+            if (MyDataManager.HistoricalData.Constituents != null &&
+                MyDataManager.HistoricalData.Constituents.Count > 0)
+            {
+                this.analysisSelectBox.Items.Clear();
+                foreach (Equity eq in MyDataManager.HistoricalData.Constituents)
+                {
+                    this.analysisSelectBox.Items.Add(eq.Name + " (" + eq.Symbol + ")");
+                }
+            }
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  analysisSelectBox_SelectedIndexChanged
+         *  Description:    Handles updates to the Analysis tab page when the selected
+         *                  equity to be analyzed is changed. 
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void analysisSelectBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index;
+            List<Equity> data = MyDataManager.HistoricalData.Constituents;
+
+            index = this.analysisSelectBox.SelectedIndex;
+
+            if (MyDataManager.HistoricalData.Constituents != null &&
+                this.analysisSelectBox.Items.Count == MyDataManager.HistoricalData.Constituents.Count)
+            {
+                AnalysisChartBindData<DateTime>(data[index].HistoricalPriceDate, data[index].HistoricalPrice);
+                chartAnalysis.CreateCandleStick(data[index], data[index].Name, true);
+            }
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  btnAnalysisShowChart_Click
+         *  Description:    Handles the button click event for the 'Run Analysis' button
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void btnAnalysisShowChart_Click(object sender, EventArgs e)
+        {
+            RunAnalysisAndDisplayChart();
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       RunAnalysisAndDisplayChart
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
+        private void RunAnalysisAndDisplayChart()
+        {
+            List<double> x_values = new List<double>();
+            List<double> y_values = new List<double>();
+            List<Equity> hist_data = new List<Equity>();
+            //int i, x_index, y_index;
+            //double data_value_x, data_value_y;
+
+            if (MyDataManager.HistoricalData != null &&
+                cbAnalysisIndicatorX.SelectedIndex >= 0 &&
+                cbAnalysisIndicatorY.SelectedIndex >= 0 &&
+                cbAnalysisType.SelectedIndex >= 0)
+            {
+                if (MyDataManager.HistoricalData.Constituents.Count > 0)
+                {
+                    hist_data = new List<Equity>(MyDataManager.HistoricalData.Constituents);
+                    AnalysisChartTypeSpec(hist_data, (AnalysisChartType)cbAnalysisType.SelectedIndex, out x_values, out y_values);
+                    AnalysisChartBindData(x_values, y_values);
+                }
+            }
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       AnalysisChartTypeSpec
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
+        private void AnalysisChartTypeSpec(List<Equity> hist_data, AnalysisChartType chart_type, out List<double> x_values, out List<double> y_values)
+        {
+            int i, x_index, y_index;
+            double data_value_x, data_value_y;
+
+            x_values = new List<double>();
+            y_values = new List<double>();
+
+            x_index = cbAnalysisIndicatorX.SelectedIndex;
+            y_index = cbAnalysisIndicatorY.SelectedIndex;
+            for (i = 0; i < hist_data.Count; i++)
+            {
+                data_value_x = 0;
+                data_value_y = 0;
+                switch (chart_type)
+                {
+                    case AnalysisChartType.AVERAGE:
+                        data_value_x = AnalysisChartFeatureValue(hist_data[i], x_index, chart_type).Average();
+                        data_value_y = AnalysisChartFeatureValue(hist_data[i], y_index, chart_type).Average();
+                        this.panelAnalysis1.Visible = false;
+                        break;
+                    case AnalysisChartType.ANIMATED:
+                        if (AnalysisDisplayIndex >= 0 && AnalysisDisplayIndex < hist_data.Count)
+                        {
+                            data_value_x = AnalysisChartFeatureValue(hist_data[i], x_index, chart_type)[AnalysisDisplayIndex];
+                            data_value_y = AnalysisChartFeatureValue(hist_data[i], y_index, chart_type)[AnalysisDisplayIndex];
+                            this.lblChartDate.Text = hist_data[0].HistoricalPriceDate[AnalysisDisplayIndex].ToShortDateString();
+                            this.panelAnalysis1.Visible = true;
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+                x_values.Add(data_value_x);
+                y_values.Add(data_value_y);
+            }
+
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       AnalysisChartFeatureValue
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
+        private List<double> AnalysisChartFeatureValue(Equity pInputData, int pFeatureIndex, AnalysisChartType pChartType)
+        {
+            List<double> temp_value = new List<double>();
+
+            switch (pFeatureIndex)
+            {
+                //Daily Spread
+                case 0:
+                    temp_value = Helpers.ListDoubleOperation(ListOperator.DIFF, pInputData.HistoricalHighs, pInputData.HistoricalLows);
+                    temp_value = Helpers.ListDoubleOperation(ListOperator.DIVIDE, temp_value, pInputData.HistoricalOpens);
+                    temp_value = (new ListDouble(temp_value) * 100.0).ToList();
+                    break;
+                //Daily % Change
+                case 1:
+                    temp_value = (new ListDouble(pInputData.HistoricalPctChange)).ToList();
+                    break;
+                default:
+                    break;
+            }
+
+            return temp_value;
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       AnalysisChartBindData
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
+        private void AnalysisChartBindData<T>(List<T> x_values, List<double> y_values)
+        {
+            //Bind data to chart
+            if (chartAnalysis.Series.Count <= 0)
+            {
+                chartAnalysis.Series.Add("Analysis");
+            }
+            else if (chartAnalysis.Series.IndexOf("Analysis") < 0)
+            {
+                chartAnalysis.Series.Add("Analysis");
+            }
+            chartAnalysis.Series["Analysis"].ChartType = SeriesChartType.Line;
+            chartAnalysis.Series["Analysis"].Points.Clear();
+            chartAnalysis.Series["Analysis"].Points.DataBindXY(x_values, y_values);
+
+            chartAnalysis.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
+            chartAnalysis.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
+
+            //Set chart axes labels
+            if (cbAnalysisIndicatorX.SelectedIndex >= 0 && cbAnalysisIndicatorY.SelectedIndex >= 0)
+            {
+                chartAnalysis.ChartAreas[0].AxisX.Title = Analysis.ChartFeatures[cbAnalysisIndicatorX.SelectedIndex];
+                chartAnalysis.ChartAreas[0].AxisY.Title = Analysis.ChartFeatures[cbAnalysisIndicatorY.SelectedIndex];
+            }
+
+            chartAnalysis.Invalidate();
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  btnChartNext_Click
+         *  Description:    
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void btnChartNext_Click(object sender, EventArgs e)
+        {
+            if (this.chartAnalysis.Series.Count > 0 &&
+                this.AnalysisDisplayIndex < this.chartAnalysis.Series[0].Points.Count - 1)
+            {
+                this.AnalysisDisplayIndex++;
+                RunAnalysisAndDisplayChart();
+            }
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  btnChartPrev_Click
+         *  Description:    
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void btnChartPrev_Click(object sender, EventArgs e)
+        {
+            if (this.chartAnalysis.Series.Count > 0 &&
+                this.AnalysisDisplayIndex > 0)
+            {
+                this.AnalysisDisplayIndex--;
+                RunAnalysisAndDisplayChart();
+            }
+        }
+
+        private void tabAnalysis_Layout(object sender, LayoutEventArgs e)
+        {
+            //this.heatMap1.Redraw();
+        }
+
+        /*****************************************************************************
+         *  EVENT HANDLER:  analysis_nestedSplitPanelRightOnPaint
+         *  Description:    
+         *  Parameters:     
+         *          sender - handle to the item which fired the event
+         *          e      - default event args
+         *****************************************************************************/
+        private void analysis_nestedSplitPanelRightOnPaint(object sender, PaintEventArgs e)
+        {
+            var control = sender as SplitContainer;
+            //paint the three dots'
+            Point[] points = new Point[3];
+            var w = control.Width;
+            var h = control.Height;
+            var d = control.SplitterDistance;
+            var sW = control.SplitterWidth;
+
+            //calculate the position of the points'
+            if (control.Orientation == Orientation.Horizontal)
+            {
+                points[0] = new Point((w / 2), d + (sW / 2));
+                points[1] = new Point(points[0].X - 10, points[0].Y);
+                points[2] = new Point(points[0].X + 10, points[0].Y);
+            }
+            else
+            {
+                points[0] = new Point(d + (sW / 2), (h / 2));
+                points[1] = new Point(points[0].X, points[0].Y - 10);
+                points[2] = new Point(points[0].X, points[0].Y + 10);
+            }
+
+            foreach (Point p in points)
+            {
+                p.Offset(-2, -2);
+                e.Graphics.FillRectangle(SystemBrushes.ControlDark,
+                    new Rectangle(p, new Size(4, 2)));
+
+                p.Offset(1, 1);
+                e.Graphics.FillRectangle(SystemBrushes.ControlLight,
+                    new Rectangle(p, new Size(4, 2)));
+            }
+        }
+
         /*****************************************************************************
          *  EVENT HANDLER:  btnBuyRuleExpandCollapse_Click
          *  Description:    
@@ -1507,7 +1512,7 @@ namespace MyMarketAnalyzer
         {
             int index;
             double principal_amt = 0.0;
-            List<Equity> data = MyDataManager.HistoricalData.Constituents;
+            //List<Equity> data = MyDataManager.HistoricalData.Constituents;
 
             index = this.analysisSelectBox.SelectedIndex;
 
@@ -1517,7 +1522,7 @@ namespace MyMarketAnalyzer
                 if (Helpers.ValidateNumeric(this.analysisAmtTxt.Text))
                 {
                     principal_amt = Double.Parse(this.analysisAmtTxt.Text);
-                    this.TestRuleParser.SetInputParams(data[index], this.analysisBuy_RTxtBox.Text, this.analysisSell_RTxtBox.Text, principal_amt);
+                    this.TestRuleParser.SetInputParams(MyDataManager.HistoricalData, index, this.analysisBuy_RTxtBox.Text, this.analysisSell_RTxtBox.Text, principal_amt);
 
                     backgroundWorkerAnalysis.RunWorkerAsync();
                     backgroundWorkerAnalysisProgress.RunWorkerAsync();
@@ -1670,6 +1675,11 @@ namespace MyMarketAnalyzer
             AnalysisResult _result;
             _result = this.TestRuleParser.RunAnalysis();
             this.analysisSummaryPage1.SetResult(_result);
+
+            if(TestRuleParser.errorIndex[1] > TestRuleParser.errorIndex[0])
+            {
+
+            }
         }
 
         /*****************************************************************************
@@ -1732,7 +1742,7 @@ namespace MyMarketAnalyzer
                 }
             }
             
-            reg = new Regex("\\[U.*\\]");
+            reg = new Regex("\\[U.*?\\]");
             if (sellRuleLines == 0)
             {
                 if (reg.Replace(this.analysisSell_RTxtBox.Text, "", 1).Trim() == String.Empty)
@@ -1783,7 +1793,7 @@ namespace MyMarketAnalyzer
                 }
             }
 
-            reg = new Regex("\\[U.*\\]");
+            reg = new Regex("\\[U.*?\\]");
             if (buyRuleLines == 0)
             {
                 if (reg.Replace(this.analysisBuy_RTxtBox.Text, "", 1).Trim() == String.Empty)
@@ -1821,4 +1831,5 @@ namespace MyMarketAnalyzer
         }
 
     }
+    #endregion
 }

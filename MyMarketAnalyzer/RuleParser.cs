@@ -35,7 +35,13 @@ namespace MyMarketAnalyzer
         [StringValue("V")]
         VOLUME = 0xE03,
         [StringValue("PCT")]
-        PCT = 0xE04
+        PCT = 0xE04,
+        [StringValue("VX")]
+        VX = 0xE05,
+        [StringValue("last_bought")]
+        LASTBUY = 0xE06,
+        [StringValue("last_sold")]
+        LASTSELL = 0xE07
     }
 
     public enum Fn
@@ -55,8 +61,9 @@ namespace MyMarketAnalyzer
 
     public static class RuleParserInputs
     {
-        public static Variable[] VarList = { Variable.PRICE, Variable.VOLUME, Variable.PCT, Variable.MACD_SIG, Variable.MACD_DIFF };
-        public static String[] VarCaptions = { "PRICE", "VOLUME", "% CHANGE", "MACD SIG", "MACD DIFF" };
+        public static Variable[] VarList = { Variable.PRICE, Variable.VOLUME, Variable.PCT, Variable.MACD_SIG, Variable.MACD_DIFF, Variable.VX };
+        public static Variable[] VarList2 = { Variable.LASTBUY, Variable.LASTSELL };
+        public static String[] VarCaptions = { "PRICE", "VOLUME", "% CHANGE", "MACD SIG", "MACD DIFF", "VOLATILITY" };
         public static Fn[] Fns = { Fn.AVG, Fn.MAX, Fn.MIN, Fn.TREND, Fn.STDEV };
         public static String[] Operators = { "AND", "OR" };
         public static String[] Comparators = { ">=", "<=", ">", "<", "=" };
@@ -65,20 +72,19 @@ namespace MyMarketAnalyzer
     public class RuleParser
     {
         private Hashtable VariablesTable = new Hashtable(100);
-
-        //private Variable[] VarList = { Variable.MACD_SIG, Variable.MACD_DIFF, Variable.PCT, Variable.PRICE, Variable.VOLUME };
-        //private static String[] operators = { "AND", "OR" };
-        //private static String[] comparators = { ">=", "<=", ">", "<", "=" };
-        //private static Fn[] fns = { Fn.AVG, Fn.MAX, Fn.MIN, Fn.TREND, Fn.STDEV };
-
         private List<Fn> current_buy_functions;
         private List<Fn> current_sell_functions;
+        private List<bool> buy_history;
+        private List<bool> sell_history;
 
         //Input parameters
         private Equity inEquity;
+        private ExchangeMarket mktData;
         private String inBuyRule;
         private String inSellRule;
         private Double inPrincipalAmt;
+
+        public int[] errorIndex { get; private set; } = new int[2];
 
         public Double PercentComplete { get; private set; }
 
@@ -87,6 +93,8 @@ namespace MyMarketAnalyzer
             PercentComplete = 0.0;
             current_buy_functions = new List<Fn>();
             current_sell_functions = new List<Fn>();
+            buy_history = new List<bool>();
+            sell_history = new List<bool>();
 
             foreach (Variable var in RuleParserInputs.VarList)
             {
@@ -94,9 +102,10 @@ namespace MyMarketAnalyzer
             }
         }
 
-        public void SetInputParams(Equity pEqIn, String pBuyRule, String pSellRule, Double pPrincipal)
+        public void SetInputParams(ExchangeMarket pMktData, int pEqIn, String pBuyRule, String pSellRule, Double pPrincipal)
         {
-            inEquity = pEqIn;
+            mktData = pMktData;
+            inEquity = pMktData.Constituents[pEqIn];
             inBuyRule = pBuyRule;
             inSellRule = pSellRule;
             inPrincipalAmt = pPrincipal;
@@ -117,8 +126,11 @@ namespace MyMarketAnalyzer
             int units = 0, units_held = 0, total_transactions = 0;
             AnalysisResult analysis_result = new AnalysisResult();
 
-            String[] buy_conditions = inBuyRule.Split(RuleParserInputs.Operators, StringSplitOptions.RemoveEmptyEntries);
-            String[] sell_conditions = inSellRule.Split(RuleParserInputs.Operators, StringSplitOptions.RemoveEmptyEntries);
+            inBuyRule = PreprocessRule(inBuyRule);
+            inSellRule = PreprocessRule(inSellRule);
+
+            String[] buy_conditions = CleanExpression(inBuyRule).Split(RuleParserInputs.Operators, StringSplitOptions.RemoveEmptyEntries);
+            String[] sell_conditions = CleanExpression(inSellRule).Split(RuleParserInputs.Operators, StringSplitOptions.RemoveEmptyEntries);
 
             PercentComplete = 0.0;
 
@@ -146,8 +158,11 @@ namespace MyMarketAnalyzer
 
             //ex. ((MACD_DIFF > 0) AND (P < AVG[P][-5..0]))
 
+            buy_history.Clear();
+            sell_history.Clear();
+
             //For every day in data
-            for(i = 0; i < inEquity.HistoricalPriceDate.Count; i++)
+            for (i = 0; i < inEquity.HistoricalPriceDate.Count; i++)
             {
                 //Initialize analysis result values
                 analysis_result.cash_totals.Add(0.0);
@@ -159,16 +174,31 @@ namespace MyMarketAnalyzer
                 buy = false;
                 str_evaluated_rule = inBuyRule;
 
-                //Get the number of units to buy
+                //Parse the unit specifier in the buy rule
                 units = GetNumberOfUnits(str_evaluated_rule, out str_evaluated_rule, inEquity.HistoricalPrice[i], cash);
                 
                 //Parse each of the individual conditional expressions and evaluate the overall rule
                 foreach(String buy_cond in buy_conditions)
                 {
+                    //str_expression = PreprocessRule(buy_cond);
                     str_expression = Parse(buy_cond, inEquity, i, current_buy_functions);
+
+                    if(str_expression == "ERROR")
+                    {
+                        analysis_result.message_string = "Syntax error in buy rule";
+                        PercentComplete = 1.0;
+                        return analysis_result;
+                    }
+
+                    //replace the sub-expression string with it's parsed value
                     str_evaluated_rule = str_evaluated_rule.Replace(buy_cond, str_expression);
                 }
+
+                //Evaluate the overall parsed buy rule. At this point, all functions and variables 
+                // must have been replaced with their parsed values 
+                // (ex. "P < AVG[P][-5..0]" must be something like "6.5 < 7.67")
                 buy = Evaluate(str_evaluated_rule);
+                buy_history.Add(buy);
 
                 //Update holdings if the buy rule evaluates to True
                 if (buy)
@@ -193,9 +223,18 @@ namespace MyMarketAnalyzer
                 foreach (String sell_cond in sell_conditions)
                 {
                     str_expression = Parse(sell_cond, inEquity, i, current_sell_functions);
+
+                    if (str_expression == "ERROR")
+                    {
+                        analysis_result.message_string = "Syntax error in sell rule";
+                        PercentComplete = 1.0;
+                        return analysis_result;
+                    }
+
                     str_evaluated_rule = str_evaluated_rule.Replace(sell_cond, str_expression);
                 }
                 sell = Evaluate(str_evaluated_rule);
+                sell_history.Add(sell);
 
                 if (sell)
                 {
@@ -239,6 +278,204 @@ namespace MyMarketAnalyzer
             return analysis_result;
         }
 
+        private String PreprocessRule(String pRuleString)
+        {
+            string subexpression = "", returnString = "";
+            int index1 = 0, index2 = 0;
+            string indexStr = "", newRule = "";
+
+            returnString = pRuleString;
+            returnString = (new Regex("\\s+")).Replace(returnString, " ");
+
+            //Find all instances of the "becomes" keyword and create the edge-detection string
+            foreach (int index in pRuleString.AllIndexesOf("becomes"))
+            {
+                index1 = ExpressionStartIndex(pRuleString, index - 1);
+                index2 = ExpressionEndIndex(pRuleString, index + 7);
+
+                subexpression = pRuleString.Substring(index1, index2 - index1);
+
+                //Replace all existing index specifiers with ones decremented by 1
+                index1 = subexpression.IndexOf('[');
+                newRule = subexpression;
+                while (index1 >= 0)
+                {
+                    index2 = subexpression.IndexOf(']', index1);
+
+                    if (index2 > index1)
+                    {
+                        indexStr = subexpression.Substring(index1 + 1, index2 - index1 - 1);
+                    }
+                    else { break; }
+
+                    //replace the indexStr with indexes decremented by 1
+                    foreach(Match si in Regex.Matches(indexStr, "[-]*[0-9]+"))
+                    {
+                        indexStr = indexStr.ReplaceFirstOccurrence(si.Value, (int.Parse(si.Value) - 1).ToString());
+                    }
+
+                    newRule = newRule.ReplaceFirstOccurrence(subexpression.Substring(index1 + 1, index2 - index1 - 1), indexStr);
+                    index1 = subexpression.IndexOf('[', index2);
+                }
+
+                //For variables used without an index specifier (indicating current data), need to add [-1] specifier
+                foreach(Variable vari in RuleParserInputs.VarList)
+                {
+                    MatchCollection mc = Regex.Matches(newRule, "\\b" + StringEnum.GetStringValue(vari) + "\\b");
+                    int i = 0, offset = 0;
+
+                    while(i < mc.Count)
+                    {
+                        index1 = mc[i++].Index + offset;
+                        index2 = index1 + StringEnum.GetStringValue(vari).Length;
+                        if(newRule[index2] != '[' && newRule[index2] != ']')
+                        {
+                            newRule = newRule.Insert(index2, "[-1]");
+                            offset += 4;
+                        }
+                    }
+                }
+                
+                //Create the new subexpression, replacing "becomes" with the same rule using 'previous' indexes
+                newRule = "(" + subexpression.Replace("becomes", "") + " AND NOT(" + newRule.Replace("becomes", "") + "))";
+                newRule = newRule.Replace("  ", " ").Trim();
+
+                returnString = returnString.Replace(subexpression, newRule);
+                returnString = (new Regex("\\s+")).Replace(returnString, " ");
+            }
+
+            return returnString;
+        }
+
+        private int ExpressionStartIndex(string pRuleString, int pFromIndex)
+        {
+            int nesting_level = 0, param_level = 0;
+            int index1 = 0;
+            string tempStr = "";
+            bool isfound = false;
+
+            //find the beginning of the expression first
+            nesting_level = 0;
+            param_level = 0;
+            isfound = false;
+            index1 = pFromIndex;
+            while (index1 > 0)
+            {
+                switch (pRuleString[index1])
+                {
+                    case '(':
+                        nesting_level--;
+                        break;
+                    case ')':
+                        nesting_level++;
+                        break;
+                    case '[':
+                        param_level--;
+                        break;
+                    case ']':
+                        param_level++;
+                        break;
+                    default:
+                        break;
+                }
+                tempStr = pRuleString.SubWord(index1);
+
+                if (RuleParserInputs.Fns.Where(a => StringEnum.GetStringValue(a) == tempStr).Count() > 0)
+                {
+                    isfound = true;
+                }
+                else if (RuleParserInputs.VarList.Where(a => StringEnum.GetStringValue(a) == tempStr).Count() > 0 &&
+                    (param_level == 0))
+                {
+                    isfound = true;
+                }
+
+                if (isfound && (param_level == 0) && (nesting_level == 0))
+                {
+                    break;
+                }
+
+                index1--;
+            }
+
+            return index1;
+        }
+
+        private int ExpressionEndIndex(string pRuleString, int pFromIndex)
+        {
+            int nesting_level = 0, param_level = 0;
+            int index1 = 0;
+            string tempStr = "";
+            bool isfound = false;
+
+            //find the end of the expression
+            nesting_level = 0;
+            param_level = 0;
+            isfound = false;
+            index1 = pFromIndex;
+
+            while (index1 < pRuleString.Length)
+            {
+                switch (pRuleString[index1])
+                {
+                    case '(':
+                        nesting_level++;
+                        break;
+                    case ')':
+                        nesting_level--;
+                        break;
+                    case '[':
+                        param_level++;
+                        break;
+                    case ']':
+                        param_level--;
+                        break;
+                    default:
+                        break;
+                }
+                tempStr = pRuleString.SubWord(index1);
+
+                try
+                {
+                    double.Parse(tempStr);
+                    isfound = true;
+                    index1 += tempStr.Length;
+                }
+                catch
+                {
+                    if (RuleParserInputs.Fns.Where(a => StringEnum.GetStringValue(a) == tempStr).Count() > 0)
+                    {
+                        isfound = true;
+                        index1 += tempStr.Length - 1;
+                    }
+                    else if (RuleParserInputs.VarList.Where(a => StringEnum.GetStringValue(a) == tempStr).Count() > 0 &&
+                        (param_level == 0))
+                    {
+                        isfound = true;
+                        index1 += tempStr.Length - 1;
+                    }
+                }
+
+                if (isfound && (param_level == 0) && (nesting_level == 0))
+                {
+                    //look ahead to the next character in case a valid fn or param string is found
+                    // to ensure the whole parameter is taken
+                    if(index1 < (pRuleString.Length - 1) && pRuleString[index1+1] == '[')
+                    {
+                        param_level++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                index1++;
+            }
+
+            return index1;
+        }
+
         /*****************************************************************************
          *  FUNCTION:       Parse
          *  Description:    Replaces a primitive expression with corresponding numeric values
@@ -257,11 +494,13 @@ namespace MyMarketAnalyzer
             Variable in_param;
 
             str_expression = pExpression;
+            //For each function in the expression being parsed
             foreach (Fn func in pFNs)
             {
                 fn_str = "";
                 if(pExpression.Contains(StringEnum.GetStringValue(func)))
                 {
+                    //Get the substring containing only the logical expression for this function
                     index1 = pExpression.IndexOf(StringEnum.GetStringValue(func));
                     index2 = pExpression.IndexOf("]", index1);
 
@@ -271,7 +510,29 @@ namespace MyMarketAnalyzer
                     }
 
                     fn_str = pExpression.Substring(index1, index2 - index1 + 1);
-                    str_expression = str_expression.Replace(fn_str.Trim(), GetFunction(func, pEqIn, fn_str, pIndex).ToString());
+
+                    try
+                    {
+                        //Evaluate the function and replace the substring in the original parent expression with the value
+                        str_expression = str_expression.Replace(fn_str.Trim(), GetFunction(func, pEqIn, fn_str, pIndex).ToString());
+                    }
+                    catch(IndexOutOfRangeException)
+                    {
+                        //The index will be out of range even for a valid command if the function operates on past data that 
+                        // isn't available at the start of a series. 
+                        //
+                        // Ex. AVG[P][-5..0] --> at the start of the price data series, there aren't 5 previous data points available 
+                        //     to calculate an average on.
+                        //
+                        // In this case, just return false to allow the rest of the command to be processed.
+                        return "false";
+                    }
+                    catch(Exception)
+                    {
+                        errorIndex[0] = index1;
+                        errorIndex[1] = index2;
+                        return "ERROR";
+                    }
                 }
             }
 
@@ -279,26 +540,39 @@ namespace MyMarketAnalyzer
 
             foreach(string exp_part in split_str)
             {
-                if(Helpers.ValidateNumeric(exp_part) == false)
+                parameter = CleanExpression(exp_part.Trim()).Replace("NOT","");
+
+                if (Helpers.ValidateNumeric(parameter) == false)
                 {
-                    parameter = CleanExpression(exp_part.Trim());
                     in_param = GetParameterType(parameter);
 
-                    //If the data to be analyzed is one of the MACD signals, ensure the passed index is valid
-                    if (in_param == Variable.MACD_DIFF || in_param == Variable.MACD_SIG)
+                    try
                     {
-                        if (pIndex > (pEqIn.HistoricalPrice.Count() - pEqIn.MACD_C.Count()))
+                        //If the data to be analyzed is one of the MACD signals, ensure the passed index is valid
+                        if (in_param == Variable.MACD_DIFF || in_param == Variable.MACD_SIG)
+                        {
+                            if (pIndex > (pEqIn.HistoricalPrice.Count() - pEqIn.MACD_C.Count()))
+                            {
+                                parameter_value = GetParameter(pEqIn, parameter, pIndex);
+                                str_expression = str_expression.ReplaceFirstOccurrence(parameter, parameter_value.ToString());
+                            }
+                        }
+                        else
                         {
                             parameter_value = GetParameter(pEqIn, parameter, pIndex);
-                            str_expression = str_expression.Replace(parameter, parameter_value.ToString());
+                            str_expression = str_expression.ReplaceFirstOccurrence(parameter, parameter_value.ToString());
                         }
                     }
-                    else
+                    catch (IndexOutOfRangeException)
                     {
-                        parameter_value = GetParameter(pEqIn, parameter, pIndex);
-                        str_expression = str_expression.Replace(parameter, parameter_value.ToString());
+                        return "false";
                     }
-
+                    catch (Exception)
+                    {
+                        errorIndex[0] = 0;
+                        errorIndex[1] = 0;
+                        return "ERROR";
+                    }
                 }
             }
 
@@ -347,7 +621,8 @@ namespace MyMarketAnalyzer
                         func_inputs = new List<double>(pEqIn.HistoricalPctChange);
                         break;
                     default:
-                        break;
+                        //unknown or malformed function command
+                        throw new ArgumentException();
                 }
 
                 if ((pFnStr.Length > (index2+1)) && pFnStr.ToCharArray()[index2 + 1] == '[')
@@ -370,7 +645,7 @@ namespace MyMarketAnalyzer
                         }
                     }
 
-                    if ((filter_index1 <= 0 && filter_index2 <= 0) &&
+                    if ((filter_index1 <= filter_index2) && (filter_index2 <= 0) &&
                         (pIndex + filter_index1 >= 0) &&
                         func_inputs.Count > pIndex)
                     {
@@ -394,8 +669,12 @@ namespace MyMarketAnalyzer
                                 eval_data = Helpers.StdDev(func_inputs);
                                 break;
                             default:
-                                break;
+                                throw new ArgumentException();
                         }
+                    }
+                    else
+                    {
+                        throw new IndexOutOfRangeException();
                     }
                 }
                 else
@@ -424,6 +703,121 @@ namespace MyMarketAnalyzer
             }
 
             return eval_data;
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       GetParameter
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
+        private Double GetParameter(Equity pEqIn, String pKey, int pIndex)
+        {
+            double return_val = 0.0;
+            pKey = pKey.Trim();
+            int macd_i_diff;
+            int index1 = -1, index2 = -1, filter_index;
+            string IndexStr = "";
+            Variable get_param = 0;
+
+            index1 = pKey.IndexOf('[', 1);
+            if(index1 > 0)
+                index2 = pKey.IndexOf(']', index1);
+
+            filter_index = pIndex;
+
+            //If the parameter asks for a specific index other than pIndex
+            if (index2 > index1)
+            {
+                IndexStr = pKey.Substring(index1 + 1, index2 - index1 - 1).Trim();
+
+                if (Regex.Matches(IndexStr, "^[-][0-9]*$").Count > 0)
+                {
+                    filter_index = pIndex + int.Parse(IndexStr);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+
+                //clear the index specifier
+                pKey = pKey.Substring(0, index1);
+            }
+
+            //Ex. If the passed parameter string is "P", filter_index = pIndex
+            //    If the passed parameter string is "P[-2], filter_index = pIndex - 2
+            //
+            // At this point, in both cases pKey will be "P"
+
+            if (filter_index < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            get_param = GetParameterType(pKey);
+
+            switch (get_param)
+            {
+                case Variable.MACD_SIG:
+                    macd_i_diff = pEqIn.HistoricalPrice.Count - pEqIn.MACD_B.Count;
+                    if (filter_index >= macd_i_diff)
+                    {
+                        return_val = pEqIn.MACD_B[filter_index - macd_i_diff];
+                    }
+                    break;
+                case Variable.MACD_DIFF:
+                    macd_i_diff = pEqIn.HistoricalPrice.Count - pEqIn.MACD_C.Count;
+                    if (filter_index >= macd_i_diff)
+                    {
+                        return_val = pEqIn.MACD_C[filter_index - macd_i_diff];
+                    }
+                    break;
+                case Variable.PRICE:
+                    return_val = pEqIn.HistoricalPrice[filter_index];
+                    break;
+                case Variable.PCT:
+                    return_val = pEqIn.HistoricalPctChange[filter_index];
+                    break;
+                case Variable.VOLUME:
+                    return_val = pEqIn.HistoricalVolumes[filter_index];
+                    break;
+                case Variable.VX:
+                    return_val = Helpers.StdDev(pEqIn.HistoricalPrice.GetRange(0, filter_index));
+                    break;
+                case Variable.LASTBUY:
+                    return_val = (double)(filter_index - this.buy_history.LastIndexOf(true));
+                    break;
+                case Variable.LASTSELL:
+                    return_val = (double)(filter_index - this.sell_history.LastIndexOf(true));
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+
+            return return_val;
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:       GetParameterType
+         *  Description:    
+         *  Parameters:     None
+         *****************************************************************************/
+        private Variable GetParameterType(String pKey)
+        {
+            Variable return_type;
+            Regex regex;
+
+            try
+            {
+                regex = new Regex(Regex.Escape("[") + ".*?" + Regex.Escape("]"));
+                pKey = regex.Replace(pKey, "").Trim();
+                return_type = (Variable)VariablesTable[pKey];
+            }
+            catch (NullReferenceException)
+            {
+                return_type = 0;
+            }
+
+            return return_type;
         }
 
         /*****************************************************************************
@@ -473,6 +867,7 @@ namespace MyMarketAnalyzer
                 else { }
             }
             
+            //Remove leading or trailing brackets if there is no pair for it in the string
             if(nesting_level > 0)
             {
                 regex = new Regex(Regex.Escape("("));
@@ -485,7 +880,8 @@ namespace MyMarketAnalyzer
             }
             else { }
 
-            regex = new Regex(Regex.Escape("[") + "U.*" + Regex.Escape("]"));
+            //Remove the units specifier
+            regex = new Regex(Regex.Escape("[") + "U.*?" + Regex.Escape("]"));
             str_return = regex.Replace(str_return, "").Trim();
 
             return str_return;
@@ -559,79 +955,12 @@ namespace MyMarketAnalyzer
                 units_int = (int)units;
             }
 
-            regex = new Regex(Regex.Escape("[") + "U.*" + Regex.Escape("]"));
+            regex = new Regex(Regex.Escape("[") + "U.*?" + Regex.Escape("]"));
             str_return = regex.Replace(str_return, "").Trim();
 
             pReturnString = str_return;
 
             return units_int;
-        }
-
-        /*****************************************************************************
-         *  FUNCTION:       GetParameter
-         *  Description:    
-         *  Parameters:     None
-         *****************************************************************************/
-        private Double GetParameter(Equity pEqIn, String pKey, int pIndex)
-        {
-            double return_val = 0.0;
-            pKey = pKey.Trim();
-            int macd_i_diff;
-            Variable get_param = 0;
-
-            get_param = GetParameterType(pKey);
-
-            switch(get_param)
-            {
-                case Variable.MACD_SIG:
-                    macd_i_diff = pEqIn.HistoricalPrice.Count - pEqIn.MACD_B.Count;
-                    if(pIndex >= macd_i_diff)
-                    {
-                        return_val = pEqIn.MACD_B[pIndex - macd_i_diff];
-                    }
-                    break;
-                case Variable.MACD_DIFF:
-                    macd_i_diff = pEqIn.HistoricalPrice.Count - pEqIn.MACD_C.Count;
-                    if (pIndex >= macd_i_diff)
-                    {
-                        return_val = pEqIn.MACD_C[pIndex - macd_i_diff];
-                    }
-                    break;
-                case Variable.PRICE:
-                    return_val = pEqIn.HistoricalPrice[pIndex];
-                    break;
-                case Variable.PCT:
-                    return_val = pEqIn.HistoricalPctChange[pIndex];
-                    break;
-                case Variable.VOLUME:
-                    return_val = pEqIn.HistoricalVolumes[pIndex];
-                    break;
-                default:
-                    break;
-            }
-
-            return return_val;
-        }
-
-        /*****************************************************************************
-         *  FUNCTION:       GetParameterType
-         *  Description:    
-         *  Parameters:     None
-         *****************************************************************************/
-        private Variable GetParameterType(String pKey)
-        {
-            Variable return_type;
-
-            try
-            {
-                return_type = (Variable)VariablesTable[pKey];
-            }
-            catch(NullReferenceException)
-            {
-                return_type = 0;
-            }
-
-            return return_type;
         }
 
     }

@@ -16,7 +16,8 @@ namespace MyMarketAnalyzer
         private enum ColumnStyle
         {
             NONE,
-            PLUS_MINUS
+            PLUS_MINUS,
+            SYMBOL
         }
 
         private enum ContextMenuEntry
@@ -52,6 +53,7 @@ namespace MyMarketAnalyzer
 
         List<ColumnStyle> ColumnStyles = new List<ColumnStyle>();
         List<int> PlusMinusColumns = new List<int>();
+        int SymbolColumn;
 
         public List<int> SelectedEntries { get; private set; }
         public StatTableType TableType { get; set; }
@@ -178,6 +180,7 @@ namespace MyMarketAnalyzer
 
                 // Create the columns and column headings
                 AddColumnToSource(System.Type.GetType("System.String"), TableHeadings.Name, "Name", true, false);
+                AddColumnToSource(System.Type.GetType("System.String"), TableHeadings.Symbol, "Sym", true, false, false, ColumnStyle.SYMBOL);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_Last, TableHeadings.Live_Last, true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_High, TableHeadings.Live_High, true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_Low, TableHeadings.Live_Low, true, false);
@@ -196,6 +199,7 @@ namespace MyMarketAnalyzer
                     row = tableSource.NewRow();
                     row[IndexColumnName] = i + 1;
                     row[TableHeadings.Name] = mktData.Constituents[i].Name;
+                    row[TableHeadings.Symbol] = mktData.Constituents[i].Symbol;
                     row[TableHeadings.Live_Last] = mktData.Constituents[i].HistoricalPrice[mktData.Constituents[i].HistoricalPrice.Count - 1];
                     row[TableHeadings.Live_High] = mktData.Constituents[i].HistoricalPrice.Max();
                     row[TableHeadings.Live_Low] = mktData.Constituents[i].HistoricalPrice.Min();
@@ -238,6 +242,7 @@ namespace MyMarketAnalyzer
 
                 // Create new columns
                 AddColumnToSource(System.Type.GetType("System.String"), TableHeadings.Name, "Name", true, false);
+                AddColumnToSource(System.Type.GetType("System.String"), TableHeadings.Symbol, "Sym", true, false, false, ColumnStyle.SYMBOL);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_Last, "Last", true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_High, "High", true, false);
                 AddColumnToSource(System.Type.GetType("System.Double"), TableHeadings.Live_Low, "Low", true, false);
@@ -252,6 +257,7 @@ namespace MyMarketAnalyzer
                     row = tableSource.NewRow();
                     row[IndexColumnName] = i + 1;
                     row[TableHeadings.Name] = mktData.Constituents[i].Name;
+                    row[TableHeadings.Symbol] = mktData.Constituents[i].Symbol;
                     row[TableHeadings.Live_Last] = mktData.Constituents[i].DailyLast[mktData.Constituents[i].DailyLast.Count - 1];
                     row[TableHeadings.Live_High] = mktData.Constituents[i].DailyHigh;
                     row[TableHeadings.Live_Low] = mktData.Constituents[i].DailyLow;
@@ -271,6 +277,7 @@ namespace MyMarketAnalyzer
 
             //Get the column indices of columns where the set style is PLUS_MINUS
             PlusMinusColumns = ColumnStyles.Select((cs, ci) => cs == ColumnStyle.PLUS_MINUS ? ci : -1).Where(ci2 => ci2 >= 0).ToList();
+            SymbolColumn = ColumnStyles.Select((cs, ci) => cs == ColumnStyle.SYMBOL ? ci : -1).Where(ci2 => ci2 >= 0).FirstOrDefault();
 
             //Bind Data from the DataTable to the DataGridView control
             BindTableSource(NameColWidth);
@@ -537,6 +544,7 @@ namespace MyMarketAnalyzer
                     ColumnStyles.RemoveAt(ColumnStyles.Count - 1);
                     ColumnStyles.Insert(pIndex > 0 ? pIndex : 1, new_item);
                     PlusMinusColumns = ColumnStyles.Select((cs, ci) => cs == ColumnStyle.PLUS_MINUS ? ci : -1).Where(ci2 => ci2 >= 0).ToList();
+                    SymbolColumn = ColumnStyles.Select((cs, ci) => cs == ColumnStyle.SYMBOL ? ci : -1).Where(ci2 => ci2 >= 0).FirstOrDefault();
 
                     //Set the column at the desired position. Note: column[0] must always be the item index (which is hidden) so don't allow insertion before it
                     if (pIndex > 0)
@@ -833,7 +841,6 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void dataGridView1_OnPaint(object sender, PaintEventArgs e)
         {
-
             base.OnPaint(e);
         }
 
@@ -882,10 +889,17 @@ namespace MyMarketAnalyzer
         {
             int i;
             double value;
+            string symbl;
 
             //Set Cell Styles
             for (int index = e.RowIndex; index <= e.RowIndex + e.RowCount - 1; index++)
             {
+                symbl = (string)dataGridView1.Rows[index].Cells[SymbolColumn].Value;
+                if(symbl.Contains("?"))
+                {
+                    dataGridView1.Rows[index].Cells[SymbolColumn].Style.ForeColor = Color.MediumBlue;
+                }
+
                 for (i = 0; i < PlusMinusColumns.Count; i++)
                 {
                     value = (double)dataGridView1.Rows[index].Cells[PlusMinusColumns[i]].Value;
@@ -903,7 +917,6 @@ namespace MyMarketAnalyzer
                     }
                 }
             }
-            
         }
 
         

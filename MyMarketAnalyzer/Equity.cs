@@ -46,6 +46,9 @@ namespace MyMarketAnalyzer
         private String liveDataAddress;
         private String listedMarket;
         public String Name { get; private set; }
+        public String Symbol { get; private set; }
+        public String Industry { get; private set; }
+        public String Sector { get; private set; }
 
         //***** PROPERTIES *****//
         //Numerical properties
@@ -252,7 +255,8 @@ namespace MyMarketAnalyzer
                 //parse the CSV into a list of string arrays
                 rawData = CSVParser.CSVtoListArray(dataFileName, MAX_DATA_SIZE);
 
-                //array index of each column of data hardcoded based on ICom downloads
+                //array index of each column of data 
+                //Indexes hardcoded based on ICom tables
                 //historical data - Dates
                 hist_data_in = rawData.Select(arr => arr[0]).ToList();
                 hist_dates = hist_data_in.Skip(1).Select(date => DateTime.Parse(date)).ToList();
@@ -314,8 +318,12 @@ namespace MyMarketAnalyzer
                 index1 = dataFileName.LastIndexOf("\\") + 1;
                 index2 = dataFileName.LastIndexOf(".csv");
                 if(index1 > 0 && index2 > 0)
-                    this.Name = dataFileName.Substring(index1, index2 - index1);
-                
+                {
+                    Name = dataFileName.Substring(index1, index2 - index1);
+                }
+                    
+                GetProfile();
+
                 //Compute technical indicators
                 CalculatePctChange();
                 CalculateAvgPrice();
@@ -333,6 +341,103 @@ namespace MyMarketAnalyzer
             }
 
             return success;
+        }
+
+        /*****************************************************************************
+         *  FUNCTION:  GetProfile
+         *  Description:    Get the company profile if it exists in the expected location
+         *                  The expected location is a subfolder within the same folder as
+         *                  the equity source .csv file with the word "Profile" in the name.
+         *                  
+         *                  This function will search only the first subfolder it finds 
+         *                  matching this pattern
+         *  Parameters: 
+         *****************************************************************************/
+        private void GetProfile()
+        {
+            List<string> searchNames = new List<string>();
+            string root = "", pf = "";
+            bool profileFound = false;
+            string[] profiles, pf_lines;
+            List<string[]> profile_content;
+
+            try
+            {
+                root = this.dataFileName.Substring(0, dataFileName.LastIndexOf("\\"));
+                string[] dirs = Directory.GetDirectories(root, "*Profile*", SearchOption.AllDirectories);
+
+                if(dirs.Length > 0)
+                {
+                    //Define search keys
+                    searchNames.Add(Name);
+                    searchNames.Add(Name.Replace(" ", "-").ToLower());
+
+                    //Find the first file name matching one of the search keys and suffixed with "_profile"
+                    foreach(string sName in searchNames)
+                    {
+                        profiles = Directory.GetFiles(dirs[0], string.Concat(sName, "*_profile.txt"), SearchOption.TopDirectoryOnly);
+                        if(profiles.Length > 0)
+                        {
+                            pf = profiles[0];
+                            break;
+                        }
+                    }
+
+                    //Read the profile text file
+                    // For data to be read properly, a value must immediately follow the corresponding key on the same line 
+                    // and separated by a comma.
+                    //
+                    // ex. "Symbol,AC" or "Industry,Airline"
+                    if (pf != "")
+                    {
+                        profile_content = CSVParser.CSVtoListArray(pf, 20);
+
+                        //Symbol = profile_content.Where(arg => arg[0] == "Symbol").FirstOrDefault()[1];
+                        pf_lines = profile_content.Where(arg => arg.Contains("Symbol")).FirstOrDefault();
+                        Symbol = pf_lines[pf_lines.ToList().IndexOf("Symbol") + 1];
+
+                        pf_lines = profile_content.Where(arg => arg.Contains("Industry")).FirstOrDefault();
+                        Industry = pf_lines[pf_lines.ToList().IndexOf("Industry") + 1];
+
+                        pf_lines = profile_content.Where(arg => arg.Contains("Sector")).FirstOrDefault();
+                        Sector = pf_lines[pf_lines.ToList().IndexOf("Sector") + 1];
+
+                        profileFound = true;
+                    }
+                }
+            }
+            catch(Exception)
+            {
+
+            }
+
+            if(!profileFound)
+            {
+                SetDefaultSymbol();
+            }
+        }
+
+        private void SetDefaultSymbol()
+        {
+            string[] words = Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (words != null && words.Length > 0)
+            {
+                foreach(string str in words)
+                {
+                    Symbol += str.Substring(0, 1).ToUpper();
+                }
+                Symbol = Helpers.RemoveNonAlphanumeric(Symbol) + "?";
+            }
+        }
+
+        public void UpdateSymbol(string newSymbol)
+        {
+            Symbol = newSymbol;
+            if(Symbol.Contains("?"))
+            {
+                Symbol = Symbol.Replace("?", "") + "?";
+            }
         }
 
         /*****************************************************************************

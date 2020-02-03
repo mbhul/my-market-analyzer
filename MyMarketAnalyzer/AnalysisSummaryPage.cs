@@ -55,6 +55,14 @@ namespace MyMarketAnalyzer
         {
             if(this._Result != null)
             {
+                if(_Result.message_string != "")
+                {
+                    this.lblTopLeft.Text = _Result.message_string;
+                    this.lblTopLeft.Visible = true;
+                    this.analysisResultsTable.SetColumnSpan(this.lblTopLeft, 3);
+                    return;
+                }
+
                 this.lblTopLeft.Text = "Net Change:";
                 this.analysisResultsTable.SetColumnSpan(this.lblTopLeft, 1);
                 foreach (Control item in analysisResultsTable.Controls)

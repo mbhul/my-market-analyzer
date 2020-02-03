@@ -467,11 +467,59 @@ namespace MyMarketAnalyzer
         {
             String return_value = "";
 
-            System.Text.RegularExpressions.Regex rgx = new System.Text.RegularExpressions.Regex("[^a-zA-Z0-9_]");
+            Regex rgx = new Regex("[^a-zA-Z0-9_]");
             return_value = rgx.Replace(pInput, " ");
             return_value = return_value.Substring(0, return_value.Trim().IndexOf(' ') + 1).Trim();
             
             return return_value;
+        }
+
+        public static string ReplaceFirstOccurrence(this string Source, string Find, string Replace)
+        {
+            int Place = Source.IndexOf(Find);
+            string result = Source.Remove(Place, Find.Length).Insert(Place, Replace);
+            return result;
+        }
+
+        //return the next word or non-space character
+        //public static String GetNextWord(String pInString, int pFromIndex)
+        //{
+        //    String return_value = "";
+        //    int index1, index2;
+        //    Regex rgx = new Regex("[^a-zA-Z0-9_]"); //matches all non-alphanumeric or underscore characters
+
+        //    //Get the index of the next non-word character from the specified index (space or bracket etc.)
+        //    index1 = rgx.Match(pInString, pFromIndex).Index;
+
+        //    return return_value;
+        //}
+
+        public static String SubWord(this string str, int AtIndex)
+        {
+            int index;
+            Regex rgx = new Regex("[^a-zA-Z0-9_\\-\\.]");
+
+            index = rgx.Match(str, AtIndex).Index;
+
+            if (index < AtIndex)
+                index = str.Length;
+
+            return str.Substring(AtIndex, index - AtIndex);
+        }
+
+        public static List<int> AllIndexesOf(this string str, string value)
+        {
+            if (String.IsNullOrEmpty(value))
+                throw new ArgumentException("Cannot search for empty string", "value");
+
+            List<int> indexes = new List<int>();
+            for (int index = 0; ; index += value.Length)
+            {
+                index = str.IndexOf(value, index);
+                if (index == -1)
+                    return indexes;
+                indexes.Add(index);
+            }
         }
 
         public static void TestPOSTRequest()
@@ -732,6 +780,7 @@ namespace MyMarketAnalyzer
     static class TableHeadings
     {
         public const string Name = "Name";
+        public const string Symbol = "Sym";
         public static readonly string[] PctChange = {"PctChange", "% Change"};
 
         public static readonly string[] Hist_Avg = {"AvgPrice", "Avg. Price"};
@@ -833,6 +882,7 @@ namespace MyMarketAnalyzer
         public List<double> investments_totals;
         public List<int> units_change_daily;
         public Tuple<DateTime, DateTime> dates_from_to;
+        public string message_string;
         
         public AnalysisResult()
         {
@@ -841,6 +891,7 @@ namespace MyMarketAnalyzer
             cash_totals = new List<double>();
             investments_totals = new List<double>();
             units_change_daily = new List<int>();
+            message_string = "";
         }
     }
 }

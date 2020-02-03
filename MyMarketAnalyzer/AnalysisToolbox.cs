@@ -36,6 +36,7 @@ namespace MyMarketAnalyzer
         private void loadButtons()
         {
             int itterator = 0;
+            int textLen = 0;
             BtnListFunctions = new List<Button>();
             BtnListVariables = new List<Button>();
 
@@ -51,10 +52,17 @@ namespace MyMarketAnalyzer
             itterator = 0;
             foreach (Variable vEn in RuleParserInputs.VarList)
             {
+                textLen = RuleParserInputs.VarCaptions[itterator].Length;
                 BtnListVariables.Add(new Button());
                 BtnListVariables[itterator].Text = RuleParserInputs.VarCaptions[itterator];
                 BtnListVariables[itterator].Click += new EventHandler(this.analysisBtnVar_OnClick);
                 this.flpVariables.Controls.Add(BtnListVariables[itterator]);
+
+                //Increase the size of the button if necessary to get all text to fit on 1 line
+                if (textLen > 9)
+                {
+                    BtnListVariables[itterator].Width += (textLen - 9) * 8;
+                }
                 itterator++;
             }
         }

@@ -96,7 +96,7 @@ namespace MyMarketAnalyzer
 
         private void custom_OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (_mousePressed)
+            if (_mousePressed && Zoom > 1.0)
             {
                 DragChart(e.X, e.Y);
             }
@@ -442,7 +442,7 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void RedrawGridLines(int pChartArea, double gridsize = 0.05)
         {
-            if(pChartArea < this.ChartAreas.Count)
+            if(pChartArea < this.ChartAreas.Count && Series.Count > 0)
             {
                 double xRange = this.ChartAreas[pChartArea].AxisX.Maximum -
                     this.ChartAreas[pChartArea].AxisX.Minimum;
@@ -525,6 +525,8 @@ namespace MyMarketAnalyzer
             double xRange2, yRange2;
             double x1, x2, y1, y2;
 
+            if (!AllowZoom) { return; }
+
             xRange = this.ChartAreas[0].AxisX.Maximum - this.ChartAreas[0].AxisX.Minimum;
             yRange = this.ChartAreas[0].AxisY.Maximum - this.ChartAreas[0].AxisY.Minimum;
 
@@ -576,21 +578,28 @@ namespace MyMarketAnalyzer
          *          pEquity  - Object containing price data (high,low,open,close)
          *          pSeriesName - Name of the parent series
          *****************************************************************************/
-        public void CreateCandleStick(Equity pEquity, String pSeriesName)
+        public void CreateCandleStick(Equity pEquity, String pSeriesName, Boolean pReplaceExisting = false)
         {
             String csName = "", seriesName = "";
 
             //Before attempting to add a new candlestick chart, first ensure any others are hidden
             // and remember the name of the last one that was shown
-            foreach (Series cs in this.Series)
+            foreach (Series cs in this.Series.ToList())
             {
                 if (cs.ChartType == SeriesChartType.Candlestick)
                 {
-                    if (cs.Enabled)
+                    if (pReplaceExisting)
                     {
-                        csName = cs.Name;
+                        Series.Remove(cs);
                     }
-                    cs.Enabled = false;
+                    else
+                    {
+                        if (cs.Enabled)
+                        {
+                            csName = cs.Name;
+                        }
+                        cs.Enabled = false;
+                    }
                 }
             }
 
@@ -623,6 +632,8 @@ namespace MyMarketAnalyzer
                     Series[csName].Enabled = true;
                 }
             }
+
+            UpdateAxesRange();
         }
 
         /*****************************************************************************
@@ -652,6 +663,9 @@ namespace MyMarketAnalyzer
             }
         }
 
+        /*****************************************************************************
+         *  Mouse click event handlers
+         *****************************************************************************/
         private void custom_OnMouseDown(object sender, MouseEventArgs e)
         {
             _mousePressed = true;

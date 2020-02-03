@@ -244,6 +244,34 @@ namespace MyMarketAnalyzer
             return success;
         }
 
+        private void ValidateConstituentSymbols()
+        {
+            List<string> symbols;
+            string symbol_temp = "";
+
+            try
+            {
+                symbols = this.Constituents.Select(a => a.Symbol).ToList();
+                var duplicates = symbols.GroupBy(x => x).Where(g => g.Count() > 1)
+                                          .Select(y => new { Element = y.Key, Count = y.Count() })
+                                          .ToList();
+
+                foreach(var dp in duplicates)
+                {
+                    symbol_temp = dp.Element;
+
+                    for (int i = 0; i < dp.Count; i++)
+                    {
+                        if(i > 0)
+                        {
+                            this.Constituents.Where(a => a.Symbol == dp.Element).FirstOrDefault().UpdateSymbol(string.Concat(symbol_temp, i.ToString()));
+                        }
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
+
         /*****************************************************************************
          *  FUNCTION:  UpdateConstituentData
          *  Description:    
