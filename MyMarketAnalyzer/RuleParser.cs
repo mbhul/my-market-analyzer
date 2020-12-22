@@ -71,7 +71,7 @@ namespace MyMarketAnalyzer
 
     public class RuleParser
     {
-        private Hashtable VariablesTable = new Hashtable(100);
+        private Hashtable KeysTable = new Hashtable(100);
         private List<Fn> current_buy_functions;
         private List<Fn> current_sell_functions;
         private List<bool> buy_history;
@@ -96,9 +96,9 @@ namespace MyMarketAnalyzer
             buy_history = new List<bool>();
             sell_history = new List<bool>();
 
-            foreach (Variable var in RuleParserInputs.VarList)
+            foreach (Variable var in RuleParserInputs.VarList.Concat(RuleParserInputs.VarList2))
             {
-                VariablesTable.Add(StringEnum.GetStringValue(var),var);
+                KeysTable.Add(StringEnum.GetStringValue(var),var);
             }
         }
 
@@ -810,7 +810,7 @@ namespace MyMarketAnalyzer
             {
                 regex = new Regex(Regex.Escape("[") + ".*?" + Regex.Escape("]"));
                 pKey = regex.Replace(pKey, "").Trim();
-                return_type = (Variable)VariablesTable[pKey];
+                return_type = (Variable)KeysTable[pKey];
             }
             catch (NullReferenceException)
             {

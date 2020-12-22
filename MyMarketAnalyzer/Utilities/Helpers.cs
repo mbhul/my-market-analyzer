@@ -34,15 +34,8 @@ namespace MyMarketAnalyzer
             //    arg0 = "0";
             //}
 
-            try
-            {
-                testValue = Double.Parse(arg0);
-                returnValue = true;
-            }
-            catch (Exception)
-            {
-                //do nothing
-            }
+            returnValue = Double.TryParse(arg0, out testValue);
+
             return returnValue;
         }
 
@@ -62,6 +55,44 @@ namespace MyMarketAnalyzer
             return_value = rgx.Replace(pInput, "");
 
             return return_value;
+        }
+
+        public static double CustomParseDouble(String dblStr)
+        {
+            int strLen = 0;
+
+            //Replace any spaces or comma place separators
+            dblStr = dblStr.Replace(" ", "");
+            dblStr = dblStr.Replace(",", "");
+
+            //Replace formatted strings with equivalent value (ex. 4K => 4000)
+            if(!Helpers.ValidateNumeric(dblStr))
+            {
+                try
+                {
+                    strLen = dblStr.Length;
+                    strLen = strLen - Regex.Replace(dblStr, "[.].*", "").Length - 2;
+                    dblStr = dblStr.Replace(".", "");
+                    if (strLen > 0 && dblStr.Contains("K"))
+                    {
+                        dblStr += String.Join("", Enumerable.Repeat("0", 3 - strLen));
+                    }
+                    else if (strLen > 0 && dblStr.Contains("M"))
+                    {
+                        dblStr += String.Join("", Enumerable.Repeat("0", 6 - strLen));
+                    }
+                    dblStr = Regex.Replace(dblStr, "[A-Z]", "");
+
+                    //Ensure the resulting value can be parsed (otherwise the exception handler will replace it with '0')
+                    double tempDbl = double.Parse(dblStr);
+                }
+                catch (Exception)
+                {
+                    dblStr = "0";
+                }
+            }
+            
+            return double.Parse(dblStr);
         }
 
         /*****************************************************************************

@@ -784,10 +784,12 @@ namespace MyMarketAnalyzer
         private void dataGridView1_MouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridViewCell click_cell;
+            int selrow = 0;
 
             if (e.RowIndex != -1 && e.ColumnIndex != -1)
             {
-                if (this.SelectedCells.Contains(new Tuple<int, int>(e.RowIndex + 1, e.ColumnIndex)) == false)
+                selrow = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+                if (this.SelectedCells.Contains(new Tuple<int, int>(selrow, e.ColumnIndex)) == false)
                 {
                     dataGridView1.ClearSelection();
                     dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -894,7 +896,7 @@ namespace MyMarketAnalyzer
             //Set Cell Styles
             for (int index = e.RowIndex; index <= e.RowIndex + e.RowCount - 1; index++)
             {
-                symbl = (string)dataGridView1.Rows[index].Cells[SymbolColumn].Value;
+                symbl = dataGridView1.Rows[index].Cells[SymbolColumn].Value.ToString();
                 if(symbl.Contains("?"))
                 {
                     dataGridView1.Rows[index].Cells[SymbolColumn].Style.ForeColor = Color.MediumBlue;

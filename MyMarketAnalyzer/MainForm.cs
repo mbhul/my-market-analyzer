@@ -89,6 +89,8 @@ namespace MyMarketAnalyzer
         private HeatMap heatMapControl = new HeatMap();
         private Form heatMapForm = new Form();
 
+        private DateTime HistDateStart, HistDateEnd;
+
         [DllImport("user32.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern int SendMessage(
                           IntPtr hWnd,      // handle to destination window
@@ -120,6 +122,7 @@ namespace MyMarketAnalyzer
             InitializeMainForm();
             InitializeAnalysisForm();
             CollapseMenuPanel();
+            UpdateDateRangeSlider();
 
             //debug
             //Helpers.TestPOSTRequest();
@@ -146,6 +149,89 @@ namespace MyMarketAnalyzer
                 this.cbRegionSelect.SelectedIndex = 0;
             }
             SetLiveDataIntervalOptions();
+
+            rangeSlider1.LowerSlider.ValueChanged += new System.Windows.RoutedPropertyChangedEventHandler<double>(lowerDateSlider_Changed);
+            rangeSlider1.UpperSlider.ValueChanged += new System.Windows.RoutedPropertyChangedEventHandler<double>(upperDateSlider_Changed);
+
+            rangeSlider1.LowerSlider.LostMouseCapture += new System.Windows.Input.MouseEventHandler(LowerSlider_LostMouseCapture);
+            rangeSlider1.UpperSlider.LostMouseCapture += new System.Windows.Input.MouseEventHandler(LowerSlider_LostMouseCapture);
+
+            rangeSlider1.LowerSlider.KeyUp += new System.Windows.Input.KeyEventHandler(dateSlider_KeyUp);
+            rangeSlider1.UpperSlider.KeyUp += new System.Windows.Input.KeyEventHandler(dateSlider_KeyUp);
+        }
+
+        void lowerDateSlider_Changed(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            setSliderDateValues();
+        }
+
+        void upperDateSlider_Changed(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            setSliderDateValues();
+        }
+
+        private void LowerSlider_LostMouseCapture(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (MyDataManager.HistoricalData != null && MyDataManager.HistoricalData.Constituents.Count > 0)
+            {
+                if ((MyDataManager.HistoricalData.DateStart != HistDateStart) ||
+                    (MyDataManager.HistoricalData.DateEnd != HistDateEnd))
+                {
+                    dateChangeRebindStatTableData();
+                }
+            }
+        }
+
+        void dateSlider_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (MyDataManager.HistoricalData != null && MyDataManager.HistoricalData.Constituents.Count > 0)
+            {
+                if ((MyDataManager.HistoricalData.DateStart != HistDateStart) ||
+                    (MyDataManager.HistoricalData.DateEnd != HistDateEnd))
+                {
+                    dateChangeRebindStatTableData();
+                }
+            }
+        }
+
+        private void setSliderDateValues()
+        {
+            if (MyDataManager.HistoricalData != null && MyDataManager.HistoricalData.Constituents.Count > 0)
+            {
+                HistDateStart = MyDataManager.HistoricalData.DateList[(int)rangeSlider1.LowerValue];
+                HistDateEnd = MyDataManager.HistoricalData.DateList[(int)rangeSlider1.UpperValue];
+                rangeSlider1.sMinValue.Text = HistDateStart.ToString("MM/dd/y");
+                rangeSlider1.sMaxValue.Text = HistDateEnd.ToString("MM/dd/y");
+            }
+        }
+
+        private void dateChangeRebindStatTableData()
+        {
+            MyDataManager.HistoricalData.setUsableDateRange(HistDateStart, HistDateEnd);
+            ClearFilter();
+            DisplayStatData();
+            DisplayAnalysisData();
+        }
+
+        private void UpdateDateRangeSlider()
+        {
+            //Get/Set minimum and maximum values
+            if (MyDataManager.HistoricalData != null && MyDataManager.HistoricalData.Constituents.Count > 0)
+            {
+                rangeSlider1.Visibility = System.Windows.Visibility.Visible;
+                label16.SendToBack();
+                rangeSlider1.Maximum = (double)MyDataManager.HistoricalData.DateList.Count() - 1;
+                rangeSlider1.LowerValue = 0;
+                rangeSlider1.UpperValue = rangeSlider1.Maximum;
+
+                rangeSlider1.sMinValue.Text = MyDataManager.HistoricalData.DateList[(int)rangeSlider1.LowerValue].ToString("MM/dd/y");
+                rangeSlider1.sMaxValue.Text = MyDataManager.HistoricalData.DateList[(int)rangeSlider1.UpperValue].ToString("MM/dd/y");
+            }
+            else
+            {
+                rangeSlider1.Visibility = System.Windows.Visibility.Hidden;
+                label16.BringToFront();
+            }
         }
 
         /*****************************************************************************
@@ -185,6 +271,7 @@ namespace MyMarketAnalyzer
         {
             this.dataMenuPanel.Size = this.dataMenuArrow.Size;
             this.dataMenuPanel.Location = new Point(this.tabStats.Width - this.dataMenuArrow.Width - 4, 0);
+            this.dateSlider1.Hide();
             DataMenuPanelVisible = false;
             this.dataMenuArrow.Image = MyMarketAnalyzer.Properties.Resources.arrow_icon_normal;
         }
@@ -198,6 +285,7 @@ namespace MyMarketAnalyzer
         {
             this.dataMenuPanel.Size = new Size(120, this.tabStats.Height);
             this.dataMenuPanel.Location = new Point(this.tabStats.Width - 120, 0);
+            this.dateSlider1.Show();
             DataMenuPanelVisible = true;
             this.dataMenuArrow.Image = MyMarketAnalyzer.Properties.Resources.arrow_icon_normal_rev;
         }
@@ -429,20 +517,22 @@ namespace MyMarketAnalyzer
                 System.Threading.Thread.Sleep(100);
                 time_passed += 100;
                 pct_progress[1] = (int)(MyDataManager.HistoricalData.DownloadPercentage * 100);
-                if (pct_progress[1] == pct_progress[0])
-                {
-                    exit_persistence += 1;
-                }
-                else
-                {
-                    exit_persistence = 0;
-                }
 
-                //if the progress hasn't changed in 5 update periods, exit
-                if (exit_persistence >= 5)
-                {
-                    break;
-                }
+                //if (pct_progress[1] == pct_progress[0])
+                //{
+                //    exit_persistence += 1;
+                //}
+                //else
+                //{
+                //    exit_persistence = 0;
+                //}
+
+                ////if the progress hasn't changed in 5 update periods, exit
+                //if (exit_persistence >= 5)
+                //{
+                //    break;
+                //}
+
                 pct_progress[0] = pct_progress[1];
                 worker.ReportProgress(pct_progress[1]);
             }
@@ -471,6 +561,7 @@ namespace MyMarketAnalyzer
                 ClearFilter();
                 UpdateAnalysisComboBox();
                 ShowVisualizationTab(0, false, false);
+                UpdateDateRangeSlider();
             }
         }
 
@@ -997,7 +1088,8 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void dataMenuArrow_Click(object sender, EventArgs e)
         {
-            if(this.DataMenuPanelVisible)
+            
+            if (this.DataMenuPanelVisible)
             {
                 CollapseMenuPanel();
             }
@@ -1682,6 +1774,7 @@ namespace MyMarketAnalyzer
             }
         }
 
+        
         /*****************************************************************************
          *  EVENT HANDLER:  analysisBuy_RTxtBox_TextChanged
          *  Description:    Event fired when the contents of the 'buy rule' text box
@@ -1692,7 +1785,7 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void analysisBuy_RTxtBox_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         /*****************************************************************************
@@ -1832,4 +1925,14 @@ namespace MyMarketAnalyzer
 
     }
     #endregion
+
+    public class IntelliSense
+    {
+        public string LastWord { get; private set; }
+
+        public IntelliSense()
+        {
+
+        }
+    }
 }

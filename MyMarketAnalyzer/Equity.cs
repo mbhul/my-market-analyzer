@@ -17,6 +17,7 @@ namespace MyMarketAnalyzer
         //***** CONSTANTS *****//
         private const int MAX_DATA_SIZE = 256;
         private const int LIVE_DATA_BUFFER_SIZE = 256;
+        private const int DATA_FILE_HEADER_ROWS = 2;
 
         //***** DATA MEMBERS *****//
         private List<String> hist_data_in;
@@ -30,6 +31,9 @@ namespace MyMarketAnalyzer
         private List<double> hist_volumes = new List<double>();
         private List<double> hist_daily_change = new List<double>();
 
+        private int start_date_index = 0;
+        private int end_date_index = 0;
+
         //Live Data
         private List<DateTime> live_timestamps = new List<DateTime>();
         private List<double> live_price = new List<double>();
@@ -40,6 +44,7 @@ namespace MyMarketAnalyzer
         private double live_chg_pct;
         private double live_volume;
 
+        //General Properties
         private int[] MACD_TIME_BASES = { 12, 26, 9 };
 
         private String dataFileName;
@@ -90,39 +95,101 @@ namespace MyMarketAnalyzer
 
         #region Get/Set Interface Functions
         //****** Historical Data Interfaces ******//
+        //Public properties return a subset of the private data read from the CSV file, bounded by modifiable start and end indices
         public List<double> HistoricalPrice
         {
-            get { return hist_price; }
+            get; private set;
         }
 
         public List<DateTime> HistoricalPriceDate
         {
-            get { return hist_dates; }
+            get; private set;
         }
 
         public List<double> HistoricalPctChange
         {
-            get { return hist_daily_change; }
+            get; private set;
         }
 
         public List<double> HistoricalOpens
         {
-            get { return hist_price_opens; }
+            get; private set;
         }
 
         public List<double> HistoricalHighs
         {
-            get { return hist_price_highs; }
+            get; private set;
         }
 
         public List<double> HistoricalLows
         {
-            get { return hist_price_lows; }
+            get; private set;
         }
 
         public List<double> HistoricalVolumes
         {
-            get { return hist_volumes; }
+            get; private set;
+        }
+
+        //Define usable data range
+        public DateTime HistStartDate
+        {
+            get
+            {
+                return hist_dates[start_date_index];
+            }
+
+            set
+            {
+                if(value > hist_dates[0] && value < hist_dates[hist_dates.Count - 1])
+                {
+                    start_date_index = hist_dates.Where(x => x < value).Count();
+                }
+                else
+                {
+                    start_date_index = 0;
+                }
+
+                updateHistPublicProperties();
+            }
+        }
+        public DateTime HistEndDate
+        {
+            get
+            {
+                return hist_dates[end_date_index];
+            }
+
+            set
+            {
+                if (value > hist_dates[0] && value < hist_dates[hist_dates.Count - 1])
+                {
+                    end_date_index = hist_dates.Where(x => x < value).Count();
+                }
+                else
+                {
+                    end_date_index = hist_dates.Count - 1;
+                }
+
+                updateHistPublicProperties();
+            }
+        }
+
+        private void updateHistPublicProperties()
+        {
+            int count = end_date_index - start_date_index + 1;
+
+            this.HistoricalPriceDate = hist_dates.GetRange(start_date_index, count);
+            this.HistoricalPrice = hist_price.GetRange(start_date_index, count);
+            this.HistoricalPctChange = hist_daily_change.GetRange(start_date_index, count);
+            this.HistoricalOpens = hist_price_opens.GetRange(start_date_index, count);
+            this.HistoricalHighs = hist_price_highs.GetRange(start_date_index, count);
+            this.HistoricalLows = hist_price_lows.GetRange(start_date_index, count);
+            this.HistoricalVolumes = hist_volumes.GetRange(start_date_index, count);
+
+            CalculatePctChange();
+            CalculateAvgPrice();
+            CalculateVolatility();
         }
 
         //****** Live Data Interfaces *******//
@@ -248,71 +315,55 @@ namespace MyMarketAnalyzer
         {
             Boolean success = false;
             List<String[]> rawData = null;
-            int index1, index2, volLen;
+            int index1, index2;
+            string linkStr;
 
             if (dataFileName != "")
             {
                 //parse the CSV into a list of string arrays
                 rawData = CSVParser.CSVtoListArray(dataFileName, MAX_DATA_SIZE);
 
+                linkStr = rawData[0][0];
+                if(linkStr != null && linkStr.Contains("http"))
+                {
+                    this.liveDataAddress = linkStr;
+                }
+
                 //array index of each column of data 
                 //Indexes hardcoded based on ICom tables
                 //historical data - Dates
                 hist_data_in = rawData.Select(arr => arr[0]).ToList();
-                hist_dates = hist_data_in.Skip(1).Select(date => DateTime.Parse(date)).ToList();
+                hist_dates = hist_data_in.Skip(DATA_FILE_HEADER_ROWS).Select(date => DateTime.Parse(date)).ToList();
                 hist_dates.Reverse();
 
                 //historical data - Closing Price
                 hist_data_in = rawData.Select(arr => arr[1]).ToList();
-                hist_price = hist_data_in.Skip(1).Select(dbl => double.Parse(dbl)).ToList();
+                hist_price = hist_data_in.Skip(DATA_FILE_HEADER_ROWS).Select(dbl => Helpers.CustomParseDouble(dbl)).ToList();
                 hist_price.Reverse();
 
                 //historical data - Opening Price
                 hist_data_in = rawData.Select(arr => arr[2]).ToList();
-                hist_price_opens = hist_data_in.Skip(1).Select(dbl => double.Parse(dbl)).ToList();
+                hist_price_opens = hist_data_in.Skip(DATA_FILE_HEADER_ROWS).Select(dbl => Helpers.CustomParseDouble(dbl)).ToList();
                 hist_price_opens.Reverse();
 
                 //historical data - High
                 hist_data_in = rawData.Select(arr => arr[3]).ToList();
-                hist_price_highs = hist_data_in.Skip(1).Select(dbl => double.Parse(dbl)).ToList();
+                hist_price_highs = hist_data_in.Skip(DATA_FILE_HEADER_ROWS).Select(dbl => Helpers.CustomParseDouble(dbl)).ToList();
                 hist_price_highs.Reverse();
 
                 //historical data - Low
                 hist_data_in = rawData.Select(arr => arr[4]).ToList();
-                hist_price_lows = hist_data_in.Skip(1).Select(dbl => double.Parse(dbl)).ToList();
+                hist_price_lows = hist_data_in.Skip(DATA_FILE_HEADER_ROWS).Select(dbl => Helpers.CustomParseDouble(dbl)).ToList();
                 hist_price_lows.Reverse();
 
                 //historical data - Volume
                 hist_data_in = rawData.Select(arr => arr[5]).ToList();
-                for (int i = 1; i < hist_data_in.Count(); i++)
-                {
-                    try
-                    {
-                        volLen = hist_data_in[i].Length;
-                        volLen = volLen - Regex.Replace(hist_data_in[i], "[.].*", "").Length - 2;
-                        hist_data_in[i] = hist_data_in[i].Replace(".", "");
-                        if (volLen > 0 && hist_data_in[i].Contains("K"))
-                        {
-                            hist_data_in[i] += String.Join("", Enumerable.Repeat("0", 3 - volLen));
-                        }
-                        else if (volLen > 0 && hist_data_in[i].Contains("M"))
-                        {
-                            hist_data_in[i] += String.Join("", Enumerable.Repeat("0", 6 - volLen));
-                        }
-                        hist_data_in[i] = Regex.Replace(hist_data_in[i], "[A-Z]", "");
-                    }
-                    catch (Exception)
-                    {
-                        hist_data_in[i] = "0";
-                    }
-                }
-                hist_volumes = hist_data_in.Skip(1).Select(dbl => double.Parse(dbl)).ToList();
+                hist_volumes = hist_data_in.Skip(DATA_FILE_HEADER_ROWS).Select(dbl => Helpers.CustomParseDouble(dbl)).ToList();
                 hist_volumes.Reverse();
                 
-
                 //historical data - percent change
                 hist_data_in = rawData.Select(arr => arr[6]).ToList();
-                hist_daily_change = hist_data_in.Skip(1).Select(dbl => Math.Round(double.Parse(dbl.Replace("%", "")), 8)).ToList();
+                hist_daily_change = hist_data_in.Skip(DATA_FILE_HEADER_ROWS).Select(dbl => Math.Round(double.Parse(dbl.Replace("%", "")), 8)).ToList();
                 hist_daily_change.Reverse();
                 
                 index1 = dataFileName.LastIndexOf("\\") + 1;
@@ -321,8 +372,16 @@ namespace MyMarketAnalyzer
                 {
                     Name = dataFileName.Substring(index1, index2 - index1);
                 }
-                    
+
+                //IMPORTANT: ValidateHistoricalData() must be called before updateHistPublicProperties() to ensure the private
+                // "hist_" data lists are finalized with any duplicate values removed.
+                if (ValidateHistoricalData())
+                {
+                    this.ContainsHistData = true;
+                }
+
                 GetProfile();
+                updateHistPublicProperties();
 
                 //Compute technical indicators
                 CalculatePctChange();
@@ -331,10 +390,7 @@ namespace MyMarketAnalyzer
                 ComputeTrend();
                 ComputeTechnicalIndicators();
 
-                if(ValidateHistoricalData())
-                {
-                    this.ContainsHistData = true;
-                }
+                
 
                 //set return status successful
                 success = true;
@@ -417,9 +473,18 @@ namespace MyMarketAnalyzer
             }
         }
 
+        /*****************************************************************************
+         *  FUNCTION:  SetDefaultSymbol
+         *  
+         *  Description:    If no ticker symbol is found for this equity, this function
+         *                  creates a default one using the first alpha-numeric value 
+         *                  in each word of the Name field.
+         *                  
+         *****************************************************************************/
         private void SetDefaultSymbol()
         {
             string[] words = Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            Symbol = "";
 
             if (words != null && words.Length > 0)
             {
@@ -549,6 +614,7 @@ namespace MyMarketAnalyzer
 
             if(ValidateLiveData())
             {
+                GetProfile();
                 this.ContainsLiveData = true;
             }
             return success;
@@ -677,12 +743,40 @@ namespace MyMarketAnalyzer
         private Boolean ValidateHistoricalData()
         {
             Boolean validated = true;
+            int index = 0;
+
+            //Check for duplicate data entries
+            List<DateTime> duplicates = hist_dates.GroupBy(x => x)
+                                         .Where(g => g.Count() > 1)
+                                         .Select(g => g.Key)
+                                         .ToList();
+
+            //If duplicates exist, remove all but the last occurence of the value from each vector
+            foreach (DateTime elt in duplicates)
+            {
+                string tempstr = this.Name;
+                index = hist_dates.IndexOf(elt);
+
+                while(index != hist_dates.LastIndexOf(elt))
+                {
+                    hist_dates.RemoveAt(index);
+                    hist_price.RemoveAt(index);
+                    hist_price_opens.RemoveAt(index);
+                    hist_price_highs.RemoveAt(index);
+                    hist_price_lows.RemoveAt(index);
+                    hist_volumes.RemoveAt(index);
+                    hist_daily_change.RemoveAt(index);
+                    index = hist_dates.IndexOf(elt);
+                }
+            }
 
             validated &= (hist_dates.Count() == hist_price.Count());
             validated &= (hist_dates.Count() == hist_price_opens.Count());
             validated &= (hist_dates.Count() == hist_price_highs.Count());
             validated &= (hist_dates.Count() == hist_price_lows.Count());
             validated &= (hist_dates.Count() == hist_volumes.Count());
+
+            this.end_date_index = hist_dates.Count - 1;
 
             return validated;
         }
@@ -772,7 +866,7 @@ namespace MyMarketAnalyzer
         {
             if(hist_price.Count() > 0)
             {
-                pctChange = Math.Round(((hist_price.Last() - hist_price.First()) / hist_price.First()) * 100, 2);
+                pctChange = Math.Round(((HistoricalPrice.Last() - HistoricalPrice.First()) / HistoricalPrice.First()) * 100, 2);
             }
         }
 
@@ -783,11 +877,11 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void CalculateAvgPrice()
         {
-            if (hist_price.Count() > 0)
+            if (HistoricalPrice.Count() > 0)
             {
-                avgPrice = Math.Round(hist_price.Average(), 2);
-                avgDailyPctChange = hist_daily_change.Average();
-                avgDailyVolume = (long)hist_volumes.Average();
+                avgPrice = Math.Round(HistoricalPrice.Average(), 2);
+                avgDailyPctChange = HistoricalPctChange.Average();
+                avgDailyVolume = (long)HistoricalVolumes.Average();
             }
         }
 
@@ -798,7 +892,7 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void CalculateVolatility()
         {
-            Volatility = Helpers.StdDev(hist_daily_change);
+            Volatility = Helpers.StdDev(HistoricalPctChange);
         }
 
         /*****************************************************************************
@@ -835,11 +929,11 @@ namespace MyMarketAnalyzer
             const double pct_change_zero = 0.00001;
 
             //set scaled volume such that -1 < x < 1
-            scaled_volumes = hist_volumes.Select(x => (double)((double)x / (double)hist_volumes.Max())).ToList();
+            scaled_volumes = HistoricalVolumes.Select(x => (double)((double)x / (double)HistoricalVolumes.Max())).ToList();
 
 
             //Trend will be one of {-1, 0, +1}
-            Trend = hist_daily_change.Select(sign => (Math.Abs(sign) < pct_change_zero) ? 0 : (int)(sign / Math.Abs(sign))).ToList();
+            Trend = HistoricalPctChange.Select(sign => (Math.Abs(sign) < pct_change_zero) ? 0 : (int)(sign / Math.Abs(sign))).ToList();
             WeightedTrend.Clear();
 
             windowSize = 5;
@@ -861,7 +955,7 @@ namespace MyMarketAnalyzer
 
                 //weight = (scaled volume / exp. average volume) ^ daily % change
                 // note: 100% = 1.0
-                weight = Math.Pow((scaled_volumes[i] / emAvg), Math.Abs(hist_daily_change[i]));
+                weight = Math.Pow((scaled_volumes[i] / emAvg), Math.Abs(HistoricalPctChange[i]));
 
                 WeightedTrend.Add(Trend[i] * weight);
             }
@@ -960,6 +1054,15 @@ namespace MyMarketAnalyzer
             this.hist_price_lows.Clear();
             this.hist_price_opens.Clear();
             this.hist_volumes.Clear();
+
+            this.HistoricalPriceDate.Clear();
+            this.HistoricalPrice.Clear();
+            this.HistoricalPctChange.Clear();
+            this.HistoricalOpens.Clear();
+            this.HistoricalHighs.Clear();
+            this.HistoricalLows.Clear();
+            this.HistoricalVolumes.Clear();
+
             this.live_price.Clear();
             this.live_timestamps.Clear();
         }

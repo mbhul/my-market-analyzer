@@ -13,7 +13,7 @@ namespace MyMarketAnalyzer
     {
         private String downloadedDataPath = "";
         private String liveDataUrl = "";
-        private List<Equity> constituents;
+        private List<Equity> constituents = new List<Equity>();
         private Double pct_download;
 
         public String Name { get; private set; }
@@ -21,6 +21,7 @@ namespace MyMarketAnalyzer
         public DateTime DateStart { get; private set; }
         public DateTime DateEnd { get; private set; }
         public int MaxDataPoints { get; private set; }
+        public List<DateTime> DateList { get; private set; }
         public Boolean IsDataAligned { get; private set; }
 
         public Double[] CorrelationCoefficients { get; private set; }
@@ -74,6 +75,39 @@ namespace MyMarketAnalyzer
         }
         #endregion
 
+        public void setUsableDateRange(DateTime startDT, DateTime endDT)
+        {
+            //Validate the passed start and end dates
+            if(startDT < this.DateList.Min())
+            {
+                startDT = this.DateList.Min();
+            }
+            else if(startDT > this.DateList.Max())
+            {
+                startDT = this.DateList.Max();
+            }
+
+            if (endDT < this.DateList.Min())
+            {
+                endDT = this.DateList.Min();
+            }
+            else if (endDT > this.DateList.Max())
+            {
+                endDT = this.DateList.Max();
+            }
+
+            //Set the date range for each constituent Equity class
+            foreach (Equity ct in this.constituents)
+            {
+                ct.HistStartDate = startDT;
+                ct.HistEndDate = endDT;
+            }
+
+            //Update the overall start and end dates
+            this.DateStart = startDT;
+            this.DateEnd = endDT;
+        }
+
         /*****************************************************************************
          *  FUNCTION:  parseCsvHistoricalData
          *  Description:    
@@ -116,8 +150,8 @@ namespace MyMarketAnalyzer
                 //Loop through all CSV files one by one
                 foreach (FileInfo fi in files)
                 {
-                    try
-                    {
+                    //try
+                    //{
                         if (this.constituents == null)
                         {
                             this.constituents = new List<Equity>();
@@ -150,18 +184,19 @@ namespace MyMarketAnalyzer
                         {
                             this.IsDataAligned = cEQ.HistoricalPriceDate.SequenceEqual(this.Constituents[0].HistoricalPriceDate);
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
+                    //}
+                    //catch (Exception e)
+                    //{
+                    //    Console.WriteLine(e.Message);
+                    //}
 
-                    index++;
                     pct_download = (Double)index / (Double)files.Count();
+                    index++;
                 }
 
                 CalculateCorrelationCoefficients();
                 UpdateTimeline();
+                pct_download = 1.0;
             }
             
             return success;
@@ -333,9 +368,10 @@ namespace MyMarketAnalyzer
          *****************************************************************************/
         private void UpdateTimeline()
         {
-            this.DateStart = this.Constituents.Select(x => x.HistoricalPriceDate.Min()).Min();
-            this.DateEnd = this.Constituents.Select(x => x.HistoricalPriceDate.Max()).Max();
             this.MaxDataPoints = this.Constituents.Select(x => x.HistoricalPrice.Count()).Max();
+            this.DateList = this.Constituents.SelectMany(x => x.HistoricalPriceDate).Distinct().ToList();
+            this.DateStart = this.DateList.Min();
+            this.DateEnd = this.DateList.Max();
         }
 
         /*****************************************************************************

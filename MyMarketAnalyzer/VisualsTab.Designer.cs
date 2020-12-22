@@ -131,7 +131,7 @@
             // 
             // chartMain
             // 
-            this.chartMain.AllowZoom = false;
+            this.chartMain.AllowZoom = true;
             this.chartMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));

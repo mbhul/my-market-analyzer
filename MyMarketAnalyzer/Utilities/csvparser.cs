@@ -19,6 +19,7 @@ namespace MyMarketAnalyzer
             List<String[]> retArray = null;
             var reader = new StreamReader(File.OpenRead(fullfilepath));
             String[] values = null;
+            int maxsize = 1;
 
             retArray = new List<String[]>();
 
@@ -27,9 +28,25 @@ namespace MyMarketAnalyzer
                 var line = reader.ReadLine();
                 values = line.Split(',');
                 retArray.Add(values);
+                
+                if(values.Length > maxsize)
+                {
+                    maxsize = values.Length;
+                }
+            }
+            reader.Close();
+
+            //Ensure each array in the list has the same number of elements, to make column selection possible
+            for(int i = 0; i < retArray.Count; i++)
+            {
+                if(retArray[i].Length < maxsize)
+                {
+                    values = retArray[i];
+                    Array.Resize(ref values, maxsize);
+                    retArray[i] = values;
+                }
             }
 
-            reader.Close();
             return retArray;
         }
     }

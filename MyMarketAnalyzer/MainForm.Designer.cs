@@ -50,9 +50,13 @@
             this.tabStats = new System.Windows.Forms.TabPage();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.dataMenuPanel = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.dateSlider1 = new System.Windows.Forms.Integration.ElementHost();
+            this.rangeSlider1 = new MyMarketAnalyzer.RangeSlider();
             this.cbLiveDataInterval = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.dataMenuArrow = new System.Windows.Forms.PictureBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.tblStatTableMain = new MyMarketAnalyzer.StatTable();
             this.lblUpdate = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -142,7 +146,6 @@
             this.btnAnalysisShowChart = new System.Windows.Forms.Button();
             this.cbAnalysisIndicatorX = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            //this.dlgStatFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.backgroundWorkerStat = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerProgress = new System.ComponentModel.BackgroundWorker();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -384,27 +387,47 @@
             // dataMenuPanel
             // 
             this.dataMenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataMenuPanel.Controls.Add(this.label15);
+            this.dataMenuPanel.Controls.Add(this.dateSlider1);
             this.dataMenuPanel.Controls.Add(this.cbLiveDataInterval);
             this.dataMenuPanel.Controls.Add(this.label11);
             this.dataMenuPanel.Controls.Add(this.dataMenuArrow);
+            this.dataMenuPanel.Controls.Add(this.label16);
             this.dataMenuPanel.Location = new System.Drawing.Point(848, 0);
             this.dataMenuPanel.Name = "dataMenuPanel";
             this.dataMenuPanel.Size = new System.Drawing.Size(120, 373);
             this.dataMenuPanel.TabIndex = 5;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(10, 95);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(65, 13);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Date Range";
+            // 
+            // dateSlider1
+            // 
+            this.dateSlider1.Location = new System.Drawing.Point(3, 111);
+            this.dateSlider1.Name = "dateSlider1";
+            this.dateSlider1.Size = new System.Drawing.Size(114, 46);
+            this.dateSlider1.TabIndex = 5;
+            this.dateSlider1.Child = this.rangeSlider1;
+            // 
             // cbLiveDataInterval
             // 
             this.cbLiveDataInterval.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLiveDataInterval.FormattingEnabled = true;
-            this.cbLiveDataInterval.Location = new System.Drawing.Point(6, 46);
+            this.cbLiveDataInterval.Location = new System.Drawing.Point(3, 46);
             this.cbLiveDataInterval.Name = "cbLiveDataInterval";
-            this.cbLiveDataInterval.Size = new System.Drawing.Size(104, 21);
+            this.cbLiveDataInterval.Size = new System.Drawing.Size(111, 21);
             this.cbLiveDataInterval.TabIndex = 3;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 30);
+            this.label11.Location = new System.Drawing.Point(7, 30);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(107, 13);
             this.label11.TabIndex = 2;
@@ -422,6 +445,14 @@
             this.dataMenuArrow.Click += new System.EventHandler(this.dataMenuArrow_Click);
             this.dataMenuArrow.MouseEnter += new System.EventHandler(this.dataMenuArrow_MouseEnter);
             this.dataMenuArrow.MouseLeave += new System.EventHandler(this.dataMenuArrow_MouseLeave);
+            // 
+            // label16
+            // 
+            this.label16.Location = new System.Drawing.Point(10, 118);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(104, 35);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "No Historical Data Loaded!";
             // 
             // tblStatTableMain
             // 
@@ -547,7 +578,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -555,7 +586,7 @@
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F2)));
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -660,7 +691,7 @@
             // toolStripLabel4
             // 
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(86, 22);
+            this.toolStripLabel4.Size = new System.Drawing.Size(87, 22);
             this.toolStripLabel4.Text = "Market / Index:";
             // 
             // cbMarketSelect
@@ -933,6 +964,7 @@
             this.analysisSell_RTxtBox.Size = new System.Drawing.Size(465, 22);
             this.analysisSell_RTxtBox.TabIndex = 3;
             this.analysisSell_RTxtBox.Text = "";
+            this.analysisSell_RTxtBox.TextChanged += new System.EventHandler(this.analysisSell_RTxtBox_TextChanged);
             this.analysisSell_RTxtBox.Enter += new System.EventHandler(this.sellRTBox_OnFocus);
             // 
             // buyRulesBox
@@ -997,6 +1029,7 @@
             this.analysisBuy_RTxtBox.Size = new System.Drawing.Size(465, 22);
             this.analysisBuy_RTxtBox.TabIndex = 11;
             this.analysisBuy_RTxtBox.Text = "";
+            this.analysisBuy_RTxtBox.TextChanged += new System.EventHandler(this.analysisBuy_RTxtBox_TextChanged);
             this.analysisBuy_RTxtBox.Enter += new System.EventHandler(this.buyRTBox_OnFocus);
             // 
             // analysisToolbox1
@@ -1204,8 +1237,10 @@
             // 
             // chartAnalysis
             // 
+            this.chartAnalysis.AllowZoom = false;
             this.chartAnalysis.BackColor = System.Drawing.Color.Silver;
             this.chartAnalysis.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
+            this.chartAnalysis.CandleStickEnabled = false;
             chartArea1.BackColor = System.Drawing.Color.Silver;
             chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
             chartArea1.Name = "ChartArea1";
@@ -1241,6 +1276,7 @@
             // tsHistSourceDir2
             // 
             this.tsHistSourceDir2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsHistSourceDir2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tsHistSourceDir2.Name = "tsHistSourceDir2";
             this.tsHistSourceDir2.ReadOnly = true;
             this.tsHistSourceDir2.Size = new System.Drawing.Size(433, 25);
@@ -1289,6 +1325,7 @@
             // tsHistSourceDir1
             // 
             this.tsHistSourceDir1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsHistSourceDir1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tsHistSourceDir1.Name = "tsHistSourceDir1";
             this.tsHistSourceDir1.ReadOnly = true;
             this.tsHistSourceDir1.Size = new System.Drawing.Size(433, 25);
@@ -1639,6 +1676,10 @@
         private System.Windows.Forms.Button btnSellRuleExpandCollapse;
         private System.Windows.Forms.RichTextBox analysisSell_RTxtBox;
         private AnalysisToolbox analysisToolbox1;
+        private System.Windows.Forms.Integration.ElementHost dateSlider1;
+        private RangeSlider rangeSlider1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }
 
