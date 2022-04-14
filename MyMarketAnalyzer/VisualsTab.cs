@@ -344,6 +344,12 @@ namespace MyMarketAnalyzer
 
             chartMain.CurrentSeriesIndex = 0;
             UpdateChartTitles();
+
+            if (tabVisualsData.SelectedIndex != lastDisplayedCorrelation)
+            {
+                BindCorrelationTable();
+                lastDisplayedCorrelation = tabVisualsData.SelectedIndex;
+            }
         }
 
         private void AppendChartData(List<Equity> appData)
@@ -476,7 +482,7 @@ namespace MyMarketAnalyzer
         {
             //Get the index within
             int pIndex = statsMarketData.Constituents.IndexOf(statsMarketData.Constituents.Where(x => x.Name == dataSet[tabVisualsData.SelectedIndex].Name).FirstOrDefault());
-            if (statsMarketData != null && pIndex > 0)
+            if (statsMarketData != null && statsMarketData.Constituents.Count > 0)
             {
                 tblVisualsTab1.BindCorrelationData(ref statsMarketData, pIndex);
             }

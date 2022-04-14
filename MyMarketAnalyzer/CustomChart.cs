@@ -620,7 +620,7 @@ namespace MyMarketAnalyzer
                     {
                         this.Series[seriesName].Points.AddXY(pEquity.HistoricalPriceDate[i],
                             new object[] { pEquity.HistoricalHighs[i], pEquity.HistoricalLows[i],
-                                        pEquity.HistoricalPrice[i], pEquity.HistoricalOpens[i]});
+                                        pEquity.HistoricalOpens[i], pEquity.HistoricalPrice[i]});
                     }
                 }
             }

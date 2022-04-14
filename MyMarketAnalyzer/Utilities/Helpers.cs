@@ -735,6 +735,13 @@ namespace MyMarketAnalyzer
         {
             return (++ID);
         }
+
+        public static void SearchNews(String pSymbol, int pMaxResults = 0)
+        {
+            String url = "https://news.google.com/search?q=" + pSymbol;
+
+        }
+
     }
     //End of Helpers Class
 

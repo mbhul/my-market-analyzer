@@ -905,7 +905,7 @@ namespace MyMarketAnalyzer
             List<Double> out_macd_a, out_macd_b, out_macd_c;
 
             //*** Accumulation / Distribution Index ***//
-            AccumDistrIndex = Helpers.AccumulationDistributionIndex(hist_price, hist_price_highs, hist_price_lows, hist_volumes);
+            AccumDistrIndex = Helpers.AccumulationDistributionIndex(hist_price, hist_price_highs, hist_price_lows, hist_volumes).GetRange(start_date_index, end_date_index);
 
             //*** MACD ***//
             Helpers.ComputeMACD(MACD_TIME_BASES, hist_price, out out_macd_a, out out_macd_b, out out_macd_c);
@@ -1039,10 +1039,18 @@ namespace MyMarketAnalyzer
 
             if (transformApplied)
             {
+                updateHistPublicProperties();
                 CalculateAvgPrice();
             }
         }
         #endregion
+
+        public void GetSentimentScore()
+        {
+            //Get source text to analyze
+            // - need predetermined list of possible searchable sources
+            // - 
+        }
 
         public void Clear()
         {

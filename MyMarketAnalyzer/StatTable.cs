@@ -348,7 +348,7 @@ namespace MyMarketAnalyzer
 
             DataRow row;
             
-            if(TableType == StatTableType.INDIVIDUAL_PPC && (pIndex < mktData.Constituents.Count && pIndex > 0))
+            if(TableType == StatTableType.INDIVIDUAL_PPC && (pIndex < mktData.Constituents.Count && pIndex >= 0))
             {
                 //CreateSingleCorrelationTable();
                 CreateNewTable();
@@ -374,7 +374,7 @@ namespace MyMarketAnalyzer
                         //Check for availability of PPC coefficients
                         if (i < CoefficientList.Count)
                         {
-                            row[TableHeadings.PPC_Coeff] = CoefficientList[i];
+                            row[TableHeadings.PPC_Coeff] = Math.Round(CoefficientList[i],4);
                         }
                         else
                         {
@@ -450,14 +450,22 @@ namespace MyMarketAnalyzer
             //Set Item # column invisible (used to recall the original order of sorted data)
             dataGridView1.Columns[0].Visible = false;
 
-            if (this.Visible)
+            try
             {
-                //Set Column Widths
-                dataGridView1.Columns[1].Width = (int)(this.Width * NameColWidth);
-                for (i = 2; i < dataGridView1.Columns.Count; i++)
+                if (this.Visible)
                 {
-                    dataGridView1.Columns[i].Width = (int)(this.Width * (1 - NameColWidth) / (dataGridView1.Columns.Count - 2));
+                    //Set Column Widths
+                    dataGridView1.Columns[1].Width = (int)(this.Width * NameColWidth);
+
+                    for (i = 2; i < dataGridView1.Columns.Count; i++)
+                    {
+                        dataGridView1.Columns[i].Width = (int)(this.Width * (1 - NameColWidth) / (dataGridView1.Columns.Count - 2));
+                    }
                 }
+            }
+            catch (NullReferenceException nex)
+            {
+                //Ignore: DataGridViewBand.set_Thickness may throw this exception the first time the table is created
             }
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)

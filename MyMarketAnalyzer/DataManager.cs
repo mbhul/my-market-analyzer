@@ -705,6 +705,11 @@ namespace MyMarketAnalyzer
 
         #endregion
 
+        public void GetSentimentScores()
+        {
+           
+        }
+
         [DllImport("user32.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern int SendMessage(
                           IntPtr hWnd,      // handle to destination window

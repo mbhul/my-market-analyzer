@@ -560,7 +560,7 @@ namespace MyMarketAnalyzer
                 SetDisplayHistoricalDataStatus(true);
                 ClearFilter();
                 UpdateAnalysisComboBox();
-                ShowVisualizationTab(0, false, false);
+                //ShowVisualizationTab(0, false, false);
                 UpdateDateRangeSlider();
             }
         }
